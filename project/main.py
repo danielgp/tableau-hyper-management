@@ -2,7 +2,7 @@ import csv
 import getopt
 import sys
 
-from TypeDetermination import TypeDetermination
+from datetime import datetime
 
 from tableauhyperapi import HyperProcess, Telemetry, \
     Connection, CreateMode, \
@@ -10,12 +10,13 @@ from tableauhyperapi import HyperProcess, Telemetry, \
     Inserter, \
     escape_name, escape_string_literal, \
     TableName, \
-    HyperException
-########################################################################################################################
+    HyperException, \
+    Timestamp
+
+from TypeDetermination import TypeDetermination
 
 
-def build_hyper_columns_for_csv(given_file_name, csv_field_separator):
-    detected_csv_structure = determinate_csv_structure(given_file_name, csv_field_separator)
+def build_hyper_columns_for_csv(given_file_name, csv_field_separator, detected_csv_structure):
     hyper_table_columns_to_return = []
     for crt_field_structure in detected_csv_structure:
         hyper_table_columns_to_return.append(crt_field_structure['order'])
@@ -119,7 +120,7 @@ def convert_to_hyper_types(given_type):
     return switcher.get(given_type)
 
 
-def determinate_csv_structure(given_file_name, csv_field_separator):
+def detect_csv_structure(given_file_name, csv_field_separator):
     csv_structure = []
     with open(given_file_name, newline='') as csv_file:
         csv_object = csv.DictReader(csv_file, delimiter=';')
@@ -173,12 +174,46 @@ def determinate_csv_structure(given_file_name, csv_field_separator):
         return csv_structure
 
 
+def rebuild_csv_content_for_hyper(given_file_name, csv_field_separator, detected_fields_type):
+    csv_content_for_hyper = []
+    with open(given_file_name, newline='') as csv_file:
+        csv_object = csv.DictReader(csv_file, delimiter=csv_field_separator)
+        # parse rows with index
+        for row_idx, row_content in enumerate(csv_object):
+            csv_content_for_hyper.append(row_idx)
+            csv_content_for_hyper[row_idx] = []
+            print_prefix = 'On the row ' + str((row_idx + 1))
+            # parse all columns with index
+            for col_idx, column_name in enumerate(csv_object.fieldnames):
+                csv_content_for_hyper[row_idx].append(col_idx)
+                if row_content[csv_object.fieldnames[col_idx]] == '':
+                    csv_content_for_hyper[row_idx][col_idx] = None
+                else:
+                    if detected_fields_type[col_idx]['type'] == 'datetime-iso8601':
+                        tm = datetime.fromisoformat(row_content[csv_object.fieldnames[col_idx]])
+                        csv_content_for_hyper[row_idx][col_idx] = Timestamp(tm.year, tm.month, tm.day,
+                                                                   tm.hour, tm.minute, tm.second)
+                    elif detected_fields_type[col_idx]['type'] == 'int':
+                        csv_content_for_hyper[row_idx][col_idx] = int(row_content[csv_object.fieldnames[col_idx]])
+                    elif detected_fields_type[col_idx]['type'] == 'float-US':
+                        csv_content_for_hyper[row_idx][col_idx] = float(row_content[csv_object.fieldnames[col_idx]])
+                    else:
+                        csv_content_for_hyper[row_idx][col_idx] = row_content[csv_object.fieldnames[col_idx]].\
+                            replace('"', '\\"')
+                print(print_prefix + ' column ' + str(col_idx)
+                    + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
+                    + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
+                    + '> which was interpreted as <<' + str(csv_content_for_hyper[row_idx][col_idx]) + '>>')
+    return csv_content_for_hyper
+
+
 def run_create_hyper_file_from_csv(input_csv_file,
                                    csv_field_separator,
                                    schema_name,
                                    table_name,
                                    output_hyper_file):
-    hyper_table_columns = build_hyper_columns_for_csv(input_csv_file, csv_field_separator)
+    detected_csv_structure = detect_csv_structure(input_csv_file, csv_field_separator)
+    hyper_table_columns = build_hyper_columns_for_csv(input_csv_file, csv_field_separator, detected_csv_structure)
     # Starts the Hyper Process with telemetry enabled to send data to Tableau.
     # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
     # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
@@ -201,6 +236,8 @@ def run_create_hyper_file_from_csv(input_csv_file,
                 )
             hyper_connection.catalog.create_table(table_definition=hyper_table)
             print("The connection to the Hyper file has been created.")
+            '''
+            VERDICT: does not work as DOUBLE or INT are not accepting empty values... :-(
             print("I am about to execute command: " 
                 + f"COPY {hyper_table.table_name} from {escape_string_literal(input_csv_file)} with "
                 f"(format csv, NULL 'NULL', delimiter '{csv_field_separator}', header)")
@@ -210,11 +247,21 @@ def run_create_hyper_file_from_csv(input_csv_file,
                 command=f"COPY {hyper_table.table_name} from {escape_string_literal(input_csv_file)} with "
                 f"(format csv, NULL 'NULL', delimiter '{csv_field_separator}', header)")
             print(f"The number of rows in table {hyper_table.table_name} is {count_in_target_table}.")
+            '''
+            # The rows to insert into the <hyper_table> table.
+            data_to_insert = rebuild_csv_content_for_hyper(input_csv_file, csv_field_separator, detected_csv_structure)
+            # Execute the actual insert
+            with Inserter(hyper_connection, hyper_table) as hyper_inserter:
+                hyper_inserter.add_rows(rows=data_to_insert)
+                hyper_inserter.execute()
+            # Number of rows in the <hyper_table> table.
+            # `execute_scalar_query` is for executing a query that returns exactly one row with one column.
+            row_count = hyper_connection.execute_scalar_query(query=f"SELECT COUNT(*) FROM {hyper_table.table_name}")
+            print(f"The number of rows in table {hyper_table.table_name} is {row_count}.")
         print("The connection to the Hyper file has been closed.")
     print("The Hyper process has been shut down.")
 
 
-########################################################################################################################
 if __name__ == '__main__':
     try:
         command_line_argument_interpretation(sys.argv[1:])
