@@ -16,14 +16,16 @@ from tableauhyperapi import HyperProcess, Telemetry, \
 from TypeDetermination import TypeDetermination
 
 
-def build_hyper_columns_for_csv(given_file_name, csv_field_separator, detected_csv_structure):
+def build_hyper_columns_for_csv(given_file_name, csv_field_separator, detected_csv_structure, verbose):
     hyper_table_columns_to_return = []
     for crt_field_structure in detected_csv_structure:
         hyper_table_columns_to_return.append(crt_field_structure['order'])
         current_column_type=convert_to_hyper_types(crt_field_structure['type'])
-        print('Column ' + str(crt_field_structure['order']) + ' having name "'
-            + crt_field_structure['name'] + '" and type "' + crt_field_structure['type'] + '" will become "'
-            + str(current_column_type) + '"')
+        if verbose:
+            print('Column ' + str(crt_field_structure['order']) + ' having name "'
+                + crt_field_structure['name'] + '" and type "' 
+                + crt_field_structure['type'] + '" will become "'
+                + str(current_column_type) + '"')
         hyper_table_columns_to_return[crt_field_structure['order']] = TableDefinition.Column(
             name=crt_field_structure['name'],
             type=current_column_type,
@@ -38,21 +40,25 @@ def command_line_argument_interpretation(argv):
     schema_name = ''
     table_name = ''
     output_file = ''
+    verbose = False
     print('#'*120)
     try:
-        opts, args = getopt.getopt(argv, "hi:cfs:sn:tn:o:", [
+        opts, args = getopt.getopt(argv, "hi:cfs:sn:tn:o:v:", [
             "input-file=", 
             "csv-field-separator=", 
             "schema-name=", 
             "table-name=", 
-            "output-file="
+            "output-file=",
+            "verbose"
         ])
     except getopt.GetoptError:
         print('main.py -i|--input-file <input-file>'
             + ' -cfs|--csv-field-separator <csv-field-separator>'
             + ' [-sn|--schema-name <schema-name>]'
             + ' -tn|--table-name <table-name>'
-            + ' -o|--output-file <output-file>')
+            + ' -o|--output-file <output-file>'
+            + ' [-v|--verbose]'
+        )
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
@@ -72,6 +78,8 @@ def command_line_argument_interpretation(argv):
             table_name = arg
         elif opt in ("-o", "--output-file"):
             output_file = arg
+        elif opt in ("-v", "--verbose"):
+            verbose = True
         else:
             assert False, "unhandled option"
     if input_file == '':
@@ -103,7 +111,8 @@ def command_line_argument_interpretation(argv):
                                    csv_field_separator,
                                    schema_name,
                                    table_name,
-                                   output_file)
+                                   output_file,
+                                   verbose)
 
 
 def convert_to_hyper_types(given_type):
@@ -120,7 +129,7 @@ def convert_to_hyper_types(given_type):
     return switcher.get(given_type)
 
 
-def detect_csv_structure(given_file_name, csv_field_separator):
+def detect_csv_structure(given_file_name, csv_field_separator, verbose):
     csv_structure = []
     with open(given_file_name, newline='') as csv_file:
         csv_object = csv.DictReader(csv_file, delimiter=';')
@@ -133,31 +142,21 @@ def detect_csv_structure(given_file_name, csv_field_separator):
                 for col_idx, column_name in enumerate(csv_object.fieldnames):
                     # determine the field type by current row and column content
                     crt_field_type = TypeDetermination.type_determination(row_content[csv_object.fieldnames[col_idx]])
-                    '''
-                    print(print_prefix + ' the field [' + csv_object.fieldnames[col_idx] + '] '
-                        + ' col_index = ' + str(col_idx)
-                        + ' is <' + row_content[csv_object.fieldnames[col_idx]]
-                        + '> and that means type "' + crt_field_type + '"')
-                    '''
                     # evaluate if CSV structure for current field (column) already exists
                     if row_idx > 0:
                         # if CSV structure for current field (column) exists, does the current type is more important?
                         crt_type_index = TypeDetermination.importance__low_to_high.index(crt_field_type)
                         prv_type_index = TypeDetermination.importance__low_to_high.index(csv_structure[col_idx]['type'])
                         if crt_type_index > prv_type_index:
-                            print(print_prefix 
-                                + ' column ' + str(col_idx)
-                                + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
-                                + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
-                                + '> which means is of type "' + crt_field_type + '" '
-                                + ' and that is stronger than previously thought to be as "'
-                                + csv_structure[col_idx]['type'] + '"')
+                            if verbose:
+                                print(print_prefix 
+                                    + ' column ' + str(col_idx)
+                                    + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
+                                    + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
+                                    + '> which means is of type "' + crt_field_type + '" '
+                                    + ' and that is stronger than previously thought to be as "'
+                                    + csv_structure[col_idx]['type'] + '"')
                             csv_structure[col_idx]['type'] = crt_field_type
-                            '''
-                        if crt_field_type == 'str':
-                            if len(row_content[csv_object.fieldnames[col_idx]]) > csv_structure[col_idx]['length']:
-                                csv_structure[col_idx]['length'] = len(row_content[csv_object.fieldnames[col_idx]])
-                            '''
                     else:
                         csv_structure.append(col_idx)
                         csv_structure[col_idx] = {
@@ -167,14 +166,15 @@ def detect_csv_structure(given_file_name, csv_field_separator):
                         }
                         if crt_field_type == 'str':
                             csv_structure[col_idx]['length'] = len(row_content[csv_object.fieldnames[col_idx]])
-                        print(print_prefix + ' column ' + str(col_idx)
-                            + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
-                            + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
-                            + '> which mean is of type "' + crt_field_type + '"')
+                        if verbose:
+                            print(print_prefix + ' column ' + str(col_idx)
+                                + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
+                                + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
+                                + '> which mean is of type "' + crt_field_type + '"')
         return csv_structure
 
 
-def rebuild_csv_content_for_hyper(given_file_name, csv_field_separator, detected_fields_type):
+def rebuild_csv_content_for_hyper(given_file_name, csv_field_separator, detected_fields_type, verbose):
     csv_content_for_hyper = []
     with open(given_file_name, newline='') as csv_file:
         csv_object = csv.DictReader(csv_file, delimiter=csv_field_separator)
@@ -200,10 +200,11 @@ def rebuild_csv_content_for_hyper(given_file_name, csv_field_separator, detected
                     else:
                         csv_content_for_hyper[row_idx][col_idx] = row_content[csv_object.fieldnames[col_idx]].\
                             replace('"', '\\"')
-                print(print_prefix + ' column ' + str(col_idx)
-                    + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
-                    + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
-                    + '> which was interpreted as <<' + str(csv_content_for_hyper[row_idx][col_idx]) + '>>')
+                if verbose:
+                    print(print_prefix + ' column ' + str(col_idx)
+                        + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
+                        + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
+                        + '> which was interpreted as <<' + str(csv_content_for_hyper[row_idx][col_idx]) + '>>')
     return csv_content_for_hyper
 
 
@@ -211,10 +212,16 @@ def run_create_hyper_file_from_csv(input_csv_file,
                                    csv_field_separator,
                                    schema_name,
                                    table_name,
-                                   output_hyper_file):
-    detected_csv_structure = detect_csv_structure(input_csv_file, csv_field_separator)
-    hyper_table_columns = build_hyper_columns_for_csv(input_csv_file, csv_field_separator, detected_csv_structure)
-    # Starts the Hyper Process with telemetry enabled to send data to Tableau.
+                                   output_hyper_file,
+                                   verbose):
+    detected_csv_structure = detect_csv_structure(input_csv_file,
+                                                  csv_field_separator,
+                                                  verbose)
+    hyper_table_columns = build_hyper_columns_for_csv(input_csv_file,
+                                                      csv_field_separator,
+                                                      detected_csv_structure,
+                                                      verbose)
+    # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
     # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
     # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
     with HyperProcess(telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU) as hyper:
@@ -249,7 +256,10 @@ def run_create_hyper_file_from_csv(input_csv_file,
             print(f"The number of rows in table {hyper_table.table_name} is {count_in_target_table}.")
             '''
             # The rows to insert into the <hyper_table> table.
-            data_to_insert = rebuild_csv_content_for_hyper(input_csv_file, csv_field_separator, detected_csv_structure)
+            data_to_insert = rebuild_csv_content_for_hyper(input_csv_file, 
+                                                           csv_field_separator,
+                                                           detected_csv_structure,
+                                                           verbose)
             # Execute the actual insert
             with Inserter(hyper_connection, hyper_table) as hyper_inserter:
                 hyper_inserter.add_rows(rows=data_to_insert)
