@@ -17,13 +17,13 @@ class TypeDetermination:
     @staticmethod
     def type_determination(variable_to_assess):
         # Website https://regex101.com/ was used to validate below code
-        re_float = '^[0-9]*\\.{1}[0-9]*$'
+        re_float = '^[+-]*[0-9]*\\.{1}[0-9]*$'
         re_date = '^(1[0-9]{3}|2[0-9]{3})-(0[0-9]|1[0-2])-([0-5][0-9])$'
         re_time24 = '^(2[0-3]|[01][0-9]|[0-9]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])$'
         re_time_usa = '^([0-9]|0[0-9]|1[0-2]):{1}([0-5][0-9]|[0-9]):{1}([0-5][0-9]|[0-9])\\s*(AM|am|PM|pm)$'
         if variable_to_assess == '':
             return 'empty'
-        elif re.match('^[0-9]+$', variable_to_assess):
+        elif re.match('^[+-]*[0-9]+$', variable_to_assess):
             return 'int'
         elif re.match(re_float, variable_to_assess):
             return 'float-US'
