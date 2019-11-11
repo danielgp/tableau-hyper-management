@@ -1,8 +1,9 @@
 import csv
 import getopt
 import sys
+import time
 
-from datetime import datetime
+from datetime import datetime,timedelta
 
 from tableauhyperapi import HyperProcess, Telemetry, \
     Connection, CreateMode, \
@@ -106,13 +107,18 @@ def command_line_argument_interpretation(argv):
         sys.exit(2)
     else:
         print('Output file is "' + output_file + '"')
+    # marking the start of performance measuring (in nanoseconds)
+    performance_start = time.perf_counter_ns()
     print('#'*120)
     run_create_hyper_file_from_csv(input_file,
                                    csv_field_separator,
                                    schema_name,
                                    table_name,
                                    output_file,
-                                   verbose)
+                                   verbose)    
+    performance_finish = time.perf_counter_ns()
+    performance_timed = timedelta(microseconds=(performance_finish - performance_start)/1000)
+    print("This script has been executed in " + format(performance_timed) + ' seconds')
 
 
 def convert_to_hyper_types(given_type):
