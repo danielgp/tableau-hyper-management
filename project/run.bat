@@ -9,6 +9,9 @@ SET variable__destination_prefix=Prj15172__
 REM --------------------------------------------------------------------------------------------------------------------
 REM Main part of the script
 REM --------------------------------------------------------------------------------------------------------------------
+ECHO Any potential leftover Hyper Deamon Log file will be removed to ensure only the current session results will be captured
+DEL %variable__path_parent%/hyperd.log
+REM --------------------------------------------------------------------------------------------------------------------
 SET variable__source_file_base_name=Project_Line_Items__Summary
 CALL %variable__parent%_functions-Defined.bat :ExecuteTableauHyperMaintenance
 SET variable__source_file_base_name=Purchase_Document_For_Project__Summary
