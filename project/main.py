@@ -19,14 +19,15 @@ def build_hyper_columns_for_csv(given_file_name, csv_field_separator):
     hyper_table_columns_to_return = []
     for crt_field_structure in detected_csv_structure:
         hyper_table_columns_to_return.append(crt_field_structure['order'])
+        current_column_type=convert_to_hyper_types(crt_field_structure['type'])
         print('Column ' + str(crt_field_structure['order']) + ' having name "'
             + crt_field_structure['name'] + '" and type "' + crt_field_structure['type'] + '" will become "'
-            + str(convert_to_hyper_types(crt_field_structure['type'])) + '"')
+            + str(current_column_type) + '"')
         hyper_table_columns_to_return[crt_field_structure['order']] = TableDefinition.Column(
-            crt_field_structure['name'],
-            convert_to_hyper_types(crt_field_structure['type'])
+            name=crt_field_structure['name'],
+            type=current_column_type,
+            nullability=NULLABLE
         )
-    #exit(1)
     return hyper_table_columns_to_return
 
 
@@ -108,7 +109,7 @@ def convert_to_hyper_types(given_type):
     switcher = {
         'empty': SqlType.text(),
         'int': SqlType.big_int(),
-        'float-US': SqlType.numeric(18,9),
+        'float-US': SqlType.double(),
         'date-iso8601': SqlType.date(),
         'time24': SqlType.time(),
         'timeUS': SqlType.time(),
@@ -125,10 +126,8 @@ def determinate_csv_structure(given_file_name, csv_field_separator):
         # parse rows with index
         for row_idx, row_content in enumerate(csv_object):
             # limit rows evaluation to a certain value
-            if row_idx <= 1:
-                '''
-                print_prefix = 'On the row ' + str(row_idx)
-                '''
+            if row_idx <= 200:
+                print_prefix = 'On the row ' + str((row_idx + 1))
                 # parse all columns with index
                 for col_idx, column_name in enumerate(csv_object.fieldnames):
                     # determine the field type by current row and column content
@@ -145,14 +144,15 @@ def determinate_csv_structure(given_file_name, csv_field_separator):
                         crt_type_index = TypeDetermination.importance__low_to_high.index(crt_field_type)
                         prv_type_index = TypeDetermination.importance__low_to_high.index(csv_structure[col_idx]['type'])
                         if crt_type_index > prv_type_index:
+                            print(print_prefix 
+                                + ' column ' + str(col_idx)
+                                + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
+                                + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
+                                + '> which means is of type "' + crt_field_type + '" '
+                                + ' and that is stronger than previously thought to be as "'
+                                + csv_structure[col_idx]['type'] + '"')
                             csv_structure[col_idx]['type'] = crt_field_type
                             '''
-                            print(print_prefix + ' the field [' + csv_object.fieldnames[col_idx] + '] '
-                                + ' col_index = ' + str(col_idx)
-                                + ' is <' + row_content[csv_object.fieldnames[col_idx]]
-                                + '> and that means type "' + crt_field_type + '" '
-                                + 'which is stronger than previously thought to be as "'
-                                + csv_structure[col_idx]['type'] + '"')
                         if crt_field_type == 'str':
                             if len(row_content[csv_object.fieldnames[col_idx]]) > csv_structure[col_idx]['length']:
                                 csv_structure[col_idx]['length'] = len(row_content[csv_object.fieldnames[col_idx]])
@@ -164,14 +164,12 @@ def determinate_csv_structure(given_file_name, csv_field_separator):
                             'name': csv_object.fieldnames[col_idx],
                             'type': crt_field_type
                         }
-                        '''
                         if crt_field_type == 'str':
                             csv_structure[col_idx]['length'] = len(row_content[csv_object.fieldnames[col_idx]])
-                        print(print_prefix + ' the field [' + csv_object.fieldnames[col_idx] + '] '
-                            + ' col_index = ' + str(col_idx)
-                            + ' is <' + row_content[csv_object.fieldnames[col_idx]]
-                            + '> and that means type "' + crt_field_type + '"')
-                        '''
+                        print(print_prefix + ' column ' + str(col_idx)
+                            + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
+                            + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
+                            + '> which mean is of type "' + crt_field_type + '"')
         return csv_structure
 
 
