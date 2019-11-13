@@ -38,25 +38,21 @@ def build_hyper_columns_for_csv(given_file_name, csv_field_separator, detected_c
 def command_line_argument_interpretation(argv):
     input_file = ''
     csv_field_separator = ''
-    schema_name = ''
-    table_name = ''
+    schema_name = 'Extract'
+    table_name = 'Extract'
     output_file = ''
     verbose = False
     print('#'*120)
     try:
-        opts, args = getopt.getopt(argv, "hi:cfs:sn:tn:o:v:", [
+        opts, args = getopt.getopt(argv, "hi:cfs:o:v:", [
             "input-file=", 
             "csv-field-separator=", 
-            "schema-name=", 
-            "table-name=", 
             "output-file=",
             "verbose"
         ])
     except getopt.GetoptError:
         print('main.py -i|--input-file <input-file>'
             + ' -cfs|--csv-field-separator <csv-field-separator>'
-            + ' [-sn|--schema-name <schema-name>]'
-            + ' -tn|--table-name <table-name>'
             + ' -o|--output-file <output-file>'
             + ' [-v|--verbose]'
         )
@@ -65,18 +61,12 @@ def command_line_argument_interpretation(argv):
         if opt == '-h':
             print('main.py -i|--input-file <input-file>'
             + ' -cfs|--csv-field-separator <csv-field-separator>'
-            + ' [-sn|--schema-name <schema-name>]'
-            + ' -tn|--table-name <table-name>'
             + ' -o|--output-file <output-file>')
             sys.exit()
         elif opt in ("-i", "--input-file"):
             input_file = arg
         elif opt in ("-cfs", "--csv-field-separator"):
             csv_field_separator = arg
-        elif opt in ("-sn", "--schema-name"):
-            schema_name = arg
-        elif opt in ("-tn", "--table-name"):
-            table_name = arg
         elif opt in ("-o", "--output-file"):
             output_file = arg
         elif opt in ("-v", "--verbose"):
@@ -95,12 +85,6 @@ def command_line_argument_interpretation(argv):
         sys.exit(2)
     else:
         print('CSV field separator is "' + csv_field_separator + '"')
-    if table_name == '':
-        print('Fatal Error......................................................................:-(')
-        print('Expected -tn|--table-name <table-name> but nothing of that sort has been seen... :-(')
-        sys.exit(2)
-    else:
-        print('Table name is "' + table_name + '"')
     if output_file == '':
         print('Fatal Error.......................................................................:-(')
         print('Expected -o|--output-file <output-file> but nothing of that sort has been seen... :-(')
