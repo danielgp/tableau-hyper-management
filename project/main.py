@@ -116,7 +116,10 @@ def convert_to_hyper_types(given_type):
         'datetime-iso8601': SqlType.timestamp(),
         'str': SqlType.text()
     }
-    return switcher.get(given_type)
+    identified_type = switcher.get(given_type)
+    if identified_type == None:
+        identified_type = SqlType.text()
+    return identified_type
 
 
 def detect_csv_structure(given_file_name, csv_field_separator, verbose):
