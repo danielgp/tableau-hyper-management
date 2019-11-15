@@ -1,3 +1,4 @@
+import csv
 import re
 
 
@@ -14,8 +15,57 @@ class TypeDetermination:
         'str'
     ]
 
+    def fn_detect_csv_structure(given_file_name, csv_field_separator, verbose):
+        csv_structure = []
+        with open(given_file_name, newline='') as csv_file:
+            csv_object = csv.DictReader(csv_file, delimiter=';')
+            # parse rows with index
+            for row_idx, row_content in enumerate(csv_object):
+                # limit rows evaluation to a certain value
+                if row_idx <= 200:
+                    print_prefix = 'On the row ' + str((row_idx + 1))
+                    # parse all columns with index
+                    for col_idx, column_name in enumerate(csv_object.fieldnames):
+                        # determine the field type by current row and column content
+                        crt_field_type = TypeDetermination.\
+                            fn_type_determination(row_content[csv_object.fieldnames[col_idx]])
+                        # evaluate if CSV structure for current field (column) already exists
+                        if row_idx > 0:
+                            '''
+                            if CSV structure for current field (column) exists, 
+                            does the current type is more important?
+                            '''
+                            crt_type_index = TypeDetermination.importance__low_to_high.index(crt_field_type)
+                            prv_type_index = TypeDetermination.importance__low_to_high.\
+                                index(csv_structure[col_idx]['type'])
+                            if crt_type_index > prv_type_index:
+                                if verbose:
+                                    print(print_prefix 
+                                        + ' column ' + str(col_idx)
+                                        + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
+                                        + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
+                                        + '> which means is of type "' + crt_field_type + '" '
+                                        + ' and that is stronger than previously thought to be as "'
+                                        + csv_structure[col_idx]['type'] + '"')
+                                csv_structure[col_idx]['type'] = crt_field_type
+                        else:
+                            csv_structure.append(col_idx)
+                            csv_structure[col_idx] = {
+                                'order': col_idx,
+                                'name': csv_object.fieldnames[col_idx],
+                                'type': crt_field_type
+                            }
+                            if crt_field_type == 'str':
+                                csv_structure[col_idx]['length'] = len(row_content[csv_object.fieldnames[col_idx]])
+                            if verbose:
+                                print(print_prefix + ' column ' + str(col_idx)
+                                    + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
+                                    + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
+                                    + '> which mean is of type "' + crt_field_type + '"')
+        return csv_structure
+
     @staticmethod
-    def type_determination(variable_to_assess):
+    def fn_type_determination(variable_to_assess):
         # Website https://regex101.com/ was used to validate below code
         re_float = '^[+-]*[0-9]*\\.{1}[0-9]*$'
         re_date = '^(1[0-9]{3}|2[0-9]{3})-(0[0-9]|1[0-2])-([0-5][0-9])$'
