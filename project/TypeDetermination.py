@@ -7,11 +7,15 @@ class TypeDetermination:
     importance__low_to_high = [
         'empty',
         'int',
-        'float-US',
+        'float-USA',
         'date-iso8601',
-        'time24',
-        'timeUS',
+        'date-USA',
+        'time-24',
+        'time-24-us',
+        'time-USA',
+        'time-USA-us',
         'datetime-iso8601',
+        'datetime-iso8601-us',
         'str'
     ]
 
@@ -67,23 +71,33 @@ class TypeDetermination:
     @staticmethod
     def fn_type_determination(variable_to_assess):
         # Website https://regex101.com/ was used to validate below code
+        re_int = '^[+-]*[0-9]+$'
         re_float = '^[+-]*[0-9]*\\.{1}[0-9]*$'
-        re_date = '^(1[0-9]{3}|2[0-9]{3})-(0[0-9]|1[0-2])-([0-5][0-9])$'
+        re_date_us = '^([1-9]|11|12|0[0-9]|1[0-2])/([1-9]|0[0-9]|1[0-9]|2[0-9]|3[0-1])/(1[0-9]{3}|2[0-9]{3})$'
+        re_date_iso8601 = '^(1[0-9]{3}|2[0-9]{3})-([0-9]|0[0-9]|1[0-2])-([0-9]|0[0-9]|1[0-9]|2[0-9]|3[0-1])$'
         re_time24 = '^(2[0-3]|[01][0-9]|[0-9]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])$'
-        re_time_usa = '^([0-9]|0[0-9]|1[0-2]):{1}([0-5][0-9]|[0-9]):{1}([0-5][0-9]|[0-9])\\s*(AM|am|PM|pm)$'
+        re_time_us = '^([0-9]|0[0-9]|1[0-2]):{1}([0-5][0-9]|[0-9]):{1}([0-5][0-9]|[0-9])\\s*(AM|am|PM|pm)$'
         if variable_to_assess == '':
             return 'empty'
-        elif re.match('^[+-]*[0-9]+$', variable_to_assess):
+        elif re.match(re_int, variable_to_assess):
             return 'int'
         elif re.match(re_float, variable_to_assess):
             return 'float-US'
-        elif re.match(re_date, variable_to_assess):
+        elif re.match(re_date_iso8601, variable_to_assess):
             return 'date-iso8601'
+        elif re.match(re_date_us, variable_to_assess):
+            return 'date-USA'
         elif re.match(re_time24, variable_to_assess):
-            return 'time24'
-        elif re.match(re_time_usa, variable_to_assess):
-            return 'timeUS'
-        elif re.match(re_date[:-1] + ' ' + re_time24[1:], variable_to_assess):
+            return 'time-24'
+        elif re.match(re_time24.replace(')$', ').([0-9]{6})$'), variable_to_assess):
+            return 'time-24-us'
+        elif re.match(re_time_us, variable_to_assess):
+            return 'time-USA'
+        elif re.match(re_time_us.replace(')$', ').([0-9]{6})$'), variable_to_assess):
+            return 'time-USA-us'
+        elif re.match(re_date_iso8601[:-1] + ' ' + re_time24[1:], variable_to_assess):
             return 'datetime-iso8601'
+        elif re.match(re_date_iso8601[:-1] + ' ' + re_time24[1:].replace(')$', ').([0-9]{6})$'), variable_to_assess):
+            return 'datetime-iso8601-us'
         else:
             return 'str'

@@ -1,7 +1,7 @@
 import csv
 
 from TypeDetermination import TypeDetermination
-from datetime import datetime
+from datetime import datetime,time
 from tableauhyperapi import HyperProcess, Telemetry, \
     Connection, CreateMode, \
     NOT_NULLABLE, NULLABLE, SqlType, TableDefinition, \
@@ -35,10 +35,12 @@ class TableauHyperApiExtraLogic:
         switcher = {
             'empty': SqlType.text(),
             'int': SqlType.big_int(),
-            'float-US': SqlType.double(),
+            'float-USA': SqlType.double(),
             'date-iso8601': SqlType.date(),
-            'time24': SqlType.time(),
-            'timeUS': SqlType.time(),
+            'date-USA': SqlType.date(),
+            'time-24': SqlType.time(),
+            'time-24-us': SqlType.time(),
+            'time-USA': SqlType.time(),
             'datetime-iso8601': SqlType.timestamp(),
             'str': SqlType.text()
         }
@@ -62,14 +64,36 @@ class TableauHyperApiExtraLogic:
                     if row_content[csv_object.fieldnames[col_idx]] == '':
                         csv_content_for_hyper[row_idx][col_idx] = None
                     else:
-                        if detected_fields_type[col_idx]['type'] == 'datetime-iso8601':
-                            tm = datetime.fromisoformat(row_content[csv_object.fieldnames[col_idx]])
-                            csv_content_for_hyper[row_idx][col_idx] = Timestamp(tm.year, tm.month, tm.day,
-                                                                                tm.hour, tm.minute, tm.second)
-                        elif detected_fields_type[col_idx]['type'] == 'int':
+                        if detected_fields_type[col_idx]['type'] == 'int':
                             csv_content_for_hyper[row_idx][col_idx] = int(row_content[csv_object.fieldnames[col_idx]])
                         elif detected_fields_type[col_idx]['type'] == 'float-US':
                             csv_content_for_hyper[row_idx][col_idx] = float(row_content[csv_object.fieldnames[col_idx]])
+                        elif detected_fields_type[col_idx]['type'] == 'date-iso8601':
+                            tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%Y-%m-%d')
+                            csv_content_for_hyper[row_idx][col_idx] = datetime(tm.year, tm.month, tm.day)
+                        elif detected_fields_type[col_idx]['type'] == 'date-US':
+                            tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%m/%d/%Y')
+                            csv_content_for_hyper[row_idx][col_idx] = datetime(tm.year, tm.month, tm.day)
+                        elif detected_fields_type[col_idx]['type'] == 'time-24':
+                            tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%H:%M:%S')
+                            csv_content_for_hyper[row_idx][col_idx] = time(tm.hour, tm.minute, tm.second)
+                        elif detected_fields_type[col_idx]['type'] == 'time-24-us':
+                            tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%H:%M:%S.%f')
+                            csv_content_for_hyper[row_idx][col_idx] = time(tm.hour,
+                                                                           tm.minute,
+                                                                           tm.second,
+                                                                           tm.microsecond)
+                        elif detected_fields_type[col_idx]['type'] == 'time-US':
+                            tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%I:%M:%S')
+                        elif detected_fields_type[col_idx]['type'] == 'datetime-iso8601':
+                            tm = datetime.fromisoformat(row_content[csv_object.fieldnames[col_idx]])
+                            csv_content_for_hyper[row_idx][col_idx] = Timestamp(tm.year, tm.month, tm.day,
+                                                                                tm.hour, tm.minute, tm.second)
+                        elif detected_fields_type[col_idx]['type'] == 'datetime-iso8601-us':
+                            tm = datetime.fromisoformat(row_content[csv_object.fieldnames[col_idx]])
+                            csv_content_for_hyper[row_idx][col_idx] = Timestamp(tm.year, tm.month, tm.day,
+                                                                                tm.hour, tm.minute, tm.second,
+                                                                                tm.microsecond)
                         else:
                             csv_content_for_hyper[row_idx][col_idx] = row_content[csv_object.fieldnames[col_idx]]. \
                                 replace('"', '\\"')
@@ -77,7 +101,8 @@ class TableauHyperApiExtraLogic:
                         print(print_prefix + ' column ' + str(col_idx)
                               + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
                               + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
-                              + '> which was interpreted as <<' + str(csv_content_for_hyper[row_idx][col_idx]) + '>>')
+                              + '> which was interpreted as <<' + str(csv_content_for_hyper[row_idx][col_idx])
+                              + '>>')
         return csv_content_for_hyper
 
     def fn_run_create_hyper_file_from_csv(input_csv_file,
