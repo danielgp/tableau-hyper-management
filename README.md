@@ -15,7 +15,11 @@ Repository owner is: [Daniel Popiniuc](mailto:daniel.popiniuc@honeywell.com)
 see [this file](readme_software.md)
 
 
-## Used references ##
+## Used references
 
 see [this file](readme_reference.md)
 
+
+## Usage
+
+`python(.exe) <local_path_of_this_package>main.py --input-file <full_path_and_file_base_name_to_file_having_content_as_CSV>(.txt|.csv) --csv-field-separator ,|; --output-file <full_path_and_file_base_name_to_generated_file>(.hyper)`
