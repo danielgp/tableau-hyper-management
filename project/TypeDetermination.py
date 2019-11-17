@@ -82,7 +82,7 @@ class TypeDetermination:
         elif re.match(re_int, variable_to_assess):
             return 'int'
         elif re.match(re_float, variable_to_assess):
-            return 'float-US'
+            return 'float-USA'
         elif re.match(re_date_iso8601, variable_to_assess):
             return 'date-iso8601'
         elif re.match(re_date_us, variable_to_assess):

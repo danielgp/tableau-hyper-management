@@ -66,12 +66,12 @@ class TableauHyperApiExtraLogic:
                     else:
                         if detected_fields_type[col_idx]['type'] == 'int':
                             csv_content_for_hyper[row_idx][col_idx] = int(row_content[csv_object.fieldnames[col_idx]])
-                        elif detected_fields_type[col_idx]['type'] == 'float-US':
+                        elif detected_fields_type[col_idx]['type'] == 'float-USA':
                             csv_content_for_hyper[row_idx][col_idx] = float(row_content[csv_object.fieldnames[col_idx]])
                         elif detected_fields_type[col_idx]['type'] == 'date-iso8601':
                             tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%Y-%m-%d')
                             csv_content_for_hyper[row_idx][col_idx] = datetime(tm.year, tm.month, tm.day)
-                        elif detected_fields_type[col_idx]['type'] == 'date-US':
+                        elif detected_fields_type[col_idx]['type'] == 'date-USA':
                             tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%m/%d/%Y')
                             csv_content_for_hyper[row_idx][col_idx] = datetime(tm.year, tm.month, tm.day)
                         elif detected_fields_type[col_idx]['type'] == 'time-24':
@@ -83,7 +83,7 @@ class TableauHyperApiExtraLogic:
                                                                            tm.minute,
                                                                            tm.second,
                                                                            tm.microsecond)
-                        elif detected_fields_type[col_idx]['type'] == 'time-US':
+                        elif detected_fields_type[col_idx]['type'] == 'time-USA':
                             tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%I:%M:%S')
                         elif detected_fields_type[col_idx]['type'] == 'datetime-iso8601':
                             tm = datetime.fromisoformat(row_content[csv_object.fieldnames[col_idx]])
