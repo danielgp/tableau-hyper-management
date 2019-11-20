@@ -1,5 +1,5 @@
 import platform
-from distutils.core import setup
+from distutils.core import setup as _setup
 
 with open("README.md", "r") as fh:
     long_description_readme = fh.read()
@@ -23,7 +23,7 @@ else:
                              + tableau_hyper_api__current_known_version \
                              + '-py3-none-linux_x86_64.whl'
 
-setup(
+_setup(
         author = 'Daniel Popiniuc',
         author_email = 'danielpopiniuc@gmail.com',
         dependency_links = [
@@ -32,9 +32,7 @@ setup(
         description = 'Wrapper to ease data management into Tableau Hyper format',
         license = 'LGPL3',
         long_description = long_description_readme,
-        long_description_content_type = "text/markdown",
         name = 'tableau-hyper-management',
-        python_requires = '>=3.6',
         version = '1.0',
         download_url = '',
 )
