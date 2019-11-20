@@ -18,6 +18,10 @@ elif platform.system() == 'Linux':
     url__tableau_hyper_api = 'http://downloads.tableau.com/tssoftware/tableauhyperapi-'\
                              + tableau_hyper_api__current_known_version \
                              + '-py3-none-linux_x86_64.whl'
+else:
+    url__tableau_hyper_api = 'http://downloads.tableau.com/tssoftware/tableauhyperapi-'\
+                             + tableau_hyper_api__current_known_version \
+                             + '-py3-none-linux_x86_64.whl'
 
 setup(
         author = 'Daniel Popiniuc',
