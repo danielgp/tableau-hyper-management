@@ -8,18 +8,17 @@ class CommandLineArgumentsHandling:
         str_combined_options = ''
         for option_index, current_option in enumerate(self.config_details['options']):
             if current_option is not None:
-                if option_index > 0:
-                    str_combined_options += ' '
-                if self.config_details['options'][current_option]['option_type'] == 'optional':
-                    str_combined_options += '['
-                str_combined_options += '-' + current_option + '|' \
-                                        + self.config_details['options'][current_option]['option_long']
+                str_option_crt = '-' + current_option + '|' \
+                                 + self.config_details['options'][current_option]['option_long']
                 if 'option_sample_value' in self.config_details['options'][current_option]:
-                    str_combined_options += ' <' \
-                                            + self.config_details['options'][current_option]['option_sample_value'] \
-                                            + '>'
+                    str_option_crt += ' <' \
+                                       + self.config_details['options'][current_option]['option_sample_value'] + '>'
                 if self.config_details['options'][current_option]['option_type'] == 'optional':
-                    str_combined_options += ']'
+                    str_combined_options += ' [' + str_option_crt + '|if omitted default value will be considered: ' \
+                                            + str(self.config_details['options'][current_option]['default_value']) \
+                                            + ']'
+                else:
+                    str_combined_options += ' ' + str_option_crt
         return str_combined_options
 
 

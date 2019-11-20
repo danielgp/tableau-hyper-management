@@ -11,7 +11,7 @@ def fn_command_line_argument_interpretation(argv):
     print('#'*120)
     _clah.fn_load_configuration(_clah)
     input_file = ''
-    csv_field_separator = ''
+    csv_field_separator = ','
     output_file = ''
     verbose = False
     help_feedback = __file__ + _clah.fn_build_combined_options(_clah)
@@ -40,12 +40,7 @@ def fn_command_line_argument_interpretation(argv):
         sys.exit(2)
     else:
         print('Input file is "' + input_file + '"')
-    if csv_field_separator == '':
-        print('Fatal Error........................................................................................:-(')
-        print('Expected -cs|--csv-field-separator <csv-field-separator> but nothing of that sort has been seen... :-(')
-        sys.exit(2)
-    else:
-        print('CSV field separator is "' + csv_field_separator + '"')
+    print('CSV field separator is "' + csv_field_separator + '"')
     if output_file == '':
         print('Fatal Error.......................................................................:-(')
         print('Expected -o|--output-file <output-file> but nothing of that sort has been seen... :-(')

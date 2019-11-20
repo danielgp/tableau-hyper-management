@@ -6,8 +6,9 @@
             "option_sample_value"   : "input-file-name"
         },
         "cfs": {
+            "default_value"         : ",",
             "option_long"           : "csv-field-separator",
-            "option_type"           : "mandatory",
+            "option_type"           : "optional",
             "option_sample_value"   : "csv-field-separator-character"
         },
         "o": {
@@ -16,6 +17,7 @@
             "option_sample_value"   : "output-file-name"
         },
         "v": {
+            "default_value"         : false,
             "option_long"           : "verbose",
             "option_type"           : "optional"
         }
