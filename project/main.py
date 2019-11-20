@@ -3,34 +3,26 @@ import sys
 import time
 
 from TableauHyperApiExtraLogic import TableauHyperApiExtraLogic
+from CommandLineArgumentsHandling import CommandLineArgumentsHandling as _clah
 from datetime import timedelta
 
 
 def fn_command_line_argument_interpretation(argv):
+    print('#'*120)
+    _clah.fn_load_configuration(_clah)
     input_file = ''
     csv_field_separator = ''
     output_file = ''
     verbose = False
-    print('#'*120)
+    help_feedback = __file__ + _clah.fn_build_combined_options(_clah)
     try:
-        opts, args = getopt.getopt(argv, "hi:cfs:o:v:", [
-            "input-file=", 
-            "csv-field-separator=", 
-            "output-file=",
-            "verbose"
-        ])
+        opts, args = getopt.getopt(argv,  _clah.fn_build_short_options(_clah), _clah.fn_build_long_options(_clah))
     except getopt.GetoptError:
-        print('main.py -i|--input-file <input-file>'
-            + ' -cfs|--csv-field-separator <csv-field-separator>'
-            + ' -o|--output-file <output-file>'
-            + ' [-v|--verbose]'
-        )
+        print(help_feedback)
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print('main.py -i|--input-file <input-file>'
-            + ' -cfs|--csv-field-separator <csv-field-separator>'
-            + ' -o|--output-file <output-file>')
+            print(help_feedback)
             sys.exit()
         elif opt in ("-i", "--input-file"):
             input_file = arg
@@ -61,16 +53,17 @@ def fn_command_line_argument_interpretation(argv):
     else:
         print('Output file is "' + output_file + '"')
     print('#'*120)
-    # marking the start of performance measuring (in nanoseconds)
-    performance_start = time.perf_counter_ns()
     TableauHyperApiExtraLogic.fn_run_create_hyper_file_from_csv(input_file,
                                                                 csv_field_separator,
                                                                 output_file,
                                                                 verbose)
-    performance_finish = time.perf_counter_ns()
-    performance_timed = timedelta(microseconds=(performance_finish - performance_start)/1000)
-    print("This script has been executed in " + format(performance_timed) + ' seconds')
 
 
 if __name__ == '__main__':
+    # marking the start of performance measuring (in nanoseconds)
+    performance_start = time.perf_counter_ns()
     fn_command_line_argument_interpretation(sys.argv[1:])
+    # marking the end of performance measuring (in nanoseconds)
+    performance_finish = time.perf_counter_ns()
+    performance_timed = timedelta(microseconds=(performance_finish - performance_start)/1000)
+    print("This script has been executed in " + format(performance_timed) + ' seconds')
