@@ -60,9 +60,9 @@ def fn_command_line_argument_interpretation(argv):
         sys.exit(2)
     else:
         print('Output file is "' + output_file + '"')
+    print('#'*120)
     # marking the start of performance measuring (in nanoseconds)
     performance_start = time.perf_counter_ns()
-    print('#'*120)
     TableauHyperApiExtraLogic.fn_run_create_hyper_file_from_csv(input_file,
                                                                 csv_field_separator,
                                                                 output_file,
