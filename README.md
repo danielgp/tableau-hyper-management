@@ -14,6 +14,10 @@ Repository owner is: [Daniel Popiniuc](mailto:daniel.popiniuc@honeywell.com)
 
 `python(.exe) <local_path_of_this_package>main.py --input-file <full_path_and_file_base_name_to_file_having_content_as_CSV>(.txt|.csv) --csv-field-separator ,|; --output-file <full_path_and_file_base_name_to_generated_file>(.hyper)`
 
+- conventions used:
+    - (content_within_round_paranthesis) = optional
+    - <content_within_html_tags> = variables to be replaced with user values relevant strings
+    - single vertical pipeline = separator for alternative options 
 
 ## Implemented features
 
@@ -32,7 +36,7 @@ Repository owner is: [Daniel Popiniuc](mailto:daniel.popiniuc@honeywell.com)
     - string;
 - support for empty field content for any data type (required re-interpreting CSV to be accepted by Hyper Inserter);
 
-## Planned features to add (of course, when time will permit / help would be appreciated / votes|feedback is welcomed, see)
+## Planned features to add (of course, when time will permit / help would be appreciated / votes|feedback is welcomed)
 
 - additional formats to be recognized, like:
     - date-USA-medium;
