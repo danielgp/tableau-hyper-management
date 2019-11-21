@@ -1,5 +1,6 @@
 import csv
 
+from BasicNeeds import BasicNeeds as cls_bn
 from TypeDetermination import TypeDetermination
 from datetime import datetime,time
 from tableauhyperapi import HyperProcess, Telemetry, \
@@ -19,11 +20,11 @@ class TableauHyperApiExtraLogic:
         for current_field_structure in detected_csv_structure:
             list_hyper_table_columns_to_return.append(current_field_structure['order'])
             current_column_type = TableauHyperApiExtraLogic.fn_convert_to_hyper_types(current_field_structure['type'])
-            if verbose:
-                print('Column ' + str(current_field_structure['order']) + ' having name "'
-                      + current_field_structure['name'] + '" and type "'
-                      + current_field_structure['type'] + '" will become "'
-                      + str(current_column_type) + '"')
+            cls_bn.fn_optional_print(cls_bn, verbose, 'Column '
+                                     + str(current_field_structure['order']) + ' having name "'
+                                     + current_field_structure['name'] + '" and type "'
+                                     + current_field_structure['type'] + '" will become "'
+                                     + str(current_column_type) + '"')
             list_hyper_table_columns_to_return[current_field_structure['order']] = TableDefinition.Column(
                 name=current_field_structure['name'],
                 type=current_column_type,
@@ -85,6 +86,9 @@ class TableauHyperApiExtraLogic:
                                                                            tm.microsecond)
                         elif detected_fields_type[col_idx]['type'] == 'time-USA':
                             tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%I:%M:%S')
+                            csv_content_for_hyper[row_idx][col_idx] = time(tm.hour,
+                                                                           tm.minute,
+                                                                           tm.second)
                         elif detected_fields_type[col_idx]['type'] == 'datetime-iso8601':
                             tm = datetime.fromisoformat(row_content[csv_object.fieldnames[col_idx]])
                             csv_content_for_hyper[row_idx][col_idx] = Timestamp(tm.year, tm.month, tm.day,
@@ -97,19 +101,20 @@ class TableauHyperApiExtraLogic:
                         else:
                             csv_content_for_hyper[row_idx][col_idx] = row_content[csv_object.fieldnames[col_idx]]. \
                                 replace('"', '\\"')
-                    if verbose:
-                        print(print_prefix + ' column ' + str(col_idx)
-                              + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
-                              + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
-                              + '> which was interpreted as <<' + str(csv_content_for_hyper[row_idx][col_idx])
-                              + '>>')
+                    cls_bn.fn_optional_print(cls_bn, verbose, print_prefix + ' column ' + str(col_idx)
+                                             + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
+                                             + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
+                                             + '> which was interpreted as <<'
+                                             + str(csv_content_for_hyper[row_idx][col_idx])
+                                             + '>>')
         return csv_content_for_hyper
 
     def fn_run_create_hyper_file_from_csv(input_csv_file,
                                           csv_field_separator,
                                           output_hyper_file,
                                           verbose):
-        detected_csv_structure = TypeDetermination.fn_detect_csv_structure(input_csv_file,
+        detected_csv_structure = TypeDetermination.fn_detect_csv_structure(TypeDetermination,
+                                                                           input_csv_file,
                                                                            csv_field_separator,
                                                                            verbose)
         hyper_table_columns = TableauHyperApiExtraLogic.fn_build_hyper_columns_for_csv(input_csv_file,
