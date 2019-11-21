@@ -66,3 +66,7 @@ see [readme_software.md](readme_software.md)
 ## Used references
 
 see [readme_reference.md](readme_reference.md)
+
+
+## Code quality analysis
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/?branch=master)
