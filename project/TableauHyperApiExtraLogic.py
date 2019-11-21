@@ -32,6 +32,38 @@ class TableauHyperApiExtraLogic:
             )
         return list_hyper_table_columns_to_return
 
+    def fn_convert_and_validate_content(self, crt_value, crt_type):
+        if crt_value == '':
+            return None
+        else:
+            if crt_type == 'int':
+                return int(crt_value)
+            elif crt_type == 'float-USA':
+                return float(crt_value)
+            elif crt_type == 'date-iso8601':
+                tm = datetime.strptime(crt_value, '%Y-%m-%d')
+                return datetime(tm.year, tm.month, tm.day)
+            elif crt_type == 'date-USA':
+                tm = datetime.strptime(crt_value, '%m/%d/%Y')
+                return datetime(tm.year, tm.month, tm.day)
+            elif crt_type == 'time-24':
+                tm = datetime.strptime(crt_value, '%H:%M:%S')
+                return time(tm.hour, tm.minute, tm.second)
+            elif crt_type == 'time-24-us':
+                tm = datetime.strptime(crt_value, '%H:%M:%S.%f')
+                return time(tm.hour, tm.minute, tm.second, tm.microsecond)
+            elif crt_type == 'time-USA':
+                tm = datetime.strptime(crt_value, '%I:%M:%S')
+                return time(tm.hour, tm.minute, tm.second)
+            elif crt_type == 'datetime-iso8601':
+                tm = datetime.fromisoformat(crt_value)
+                return Timestamp(tm.year, tm.month, tm.day, tm.hour, tm.minute, tm.second)
+            elif crt_type == 'datetime-iso8601-us':
+                tm = datetime.fromisoformat(crt_value)
+                return Timestamp(tm.year, tm.month, tm.day, tm.hour, tm.minute, tm.second, tm.microsecond)
+            else:
+                return crt_value.replace('"', '\\"')
+
     def fn_convert_to_hyper_types(given_type):
         switcher = {
             'empty': SqlType.text(),
@@ -62,45 +94,10 @@ class TableauHyperApiExtraLogic:
                 # parse all columns with index
                 for col_idx, column_name in enumerate(csv_object.fieldnames):
                     csv_content_for_hyper[row_idx].append(col_idx)
-                    if row_content[csv_object.fieldnames[col_idx]] == '':
-                        csv_content_for_hyper[row_idx][col_idx] = None
-                    else:
-                        if detected_fields_type[col_idx]['type'] == 'int':
-                            csv_content_for_hyper[row_idx][col_idx] = int(row_content[csv_object.fieldnames[col_idx]])
-                        elif detected_fields_type[col_idx]['type'] == 'float-USA':
-                            csv_content_for_hyper[row_idx][col_idx] = float(row_content[csv_object.fieldnames[col_idx]])
-                        elif detected_fields_type[col_idx]['type'] == 'date-iso8601':
-                            tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%Y-%m-%d')
-                            csv_content_for_hyper[row_idx][col_idx] = datetime(tm.year, tm.month, tm.day)
-                        elif detected_fields_type[col_idx]['type'] == 'date-USA':
-                            tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%m/%d/%Y')
-                            csv_content_for_hyper[row_idx][col_idx] = datetime(tm.year, tm.month, tm.day)
-                        elif detected_fields_type[col_idx]['type'] == 'time-24':
-                            tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%H:%M:%S')
-                            csv_content_for_hyper[row_idx][col_idx] = time(tm.hour, tm.minute, tm.second)
-                        elif detected_fields_type[col_idx]['type'] == 'time-24-us':
-                            tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%H:%M:%S.%f')
-                            csv_content_for_hyper[row_idx][col_idx] = time(tm.hour,
-                                                                           tm.minute,
-                                                                           tm.second,
-                                                                           tm.microsecond)
-                        elif detected_fields_type[col_idx]['type'] == 'time-USA':
-                            tm = datetime.strptime(row_content[csv_object.fieldnames[col_idx]], '%I:%M:%S')
-                            csv_content_for_hyper[row_idx][col_idx] = time(tm.hour,
-                                                                           tm.minute,
-                                                                           tm.second)
-                        elif detected_fields_type[col_idx]['type'] == 'datetime-iso8601':
-                            tm = datetime.fromisoformat(row_content[csv_object.fieldnames[col_idx]])
-                            csv_content_for_hyper[row_idx][col_idx] = Timestamp(tm.year, tm.month, tm.day,
-                                                                                tm.hour, tm.minute, tm.second)
-                        elif detected_fields_type[col_idx]['type'] == 'datetime-iso8601-us':
-                            tm = datetime.fromisoformat(row_content[csv_object.fieldnames[col_idx]])
-                            csv_content_for_hyper[row_idx][col_idx] = Timestamp(tm.year, tm.month, tm.day,
-                                                                                tm.hour, tm.minute, tm.second,
-                                                                                tm.microsecond)
-                        else:
-                            csv_content_for_hyper[row_idx][col_idx] = row_content[csv_object.fieldnames[col_idx]]. \
-                                replace('"', '\\"')
+                    csv_content_for_hyper[row_idx][col_idx] = \
+                        self.fn_convert_and_validate_content(self,
+                                                             row_content[csv_object.fieldnames[col_idx]],
+                                                             detected_fields_type[col_idx]['type'])
                     cls_bn.fn_optional_print(cls_bn, verbose, print_prefix + ' column ' + str(col_idx)
                                              + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
                                              + ' has the value <' + row_content[csv_object.fieldnames[col_idx]]
