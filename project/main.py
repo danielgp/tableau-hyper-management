@@ -2,7 +2,7 @@ import getopt
 import sys
 import time
 
-from TableauHyperApiExtraLogic import TableauHyperApiExtraLogic
+from TableauHyperApiExtraLogic import TableauHyperApiExtraLogic as _cls_thael
 from CommandLineArgumentsHandling import CommandLineArgumentsHandling as _clah
 from datetime import timedelta
 
@@ -48,10 +48,11 @@ def fn_command_line_argument_interpretation(argv):
     else:
         print('Output file is "' + output_file + '"')
     print('#'*120)
-    TableauHyperApiExtraLogic.fn_run_create_hyper_file_from_csv(input_file,
-                                                                csv_field_separator,
-                                                                output_file,
-                                                                verbose)
+    _cls_thael.fn_run_create_hyper_file_from_csv(_cls_thael,
+                                                 input_file,
+                                                 csv_field_separator,
+                                                 output_file,
+                                                 verbose)
 
 
 if __name__ == '__main__':

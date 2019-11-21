@@ -1,4 +1,5 @@
 import json
+import os.path
 
 
 class CommandLineArgumentsHandling:
@@ -44,5 +45,5 @@ class CommandLineArgumentsHandling:
 
 
     def fn_load_configuration(self):
-        with open("config.json", 'r') as json_file:
+        with open(os.path.dirname(__file__) + "/config.json", 'r') as json_file:
             self.config_details = json.load(json_file)

@@ -15,11 +15,11 @@ from tableauhyperapi import HyperProcess, Telemetry, \
 
 class TableauHyperApiExtraLogic:
 
-    def fn_build_hyper_columns_for_csv(given_file_name, csv_field_separator, detected_csv_structure, verbose):
+    def fn_build_hyper_columns_for_csv(self, given_file_name, csv_field_separator, detected_csv_structure, verbose):
         list_hyper_table_columns_to_return = []
         for current_field_structure in detected_csv_structure:
             list_hyper_table_columns_to_return.append(current_field_structure['order'])
-            current_column_type = TableauHyperApiExtraLogic.fn_convert_to_hyper_types(current_field_structure['type'])
+            current_column_type = self.fn_convert_to_hyper_types(current_field_structure['type'])
             cls_bn.fn_optional_print(cls_bn, verbose, 'Column '
                                      + str(current_field_structure['order']) + ' having name "'
                                      + current_field_structure['name'] + '" and type "'
@@ -82,7 +82,7 @@ class TableauHyperApiExtraLogic:
             identified_type = SqlType.text()
         return identified_type
 
-    def fn_rebuild_csv_content_for_hyper(given_file_name, csv_field_separator, detected_fields_type, verbose):
+    def fn_rebuild_csv_content_for_hyper(self, given_file_name, csv_field_separator, detected_fields_type, verbose):
         csv_content_for_hyper = []
         with open(given_file_name, newline='') as csv_file:
             csv_object = csv.DictReader(csv_file, delimiter=csv_field_separator)
@@ -105,7 +105,8 @@ class TableauHyperApiExtraLogic:
                                              + '>>')
         return csv_content_for_hyper
 
-    def fn_run_create_hyper_file_from_csv(input_csv_file,
+    def fn_run_create_hyper_file_from_csv(self,
+                                          input_csv_file,
                                           csv_field_separator,
                                           output_hyper_file,
                                           verbose):
@@ -113,10 +114,11 @@ class TableauHyperApiExtraLogic:
                                                                            input_csv_file,
                                                                            csv_field_separator,
                                                                            verbose)
-        hyper_table_columns = TableauHyperApiExtraLogic.fn_build_hyper_columns_for_csv(input_csv_file,
-                                                                                       csv_field_separator,
-                                                                                       detected_csv_structure,
-                                                                                       verbose)
+        hyper_table_columns = self.fn_build_hyper_columns_for_csv(self,
+                                                                  input_csv_file,
+                                                                  csv_field_separator,
+                                                                  detected_csv_structure,
+                                                                  verbose)
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
         # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
         # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
@@ -146,10 +148,11 @@ class TableauHyperApiExtraLogic:
                 print(f"The number of rows in table {hyper_table.table_name} is {count_in_target_table}.")
                 '''
                 # The rows to insert into the <hyper_table> table.
-                data_to_insert = TableauHyperApiExtraLogic.fn_rebuild_csv_content_for_hyper(input_csv_file,
-                                                                                            csv_field_separator,
-                                                                                            detected_csv_structure,
-                                                                                            verbose)
+                data_to_insert = self.fn_rebuild_csv_content_for_hyper(self,
+                                                                       input_csv_file,
+                                                                       csv_field_separator,
+                                                                       detected_csv_structure,
+                                                                       verbose)
                 # Execute the actual insert
                 with Inserter(hyper_connection, hyper_table) as hyper_inserter:
                     hyper_inserter.add_rows(rows=data_to_insert)
