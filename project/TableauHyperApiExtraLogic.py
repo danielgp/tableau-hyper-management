@@ -32,7 +32,7 @@ class TableauHyperApiExtraLogic:
             )
         return list_hyper_table_columns_to_return
 
-    def fn_convert_and_validate_content(self, crt_value, crt_type):
+    def fn_convert_and_validate_content(crt_value, crt_type):
         if crt_value == '':
             return None
         else:
@@ -95,8 +95,7 @@ class TableauHyperApiExtraLogic:
                 for col_idx, column_name in enumerate(csv_object.fieldnames):
                     csv_content_for_hyper[row_idx].append(col_idx)
                     csv_content_for_hyper[row_idx][col_idx] = \
-                        self.fn_convert_and_validate_content(self,
-                                                             row_content[csv_object.fieldnames[col_idx]],
+                        self.fn_convert_and_validate_content(row_content[csv_object.fieldnames[col_idx]],
                                                              detected_fields_type[col_idx]['type'])
                     cls_bn.fn_optional_print(cls_bn, verbose, print_prefix + ' column ' + str(col_idx)
                                              + ' having the name [' + csv_object.fieldnames[col_idx] + '] '
