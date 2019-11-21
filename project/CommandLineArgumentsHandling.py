@@ -1,9 +1,27 @@
 import json
 import os.path
+import sys
 
 
 class CommandLineArgumentsHandling:
     config_details = []
+
+    def fn_assess_option(self, current_option, established_default_value):
+        if self.config_details['options'][current_option]['default_value'] == established_default_value:
+            str_feedback_parts = {
+                'prefix': 'Fatal Error',
+                'verdict': 'Expected -' + current_option + '|--'
+                           + self.config_details['options'][current_option]['option_long']
+                           + ' <' + self.config_details['options'][current_option]['option_sample_value']
+                           + '> but nothing of that sort has been seen...',
+                'suffix': ':-('
+            }
+            print(str_feedback_parts['prefix']
+                  + '_'*(len(str_feedback_parts['verdict']) - len(str_feedback_parts['prefix'])))
+            print(str_feedback_parts['verdict'] + ' ' + str_feedback_parts['suffix'])
+            sys.exit(2)
+        print('Input file is "' + established_default_value + '"')
+
 
     def fn_build_combined_options(self):
         str_combined_options = ''

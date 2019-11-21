@@ -1,20 +1,22 @@
 {
     "options": {
         "i": {
+            "default_value"         : "",
             "option_long"           : "input-file",
             "option_type"           : "mandatory",
             "option_sample_value"   : "input-file-name"
         },
-        "cfs": {
+        "o": {
+            "default_value"         : "",
+            "option_long"           : "output-file",
+            "option_type"           : "mandatory",
+            "option_sample_value"   : "output-file-name"
+        },
+        "s": {
             "default_value"         : ",",
             "option_long"           : "csv-field-separator",
             "option_type"           : "optional",
             "option_sample_value"   : "csv-field-separator-character"
-        },
-        "o": {
-            "option_long"           : "output-file",
-            "option_type"           : "mandatory",
-            "option_sample_value"   : "output-file-name"
         },
         "v": {
             "default_value"         : false,
