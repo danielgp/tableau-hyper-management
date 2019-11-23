@@ -23,7 +23,7 @@ def fn_command_line_argument_interpretation(argv):
         print(help_feedback)
         sys.exit(2)
     for opt, arg in opts:
-        if opt == '-h':
+        if opt in ("-h", "--help"):
             print(help_feedback)
             sys.exit()
         elif opt in ("-i", "--input-file"):
@@ -35,16 +35,12 @@ def fn_command_line_argument_interpretation(argv):
         elif opt in ("-v", "--verbose"):
             verbose = True
         else:
-            assert False, "unhandled option"
+            assert False, "Unhandled Option: " + arg
     _cls_clah.fn_assess_option(_cls_clah, 'i', input_file)
     print('CSV field separator is "' + csv_field_separator + '"')
     _cls_clah.fn_assess_option(_cls_clah, 'o', output_file)
     print('#'*120)
-    _cls_thael.fn_run_create_hyper_file_from_csv(_cls_thael,
-                                                 input_file,
-                                                 csv_field_separator,
-                                                 output_file,
-                                                 verbose)
+    _cls_thael.fn_run_hyper_creation(_cls_thael, input_file, csv_field_separator, output_file, verbose)
 
 
 if __name__ == '__main__':

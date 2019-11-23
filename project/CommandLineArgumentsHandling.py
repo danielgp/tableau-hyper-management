@@ -1,7 +1,7 @@
 import json
 import os.path
 import sys
-
+# argparse = Alternative command line option and argument parsing library.
 
 class CommandLineArgumentsHandling:
     config_details = []
@@ -27,7 +27,7 @@ class CommandLineArgumentsHandling:
         str_combined_options = ''
         for option_index, current_option in enumerate(self.config_details['options']):
             if current_option is not None:
-                str_option_crt = '-' + current_option + '|' \
+                str_option_crt = '-' + current_option + '|--' \
                                  + self.config_details['options'][current_option]['option_long']
                 if 'option_sample_value' in self.config_details['options'][current_option]:
                     str_option_crt += ' <' \
