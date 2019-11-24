@@ -1,4 +1,5 @@
 import getopt
+import pandas as pd
 import sys
 import time
 
@@ -40,7 +41,13 @@ def fn_command_line_argument_interpretation(argv):
     print('CSV field separator is "' + csv_field_separator + '"')
     _cls_clah.fn_assess_option(_cls_clah, 'o', output_file)
     print('#'*120)
-    _cls_thael.fn_run_hyper_creation(_cls_thael, input_file, csv_field_separator, output_file, verbose)
+    csv_content_df = pd.read_csv(filepath_or_buffer = input_file,
+                                 delimiter = csv_field_separator,
+                                 cache_dates = True,
+                                 index_col = None,
+                                 memory_map = True,
+                                 encoding = 'utf-8')
+    _cls_thael.fn_run_hyper_creation(_cls_thael, csv_content_df, output_file, verbose)
 
 
 if __name__ == '__main__':
