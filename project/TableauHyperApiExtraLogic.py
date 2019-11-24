@@ -138,6 +138,9 @@ class TableauHyperApiExtraLogic:
         # Cycle through all found columns
         for current_field in detected_fields_type:
             fld_nm = current_field['name']
+            _cls_bn.fn_optional_print(_cls_bn, verbose, 'Column ' + fld_nm + ' '
+                                      + 'has panda_type = ' + str(current_field['panda_type']) + ' '
+                                      + 'and ' + str(current_field['type']))
             if current_field['panda_type'] == 'float64' and current_field['type'] == 'int':
                 #input_csv_data_frame[fld_nm] = input_csv_data_frame[fld_nm].apply(lambda x: None if x is None else round(x, 0))
                 input_csv_data_frame[fld_nm] = input_csv_data_frame[fld_nm].replace(to_replace = [pd.np.nan, '.0'],
@@ -145,9 +148,6 @@ class TableauHyperApiExtraLogic:
                                                                                     inplace = True)
             elif current_field['type'] == 'datetime-iso8601':
                 input_csv_data_frame[fld_nm] = pd.to_datetime(input_csv_data_frame[fld_nm])
-        _cls_bn.fn_optional_print(_cls_bn, verbose, 'Column ' + fld_nm + ' '
-                                  + 'has panda_type = ' + str(current_field['panda_type']) + ' '
-                                  + 'and ' + str(current_field['type']))
         return input_csv_data_frame.values
 
     def fn_run_hyper_creation(self, input_csv_data_frame, output_hyper_file, verbose):

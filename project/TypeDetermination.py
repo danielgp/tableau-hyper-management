@@ -6,7 +6,7 @@ from BasicNeeds import BasicNeeds as _cls_bn
 
 class TypeDetermination:
 
-    importance__low_to_high = [
+    importance__low_to_high =     [
         'empty',
         'int',
         'float-USA',
@@ -29,6 +29,7 @@ class TypeDetermination:
                                                         field_unique_values,
                                                         field_panda_type,
                                                         verbose):
+        field_structure = []
         # Analyze unique values
         for unique_row_index, current_value in enumerate(field_unique_values):
             # determine the field type by current content
