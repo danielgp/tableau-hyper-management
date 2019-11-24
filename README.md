@@ -37,10 +37,10 @@ Repository owner is: [Daniel Popiniuc](mailto:daniel.popiniuc@honeywell.com)
     - datetime-iso8601-us,
     - string;
 - support for empty field content for any data type (required re-interpreting CSV to be accepted by Hyper Inserter);
+- use Panda package to benefit of Data Frames (since 2019-11-24)
 
 ## Planned features to add (of course, when time will permit / help would be appreciated / votes|feedback is welcomed)
 
-- use Panda package to benefit of Data Frames
 - switch to lambda function to optimize run-time for millions of rows on data reprocessing
 - additional formats to be recognized, like:
     - date-USA-medium;
