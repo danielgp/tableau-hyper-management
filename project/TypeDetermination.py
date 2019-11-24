@@ -1,10 +1,7 @@
-import csv
 import numpy as np
-import pandas as pd
 import re
-import sys
 
-from BasicNeeds import BasicNeeds as cls_bn
+from BasicNeeds import BasicNeeds as _cls_bn
 
 
 class TypeDetermination:
@@ -25,74 +22,73 @@ class TypeDetermination:
     ]
 
     @staticmethod
-    def fn_analyze_field_content_to_establish_data_type(self, 
-                                                        verbose, 
+    def fn_analyze_field_content_to_establish_data_type(self,
                                                         field_idx, 
-                                                        field_name, 
+                                                        field_name,
                                                         field_counted_nulls,
-                                                        field_unique_values):
+                                                        field_unique_values,
+                                                        field_panda_type,
+                                                        verbose):
         # Analyze unique values
         for unique_row_index, current_value in enumerate(field_unique_values):
-            # determine the field type by current contentfn_analyze_field_content_to_establish_data_type
+            # determine the field type by current content
             crt_field_type = self.fn_type_determination(current_value)
-            # wrise aside the determined value
+            # write aside the determined value
             if unique_row_index == 0:
                 field_structure = {
                     'order': field_idx,
                     'name': field_name,
                     'nulls': field_counted_nulls,
+                    'panda_type': field_panda_type,
                     'type': crt_field_type
                 }
-                cls_bn.fn_optional_print(cls_bn, verbose, f'Column {field_idx} having the name [{field_name}] '
-                                         + f'has the value <{current_value}> which mean is of type "{crt_field_type}"')
+                _cls_bn.fn_optional_print(_cls_bn, verbose, f'Column {field_idx} having the name [{field_name}] '
+                                          + f'has the value <{current_value}> '
+                                          + f'which mean is of type "{crt_field_type}"')
             else:
                 crt_type_index = self.importance__low_to_high.index(crt_field_type)
                 prv_type = field_structure['type']
                 prv_type_index = self.importance__low_to_high.index(prv_type)
                 # if CSV structure for current field (column) exists, does the current type is more important?
                 if crt_type_index > prv_type_index:
-                    cls_bn.fn_optional_print(cls_bn, verbose, f' column {field_idx} having the name [{field_name}] '
-                                             + f'has the value <{current_value}> '
-                                             + f'which means is of type "{crt_field_type}" '
-                                             + 'and this is stronger than previously thought to be '
-                                             + f'as "{prv_type}"')
+                    _cls_bn.fn_optional_print(_cls_bn, verbose, f' column {field_idx} having the name [{field_name}] '
+                                              + f'has the value <{current_value}> '
+                                              + f'which means is of type "{crt_field_type}" '
+                                              + 'and this is stronger than previously thought to be '
+                                              + f'as "{prv_type}"')
                     field_structure['type'] = crt_field_type
             # If currently determined field type is string makes not sense to scan any further
             if crt_field_type == 'str':
                 return field_structure
         return field_structure
 
-    def fn_detect_csv_structure(self, given_file_name, csv_field_separator, verbose):
-        # Import the data
-        csv_content_df = pd.read_csv(filepath_or_buffer=given_file_name,
-                                     delimiter = csv_field_separator,
-                                     cache_dates = True,
-                                     #keep_default_na = False,
-                                     encoding = 'utf-8')
+    def fn_detect_csv_structure(self, input_csv_data_frame, verbose):
         col_idx = 0
         csv_structure = []
         # Cycle through all found columns
-        for label, content in csv_content_df.items():
+        for label, content in input_csv_data_frame.items():
             panda_determined_type = content.infer_objects().dtypes
-            cls_bn.fn_optional_print(cls_bn, verbose, f'Field "{label}" according to Pandas package '
-                                     + f'is of type "{panda_determined_type}"')
+            _cls_bn.fn_optional_print(_cls_bn, verbose, f'Field "{label}" according to Pandas package '
+                                      + f'is of type "{panda_determined_type}"')
             counted_nulls = content.isnull().sum()
             if panda_determined_type in ('float64', 'object'):
                 list_unique_values = content.dropna().unique()
                 self.fn_optional_column_statistics(self, verbose, label, content, list_unique_values)
                 csv_structure.append(col_idx)
                 csv_structure[col_idx] = self.fn_analyze_field_content_to_establish_data_type(self,
-                                                                                              verbose,
                                                                                               col_idx,
                                                                                               label,
                                                                                               counted_nulls,
-                                                                                              list_unique_values[0:200])
+                                                                                              list_unique_values[0:200],
+                                                                                              panda_determined_type,
+                                                                                              verbose)
             elif panda_determined_type == 'int64':
                 csv_structure.append(col_idx)
                 csv_structure[col_idx] = {
                     'order': col_idx,
                     'name': label,
                     'nulls': counted_nulls,
+                    'panda_type': panda_determined_type,
                     'type': 'int'
                 }
             col_idx += 1
@@ -104,7 +100,7 @@ class TypeDetermination:
             counted_values_null = field_content.isnull().sum()
             counted_values_not_null = field_content.notnull().sum()
             counted_values_unique = field_content.nunique()
-            cls_bn.fn_optional_print(cls_bn, verbose, f'"{field_name}" has following characteristics: ' + \
+            _cls_bn.fn_optional_print(_cls_bn, verbose, f'"{field_name}" has following characteristics: ' + \
                                      f'count of null values: {counted_values_null}, ' + \
                                      f'count of not-null values: {counted_values_not_null}, ' + \
                                      f'count of unique values: {counted_values_unique}, ' + \
