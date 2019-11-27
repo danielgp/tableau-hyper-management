@@ -24,15 +24,17 @@ else:
                              + '-py3-none-linux_x86_64.whl'
 
 _setup(
-        author = 'Daniel Popiniuc',
-        author_email = 'danielpopiniuc@gmail.com',
-        dependency_links = [
-            url__tableau_hyper_api
-        ],
-        description = 'Wrapper to ease data management into Tableau Hyper format',
-        license = 'LGPL3',
-        long_description = long_description_readme,
-        name = 'tableau-hyper-management',
-        version = '1.0',
-        download_url = '',
+    author = 'Daniel Popiniuc',
+    author_email = 'danielpopiniuc@gmail.com',
+    dependency_links = [
+        url__tableau_hyper_api
+    ],
+    description = 'Wrapper to ease data management into Tableau Hyper format',
+    include_package_data = True,
+    license = 'LGPL3',
+    long_description = long_description_readme,
+    name = 'tableau-hyper-management',
+    url = 'https://github.com/danielgp/tableau-hyper-management',
+    version = '1.0',
+    download_url = '',
 )
