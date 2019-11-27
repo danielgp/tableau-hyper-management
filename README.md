@@ -23,25 +23,24 @@ Repository owner is: [Daniel Popiniuc](mailto:daniel.popiniuc@honeywell.com)
 
 ## Implemented features
 
-- dynamic fields detection based ont 1st line content and provided field separator;
-- content type detection:
+- dynamic fields detection based ont 1st line content and provided field separator (strategic advantage);
+- dynamic advanced content type detection:
     - integer,
     - float-USA,
     - date-iso8601,
     - date-USA,
     - time-24,
-    - time-24-us,
+    - time-24-micro-sec,
     - time-USA,
-    - time-USA-us,
+    - time-USA-micro-sec,
     - datetime-iso8601,
-    - datetime-iso8601-us,
+    - datetime-iso8601-micro-sec,
     - string;
-- support for empty field content for any data type (required re-interpreting CSV to be accepted by Hyper Inserter);
-- use Panda package to benefit of Data Frames (since 2019-11-24)
+- support for empty field content for any data type (required re-interpreting CSV to be accepted by Hyper Inserter to ensure INT or DOUBLE data types are considered);
+- use Panda package to benefit of Data Frames speed and flexibility (since 2019-11-24)
 
 ## Planned features to add (of course, when time will permit / help would be appreciated / votes|feedback is welcomed)
 
-- switch to lambda function to optimize run-time for millions of rows on data reprocessing
 - additional formats to be recognized, like:
     - date-USA-medium;
     - date-USA-long;
@@ -51,6 +50,7 @@ Repository owner is: [Daniel Popiniuc](mailto:daniel.popiniuc@honeywell.com)
     - geographical identifiers (Country, US - Zip Codes)
 - feedback localization;
 - CSV file internationalization;
+- ~~switch to lambda function to optimize run-time for millions of rows on data reprocessing~~
 
 
 ## Features to request template
