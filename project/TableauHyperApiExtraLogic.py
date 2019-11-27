@@ -39,40 +39,6 @@ class TableauHyperApiExtraLogic:
                     nullability = NULLABLE
                 )
         return list_hyper_table_columns_to_return
-    
-    '''
-    def fn_convert_and_validate_content(crt_value, crt_type):
-        if crt_value == '':
-            return None
-        else:
-            if crt_type == 'int':
-                return int(crt_value)
-            elif crt_type == 'float-USA':
-                return float(crt_value)
-            elif crt_type == 'date-iso8601':
-                tm = datetime.strptime(crt_value, '%Y-%m-%d')
-                return datetime(tm.year, tm.month, tm.day)
-            elif crt_type == 'date-USA':
-                tm = datetime.strptime(crt_value, '%m/%d/%Y')
-                return datetime(tm.year, tm.month, tm.day)
-            elif crt_type == 'time-24':
-                tm = datetime.strptime(crt_value, '%H:%M:%S')
-                return time(tm.hour, tm.minute, tm.second)
-            elif crt_type == 'time-24-us':
-                tm = datetime.strptime(crt_value, '%H:%M:%S.%f')
-                return time(tm.hour, tm.minute, tm.second, tm.microsecond)
-            elif crt_type == 'time-USA':
-                tm = datetime.strptime(crt_value, '%I:%M:%S')
-                return time(tm.hour, tm.minute, tm.second)
-            elif crt_type == 'datetime-iso8601':
-                tm = datetime.fromisoformat(crt_value)
-                return Timestamp(tm.year, tm.month, tm.day, tm.hour, tm.minute, tm.second)
-            elif crt_type == 'datetime-iso8601-us':
-                tm = datetime.fromisoformat(crt_value)
-                return Timestamp(tm.year, tm.month, tm.day, tm.hour, tm.minute, tm.second, tm.microsecond)
-            else:
-                return crt_value.replace('"', '\\"')
-    '''
 
     @staticmethod
     def fn_convert_to_hyper_types(given_type):
@@ -83,9 +49,11 @@ class TableauHyperApiExtraLogic:
             'date-iso8601': SqlType.date(),
             'date-USA': SqlType.date(),
             'time-24': SqlType.time(),
-            'time-24-us': SqlType.time(),
+            'time-24-micro-sec': SqlType.time(),
             'time-USA': SqlType.time(),
+            'time-USA-micro-sec': SqlType.time(),
             'datetime-iso8601': SqlType.timestamp(),
+            'datetime-iso8601-micro-sec': SqlType.timestamp(),
             'str': SqlType.text()
         }
         identified_type = switcher.get(given_type)
@@ -94,9 +62,7 @@ class TableauHyperApiExtraLogic:
         return identified_type
 
     def fn_create_hyper_file_from_csv(self, input_csv_data_frame, output_hyper_file, verbose):
-        detected_csv_structure = _cls_td.fn_detect_csv_structure(_cls_td,
-                                                                 input_csv_data_frame,
-                                                                 verbose)
+        detected_csv_structure = _cls_td.fn_detect_csv_structure(_cls_td, input_csv_data_frame, verbose)
         hyper_table_columns = self.fn_build_hyper_columns_for_csv(self, detected_csv_structure, verbose)
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
         # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
@@ -107,20 +73,18 @@ class TableauHyperApiExtraLogic:
             with Connection(endpoint = hyper.endpoint,
                             database = output_hyper_file,
                             create_mode = CreateMode.CREATE_AND_REPLACE) as hyper_connection:
-                print("The connection to the Hyper engine file has been created.")
+                print(f'Connection to the Hyper engine file "{output_hyper_file}" has been created.')
                 hyper_connection.catalog.create_schema("Extract")
-                print("Hyper schema Extract has been created.")
+                print('Hyper schema "Extract" has been created.')
                 hyper_table = TableDefinition(
                     TableName("Extract", "Extract"),
                     columns = hyper_table_columns
                 )
                 hyper_connection.catalog.create_table(table_definition = hyper_table)
-                print("Hyper table Extract has been created.")
+                print('Hyper table "Extract" has been created.')
                 # The rows to insert into the <hyper_table> table.
-                data_to_insert = self.fn_rebuild_csv_content_for_hyper(self,
-                                                                       input_csv_data_frame,
-                                                                       detected_csv_structure,
-                                                                       verbose)
+                data_to_insert = self.fn_rebuild_csv_content_for_hyper(self, input_csv_data_frame,
+                                                                       detected_csv_structure, verbose)
                 # Execute the actual insert
                 with Inserter(hyper_connection, hyper_table) as hyper_inserter:
                     hyper_inserter.add_rows(rows = data_to_insert)
@@ -129,9 +93,9 @@ class TableauHyperApiExtraLogic:
                 # `execute_scalar_query` is for executing a query that returns exactly one row with one column.
                 row_count = hyper_connection.\
                     execute_scalar_query(query = f'SELECT COUNT(*) FROM {hyper_table.table_name}')
-                print(f'The number of rows in table {hyper_table.table_name} is {row_count}.')
-            print('The connection to the Hyper file has been closed.')
-        print('The Hyper process has been shut down.')
+                print(f'Number of rows in table {hyper_table.table_name} is {row_count}.')
+            print('Connection to the Hyper engine file has been closed.')
+        print('Hyper engine process has been shut down.')
 
     def fn_rebuild_csv_content_for_hyper(self, input_csv_data_frame, detected_fields_type, verbose):
         input_csv_data_frame.replace(to_replace = [pd.np.nan], value = [None], inplace = True)
@@ -146,7 +110,7 @@ class TableauHyperApiExtraLogic:
                 input_csv_data_frame[fld_nm] = input_csv_data_frame[fld_nm].replace(to_replace = [pd.np.nan, '.0'],
                                                                                     value = [None, ''],
                                                                                     inplace = True)
-            elif current_field['type'] == 'datetime-iso8601':
+            elif current_field['type'] in ('datetime-iso8601', 'datetime-iso8601-micro-sec'):
                 input_csv_data_frame[fld_nm] = pd.to_datetime(input_csv_data_frame[fld_nm])
         return input_csv_data_frame.values
 
