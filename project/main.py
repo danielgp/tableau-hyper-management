@@ -3,8 +3,8 @@ import pandas as pd
 import sys
 import time
 
-from TableauHyperApiExtraLogic import TableauHyperApiExtraLogic as _cls_thael
 from CommandLineArgumentsHandling import CommandLineArgumentsHandling as _cls_clah
+from TableauHyperApiExtraLogic import TableauHyperApiExtraLogic as _cls_thael
 from datetime import timedelta
 
 
