@@ -9,6 +9,8 @@ from datetime import timedelta
 
 
 def fn_command_line_argument_interpretation(argv):
+    # argparse = Alternative command line option and argument parsing library.
+    # https://www.programcreek.com/python/example/748/argparse.ArgumentParser
     print('#'*120)
     input_file = ''
     csv_field_separator = ','
@@ -47,7 +49,8 @@ def fn_command_line_argument_interpretation(argv):
                                  index_col = None,
                                  memory_map = True,
                                  encoding = 'utf-8')
-    _cls_thael.fn_run_hyper_creation(_cls_thael, csv_content_df, output_file, verbose)
+    formats_to_evaluate = _cls_clah.config_details['data_types'];
+    _cls_thael.fn_run_hyper_creation(_cls_thael, csv_content_df, formats_to_evaluate, output_file, verbose)
 
 
 if __name__ == '__main__':

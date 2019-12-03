@@ -61,8 +61,9 @@ class TableauHyperApiExtraLogic:
             identified_type = SqlType.text()
         return identified_type
 
-    def fn_create_hyper_file_from_csv(self, input_csv_data_frame, output_hyper_file, verbose):
-        detected_csv_structure = _cls_td.fn_detect_csv_structure(_cls_td, input_csv_data_frame, verbose)
+    def fn_create_hyper_file_from_csv(self, input_csv_data_frame, formats_to_evaluate, output_hyper_file, verbose):
+        detected_csv_structure = _cls_td.fn_detect_csv_structure(_cls_td, input_csv_data_frame, 
+                                                                 formats_to_evaluate, verbose)
         hyper_table_columns = self.fn_build_hyper_columns_for_csv(self, detected_csv_structure, verbose)
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
         # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
@@ -114,9 +115,9 @@ class TableauHyperApiExtraLogic:
                 input_csv_data_frame[fld_nm] = pd.to_datetime(input_csv_data_frame[fld_nm])
         return input_csv_data_frame.values
 
-    def fn_run_hyper_creation(self, input_csv_data_frame, output_hyper_file, verbose):
+    def fn_run_hyper_creation(self, input_csv_data_frame, formats_to_evaluate, output_hyper_file, verbose):
         try:
-            self.fn_create_hyper_file_from_csv(self, input_csv_data_frame, output_hyper_file, verbose)
+            self.fn_create_hyper_file_from_csv(self, input_csv_data_frame, formats_to_evaluate, output_hyper_file, verbose)
         except HyperException as ex:
             print(ex)
             exit(1)
