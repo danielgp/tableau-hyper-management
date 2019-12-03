@@ -23,7 +23,7 @@ else:
                              + tableau_hyper_api__current_known_version \
                              + '-py3-none-linux_x86_64.whl'
 
-_setup(
+setup(
     author = 'Daniel Popiniuc',
     author_email = 'danielpopiniuc@gmail.com',
     classifiers = [
