@@ -1,5 +1,6 @@
 # Tableau-Hyper-Management
 
+
 ## What is this repository for?
 
 Based on [Tableau Hyper API](https://help.tableau.com/current/api/hyper_api/en-us/) this repository is intended to manage importing any CSV file into Tableau-Hyper format (to be used with Tableau Desktop/Server) with minimal configuration (as column detection, content type detection and reinterpretation of content are part of the included logic), therefore speed up the process of building extract.
@@ -12,14 +13,30 @@ Even better, can be used in conjunction with [Tableau Server Client](https://tab
 Repository owner is: [Daniel Popiniuc](mailto:daniel.popiniuc@honeywell.com)
 
 
+## Installation
+
+Installation is very easy. Either install it from PyPI:
+```
+    $ pip3|pip3(.exe) install -U tableau-hyper-management
+    $ pip3|pip3(.exe) install -U git+https://github.com/danielgp/tableau-hyper-management
+```
+or directly from GitHub:
+```
+    $ git clone https://github.com/danielgp/tableau-hyper-management
+    $ python3|python(.exe) setup.py install
+```
+
+
 ## Usage
 
-`python(.exe) <local_path_of_this_package>main.py --input-file <full_path_and_file_base_name_to_file_having_content_as_CSV>(.txt|.csv) --csv-field-separator ,|; --output-file <full_path_and_file_base_name_to_generated_file>(.hyper)`
-
+```
+    $ python3|python.exe <local_path_of_this_package>main.py --input-file <full_path_and_file_base_name_to_file_having_content_as_CSV>(.txt|.csv) --csv-field-separator ,|; --output-file <full_path_and_file_base_name_to_generated_file>(.hyper)
+```
 - conventions used:
     - (content_within_round_parenthesis) = optional
     - <content_within_html_tags> = variables to be replaced with user values relevant strings
     - single vertical pipeline = separator for alternative options 
+
 
 ## Implemented features
 
@@ -38,6 +55,7 @@ Repository owner is: [Daniel Popiniuc](mailto:daniel.popiniuc@honeywell.com)
     - string;
 - support for empty field content for any data type (required re-interpreting CSV to be accepted by Hyper Inserter to ensure INT or DOUBLE data types are considered);
 - use Panda package to benefit of Data Frames speed and flexibility (since 2019-11-24)
+
 
 ## Planned features to add (of course, when time will permit / help would be appreciated / votes|feedback is welcomed)
 
@@ -70,3 +88,7 @@ see [readme_reference.md](readme_reference.md)
 
 ## Code quality analysis
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/?branch=master)
+
+
+## Build Status
+[![Build Status](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/build.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/build-status/master)
