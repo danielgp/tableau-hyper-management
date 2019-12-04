@@ -1,5 +1,4 @@
 examples/
-project/__pycache__/TypeDetermination.cpython-38.pyc
-project/hyperd.log
-project/__pycache__/
 results/
+tableau_hyper_management/__pycache__/
+.pypirc
