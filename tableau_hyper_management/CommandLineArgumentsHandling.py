@@ -36,7 +36,7 @@ class CommandLineArgumentsHandling:
         print('Input file is "' + given_default_value + '"')
 
     def fn_build_combined_options(self):
-        str_combined_options = ''
+        str_combined_opts = ''
         for option_index, crt_opt in enumerate(self.cfg_dtls['options']):
             if crt_opt is not None:
                 str_option_crt = '-' + crt_opt + '|--'\
@@ -46,13 +46,13 @@ class CommandLineArgumentsHandling:
                                       + self.cfg_dtls['options'][crt_opt]['option_sample_value']\
                                       + '>'
                 if self.cfg_dtls['options'][crt_opt]['option_type'] == 'optional':
-                    str_combined_options += ' [' + str_option_crt\
-                                            + '|if omitted default value will be considered: '\
-                                            + str(self.cfg_dtls['options'][crt_opt]['default_value'])\
-                                            + ']'
+                    str_combined_opts += ' [' + str_option_crt\
+                                         + '|if omitted, default value will be considered: '\
+                                         + str(self.cfg_dtls['options'][crt_opt]['default_value'])\
+                                         + ']'
                 else:
-                    str_combined_options += ' ' + str_option_crt
-        return str_combined_options
+                    str_combined_opts += ' ' + str_option_crt
+        return str_combined_opts
 
     def fn_build_long_options(self):
         str_opts = []
@@ -105,12 +105,12 @@ class CommandLineArgumentsHandling:
         print('CSV field separator is "' + csv_field_separator + '"')
         self.fn_assess_option(self, 'o', output_file)
         print('#' * 120)
-        csv_content_df = pd.read_csv(filepath_or_buffer = input_file,
-                                     delimiter = csv_field_separator,
-                                     cache_dates = True,
-                                     index_col = None,
-                                     memory_map = True,
-                                     encoding = 'utf-8')
+        csv_content_df = pd.read_csv(filepath_or_buffer=input_file,
+                                     delimiter=csv_field_separator,
+                                     cache_dates=True,
+                                     index_col=None,
+                                     memory_map=True,
+                                     encoding='utf-8')
         formats_to_evaluate = self.config_details['data_types']
         ClassTHAEL.fn_run_hyper_creation(ClassTHAEL, csv_content_df, formats_to_evaluate,
                                          output_file, verbose)
