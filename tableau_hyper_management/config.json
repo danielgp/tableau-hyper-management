@@ -15,25 +15,31 @@
         "i": {
             "default_value"         : "",
             "option_long"           : "input-file",
-            "option_type"           : "mandatory",
+            "option_required"       : true,
             "option_sample_value"   : "input-file-name"
         },
         "o": {
             "default_value"         : "",
             "option_long"           : "output-file",
-            "option_type"           : "mandatory",
+            "option_required"       : true,
             "option_sample_value"   : "output-file-name"
+        },
+        "a": {
+            "default_value"         : 200,
+            "option_long"           : "unique-values-to-analyze-limit",
+            "option_required"       : false,
+            "option_sample_value"   : "100|200 = default value|1000"
         },
         "s": {
             "default_value"         : ",",
             "option_long"           : "csv-field-separator",
-            "option_type"           : "optional",
+            "option_required"       : false,
             "option_sample_value"   : "csv-field-separator-character"
         },
         "v": {
             "default_value"         : false,
             "option_long"           : "verbose",
-            "option_type"           : "optional"
+            "option_required"       : false
         }
     }
 }

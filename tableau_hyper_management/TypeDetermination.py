@@ -59,32 +59,32 @@ class TypeDetermination:
                 return field_structure
         return field_structure
 
-    def fn_detect_csv_structure(self, input_csv_data_frame, formats_to_evaluate, verbose):
+    def fn_detect_csv_structure(self, input_csv_data_frame, formats_to_evaluate, in_prmtrs):
         col_idx = 0
         csv_structure = []
         # Cycle through all found columns
         for label, content in input_csv_data_frame.items():
             panda_determined_type = content.infer_objects().dtypes
-            ClassBN.fn_optional_print(ClassBN, verbose,
+            ClassBN.fn_optional_print(ClassBN, in_prmtrs.verbose,
                                       f'Field "{label}" according to Pandas package '
                                       + f'is of type "{panda_determined_type}"')
             counted_nulls = content.isnull().sum()
             if panda_determined_type in ('float64', 'object'):
                 list_unique_values = content.dropna().unique()
-                self.fn_optional_column_statistics(verbose, label, content,
+                self.fn_optional_column_statistics(in_prmtrs.verbose, label, content,
                                                    list_unique_values)
                 preliminary_list = {
                     'order': col_idx,
                     'name': label,
                     'nulls': counted_nulls,
                     'panda_type': panda_determined_type,
-                    'unique_values': list_unique_values[0:200]
+                    'unique_values': list_unique_values[0:in_prmtrs.unique_values_to_analyze_limit]
                 }
                 csv_structure.append(col_idx)
                 csv_structure[col_idx] = self.\
                     fn_analyze_field_content_to_establish_data_type(self, preliminary_list,
                                                                     formats_to_evaluate,
-                                                                    verbose)
+                                                                    in_prmtrs.verbose)
             elif panda_determined_type == 'int64':
                 csv_structure.append(col_idx)
                 csv_structure[col_idx] = {
