@@ -1,17 +1,14 @@
 import pandas as pd
 
-from BasicNeeds import BasicNeeds as _cls_bn
-from TypeDetermination import TypeDetermination as _cls_td
+from . import BasicNeeds as ClassBN
+from . import TypeDetermination as ClassTD
 
-from datetime import datetime,time
 from tableauhyperapi import HyperProcess, Telemetry, \
     Connection, CreateMode, \
     NOT_NULLABLE, NULLABLE, SqlType, TableDefinition, \
     Inserter, \
-    escape_name, escape_string_literal, \
     TableName, \
-    HyperException, \
-    Timestamp
+    HyperException
 
 
 class TableauHyperApiExtraLogic:
@@ -21,7 +18,7 @@ class TableauHyperApiExtraLogic:
         for current_field_structure in detected_csv_structure:
             list_hyper_table_columns_to_return.append(current_field_structure['order'])
             current_column_type = self.fn_convert_to_hyper_types(current_field_structure['type'])
-            _cls_bn.fn_optional_print(_cls_bn, verbose, 'Column '
+            ClassBN.fn_optional_print(ClassBN, verbose, 'Column '
                                       + str(current_field_structure['order']) + ' having name "'
                                       + current_field_structure['name'] + '" and type "'
                                       + current_field_structure['type'] + '" will become "'
@@ -62,7 +59,7 @@ class TableauHyperApiExtraLogic:
         return identified_type
 
     def fn_create_hyper_file_from_csv(self, input_csv_data_frame, formats_to_evaluate, output_hyper_file, verbose):
-        detected_csv_structure = _cls_td.fn_detect_csv_structure(_cls_td, input_csv_data_frame, 
+        detected_csv_structure = ClassTD.fn_detect_csv_structure(ClassTD, input_csv_data_frame,
                                                                  formats_to_evaluate, verbose)
         hyper_table_columns = self.fn_build_hyper_columns_for_csv(self, detected_csv_structure, verbose)
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
@@ -103,11 +100,10 @@ class TableauHyperApiExtraLogic:
         # Cycle through all found columns
         for current_field in detected_fields_type:
             fld_nm = current_field['name']
-            _cls_bn.fn_optional_print(_cls_bn, verbose, 'Column ' + fld_nm + ' '
+            ClassBN.fn_optional_print(ClassBN, verbose, 'Column ' + fld_nm + ' '
                                       + 'has panda_type = ' + str(current_field['panda_type']) + ' '
                                       + 'and ' + str(current_field['type']))
             if current_field['panda_type'] == 'float64' and current_field['type'] == 'int':
-                #input_csv_data_frame[fld_nm] = input_csv_data_frame[fld_nm].apply(lambda x: None if x is None else round(x, 0))
                 input_csv_data_frame[fld_nm] = input_csv_data_frame[fld_nm].replace(to_replace = [pd.np.nan, '.0'],
                                                                                     value = [None, ''],
                                                                                     inplace = True)
@@ -117,7 +113,8 @@ class TableauHyperApiExtraLogic:
 
     def fn_run_hyper_creation(self, input_csv_data_frame, formats_to_evaluate, output_hyper_file, verbose):
         try:
-            self.fn_create_hyper_file_from_csv(self, input_csv_data_frame, formats_to_evaluate, output_hyper_file, verbose)
+            self.fn_create_hyper_file_from_csv(self, input_csv_data_frame, formats_to_evaluate, output_hyper_file,
+                                               verbose)
         except HyperException as ex:
             print(ex)
             exit(1)

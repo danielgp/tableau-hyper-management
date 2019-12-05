@@ -1,7 +1,7 @@
 import numpy as np
 import re
 
-from BasicNeeds import BasicNeeds as _cls_bn
+from . import BasicNeeds as ClassBN
 
 
 class TypeDetermination:
@@ -28,7 +28,7 @@ class TypeDetermination:
                     'panda_type': field_panda_type,
                     'type': crt_field_type
                 }
-                _cls_bn.fn_optional_print(_cls_bn, verbose, f'Column {field_idx} having the name [{field_name}] '
+                ClassBN.fn_optional_print(verbose, f'Column {field_idx} having the name [{field_name}] '
                                           + f'has the value <{current_value}> '
                                           + f'which mean is of type "{crt_field_type}"')
             else:
@@ -37,7 +37,7 @@ class TypeDetermination:
                 prv_type_index = list(data_type_and_their_formats_to_evaluate.keys()).index(prv_type)
                 # if CSV structure for current field (column) exists, does the current type is more important?
                 if crt_type_index > prv_type_index:
-                    _cls_bn.fn_optional_print(_cls_bn, verbose, f' column {field_idx} having the name [{field_name}] '
+                    ClassBN.fn_optional_print(verbose, f' column {field_idx} having the name [{field_name}] '
                                               + f'has the value <{current_value}> '
                                               + f'which means is of type "{crt_field_type}" '
                                               + 'and this is stronger than previously thought to be '
@@ -55,7 +55,7 @@ class TypeDetermination:
         # Cycle through all found columns
         for label, content in input_csv_data_frame.items():
             panda_determined_type = content.infer_objects().dtypes
-            _cls_bn.fn_optional_print(_cls_bn, verbose, f'Field "{label}" according to Pandas package '
+            ClassBN.fn_optional_print(verbose, f'Field "{label}" according to Pandas package '
                                       + f'is of type "{panda_determined_type}"')
             counted_nulls = content.isnull().sum()
             if panda_determined_type in ('float64', 'object'):
@@ -88,7 +88,7 @@ class TypeDetermination:
             counted_values_null = field_content.isnull().sum()
             counted_values_not_null = field_content.notnull().sum()
             counted_values_unique = field_content.nunique()
-            _cls_bn.fn_optional_print(_cls_bn, verbose, f'"{field_name}" has following characteristics: ' +
+            ClassBN.fn_optional_print(verbose, f'"{field_name}" has following characteristics: ' +
                                      f'count of null values: {counted_values_null}, ' +
                                      f'count of not-null values: {counted_values_not_null}, ' +
                                      f'count of unique values: {counted_values_unique}, ' +
