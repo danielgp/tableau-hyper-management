@@ -5,9 +5,6 @@ This library allows packaging CSV content into HYPER format with data type check
 """
 # additional Python packages available from PyPi
 import pandas as pd
-# Custom class specific to this package
-from TypeDetermination import TypeDetermination as ClassTD
-from TypeDetermination import ClassBN
 # Custom classes from Tableau Hyper package
 from tableauhyperapi import HyperProcess, Telemetry, \
     Connection, CreateMode, \
@@ -15,6 +12,9 @@ from tableauhyperapi import HyperProcess, Telemetry, \
     Inserter, \
     TableName, \
     HyperException
+# Custom classes specific to this package
+from .TypeDetermination import ClassBN
+from .TypeDetermination import TypeDetermination as ClassTD
 
 
 class TableauHyperApiExtraLogic:

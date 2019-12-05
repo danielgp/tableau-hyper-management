@@ -7,8 +7,18 @@ This file is performing CSV read into HYPER file and measures time elapsed (perf
 import time
 from datetime import timedelta
 # Custom classes specific to this package
-from CommandLineArgumentsHandling import ClassBN
-from CommandLineArgumentsHandling import CommandLineArgumentsHandling as ClassCLAH
+from tableau_hyper_management.CommandLineArgumentsHandling import ClassBN
+from tableau_hyper_management.CommandLineArgumentsHandling import CommandLineArgumentsHandling as ClassCLAH
+
+# standard Python packages
+import time
+from datetime import timedelta
+
+# Custom classes specific to this package
+from tableau_hyper_management.CommandLineArgumentsHandling import ClassBN
+from tableau_hyper_management.CommandLineArgumentsHandling import \
+    CommandLineArgumentsHandling as ClassCLAH
+
 # main execution logic
 if __name__ == '__main__':
     # marking the start of performance measuring (in nanoseconds)

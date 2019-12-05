@@ -4,6 +4,7 @@ setup - ensures proper package setup
 This file is ensuring proper package setup is performed to ensure all prerequisites are satisfied 
 and correct execution is possible
 """
+# standard Python packages
 import platform
 from setuptools import setup, find_packages
 
@@ -74,5 +75,5 @@ setup(
     },
     python_requires = '>=3.6',
     url = this_package_website + '/releases',  # project home page, if any
-    version = '1.0.9'
+    version = '1.0.10'
 )

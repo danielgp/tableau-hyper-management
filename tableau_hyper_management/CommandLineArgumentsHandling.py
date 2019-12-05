@@ -15,9 +15,9 @@ import os.path
 import sys
 # additional Python packages available from PyPi
 import pandas as pd
-# Custom class specific to this package
-from TableauHyperApiExtraLogic import ClassBN
-from TableauHyperApiExtraLogic import TableauHyperApiExtraLogic as ClassTHAEL
+# Custom classes specific to this package
+from .TableauHyperApiExtraLogic import ClassBN
+from .TableauHyperApiExtraLogic import TableauHyperApiExtraLogic as ClassTHAEL
 
 
 class CommandLineArgumentsHandling:

@@ -8,7 +8,7 @@ import re
 # additional Python packages available from PyPi
 import numpy as np
 # Custom class specific to this package
-from BasicNeeds import BasicNeeds as ClassBN
+from .BasicNeeds import BasicNeeds as ClassBN
 
 
 class TypeDetermination:
@@ -18,7 +18,6 @@ class TypeDetermination:
                                                         data_type_and_their_formats_to_evaluate,
                                                         verbose):
         field_structure = []
-        instance_bn = ClassBN
         # Analyze unique values
         for unique_row_index, current_value in enumerate(field_characteristics['unique_values']):
             # determine the field type by current content
@@ -33,7 +32,7 @@ class TypeDetermination:
                     'panda_type': field_characteristics['panda_type'],
                     'type': crt_field_type
                 }
-                ClassBN.fn_optional_print(instance_bn, verbose,
+                ClassBN.fn_optional_print(ClassBN, verbose,
                                           'Column ' + str(field_characteristics['order'])
                                           + ' having the name ['
                                           + field_characteristics['name']
@@ -48,7 +47,7 @@ class TypeDetermination:
                 # if CSV structure for current field (column) exists,
                 # does the current type is more important?
                 if crt_type_index > prv_type_index:
-                    ClassBN.fn_optional_print(instance_bn, verbose,
+                    ClassBN.fn_optional_print(ClassBN, verbose,
                                               'Column ' + str(field_characteristics['order'])
                                               + ' having the name ['
                                               + field_characteristics['name']
@@ -68,7 +67,7 @@ class TypeDetermination:
         # Cycle through all found columns
         for label, content in input_csv_data_frame.items():
             panda_determined_type = content.infer_objects().dtypes
-            ClassBN.fn_optional_print(self, verbose,
+            ClassBN.fn_optional_print(ClassBN, verbose,
                                       f'Field "{label}" according to Pandas package '
                                       + f'is of type "{panda_determined_type}"')
             counted_nulls = content.isnull().sum()
