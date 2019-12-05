@@ -16,7 +16,7 @@ import sys
 # additional Python packages available from PyPi
 import pandas as pd
 # Custom class specific to this package
-from BasicNeeds import BasicNeeds as ClassBN
+from TableauHyperApiExtraLogic import ClassBN
 from TableauHyperApiExtraLogic import TableauHyperApiExtraLogic as ClassTHAEL
 
 

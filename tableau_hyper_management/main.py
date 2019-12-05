@@ -7,7 +7,7 @@ This file is performing CSV read into HYPER file and measures time elapsed (perf
 import time
 from datetime import timedelta
 # Custom classes specific to this package
-from BasicNeeds import BasicNeeds as ClassBN
+from CommandLineArgumentsHandling import ClassBN
 from CommandLineArgumentsHandling import CommandLineArgumentsHandling as ClassCLAH
 # main execution logic
 if __name__ == '__main__':
