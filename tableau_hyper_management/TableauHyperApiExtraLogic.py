@@ -3,12 +3,12 @@ TableauHyperApiExtraLogic - a Hyper client library.
 
 This library allows packaging CSV content into HYPER format with data type checks
 """
-
+# additional Python packages available from PyPi
 import pandas as pd
-
-from . import BasicNeeds as ClassBN
-from . import TypeDetermination as ClassTD
-
+# Custom class specific to this package
+from BasicNeeds import BasicNeeds as ClassBN
+from TypeDetermination import TypeDetermination as ClassTD
+# Custom classes from Tableau Hyper package
 from tableauhyperapi import HyperProcess, Telemetry, \
     Connection, CreateMode, \
     NOT_NULLABLE, NULLABLE, SqlType, TableDefinition, \
@@ -24,7 +24,8 @@ class TableauHyperApiExtraLogic:
         for current_field_structure in detected_csv_structure:
             list_to_return.append(current_field_structure['order'])
             current_column_type = self.fn_convert_to_hyper_types(current_field_structure['type'])
-            ClassBN.fn_optional_print(ClassBN, verbose, 'Column '
+            instance_bn = ClassBN
+            ClassBN.fn_optional_print(instance_bn, verbose, 'Column '
                                       + str(current_field_structure['order']) + ' having name "'
                                       + current_field_structure['name'] + '" and type "'
                                       + current_field_structure['type'] + '" will become "'
@@ -78,34 +79,39 @@ class TableauHyperApiExtraLogic:
             with Connection(endpoint=hyper.endpoint,
                             database=output_hyper_file,
                             create_mode=CreateMode.CREATE_AND_REPLACE) as hyper_connection:
-                print(f'Connection to the Hyper engine file "{output_hyper_file}" '
-                      + 'has been created.')
+                ClassBN.fn_timestamped_print(ClassBN, 'Connection to the Hyper engine '
+                                             + f'file "{output_hyper_file}" '
+                                             + 'has been created.')
                 hyper_connection.catalog.create_schema("Extract")
-                print('Hyper schema "Extract" has been created.')
+                ClassBN.fn_timestamped_print(ClassBN, 'Hyper schema "Extract" has been created.')
                 hyper_table = TableDefinition(
                     TableName("Extract", "Extract"),
                     columns=hyper_cols
                 )
                 hyper_connection.catalog.create_table(table_definition=hyper_table)
-                print('Hyper table "Extract" has been created.')
+                ClassBN.fn_timestamped_print(ClassBN, 'Hyper table "Extract" has been created.')
                 # The rows to insert into the <hyper_table> table.
-                data_to_insert = self.fn_rebuild_csv_content_for_hyper(self, input_csv_data_frame,
+                data_to_insert = self.fn_rebuild_csv_content_for_hyper(input_csv_data_frame,
                                                                        detected_csv_structure,
                                                                        verbose)
                 # Execute the actual insert
-                with Inserter(hyper_connection, hyper_table) as hyper_inserter:
-                    hyper_inserter.add_rows(rows=data_to_insert)
-                    hyper_inserter.execute()
+                with Inserter(hyper_connection, hyper_table) as hyper_insert:
+                    hyper_insert.add_rows(rows=data_to_insert)
+                    hyper_insert.execute()
                 # Number of rows in the <hyper_table> table.
                 # `execute_scalar_query` is for executing a query
                 # that returns exactly one row with one column.
                 row_count = hyper_connection.\
                     execute_scalar_query(query=f'SELECT COUNT(*) FROM {hyper_table.table_name}')
-                print(f'Number of rows in table {hyper_table.table_name} is {row_count}.')
-            print('Connection to the Hyper engine file has been closed.')
-        print('Hyper engine process has been shut down.')
+                ClassBN.fn_timestamped_print(ClassBN, 'Number of rows '
+                                             + f'in table {hyper_table.table_name} '
+                                             + f'is {row_count}.')
+            ClassBN.fn_timestamped_print(ClassBN, 'Connection to the Hyper engine file '
+                                         + 'has been closed.')
+        ClassBN.fn_timestamped_print(ClassBN, 'Hyper engine process has been shut down.')
 
-    def fn_rebuild_csv_content_for_hyper(self, input_df, detected_fields_type, verbose):
+    @staticmethod
+    def fn_rebuild_csv_content_for_hyper(input_df, detected_fields_type, verbose):
         input_df.replace(to_replace=[pd.np.nan], value=[None], inplace=True)
         # Cycle through all found columns
         for current_field in detected_fields_type:

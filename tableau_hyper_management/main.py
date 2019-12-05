@@ -3,20 +3,21 @@ main - entry point of the package
 
 This file is performing CSV read into HYPER file and measures time elapsed (performance)
 """
-import sys
+# standard Python packages
 import time
-
-from . import CommandLineArgumentsHandling as ClassCLAH
 from datetime import timedelta
-
-
+# Custom classes specific to this package
+from BasicNeeds import BasicNeeds as ClassBN
+from CommandLineArgumentsHandling import CommandLineArgumentsHandling as ClassCLAH
+# main execution logic
 if __name__ == '__main__':
     # marking the start of performance measuring (in nanoseconds)
     performance_start = time.perf_counter_ns()
-    ClassCLAH.fn_command_line_argument_interpretation(ClassCLAH, sys.argv[1:])
+    ClassCLAH.fn_command_line_argument_interpretation(ClassCLAH)
     # marking the end of performance measuring (in nanoseconds)
     performance_finish = time.perf_counter_ns()
     # calculate time spent on execution
-    performance_timed = timedelta(microseconds = (performance_finish - performance_start) / 1000)
+    performance_timed = timedelta(microseconds=((performance_finish - performance_start) / 1000))
     # display time spent on execution
-    print("This script has been executed in " + format(performance_timed) + ' seconds')
+    ClassBN.fn_timestamped_print(ClassBN, 'This script has been executed in '
+                                 + format(performance_timed) + ' seconds')
