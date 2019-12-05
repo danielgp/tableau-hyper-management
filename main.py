@@ -3,12 +3,6 @@ main - entry point of the package
 
 This file is performing CSV read into HYPER file and measures time elapsed (performance)
 """
-# standard Python packages
-import time
-from datetime import timedelta
-# Custom classes specific to this package
-from tableau_hyper_management.CommandLineArgumentsHandling import ClassBN
-from tableau_hyper_management.CommandLineArgumentsHandling import CommandLineArgumentsHandling as ClassCLAH
 
 # standard Python packages
 import time
@@ -23,6 +17,7 @@ from tableau_hyper_management.CommandLineArgumentsHandling import \
 if __name__ == '__main__':
     # marking the start of performance measuring (in nanoseconds)
     performance_start = time.perf_counter_ns()
+    ClassBN.fn_load_configuration(ClassBN)
     ClassCLAH.fn_command_line_argument_interpretation(ClassCLAH)
     # marking the end of performance measuring (in nanoseconds)
     performance_finish = time.perf_counter_ns()

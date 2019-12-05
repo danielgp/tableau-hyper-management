@@ -15,14 +15,14 @@ class TypeDetermination:
 
     def fn_analyze_field_content_to_establish_data_type(self,
                                                         field_characteristics,
-                                                        data_type_and_their_formats_to_evaluate,
+                                                        known_formats,
                                                         verbose):
         field_structure = []
         # Analyze unique values
         for unique_row_index, current_value in enumerate(field_characteristics['unique_values']):
             # determine the field type by current content
             crt_field_type = self.fn_type_determination(current_value,
-                                                        data_type_and_their_formats_to_evaluate)
+                                                        known_formats)
             # write aside the determined value
             if unique_row_index == 0:
                 field_structure = {
@@ -30,7 +30,8 @@ class TypeDetermination:
                     'name': field_characteristics['name'],
                     'nulls': field_characteristics['nulls'],
                     'panda_type': field_characteristics['panda_type'],
-                    'type': crt_field_type
+                    'type': crt_field_type,
+                    'type_index': list(known_formats.keys()).index(crt_field_type)
                 }
                 ClassBN.fn_optional_print(ClassBN, verbose,
                                           'Column ' + str(field_characteristics['order'])
@@ -39,14 +40,10 @@ class TypeDetermination:
                                           + f'] has the value <{current_value}>'
                                           + f'which mean is of type "{crt_field_type}"')
             else:
-                crt_type_index = list(data_type_and_their_formats_to_evaluate.keys()).\
-                    index(crt_field_type)
-                prv_type = field_structure['type']
-                prv_type_index = list(data_type_and_their_formats_to_evaluate.keys()).\
-                    index(prv_type)
+                crt_type_index = list(known_formats.keys()).index(crt_field_type)
                 # if CSV structure for current field (column) exists,
                 # does the current type is more important?
-                if crt_type_index > prv_type_index:
+                if crt_type_index > field_structure['type_index']:
                     ClassBN.fn_optional_print(ClassBN, verbose,
                                               'Column ' + str(field_characteristics['order'])
                                               + ' having the name ['
@@ -54,8 +51,9 @@ class TypeDetermination:
                                               + f'] has the value <{current_value}> '
                                               + f'which means is of type "{crt_field_type}" '
                                               + 'and this is stronger than previously thought '
-                                              + f'to be as "{prv_type}"')
+                                              + 'to be as "' + field_structure['type'] + '}"')
                     field_structure['type'] = crt_field_type
+                    field_structure['type_index'] = crt_type_index
             # If currently determined field type is string makes not sense to scan any further
             if crt_field_type == 'str':
                 return field_structure

@@ -3,8 +3,10 @@ TableauHyperApiExtraLogic - a Hyper client library.
 
 This library allows packaging CSV content into HYPER format with data type checks
 """
+
 # additional Python packages available from PyPi
 import pandas as pd
+
 # Custom classes from Tableau Hyper package
 from tableauhyperapi import HyperProcess, Telemetry, \
     Connection, CreateMode, \
@@ -12,6 +14,7 @@ from tableauhyperapi import HyperProcess, Telemetry, \
     Inserter, \
     TableName, \
     HyperException
+
 # Custom classes specific to this package
 from .TypeDetermination import ClassBN
 from .TypeDetermination import TypeDetermination as ClassTD
@@ -24,8 +27,7 @@ class TableauHyperApiExtraLogic:
         for current_field_structure in detected_csv_structure:
             list_to_return.append(current_field_structure['order'])
             current_column_type = self.fn_convert_to_hyper_types(current_field_structure['type'])
-            instance_bn = ClassBN
-            ClassBN.fn_optional_print(instance_bn, verbose, 'Column '
+            ClassBN.fn_optional_print(ClassBN, verbose, 'Column '
                                       + str(current_field_structure['order']) + ' having name "'
                                       + current_field_structure['name'] + '" and type "'
                                       + current_field_structure['type'] + '" will become "'
