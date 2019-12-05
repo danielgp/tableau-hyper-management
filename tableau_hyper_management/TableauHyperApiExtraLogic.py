@@ -1,3 +1,9 @@
+"""
+TableauHyperApiExtraLogic - a Hyper client library.
+
+This library allows packaging CSV content into HYPER format with data type checks
+"""
+
 import pandas as pd
 
 from . import BasicNeeds as ClassBN
@@ -100,7 +106,7 @@ class TableauHyperApiExtraLogic:
         print('Hyper engine process has been shut down.')
 
     def fn_rebuild_csv_content_for_hyper(self, input_df, detected_fields_type, verbose):
-        input_df.replace(to_replace = [pd.np.nan], value = [None], inplace = True)
+        input_df.replace(to_replace=[pd.np.nan], value=[None], inplace=True)
         # Cycle through all found columns
         for current_field in detected_fields_type:
             fld_nm = current_field['name']

@@ -1,3 +1,9 @@
+"""
+TypeDetermination - a data type determination library
+
+This library allows data type determination based on data frame content
+"""
+
 import numpy as np
 import re
 

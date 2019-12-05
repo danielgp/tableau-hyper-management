@@ -1,3 +1,10 @@
+"""
+CommandLineArgumentsHandling - a command line arguments handling library
+
+This library allows handling pre-configured arguments to be received from command line and use them
+to call the main package functions
+"""
+
 import getopt
 import json
 import os.path

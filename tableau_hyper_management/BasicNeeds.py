@@ -1,4 +1,8 @@
+"""
+BasicNeeds - useful functions library
 
+This library has functions useful to keep main logic short and simple
+"""
 
 class BasicNeeds:
 
