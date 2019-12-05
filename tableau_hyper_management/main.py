@@ -1,3 +1,8 @@
+"""
+main - entry point of the package
+
+This file is performing CSV read into HYPER file and measures time elapsed (performance)
+"""
 import sys
 import time
 
