@@ -13,16 +13,12 @@ from .BasicNeeds import BasicNeeds as ClassBN
 
 class TypeDetermination:
 
-    def fn_analyze_field_content_to_establish_data_type(self,
-                                                        field_characteristics,
-                                                        known_formats,
-                                                        verbose):
+    def fn_analyze_field_content_to_establish_data_type(self, field_characteristics, verbose):
         field_structure = []
         # Analyze unique values
         for unique_row_index, current_value in enumerate(field_characteristics['unique_values']):
             # determine the field type by current content
-            crt_field_type = self.fn_type_determination(current_value,
-                                                        known_formats)
+            crt_field_type = self.fn_type_determination(current_value)
             # write aside the determined value
             if unique_row_index == 0:
                 field_structure = {
@@ -31,7 +27,7 @@ class TypeDetermination:
                     'nulls': field_characteristics['nulls'],
                     'panda_type': field_characteristics['panda_type'],
                     'type': crt_field_type,
-                    'type_index': list(known_formats.keys()).index(crt_field_type)
+                    'type_index': list(ClassBN.cfg_dtls['data_types'].keys()).index(crt_field_type)
                 }
                 ClassBN.fn_optional_print(ClassBN, verbose,
                                           'Column ' + str(field_characteristics['order'])
@@ -40,9 +36,8 @@ class TypeDetermination:
                                           + f'] has the value <{current_value}>'
                                           + f'which mean is of type "{crt_field_type}"')
             else:
-                crt_type_index = list(known_formats.keys()).index(crt_field_type)
-                # if CSV structure for current field (column) exists,
-                # does the current type is more important?
+                crt_type_index = list(ClassBN.cfg_dtls['data_types'].keys()).index(crt_field_type)
+                # is the current type is more important?
                 if crt_type_index > field_structure['type_index']:
                     ClassBN.fn_optional_print(ClassBN, verbose,
                                               'Column ' + str(field_characteristics['order'])
@@ -59,7 +54,7 @@ class TypeDetermination:
                 return field_structure
         return field_structure
 
-    def fn_detect_csv_structure(self, input_csv_data_frame, formats_to_evaluate, in_prmtrs):
+    def fn_detect_csv_structure(self, input_csv_data_frame, in_prmtrs):
         col_idx = 0
         csv_structure = []
         # Cycle through all found columns
@@ -83,7 +78,6 @@ class TypeDetermination:
                 csv_structure.append(col_idx)
                 csv_structure[col_idx] = self.\
                     fn_analyze_field_content_to_establish_data_type(self, preliminary_list,
-                                                                    formats_to_evaluate,
                                                                     in_prmtrs.verbose)
             elif panda_determined_type == 'int64':
                 csv_structure.append(col_idx)
@@ -111,13 +105,13 @@ class TypeDetermination:
                                       '>, <'.join(np.array(field_unique_values, dtype=str)) + '>')
 
     @staticmethod
-    def fn_type_determination(input_variable_to_assess, evaluation_formats):
+    def fn_type_determination(input_variable_to_assess):
         # Website https://regex101.com/ was used to validate below code
         variable_to_assess = str(input_variable_to_assess)
         if variable_to_assess == '':
             return 'empty'
         else:
-            for current_data_type, current_format in evaluation_formats.items():
+            for current_data_type, current_format in ClassBN.cfg_dtls['data_types'].items():
                 if re.match(current_format, variable_to_assess):
                     return current_data_type
             return 'str'
