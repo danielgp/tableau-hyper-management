@@ -13,6 +13,7 @@ import pandas as pd
 
 # Custom classes specific to this package
 from tableau_hyper_management.TypeDetermination import ClassBN as ClsBN
+from tableau_hyper_management.TypeDetermination import TypeDetermination as ClassTD
 from tableau_hyper_management.CommandLineArgumentsManagement import \
     CommandLineArgumentsManagement as ClassCLAM
 from tableau_hyper_management.TableauHyperApiExtraLogic import \
@@ -32,15 +33,18 @@ if __name__ == '__main__':
                                + str(parameters_interpreted.unique_values_to_analyze_limit))
     ClsBN.fn_timestamped_print(ClsBN, 'Output file is ' + parameters_interpreted.output_file)
     print('~' * 100)
+    # initiate Data Frame from specified CSV file
     csv_content_df = pd.read_csv(filepath_or_buffer=parameters_interpreted.input_file,
                                  delimiter=parameters_interpreted.csv_field_separator,
                                  cache_dates=True,
                                  index_col=None,
                                  memory_map=True,
                                  encoding='utf-8')
-    ClassTHAEL.fn_run_hyper_creation(ClassTHAEL,
-                                     csv_content_df,
-                                     ClsBN.cfg_dtls['data_types'],
+    # advanced detection of data type within Data Frame
+    detected_csv_structure = ClassTD.fn_detect_csv_structure(ClassTD, csv_content_df,
+                                                             parameters_interpreted)
+    # create HYPER from Data Frame
+    ClassTHAEL.fn_run_hyper_creation(ClassTHAEL, csv_content_df, detected_csv_structure,
                                      parameters_interpreted)
     # marking the end of performance measuring (in nanoseconds)
     performance_finish = time.perf_counter_ns()

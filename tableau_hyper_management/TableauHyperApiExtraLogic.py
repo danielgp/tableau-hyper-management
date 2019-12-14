@@ -17,7 +17,6 @@ from tableauhyperapi import HyperProcess, Telemetry, \
 
 # Custom classes specific to this package
 from .TypeDetermination import ClassBN
-from .TypeDetermination import TypeDetermination as ClassTD
 
 
 class TableauHyperApiExtraLogic:
@@ -67,12 +66,8 @@ class TableauHyperApiExtraLogic:
             identified_type = SqlType.text()
         return identified_type
 
-    def fn_create_hyper_file_from_csv(self, input_csv_data_frame, formats_to_evaluate,
-                                      given_parameters):
-        detected_csv_structure = ClassTD.fn_detect_csv_structure(ClassTD, input_csv_data_frame,
-                                                                 formats_to_evaluate,
-                                                                 given_parameters)
-        hyper_cols = self.fn_build_hyper_columns_for_csv(self, detected_csv_structure,
+    def fn_create_hyper_file_from_csv(self, input_csv_data_frame, in_data_type, given_parameters):
+        hyper_cols = self.fn_build_hyper_columns_for_csv(self, in_data_type,
                                                          given_parameters.verbose)
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
         # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
@@ -96,7 +91,7 @@ class TableauHyperApiExtraLogic:
                 ClassBN.fn_timestamped_print(ClassBN, 'Hyper table "Extract" has been created.')
                 # The rows to insert into the <hyper_table> table.
                 data_to_insert = self.fn_rebuild_csv_content_for_hyper(input_csv_data_frame,
-                                                                       detected_csv_structure,
+                                                                       in_data_type,
                                                                        given_parameters.verbose)
                 # Execute the actual insert
                 with Inserter(hyper_connection, hyper_table) as hyper_insert:
@@ -131,12 +126,10 @@ class TableauHyperApiExtraLogic:
                 input_df[fld_nm] = pd.to_datetime(input_df[fld_nm])
         return input_df.values
 
-    def fn_run_hyper_creation(self, input_data_frame, data_type_and_their_formats_to_evaluate,
-                              given_parameters):
+    def fn_run_hyper_creation(self, input_data_frame, input_data_type, given_parameters):
         try:
             self.fn_create_hyper_file_from_csv(self, input_data_frame,
-                                               data_type_and_their_formats_to_evaluate,
-                                               given_parameters)
+                                               input_data_type, given_parameters)
         except HyperException as ex:
             print(ex)
             exit(1)
