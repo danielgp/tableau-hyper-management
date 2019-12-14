@@ -14,41 +14,44 @@ from .BasicNeeds import BasicNeeds as ClassBN
 class TypeDetermination:
 
     def fn_analyze_field_content_to_establish_data_type(self, field_characteristics, verbose):
-        field_structure = []
+        crt_field_type = self.fn_type_determination(field_characteristics['unique_values'][0])
+        # write aside the determined value
+        field_structure = {
+            'order'     : field_characteristics['order'],
+            'name'      : field_characteristics['name'],
+            'nulls'     : field_characteristics['nulls'],
+            'panda_type': field_characteristics['panda_type'],
+            'type'      : crt_field_type,
+            'type_index': list(ClassBN.cfg_dtls['data_types'].keys()).index(crt_field_type)
+        }
+        ClassBN.fn_optional_print(ClassBN, verbose,
+                                  'Column ' + str(field_characteristics['order'])
+                                  + ' having the name ['
+                                  + field_characteristics['name'] + '] has the value <'
+                                  + str(field_characteristics['unique_values'][0])
+                                  + f'> which mean is of type "{crt_field_type}"')
+        if crt_field_type == 'str':
+            return field_structure
+        return self.fn_analyze_sample(self, field_characteristics, field_structure, verbose)
+
+    def fn_analyze_sample(self, field_characteristics, field_structure, verbose):
         # Analyze unique values
         for unique_row_index, current_value in enumerate(field_characteristics['unique_values']):
             # determine the field type by current content
             crt_field_type = self.fn_type_determination(current_value)
-            # write aside the determined value
-            if unique_row_index == 0:
-                field_structure = {
-                    'order': field_characteristics['order'],
-                    'name': field_characteristics['name'],
-                    'nulls': field_characteristics['nulls'],
-                    'panda_type': field_characteristics['panda_type'],
-                    'type': crt_field_type,
-                    'type_index': list(ClassBN.cfg_dtls['data_types'].keys()).index(crt_field_type)
-                }
+            crt_type_index = list(ClassBN.cfg_dtls['data_types'].keys()).index(crt_field_type)
+            # is the current type is more important?
+            if crt_type_index > field_structure['type_index']:
                 ClassBN.fn_optional_print(ClassBN, verbose,
                                           'Column ' + str(field_characteristics['order'])
                                           + ' having the name ['
                                           + field_characteristics['name']
-                                          + f'] has the value <{current_value}>'
-                                          + f'which mean is of type "{crt_field_type}"')
-            else:
-                crt_type_index = list(ClassBN.cfg_dtls['data_types'].keys()).index(crt_field_type)
-                # is the current type is more important?
-                if crt_type_index > field_structure['type_index']:
-                    ClassBN.fn_optional_print(ClassBN, verbose,
-                                              'Column ' + str(field_characteristics['order'])
-                                              + ' having the name ['
-                                              + field_characteristics['name']
-                                              + f'] has the value <{current_value}> '
-                                              + f'which means is of type "{crt_field_type}" '
-                                              + 'and this is stronger than previously thought '
-                                              + 'to be as "' + field_structure['type'] + '}"')
-                    field_structure['type'] = crt_field_type
-                    field_structure['type_index'] = crt_type_index
+                                          + f'] has the value <{current_value}> '
+                                          + f'which means is of type "{crt_field_type}" '
+                                          + 'and this is stronger than previously thought '
+                                          + 'to be as "' + field_structure['type'] + '}"')
+                field_structure['type'] = crt_field_type
+                field_structure['type_index'] = crt_type_index
             # If currently determined field type is string makes not sense to scan any further
             if crt_field_type == 'str':
                 return field_structure
