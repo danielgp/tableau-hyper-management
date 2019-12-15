@@ -48,17 +48,28 @@ class TableauHyperApiExtraLogic:
     @staticmethod
     def fn_convert_to_hyper_types(given_type):
         switcher = {
-            'empty': SqlType.text(),
-            'int': SqlType.big_int(),
-            'float-USA': SqlType.double(),
-            'date-iso8601': SqlType.date(),
-            'date-USA': SqlType.date(),
-            'time-24': SqlType.time(),
-            'time-24-micro-sec': SqlType.time(),
-            'time-USA': SqlType.time(),
-            'time-USA-micro-sec': SqlType.time(),
-            'datetime-iso8601': SqlType.timestamp(),
-            'datetime-iso8601-micro-sec': SqlType.timestamp(),
+            'empty'                        : SqlType.text(),
+            'int'                          : SqlType.big_int(),
+            'float-dot'                    : SqlType.double(),
+            'date-iso8601'                 : SqlType.date(),
+            'date-DMY-dash'                : SqlType.date(),
+            'date-DMY-dot'                 : SqlType.date(),
+            'date-DMY-slash'               : SqlType.date(),
+            'date-MDY'                     : SqlType.date(),
+            'date-MDY-medium'              : SqlType.date(),
+            'date-MDY-long'                : SqlType.date(),
+            'time-24'                      : SqlType.time(),
+            'time-24-micro-sec'            : SqlType.time(),
+            'time-12'                      : SqlType.time(),
+            'time-12-micro-sec'            : SqlType.time(),
+            'datetime-iso8601'             : SqlType.timestamp(),
+            'datetime-iso8601-micro-sec'   : SqlType.timestamp(),
+            'datetime-MDY'                 : SqlType.timestamp(),
+            'datetime-MDY-micro-sec'       : SqlType.timestamp(),
+            'datetime-MDY-medium'          : SqlType.timestamp(),
+            'datetime-MDY-medium-micro-sec': SqlType.timestamp(),
+            'datetime-MDY-long'            : SqlType.timestamp(),
+            'datetime-MDY-long-micro-sec'  : SqlType.timestamp(),
             'str': SqlType.text()
         }
         identified_type = switcher.get(given_type)
@@ -122,7 +133,7 @@ class TableauHyperApiExtraLogic:
                 input_df[fld_nm] = input_df[fld_nm].replace(to_replace=[pd.np.nan, '.0'],
                                                             value=[None, ''],
                                                             inplace=True)
-            elif current_field['type'] in ('datetime-iso8601', 'datetime-iso8601-micro-sec'):
+            elif current_field['type'][0:5] in ('date-', 'datet', 'time-'):
                 input_df[fld_nm] = pd.to_datetime(input_df[fld_nm])
         return input_df.values
 

@@ -41,34 +41,22 @@ or directly from GitHub:
 ## Implemented features
 
 - dynamic fields detection based ont 1st line content and provided field separator (strategic advantage);
-- dynamic advanced content type detection:
-    - integer,
-    - float-USA,
-    - date-iso8601,
-    - date-USA,
-    - time-24,
-    - time-24-micro-sec,
-    - time-USA,
-    - time-USA-micro-sec,
-    - datetime-iso8601,
-    - datetime-iso8601-micro-sec,
-    - string;
+- dynamic advanced content type detection covering following data types: integer, float-dot, date-iso8601, date-DMY-dash, date-DMY-dot, date-DMY-slash, date-MDY, date-MDY-medium, date-MDY-long, time-12, time-12-micro-sec, time-24, time-24-micro-sec, datetime-iso8601, datetime-iso8601-micro-sec, datetime-MDY, datetime-MDY-micro-sec, datetime-MDY-medium, datetime-MDY-medium-micro-sec, datetime-MDY-long, datetime-MDY-long-micro-sec, string;
 - support for empty field content for any data type (required re-interpreting CSV to be accepted by Hyper Inserter to ensure INT or DOUBLE data types are considered);
-- use Panda package to benefit of Data Frames speed and flexibility (since 2019-11-24)
+- use Panda package to benefit of Data Frames speed and flexibility.
 
+## Change Log / Releases detailed
+
+see [CHANGE_LOG.md](CHANGE_LOG.md)
 
 ## Planned features to add (of course, when time will permit / help would be appreciated / votes|feedback is welcomed)
 
 - additional formats to be recognized, like:
-    - date-USA-medium;
-    - date-USA-long;
     - float-USA-thousand-separator,
     - float-EU,
     - float-EU-thousand-separator;
     - geographical identifiers (Country, US - Zip Codes)
 - feedback localization;
-- CSV file internationalization;
-- ~~switch to lambda function to optimize run-time for millions of rows on data reprocessing~~
 
 
 ## Features to request template
