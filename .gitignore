@@ -3,3 +3,5 @@ results/
 tableau_hyper_management/__pycache__/
 .pypirc
 /archive.zip
+tableau_hyper_management.egg-info/
+dist/
