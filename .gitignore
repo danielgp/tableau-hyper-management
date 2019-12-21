@@ -1,7 +1,10 @@
+build/
+dist/
 examples/
+main/
 results/
 tableau_hyper_management/__pycache__/
+tableau_hyper_management.egg-info/
 .pypirc
 /archive.zip
-tableau_hyper_management.egg-info/
-dist/
+/build.txt

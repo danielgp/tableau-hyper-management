@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.2.1 released on 2019-12-22
+- just reflecting new version of Tableau Hyper API(former 0.0.8952 => new 0.0.9273)
+
 ## Version 1.2.0 released on 2019-12-15
 - additional data type formats recognized:
     - date-DMY-dash;
