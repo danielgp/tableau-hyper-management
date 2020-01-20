@@ -100,7 +100,7 @@ class TypeDetermination:
             counted_values_null = field_content.isnull().sum()
             counted_values_not_null = field_content.notnull().sum()
             counted_values_unique = field_content.nunique()
-            ClassBN.fn_optional_print(verbose, f'"{field_name}" has following characteristics: ' +
+            ClassBN.fn_optional_print(ClassBN, verbose, f'"{field_name}" has following characteristics: ' +
                                       f'count of null values: {counted_values_null}, ' +
                                       f'count of not-null values: {counted_values_not_null}, ' +
                                       f'count of unique values: {counted_values_unique}, ' +
