@@ -130,9 +130,7 @@ class TableauHyperApiExtraLogic:
                                       + ' has panda_type = ' + str(current_field['panda_type'])
                                       + ' and ' + str(current_field['type']))
             if current_field['panda_type'] == 'float64' and current_field['type'] == 'int':
-                input_df[fld_nm] = input_df[fld_nm].replace(to_replace=[pd.np.nan, '.0'],
-                                                            value=[None, ''],
-                                                            inplace=True)
+                input_df[fld_nm] = input_df[fld_nm].fillna(0).astype('int64')
             elif current_field['type'][0:5] in ('date-', 'datet', 'time-'):
                 input_df[fld_nm] = pd.to_datetime(input_df[fld_nm])
         return input_df.values
