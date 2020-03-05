@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.2.6 released on 2020-03-05
+- bug fix to get only non-null unique values analyzed in case of a float column that may hold disguised integers
+
 ## Version 1.2.5 released on 2020-03-05
 - internal code tweaks to reduce complexity for one long method
 
