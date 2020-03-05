@@ -13,16 +13,6 @@ from .BasicNeeds import BasicNeeds as ClassBN
 
 class TypeDetermination:
 
-    @staticmethod
-    def fn_additional_column_statistics(logger, field_name, field_content, field_unique_values):
-        counted_values_not_null = field_content.notnull().sum()
-        counted_values_unique = field_content.nunique()
-        logger.debug(f'additional characteristics for the field "{field_name}" are: ' +
-                     f'count of not-null values: {counted_values_not_null}, ' +
-                     f'count of unique values: {counted_values_unique}, ' +
-                     f'list of not-null and unique values is: <' +
-                     '>, <'.join(np.array(field_unique_values, dtype=str)) + '>')
-
     def fn_analyze_field_content_to_establish_data_type(self, logger, field_characteristics):
         crt_field_type = self.fn_type_determination(field_characteristics['unique_values'][0])
         # write aside the determined value
@@ -73,17 +63,15 @@ class TypeDetermination:
                          + f'is of type "{panda_determined_type}" '
                          + f'with {counted_nulls} counted NULLs')
             if panda_determined_type in ('float64', 'object'):
-                if panda_determined_type == 'float64':
-                    content = content.apply(lambda x: x if (int(x) != x) else int(x))
-                list_unique_values = content.dropna().unique()
-                self.fn_additional_column_statistics(logger, label, content,
-                                                     list_unique_values)
+                list_unique_values = self.fn_unique_values_isolation(self, logger, label, content,
+                                                                     panda_determined_type,
+                                                                     in_prmtrs)
                 preliminary_list = {
                     'order':            col_idx,
                     'name':             label,
                     'nulls':            counted_nulls,
                     'panda_type':       panda_determined_type,
-                    'unique_values':    list_unique_values[0:in_prmtrs.unique_values_to_analyze_limit]
+                    'unique_values':    list_unique_values
                 }
                 logger.debug('parameters used for further data analysis are: '
                              + str(preliminary_list).replace(chr(10), ''))
@@ -115,3 +103,17 @@ class TypeDetermination:
                 if re.match(current_format, variable_to_assess):
                     return current_data_type
             return 'str'
+
+    @staticmethod
+    def fn_unique_values_isolation(self, logger, label, content, panda_determined_type, in_prmtrs):
+        if panda_determined_type == 'float64':
+            content = content.apply(lambda x: x if (int(x) != x) else int(x))
+        list_unique_values = content.dropna().unique()
+        counted_values_not_null = content.notnull().sum()
+        counted_values_unique = content.nunique()
+        logger.debug(f'additional characteristics for the field "{label}" are: ' +
+                     f'count of not-null values: {counted_values_not_null}, ' +
+                     f'count of unique values: {counted_values_unique}, ' +
+                     f'list of not-null and unique values is: <' +
+                     '>, <'.join(np.array(list_unique_values, dtype=str)) + '>')
+        return list_unique_values[0:in_prmtrs.unique_values_to_analyze_limit]

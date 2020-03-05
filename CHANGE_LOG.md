@@ -1,5 +1,11 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.2.5 released on 2020-03-05
+- internal code tweaks to reduce complexity for one long method
+
+## Version 1.2.4 released on 2020-03-05
+- updated download source URL for Tableau Hyper API
+
 ## Version 1.2.3 released on 2020-03-05
 - added boolean data type
 - added an optional log file to ease debugging activity when necessary
