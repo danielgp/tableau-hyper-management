@@ -5,6 +5,7 @@ This file is performing CSV read into HYPER file and measures time elapsed (perf
 """
 
 # standard Python packages
+import os.path as os_path
 import time
 from datetime import timedelta
 
@@ -39,18 +40,24 @@ if __name__ == '__main__':
     ClassLN.logger.info('Output file is ' + parameters_in.output_file)
     ClassLN.logger.info('~'*50)
     # initiate Data Frame from specified CSV file
-    csv_content_df = pd.read_csv(filepath_or_buffer=parameters_in.input_file,
-                                 delimiter=parameters_in.csv_field_separator,
-                                 cache_dates=True,
-                                 index_col=None,
-                                 memory_map=True,
-                                 encoding='utf-8')
-    # advanced detection of data type within Data Frame
-    detected_csv_structure = ClassTD.fn_detect_csv_structure(ClassTD, ClassLN.logger,
-                                                             csv_content_df, parameters_in)
-    # create HYPER from Data Frame
-    ClassTHAEL.fn_run_hyper_creation(ClassTHAEL, ClassLN.logger, csv_content_df,
-                                     detected_csv_structure, parameters_in)
+    if os_path.isfile(parameters_in.input_file):
+        # exists
+        csv_content_df = pd.read_csv(filepath_or_buffer=parameters_in.input_file,
+                                     delimiter=parameters_in.csv_field_separator,
+                                     cache_dates=True,
+                                     index_col=None,
+                                     memory_map=True,
+                                     encoding='utf-8')
+        # advanced detection of data type within Data Frame
+        detected_csv_structure = ClassTD.fn_detect_csv_structure(ClassTD, ClassLN.logger,
+                                                                 csv_content_df, parameters_in)
+        # create HYPER from Data Frame
+        ClassTHAEL.fn_run_hyper_creation(ClassTHAEL, ClassLN.logger, csv_content_df,
+                                         detected_csv_structure, parameters_in)
+    else:
+        # doesn't exist
+        ClassLN.logger.error('Given file ' + parameters_in.input_file
+                             + ' does not exist, please check your inputs!')
     # marking the end of performance measuring (in nanoseconds)
     performance_finish = time.perf_counter_ns()
     # calculate time spent on execution
