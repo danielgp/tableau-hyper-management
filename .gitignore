@@ -5,6 +5,9 @@ main/
 results/
 tableau_hyper_management/__pycache__/
 tableau_hyper_management.egg-info/
+venv/
 .pypirc
+/*.log
 /archive.zip
 /build.txt
+/main.spec
