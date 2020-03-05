@@ -1,5 +1,14 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.2.3 released on 2020-03-05
+- added boolean data type
+- added an optional log file to ease debugging activity when necessary
+- bumped version of TableauHypeAPI to 0.0.9746 (which is now available on [pypi.org](https://pypi.org/) as [tableauhyperapi](https://pypi.org/project/tableauhyperapi/))
+
+## Version 1.2.2 released on 2020-01-20
+- internal code optimizations
+- switched default behavior to store 0 values instead of nulls in case of integer determined fields
+
 ## Version 1.2.1 released on 2019-12-22
 - just reflecting new version of Tableau Hyper API(former 0.0.8952 => new 0.0.9273)
 

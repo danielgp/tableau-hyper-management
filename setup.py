@@ -13,7 +13,7 @@ with open('README.md', 'r') as fh:
 
 this_package_website = 'https://github.com/danielgp/tableau-hyper-management'
 tableau_hyper_website_download = 'http://downloads.tableau.com/tssoftware/tableauhyperapi-'
-tableau_hyper_api__current_known_version = '0.0.9273'  # released on 2019-10-30
+tableau_hyper_api__current_known_version = '0.0.9746'  # released on 2020-01-29
 url__tableau_hyper_api = tableau_hyper_website_download + tableau_hyper_api__current_known_version
 
 if platform.system() == 'Windows':
@@ -47,10 +47,10 @@ setup(
     description = 'Wrapper to ease data management into Tableau Hyper format from CSV files',
     include_package_data = True,
     install_requires = [
-        'cffi>=1.12.2,<2',
-        'numpy',
-        'pandas',
-        'tableauhyperapi'
+        'cffi>=1.13.2,<2',
+        'numpy>=1.17.4,<=1.18.1',
+        'pandas>=0.25.3,<=1.0.1',
+        'tableauhyperapi>=0.0.8707,<=0.0.9746'
     ],
     keywords = [
         'tableau',
@@ -75,5 +75,5 @@ setup(
     },
     python_requires = '>=3.6',
     url = this_package_website + '/releases',  # project home page, if any
-    version = '1.2.2'
+    version = '1.2.3'
 )
