@@ -12,7 +12,7 @@ with open('README.md', 'r') as fh:
     long_description_readme = fh.read()
 
 this_package_website = 'https://github.com/danielgp/tableau-hyper-management'
-tableau_hyper_website_download = 'http://downloads.tableau.com/tssoftware/tableauhyperapi-'
+tableau_hyper_website_download = 'https://downloads.tableau.com/tssoftware/tableauhyperapi-'
 tableau_hyper_api__current_known_version = '0.0.9746'  # released on 2020-01-29
 url__tableau_hyper_api = tableau_hyper_website_download + tableau_hyper_api__current_known_version
 
@@ -21,9 +21,9 @@ if platform.system() == 'Windows':
 elif platform.system() == 'Darwin':
     url__tableau_hyper_api += '-py3-none-macosx_10_11_x86_64.whl'
 elif platform.system() == 'Linux':
-    url__tableau_hyper_api += '-py3-none-linux_x86_64.whl'
+    url__tableau_hyper_api += '-py3-none-manylinux2014_x86_64.whl'
 else:
-    url__tableau_hyper_api += '-py3-none-linux_x86_64.whl'
+    url__tableau_hyper_api += '-py3-none-manylinux2014_x86_64.whl'
 
 setup(
     author = 'Daniel Popiniuc',
@@ -75,5 +75,5 @@ setup(
     },
     python_requires = '>=3.6',
     url = this_package_website + '/releases',  # project home page, if any
-    version = '1.2.3'
+    version = '1.2.4'
 )
