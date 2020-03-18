@@ -47,6 +47,7 @@ if __name__ == '__main__':
                                      cache_dates=True,
                                      index_col=None,
                                      memory_map=True,
+                                     low_memory=False,
                                      encoding='utf-8')
         # advanced detection of data type within Data Frame
         detected_csv_structure = ClassTD.fn_detect_csv_structure(ClassTD, ClassLN.logger,
