@@ -111,7 +111,7 @@ class TypeDetermination:
         content = content.dropna()
         if panda_determined_type == 'float64':
             content = content.apply(lambda x: x if (int(x) != x) else int(x))
-        list_unique_values = content.unique()[0:in_prmtrs.unique_values_to_analyze_limit]
+        list_unique_values = content.unique()[0:int(in_prmtrs.unique_values_to_analyze_limit)]
         logger.debug(f'additional characteristics for the field "{label}" are: ' +
                      f'count of not-null values: {counted_values_not_null}, ' +
                      f'count of unique values: {counted_values_unique}, ' +
