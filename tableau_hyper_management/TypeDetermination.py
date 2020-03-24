@@ -15,6 +15,10 @@ class TypeDetermination:
 
     def fn_analyze_field_content_to_establish_data_type(self, logger, field_characteristics):
         crt_field_type = self.fn_type_determination(field_characteristics['unique_values'][0])
+        # since date fields are not accepted to have ny null value by Tableau Hyper API
+        # following forced String type is enforced
+        if crt_field_type[:4] == 'date' and field_characteristics['nulls'] != 0:
+            crt_field_type = 'str'
         # write aside the determined value
         field_structure = {
             'order'     : field_characteristics['order'],
@@ -89,7 +93,6 @@ class TypeDetermination:
                     'type':         str(panda_determined_type).replace('64', ''),
                 }
             col_idx += 1
-            logger.debug(str(csv_structure).replace(chr(10), ''))
         return csv_structure
 
     @staticmethod
