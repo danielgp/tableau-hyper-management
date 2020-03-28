@@ -68,6 +68,9 @@ if __name__ == '__main__':
         # doesn't exist
         ClassLN.logger.error('Given file ' + parameters_in.input_file
                              + ' does not exist, please check your inputs!')
-    ClassLN.logger.info(f'Total execution time was ' + str(timedelta(seconds = t.timers.total('thm'))))
+    total_time_string = str(timedelta(seconds = t.timers.total('thm')))
+    ClassLN.logger.info(f'Total execution time was ' + total_time_string)
     if parameters_in.output_log_file != 'None':
-        print('Application finished, please check ' + parameters_in.output_log_file)
+        ClassBN.fn_timestamped_print('Application finished, whole script took ' + total_time_string)
+    else:
+        ClassBN.fn_timestamped_print('Application finished, please check ' + parameters_in.output_log_file)
