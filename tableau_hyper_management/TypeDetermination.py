@@ -119,5 +119,5 @@ class TypeDetermination:
                      f'count of not-null values: {counted_values_not_null}, ' +
                      f'count of unique values: {counted_values_unique}, ' +
                      f'list of not-null and unique values is: <' +
-                     '>, <'.join(np.array(list_unique_values, dtype=str)) + '>')
+                     '>, <'.join(np.array(list_unique_values, dtype=str)).replace('\n', ' ').replace('\r', '') + '>')
         return list_unique_values
