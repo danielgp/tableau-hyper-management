@@ -13,7 +13,7 @@ with open('README.md', 'r') as fh:
 
 this_package_website = 'https://github.com/danielgp/tableau-hyper-management'
 tableau_hyper_website_download = 'https://downloads.tableau.com/tssoftware/tableauhyperapi-'
-tableau_hyper_api__current_known_version = '0.0.9746'  # released on 2020-01-29
+tableau_hyper_api__current_known_version = '0.0.10309'  # released on 2020-03-25
 url__tableau_hyper_api = tableau_hyper_website_download + tableau_hyper_api__current_known_version
 
 if platform.system() == 'Windows':
@@ -48,9 +48,10 @@ setup(
     include_package_data = True,
     install_requires = [
         'cffi>=1.13.2,<2',
-        'numpy>=1.17.4,<=1.18.1',
-        'pandas>=0.25.3,<=1.0.1',
-        'tableauhyperapi>=0.0.8707,<=0.0.9746'
+        'codetiming>=1.1,<=1.2',
+        'numpy>=1.17.4,<=1.18.2',
+        'pandas>=0.25.3,<=1.0.3',
+        'tableauhyperapi=0.0.10309'
     ],
     keywords = [
         'tableau',
