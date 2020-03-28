@@ -26,7 +26,7 @@ if __name__ == '__main__':
     ClassBN.fn_load_configuration(ClassBN)
     parameters_in = ClassCLAM.parse_arguments(ClassCLAM, ClassBN.cfg_dtls['options'])
     # initiate logger
-    ClassLN.initiate_logger(ClassLN, parameters_in.output_log_file)
+    ClassLN.initiate_logger(ClassLN, parameters_in.output_log_file, 'thm')
     # define global timer to use
     t = Timer('thm',
               text      = 'Time spent is {seconds} ',

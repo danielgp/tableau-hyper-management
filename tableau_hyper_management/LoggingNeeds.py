@@ -6,9 +6,9 @@ import logging.handlers as handlers
 class LoggingNeeds:
     logger = None
 
-    def initiate_logger(self, logger_file_name):
+    def initiate_logger(self, logger_file_name, logger_internal_name):
         # initiate Logging
-        self.logger = logging.getLogger('thm')
+        self.logger = logging.getLogger(logger_internal_name)
         # set logging level to desired level only if specified
         if logger_file_name == 'None':
             self.logger.setLevel(logging.NOTSET)
