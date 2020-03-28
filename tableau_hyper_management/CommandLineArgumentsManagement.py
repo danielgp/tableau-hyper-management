@@ -1,14 +1,26 @@
-"""
+'''
 CommandLineArgumentManagement - library to manage input parameters from command line
 
 This library allows handling pre-configured arguments to be received from command line and use them
 to call the main package functions
-"""
+'''
 
 import argparse
 
 
 class CommandLineArgumentsManagement:
+
+    @staticmethod
+    def listing_parameter_values(self, local_logger, given_parameter_values):
+        local_logger.info('~' * 50)
+        local_logger.info('Overview of input parameter given values')
+        local_logger.info('~' * 50)
+        local_logger.info('Input file is ' + given_parameter_values.input_file)
+        local_logger.info('CSV field separator is ' + given_parameter_values.csv_field_separator)
+        local_logger.info('Unique values to analyze is limited to '
+                          + str(given_parameter_values.unique_values_to_analyze_limit))
+        local_logger.info('Output file is ' + given_parameter_values.output_file)
+        local_logger.info('~' * 50)
 
     def parse_arguments(self, configuration_details):
         parser = argparse.ArgumentParser()
