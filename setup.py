@@ -51,8 +51,8 @@ setup(
         'codetiming>=1.1,<=1.2',
         'numpy>=1.17.4,<=1.18.2',
         'pandas>=0.25.3,<=1.0.3',
-        'tableauhyperapi=0.0.10309',
-        'tableauserverclient=0.10'
+        'tableauhyperapi==0.0.10309',
+        'tableauserverclient==0.10'
     ],
     keywords = [
         'tableau',
@@ -77,5 +77,5 @@ setup(
     },
     python_requires = '>=3.6',
     url = this_package_website + '/releases',  # project home page, if any
-    version = '1.2.8',
+    version = '1.2.9',
 )

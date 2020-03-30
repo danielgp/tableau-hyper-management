@@ -1,6 +1,9 @@
 # Change Log for Tableau Hyper Management package
 
-## Version 1.2.7 released on 2020-03-31
+## Version 1.2.9 released on 2020-03-31
+- just corrected setup.py
+
+## Version 1.2.8 released on 2020-03-31
 - just corrected setup.py
 
 ## Version 1.2.7 released on 2020-03-30
