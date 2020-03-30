@@ -30,6 +30,17 @@ class TableauServerCommunicator():
         local_logger.debug('The connection to the Tableau Server has been terminated!')
         timmer.stop()
 
+    def get_project_relevancy(self, relevant_projects_to_filter, filtering_type, current_project):
+        relevant = 0
+        if filtering_type == 'JustOnesMentioned':
+            if current_project.name.replace(chr(8211), chr(45)) in relevant_projects_to_filter:
+                relevant = 1
+        elif filtering_type == 'OnesMentionedMarked':
+            relevant = 2
+        elif filtering_type == 'All':
+            relevant = 99
+        return relevant
+
     @staticmethod
     def is_publishing_possible(self, local_logger, relevant_project_name, relevant_project_ids):
         publish_possible = False
@@ -62,14 +73,10 @@ class TableauServerCommunicator():
         dictionary_project_ids = []
         project_counter = 0
         for project_current in project_items:
-            relevant = 0
-            if str_filtering_type == 'JustOnesMentioned':
-                if project_current.name.replace(chr(8211), chr(45)) in relevant_projects_to_filter:
-                    relevant = 1
-            elif str_filtering_type == 'OnesMentionedMarked':
-                relevant = 2
-            elif str_filtering_type == 'All':
-                relevant = 99
+            relevant = self.get_project_relevancy(self,
+                                                  relevant_projects_to_filter,
+                                                  str_filtering_type,
+                                                  project_current)
             if relevant >= 1:
                 dictionary_project_ids.append(project_counter)
                 dictionary_project_ids[project_counter] = project_current.id
