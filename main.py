@@ -7,6 +7,7 @@ This file is performing CSV read into HYPER file and measures time elapsed (perf
 # standard Python packages
 import os.path as os_path
 from datetime import timedelta
+# package to measure portions of code performance
 from codetiming import Timer
 
 # additional packages to be installed from PyPi
@@ -24,9 +25,10 @@ from tableau_hyper_management.TableauHyperApiExtraLogic import \
 # main execution logic
 if __name__ == '__main__':
     ClassBN.fn_load_configuration(ClassBN)
-    parameters_in = ClassCLAM.parse_arguments(ClassCLAM, ClassBN.cfg_dtls['options'])
+    parameters_in = ClassCLAM.parse_arguments(ClassCLAM,
+                                              ClassBN.cfg_dtls['input_options']['converter'])
     # initiate logger
-    ClassLN.initiate_logger(ClassLN, parameters_in.output_log_file, 'thm')
+    ClassLN.initiate_logger(ClassLN, parameters_in.output_log_file, 'thm_converter')
     # define global timer to use
     t = Timer('thm',
               text      = 'Time spent is {seconds} ',
@@ -68,11 +70,4 @@ if __name__ == '__main__':
         # doesn't exist
         ClassLN.logger.error('Given file ' + parameters_in.input_file
                              + ' does not exist, please check your inputs!')
-    total_time_string = str(timedelta(seconds = t.timers.total('thm')))
-    ClassLN.logger.info(f'Total execution time was ' + total_time_string)
-    if parameters_in.output_log_file != 'None':
-        ClassBN.fn_timestamped_print(ClassBN, 'Application finished, whole script took '
-                                     + total_time_string)
-    else:
-        ClassBN.fn_timestamped_print(ClassBN, 'Application finished, please check '
-                                     + parameters_in.output_log_file)
+    ClassBN.fn_final_message(ClassBN, ClassLN.logger, t, parameters_in.output_log_file)

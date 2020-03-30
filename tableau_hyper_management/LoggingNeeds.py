@@ -22,7 +22,8 @@ class LoggingNeeds:
                                                             encoding = 'utf-8',
                                                             utc = False)
             # Here we define our formatter
-            log_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+            string_format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+            log_formatter = logging.Formatter(string_format)
             # Here we set our logHandler's formatter
             log_handler.setFormatter(log_formatter)
             # pairing the handler with logging

@@ -51,12 +51,13 @@ setup(
         'codetiming>=1.1,<=1.2',
         'numpy>=1.17.4,<=1.18.2',
         'pandas>=0.25.3,<=1.0.3',
-        'tableauhyperapi=0.0.10309'
+        'tableauhyperapi=0.0.10309',
+        'tableauserverclient=0.10',
     ],
     keywords = [
         'tableau',
         'hyper',
-        'csv'
+        'csv',
     ],
     license = 'LGPL3',
     long_description = long_description_readme,
@@ -65,16 +66,16 @@ setup(
     package_data = {
         '': [
             '*.json',
-            '*.md'
+            '*.md',
         ]
     },
     packages = find_packages(),
     project_urls = {
         'Documentation': this_package_website + '/blob/master/README.md',
         'Issue Tracker': this_package_website + '/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc',
-        'Source Code': this_package_website
+        'Source Code': this_package_website,
     },
     python_requires = '>=3.6',
     url = this_package_website + '/releases',  # project home page, if any
-    version = '1.2.6'
+    version = '1.2.7',
 )

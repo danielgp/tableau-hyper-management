@@ -11,15 +11,24 @@ import argparse
 class CommandLineArgumentsManagement:
 
     @staticmethod
-    def listing_parameter_values(self, local_logger, given_parameter_values):
+    def listing_parameter_values(self, local_logger, configuration_details, given_parameter_values):
         local_logger.info('~' * 50)
         local_logger.info('Overview of input parameter given values')
         local_logger.info('~' * 50)
-        local_logger.info('Input file is ' + given_parameter_values.input_file)
-        local_logger.info('CSV field separator is ' + given_parameter_values.csv_field_separator)
-        local_logger.info('Unique values to analyze is limited to '
-                          + str(given_parameter_values.unique_values_to_analyze_limit))
-        local_logger.info('Output file is ' + given_parameter_values.output_file)
+        parameter_values_dictionary = given_parameter_values.__dict__
+        for input_key, attributes in configuration_details.items():
+            # checking first if short key was provided, otherwise consider longer
+            if input_key in parameter_values_dictionary:
+                key_value_to_consider = input_key
+            else:
+                key_value_to_consider = attributes['option_long'].replace('-', '_')
+            # having the key consider we determine the value of the current parameter
+            value_to_consider = parameter_values_dictionary[key_value_to_consider]
+            # we build the parameter feedback considering "option_description"
+            # and replacing %s with parameter value
+            feedback = attributes['option_description'] % value_to_consider
+            # we finally write the feedback to logger
+            local_logger.info(feedback)
         local_logger.info('~' * 50)
 
     def parse_arguments(self, configuration_details):

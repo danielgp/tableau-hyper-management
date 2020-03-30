@@ -23,36 +23,94 @@
         "datetime-MDY-long"             : "^(JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER|January|February|March|April|May|June|July|August|September|October|November|December)/(1[0-9]{3}|2[0-9]{3})\\s([0-9]|0[0-9]|1[0-2]):{1}([0-5][0-9]|[0-9]):{1}([0-5][0-9]|[0-9])\\s*(AM|am|PM|pm)$",
         "datetime-MDY-long-micro-sec"   : "^(JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER|January|February|March|April|May|June|July|August|September|October|November|December)/(1[0-9]{3}|2[0-9]{3})\\s([0-9]|0[0-9]|1[0-2]):{1}([0-5][0-9]|[0-9]):{1}([0-5][0-9]|[0-9])\\.([0-9]{6})\\s*(AM|am|PM|pm)$"
     },
-    "options": {
-        "i": {
-            "default_value"         : "",
-            "option_long"           : "input-file",
-            "option_required"       : true,
-            "option_sample_value"   : "input-file-name"
+    "input_options": {
+        "converter": {
+            "i": {
+                "default_value"         : "",
+                "option_description"    : "Input file name %s",
+                "option_long"           : "input-file",
+                "option_required"       : true,
+                "option_sample_value"   : "input-file-name"
+            },
+            "o": {
+                "default_value"         : "",
+                "option_description"    : "Output file name %s",
+                "option_long"           : "output-file",
+                "option_required"       : true,
+                "option_sample_value"   : "output-file-name"
+            },
+            "l": {
+                "default_value"         : "None",
+                "option_description"    : "Output log file name is %s",
+                "option_long"           : "output-log-file",
+                "option_required"       : false,
+                "option_sample_value"   : "output-log-file-name"
+            },
+            "a": {
+                "default_value"         : 200,
+                "option_description"    : "Unique values to analyze is limited to %s",
+                "option_long"           : "unique-values-to-analyze-limit",
+                "option_required"       : false,
+                "option_sample_value"   : "100|200 = default value|300|500|1000"
+            },
+            "s": {
+                "default_value"         : ",",
+                "option_description"    : "CSV file separator is %s",
+                "option_long"           : "csv-field-separator",
+                "option_required"       : false,
+                "option_sample_value"   : "csv-field-separator-character"
+            }
         },
-        "o": {
-            "default_value"         : "",
-            "option_long"           : "output-file",
-            "option_required"       : true,
-            "option_sample_value"   : "output-file-name"
-        },
-        "l": {
-            "default_value"         : "None",
-            "option_long"           : "output-log-file",
-            "option_required"       : false,
-            "option_sample_value"   : "output-log-file-name"
-        },
-        "a": {
-            "default_value"         : 200,
-            "option_long"           : "unique-values-to-analyze-limit",
-            "option_required"       : false,
-            "option_sample_value"   : "100|200 = default value|300|500|1000"
-        },
-        "s": {
-            "default_value"         : ",",
-            "option_long"           : "csv-field-separator",
-            "option_required"       : false,
-            "option_sample_value"   : "csv-field-separator-character"
+        "publisher": {
+            "c": {
+                "default_value"         : "",
+                "option_description"    : "Configuration file with credentials file name is %s",
+                "option_long"           : "input-credentials-file",
+                "option_required"       : true,
+                "option_sample_value"   : "input-credentials-file-name"
+            },
+            "i": {
+                "default_value"         : "",
+                "option_description"    : "Input file name is %s",
+                "option_long"           : "input-file",
+                "option_required"       : true,
+                "option_sample_value"   : "input-file-name"
+            },
+            "t": {
+                "default_value"         : "",
+                "option_description"    : "Tableau Server to consider is %s",
+                "option_long"           : "tableau-server",
+                "option_required"       : true,
+                "option_sample_value"   : "https://online.tableau.com/"
+            },
+            "s": {
+                "default_value"         : "",
+                "option_description"    : "Tableau Site is %s",
+                "option_long"           : "tableau-site",
+                "option_required"       : true,
+                "option_sample_value"   : "tableau-site-name"
+            },
+            "p": {
+                "default_value"         : "",
+                "option_description"    : "Tableau Project is %s",
+                "option_long"           : "tableau-project",
+                "option_required"       : true,
+                "option_sample_value"   : "tableau-project-name"
+            },
+            "m": {
+                "default_value"         : "",
+                "option_description"    : "Publishing mode is %s",
+                "option_long"           : "publishing-mode",
+                "option_required"       : true,
+                "option_sample_value"   : "Append|CreateNew|Overwrite==default_if_ommited"
+            },
+            "l": {
+                "default_value"         : "None",
+                "option_description"    : "Output log file name is %s",
+                "option_long"           : "output-log-file",
+                "option_required"       : false,
+                "option_sample_value"   : "output-log-file-name"
+            }
         }
     }
 }
