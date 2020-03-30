@@ -1,11 +1,15 @@
 # Change Log for Tableau Hyper Management package
 
-## Version 1.2.7 released on 2020-03-28
+## Version 1.2.7 released on 2020-03-31
+- just corrected setup.py
+
+## Version 1.2.7 released on 2020-03-30
 - added a file existing check to circumvent a package crash in case of file not existing;
 - added support for large input file;
 - added support for upper case months and weekdays besides existing proper case;
 - added timing for certain code performance masuring (that is exposing such information to logger);
 - bumped version of TableauHypeAPI (former 0.0.9746 => new 0.0.10309 which was released on 2020-03-25);
+- added additional script to facilitate publishing a Tableau Extract file (Hyper format) to a specified Tableau Server.
 
 ## Version 1.2.6 released on 2020-03-05
 - bug fix to get only non-null unique values analyzed in case of a float column that may hold disguised integers
