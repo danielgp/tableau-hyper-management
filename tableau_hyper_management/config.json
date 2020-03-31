@@ -102,7 +102,7 @@
                 "option_description"    : "Publishing mode is %s",
                 "option_long"           : "publishing-mode",
                 "option_required"       : true,
-                "option_sample_value"   : "Append|CreateNew|Overwrite==default_if_ommited"
+                "option_sample_value"   : "Append|CreateNew|Overwrite==default_if_omitted"
             },
             "l": {
                 "default_value"         : "None",
