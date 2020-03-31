@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.2.12 released on 2020-04-01
+- tweaked internal code from main files (`converter.py` and `publisher.py`)
+
 ## Version 1.2.11 released on 2020-04-01
 - moved `publisher.py` from root of the package to sources folder;
 - renamed `main.py` to `converter.py` and moved it from root of the package to sources folder;
