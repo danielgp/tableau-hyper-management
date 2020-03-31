@@ -4,7 +4,7 @@ import tableauserverclient as tsc
 from pathlib import Path
 
 
-class TableauServerCommunicator():
+class TableauServerCommunicator:
     req_opts = tsc.RequestOptions(pagesize=1000)
     tableau_server = None
 
@@ -30,7 +30,8 @@ class TableauServerCommunicator():
         local_logger.debug('The connection to the Tableau Server has been terminated!')
         timmer.stop()
 
-    def get_project_relevancy(self, relevant_projects_to_filter, filtering_type, current_project):
+    @staticmethod
+    def get_project_relevancy(relevant_projects_to_filter, filtering_type, current_project):
         relevant = 0
         if filtering_type == 'JustOnesMentioned':
             if current_project.name.replace(chr(8211), chr(45)) in relevant_projects_to_filter:
@@ -42,7 +43,7 @@ class TableauServerCommunicator():
         return relevant
 
     @staticmethod
-    def is_publishing_possible(self, local_logger, relevant_project_name, relevant_project_ids):
+    def is_publishing_possible(local_logger, relevant_project_name, relevant_project_ids):
         publish_possible = False
         int_found_projects = len(relevant_project_ids)
         if int_found_projects == 0:
@@ -73,8 +74,7 @@ class TableauServerCommunicator():
         dictionary_project_ids = []
         project_counter = 0
         for project_current in project_items:
-            relevant = self.get_project_relevancy(self,
-                                                  relevant_projects_to_filter,
+            relevant = self.get_project_relevancy(relevant_projects_to_filter,
                                                   str_filtering_type,
                                                   project_current)
             if relevant >= 1:
@@ -91,7 +91,7 @@ class TableauServerCommunicator():
         timmer.start()
         local_logger.info('About to start publishing')
         data_source_name = Path(publish_details['Tableau Extract File']).name\
-                               .replace('.hyper', '') + " Extract"
+            .replace('.hyper', '') + " Extract"
         project_data_source = tsc.DatasourceItem(project_id = publish_details['Project ID'],
                                                  name       = data_source_name)
         self.tableau_server.datasources.publish(project_data_source,

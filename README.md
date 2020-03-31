@@ -32,7 +32,7 @@ or directly from GitHub:
 
 ### Converting CSV file into Tableau Extract (Hyper format)
 ```
-    $ python3|python.exe <local_path_of_this_package>main.py --input-file <full_path_and_file_base_name_to_file_having_content_as_CSV>(.txt|.csv) --csv-field-separator ,|; --output-file <full_path_and_file_base_name_to_generated_file>(.hyper) (--output-log-file <full_path_and_file_name_to_log_running_details>) (--unique-values-to-analyze-limit 100|200=default_value_if_ommited|500|1000)
+    $ python3|python.exe <local_path_of_this_package>/tableau_hyper_management/converter.py --input-file <full_path_and_file_base_name_to_file_having_content_as_CSV>(.txt|.csv) --csv-field-separator ,|; --output-file <full_path_and_file_base_name_to_generated_file>(.hyper) (--output-log-file <full_path_and_file_name_to_log_running_details>) (--unique-values-to-analyze-limit 100|200=default_value_if_omitted|500|1000)
 ```
 - conventions used:
     - (content_within_round_parenthesis) = optional
@@ -42,7 +42,7 @@ or directly from GitHub:
 
 ### Publishing a Tableau Extract (Hyper format) to a Tableau Server
 ```
-    $ python3|python.exe <local_path_of_this_package>publisher.py --input-file <full_path_and_file_base_name_with_tableau_extract>(.hyper) --tableau-server <tableau_server_url> --tableau-site <tableau_server_site_to_publish_to> --tableau-project <tableau_server_project_to_publish_to> --publishing-mode Append|CreateNew|Overwrite==default_if_ommited --input-credentials-file %credentials_file% (--output-log-file <full_path_and_file_name_to_log_running_details>)
+    $ python3|python.exe <local_path_of_this_package>/tableau_hyper_management/publisher.py --input-file <full_path_and_file_base_name_with_tableau_extract>(.hyper) --tableau-server <tableau_server_url> --tableau-site <tableau_server_site_to_publish_to> --tableau-project <tableau_server_project_to_publish_to> --publishing-mode Append|CreateNew|Overwrite==default_if_omitted --input-credentials-file %credentials_file% (--output-log-file <full_path_and_file_name_to_log_running_details>)
 ```
 - conventions used:
     - (content_within_round_parenthesis) = optional
@@ -56,9 +56,9 @@ or directly from GitHub:
 - dynamic advanced content type detection covering following data types: integer, float-dot, date-iso8601, date-DMY-dash, date-DMY-dot, date-DMY-slash, date-MDY, date-MDY-medium, date-MDY-long, time-12, time-12-micro-sec, time-24, time-24-micro-sec, datetime-iso8601, datetime-iso8601-micro-sec, datetime-MDY, datetime-MDY-micro-sec, datetime-MDY-medium, datetime-MDY-medium-micro-sec, datetime-MDY-long, datetime-MDY-long-micro-sec, string;
 - support for empty field content for any data type (required re-interpreting CSV to be accepted by Hyper Inserter to ensure INT or DOUBLE data types are considered);
 - use Panda package to benefit of Data Frames speed and flexibility;
-- log file to capture entire logic details (very usefull for either traceability but also debugging);
+- log file to capture entire logic details (very useful for either traceability but also debugging);
 - most of the logic actions are not timed for performance measuring so you can plan better your needs;
-- publishing a Tableau Extract (Hyper format) to a Tableau Server now is supported (singe end of March 2020).
+- publishing a Tableau Extract (Hyper format) to a Tableau Server now is supported (since end of March 2020).
 
 ## Change Log / Releases detailed
 

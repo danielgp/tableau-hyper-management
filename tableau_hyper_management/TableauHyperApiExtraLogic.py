@@ -73,7 +73,7 @@ class TableauHyperApiExtraLogic:
 
     def fn_create_hyper_file_from_csv(self, logger, input_csv_data_frame, in_data_type,
                                       given_parameters):
-        hyper_cols = self.fn_build_hyper_columns_for_csv(self, logger, in_data_type)
+        hyper_cols = self.fn_build_hyper_columns_for_csv(logger, in_data_type)
         # The rows to insert into the <hyper_table> table.
         data_to_insert = self.fn_rebuild_csv_content_for_hyper(logger,
                                                                input_csv_data_frame,
@@ -127,7 +127,7 @@ class TableauHyperApiExtraLogic:
 
     def fn_run_hyper_creation(self, logger, input_data_frame, input_data_type, given_parameters):
         try:
-            self.fn_create_hyper_file_from_csv(self, logger, input_data_frame,
+            self.fn_create_hyper_file_from_csv(logger, input_data_frame,
                                                input_data_type, given_parameters)
         except HyperException as ex:
             logger.error(str(ex).replace(chr(10), ' '))
