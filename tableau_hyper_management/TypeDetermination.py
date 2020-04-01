@@ -8,7 +8,7 @@ import re
 # additional Python packages available from PyPi
 import numpy as np
 # Custom class specific to this package
-from BasicNeeds import BasicNeeds
+from tableau_hyper_management import BasicNeeds
 
 
 class TypeDetermination(BasicNeeds):

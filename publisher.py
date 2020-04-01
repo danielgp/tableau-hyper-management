@@ -12,10 +12,10 @@ from codetiming import Timer
 
 
 # Custom classes specific to this package
-from BasicNeeds import BasicNeeds
-from LoggingNeeds import LoggingNeeds
-from CommandLineArgumentsManagement import CommandLineArgumentsManagement
-from TableauServerCommunicator import TableauServerCommunicator
+from tableau_hyper_management import BasicNeeds
+from tableau_hyper_management import LoggingNeeds
+from tableau_hyper_management import CommandLineArgumentsManagement
+from tableau_hyper_management import TableauServerCommunicator
 
 # main execution logic
 if __name__ == '__main__':

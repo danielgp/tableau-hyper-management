@@ -5,7 +5,7 @@ dist/
 examples/
 main/
 results/
-tableau_hyper_management/__pycache__/
+thm/__pycache__/
 tableau_hyper_management.egg-info/
 venv/
 .pypirc

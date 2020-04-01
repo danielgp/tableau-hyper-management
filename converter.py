@@ -9,10 +9,10 @@ import os.path as os_path
 # additional packages to be installed from PyPi
 import pandas as pd
 # Custom classes specific to this package
-from CommandLineArgumentsManagement import CommandLineArgumentsManagement
-from LoggingNeeds import LoggingNeeds
-from TableauHyperApiExtraLogic import TableauHyperApiExtraLogic
-from TypeDetermination import TypeDetermination
+from tableau_hyper_management import CommandLineArgumentsManagement
+from tableau_hyper_management import LoggingNeeds
+from tableau_hyper_management import TableauHyperApiExtraLogic
+from tableau_hyper_management import TypeDetermination
 # package to measure portions of code performance
 from codetiming import Timer
 
