@@ -1,5 +1,11 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.2.14 release on 2020-04-01
+- updating README file to reflect recent file name change;
+- minor code tweaks;
+
+## Version 1.2.12 skipped
+
 ## Version 1.2.12 released on 2020-04-01
 - minor code tweaks
 - renamed `publisher.py` to `publish_data_source.py`;
