@@ -14,7 +14,7 @@ class BasicNeeds:
     cfg_dtls = {}
 
     def fn_final_message(self, local_logger, timmer, log_file_name):
-        total_time_string = str(timedelta(seconds = timmer.timers.total('thm')))
+        total_time_string = str(timedelta(seconds=timmer.timers.total('thm')))
         if log_file_name == 'None':
             self.fn_timestamped_print('Application finished, whole script took '
                                       + total_time_string)
@@ -47,7 +47,7 @@ class BasicNeeds:
         # adding a special case data type
         self.cfg_dtls['data_types']['str'] = ''
 
-    def fn_open_file_and_get_its_content(self, input_file, content_type = 'json'):
+    def fn_open_file_and_get_its_content(self, input_file, content_type='json'):
         if os.path.isfile(input_file):
             with open(input_file, 'r') as file_handler:
                 self.fn_timestamped_print('I have opened file: ' + input_file)
