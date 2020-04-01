@@ -1,6 +1,11 @@
-# package tto ensure communication with Tableau Server
-import tableauserverclient as tsc
+"""
+TableauHyperApiExtraLogic - a Tableau Server Client wrapper
 
+This library facilitates publishing data source to Tableau Server
+"""
+# package to ensure communication with Tableau Server
+import tableauserverclient as tsc
+# Path manager
 from pathlib import Path
 
 
@@ -14,12 +19,10 @@ class TableauServerCommunicator:
                            + connection_details['Tableau Server'] + ' and the Site '
                            + connection_details['Tableau Site'] + ' using the Username '
                            + connection_details['Username'])
-        self.tableau_server = tsc.Server(server_address     = connection_details['Tableau Server'],
-                                         use_server_version = True)
-        tableau_auth = tsc.TableauAuth(username               = connection_details['Username'],
-                                       password               = connection_details['Password'],
-                                       site_id                = connection_details['Tableau Site'],
-                                       user_id_to_impersonate = None)
+        self.tableau_server = tsc.Server(connection_details['Tableau Server'], True)
+        tableau_auth = tsc.TableauAuth(connection_details['Username'],
+                                       connection_details['Password'],
+                                       connection_details['Tableau Site'])
         self.tableau_server.auth.sign_in(tableau_auth)
         local_logger.debug('Connection to the Tableau Server has been established successfully!')
         timmer.stop()
@@ -92,11 +95,9 @@ class TableauServerCommunicator:
         local_logger.info('About to start publishing')
         data_source_name = Path(publish_details['Tableau Extract File']).name\
             .replace('.hyper', '') + " Extract"
-        project_data_source = tsc.DatasourceItem(project_id = publish_details['Project ID'],
-                                                 name       = data_source_name)
+        project_data_source = tsc.DatasourceItem(publish_details['Project ID'], data_source_name)
         self.tableau_server.datasources.publish(project_data_source,
                                                 publish_details['Tableau Extract File'],
-                                                publish_details['Publishing Mode'],
-                                                )
+                                                publish_details['Publishing Mode'])
         local_logger.info('Publishing has finished with success!')
         timmer.stop()
