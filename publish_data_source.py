@@ -4,18 +4,15 @@ main - entry point of the package
 This file is connecting to a Tableau Server and publishes a local HYPER file
 measuring time elapsed (performance)
 """
-
 # standard Python packages
 import os.path as os_path
 # package to measure portions of code performance
 from codetiming import Timer
-
-
 # Custom classes specific to this package
-from tableau_hyper_management import BasicNeeds
-from tableau_hyper_management import LoggingNeeds
-from tableau_hyper_management import CommandLineArgumentsManagement
-from tableau_hyper_management import TableauServerCommunicator
+from tableau_hyper_management.BasicNeeds import BasicNeeds
+from tableau_hyper_management.LoggingNeeds import LoggingNeeds
+from tableau_hyper_management.CommandLineArgumentsManagement import CommandLineArgumentsManagement
+from tableau_hyper_management.TableauServerCommunicator import TableauServerCommunicator
 
 # main execution logic
 if __name__ == '__main__':
