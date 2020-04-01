@@ -42,7 +42,7 @@ or directly from GitHub:
 
 ### Publishing a Tableau Extract (Hyper format) to a Tableau Server
 ```
-    $ python3|python.exe <local_path_of_this_package>/tableau_hyper_management/publisher.py --input-file <full_path_and_file_base_name_with_tableau_extract>(.hyper) --tableau-server <tableau_server_url> --tableau-site <tableau_server_site_to_publish_to> --tableau-project <tableau_server_project_to_publish_to> --publishing-mode Append|CreateNew|Overwrite==default_if_omitted --input-credentials-file %credentials_file% (--output-log-file <full_path_and_file_name_to_log_running_details>)
+    $ python3|python.exe <local_path_of_this_package>/tableau_hyper_management/publish_data_source.py --input-file <full_path_and_file_base_name_with_tableau_extract>(.hyper) --tableau-server <tableau_server_url> --tableau-site <tableau_server_site_to_publish_to> --tableau-project <tableau_server_project_to_publish_to> --publishing-mode Append|CreateNew|Overwrite==default_if_omitted --input-credentials-file %credentials_file% (--output-log-file <full_path_and_file_name_to_log_running_details>)
 ```
 - conventions used:
     - (content_within_round_parenthesis) = optional
