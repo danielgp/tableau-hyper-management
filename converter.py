@@ -9,20 +9,21 @@ import os.path as os_path
 # additional packages to be installed from PyPi
 import pandas as pd
 # Custom classes specific to this package
-from tableau_hyper_management import CommandLineArgumentsManagement
-from tableau_hyper_management import LoggingNeeds
-from tableau_hyper_management import TableauHyperApiExtraLogic
-from tableau_hyper_management import TypeDetermination
+from tableau_hyper_management.BasicNeeds import BasicNeeds
+from tableau_hyper_management.CommandLineArgumentsManagement import CommandLineArgumentsManagement
+from tableau_hyper_management.LoggingNeeds import LoggingNeeds
+from tableau_hyper_management.TableauHyperApiExtraLogic import TableauHyperApiExtraLogic
+from tableau_hyper_management.TypeDetermination import TypeDetermination
 # package to measure portions of code performance
 from codetiming import Timer
 
 # main execution logic
 if __name__ == '__main__':
-    c_td = TypeDetermination()
-    c_td.fn_load_configuration()
+    c_bn = BasicNeeds()
+    c_bn.fn_load_configuration()
     # instate Class named Command Line Arguments
     c_clam = CommandLineArgumentsManagement()
-    parameters_in = c_clam.parse_arguments(c_td.cfg_dtls['input_options']['converter'])
+    parameters_in = c_clam.parse_arguments(c_bn.cfg_dtls['input_options']['converter'])
     # initiate logger
     c_ln = LoggingNeeds()
     c_ln.initiate_logger(parameters_in.output_log_file, 'thm_converter')
@@ -37,7 +38,7 @@ if __name__ == '__main__':
     c_ln.logger.info('Tableau Hyper Management started')
     # reflect input parameters given values
     c_clam.listing_parameter_values(c_ln.logger,
-                                    c_td.cfg_dtls['input_options']['converter'],
+                                    c_bn.cfg_dtls['input_options']['converter'],
                                     parameters_in)
     t.stop()
     # initiate Data Frame from specified CSV file
@@ -57,8 +58,11 @@ if __name__ == '__main__':
         t.stop()
         t.start()
         # advanced detection of data type within Data Frame
+        c_td = TypeDetermination()
         detected_csv_structure = c_td.fn_detect_csv_structure(c_ln.logger,
-                                                              csv_content_df, parameters_in)
+                                                              csv_content_df,
+                                                              parameters_in,
+                                                              c_bn.cfg_dtls['data_types'])
         t.stop()
         t.start()
         # create HYPER from Data Frame
@@ -70,4 +74,4 @@ if __name__ == '__main__':
         # doesn't exist
         c_ln.logger.error('Given file ' + parameters_in.input_file
                           + ' does not exist, please check your inputs!')
-    c_td.fn_final_message(c_ln.logger, t, parameters_in.output_log_file)
+    c_bn.fn_final_message(c_ln.logger, t, parameters_in.output_log_file)
