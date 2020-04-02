@@ -63,9 +63,9 @@ setup(
     long_description = long_description_readme,
     long_description_content_type = 'text/markdown',
     name = 'tableau-hyper-management',
-    packages = find_packages('thm'),
+    packages = find_packages('tableau_hyper_management'),
     package_data = {
-        'thm': [
+        'tableau_hyper_management': [
             '*.json',
             '*.md'
         ]
@@ -77,5 +77,5 @@ setup(
     },
     python_requires = '>=3.6',
     url = this_package_website + '/releases',  # project home page, if any
-    version = '1.2.14',
+    version = '1.2.15',
 )
