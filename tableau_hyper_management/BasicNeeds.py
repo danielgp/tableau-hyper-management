@@ -78,6 +78,7 @@ class BasicNeeds:
 
     def fn_validate_single_value(self, value_to_validate, validation_type, name_meaning):
         is_fatal_error = False
+        message = ''
         if validation_type == 'file':
             is_fatal_error = (not os.path.isfile(value_to_validate))
             message = 'Given ' + name_meaning + ' "' + value_to_validate \
