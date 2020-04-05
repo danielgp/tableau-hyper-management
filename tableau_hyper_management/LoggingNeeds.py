@@ -25,8 +25,7 @@ class LoggingNeeds:
                                                             interval=1,
                                                             backupCount=5,
                                                             encoding='utf-8',
-                                                            utc=False,
-                                                            )
+                                                            utc=False)
             # Here we define our formatter
             string_format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
             log_formatter = logging.Formatter(string_format)
