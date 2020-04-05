@@ -64,7 +64,8 @@ class BasicNeeds:
                                       + in_content_type)
 
     def fn_get_file_statitics(self, file_to_evaluate):
-        file_sha512 = hashlib.sha512(open(file_to_evaluate, 'r').read().encode()).hexdigest()
+        file_sha512 = hashlib.sha512(open(file=file_to_evaluate, mode='r', encoding='utf-8')\
+                                     .read().encode()).hexdigest()
         file_dates = {
             'created': os.path.getctime(file_to_evaluate),
             'modified': os.path.getctime(file_to_evaluate),
@@ -111,7 +112,7 @@ class BasicNeeds:
               + ' - ' + string_to_print)
 
     @staticmethod
-    def fn_validate_one_value(self, value_to_validate, validation_type, name_meaning):
+    def fn_validate_one_value(value_to_validate, validation_type, name_meaning):
         is_fatal_error = False
         message = ''
         if validation_type == 'file':
