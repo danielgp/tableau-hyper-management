@@ -3,11 +3,10 @@ TableauHyperApiExtraLogic - a Hyper client library.
 
 This library allows packaging CSV content into HYPER format with data type checks
 """
-
-# additional Python packages available from PyPi
+# package to handle numerical structures
 import numpy as nmpy
+# package to handle Data Frames (in this file)
 import pandas as pd
-
 # Custom classes from Tableau Hyper package
 from tableauhyperapi import HyperProcess, Telemetry, \
     Connection, CreateMode, \
@@ -71,44 +70,58 @@ class TableauHyperApiExtraLogic:
             identified_type = SqlType.text()
         return identified_type
 
-    def fn_create_hyper_file_from_csv(self, logger, input_csv_data_frame, in_data_type,
-                                      given_parameters):
-        hyper_cols = self.fn_build_hyper_columns_for_csv(logger, in_data_type)
+    def fn_create_hyper_file_from_csv(self, local_logger, timmer, input_csv_data_frame,
+                                      in_data_type, given_parameters):
+        timmer.start()
+        hyper_cols = self.fn_build_hyper_columns_for_csv(local_logger, in_data_type)
+        local_logger.info('Building Hyper columns completed')
+        timmer.stop()
         # The rows to insert into the <hyper_table> table.
-        data_to_insert = self.fn_rebuild_csv_content_for_hyper(logger,
+        timmer.start()
+        data_to_insert = self.fn_rebuild_csv_content_for_hyper(local_logger,
                                                                input_csv_data_frame,
                                                                in_data_type)
+        local_logger.info('Re-building CSV content for maximum Hyper compatibility '
+                          + 'has been completed')
+        timmer.stop()
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
         # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
         # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
         with HyperProcess(telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU) as hyper:
             # Creates new Hyper file <output_hyper_file>
             # Replaces file with CreateMode.CREATE_AND_REPLACE if it already exists.
+            timmer.start()
             with Connection(endpoint=hyper.endpoint,
                             database=given_parameters.output_file,
                             create_mode=CreateMode.CREATE_AND_REPLACE) as hyper_connection:
-                logger.info('Connection to the Hyper engine '
-                            + f'file "{given_parameters.output_file}" has been created.')
+                local_logger.info('Connection to the Hyper engine '
+                                  + f'file "{given_parameters.output_file}" has been created.')
+                timmer.stop()
+                timmer.start()
                 hyper_connection.catalog.create_schema("Extract")
-                logger.info('Hyper schema "Extract" has been created.')
+                local_logger.info('Hyper schema "Extract" has been created.')
                 hyper_table = TableDefinition(
                     TableName("Extract", "Extract"),
                     columns=hyper_cols
                 )
                 hyper_connection.catalog.create_table(table_definition=hyper_table)
-                logger.info('Hyper table "Extract" has been created.')
+                local_logger.info('Hyper table "Extract" has been created.')
+                timmer.stop()
+                timmer.start()
                 # Execute the actual insert
                 with Inserter(hyper_connection, hyper_table) as hyper_insert:
                     hyper_insert.add_rows(rows=data_to_insert)
                     hyper_insert.execute()
+                local_logger.info('Data has been inserted into Hyper table')
+                timmer.stop()
                 # Number of rows in the <hyper_table> table.
                 # `execute_scalar_query` is for executing a query
                 # that returns exactly one row with one column.
                 row_count = hyper_connection.\
                     execute_scalar_query(query=f'SELECT COUNT(*) FROM {hyper_table.table_name}')
-                logger.info(f'Number of rows in table {hyper_table.table_name} is {row_count}')
-            logger.info('Connection to the Hyper engine file has been closed')
-        logger.info('Hyper engine process has been shut down')
+                local_logger.info(f'Number of rows in table {hyper_table.table_name} is {row_count}')
+            local_logger.info('Connection to the Hyper engine file has been closed')
+        local_logger.info('Hyper engine process has been shut down')
 
     @staticmethod
     def fn_rebuild_csv_content_for_hyper(logger, input_df, detected_fields_type):
@@ -125,10 +138,11 @@ class TableauHyperApiExtraLogic:
                 input_df[fld_nm] = pd.to_datetime(input_df[fld_nm])
         return input_df.values
 
-    def fn_run_hyper_creation(self, logger, input_data_frame, input_data_type, given_parameters):
+    def fn_run_hyper_creation(self, local_logger, timmer, input_data_frame, input_data_type,
+                              given_parameters):
         try:
-            self.fn_create_hyper_file_from_csv(logger, input_data_frame,
+            self.fn_create_hyper_file_from_csv(local_logger, timmer, input_data_frame,
                                                input_data_type, given_parameters)
         except HyperException as ex:
-            logger.error(str(ex).replace(chr(10), ' '))
+            local_logger.error(str(ex).replace(chr(10), ' '))
             exit(1)
