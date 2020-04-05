@@ -110,7 +110,8 @@ class BasicNeeds:
         print(datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S.%f %Z")
               + ' - ' + string_to_print)
 
-    def fn_validate_single_value(self, value_to_validate, validation_type, name_meaning):
+    @staticmethod
+    def fn_validate_one_value(self, value_to_validate, validation_type, name_meaning):
         is_fatal_error = False
         message = ''
         if validation_type == 'file':
@@ -126,6 +127,14 @@ class BasicNeeds:
             is_fatal_error = (not re.match(url_reg_expression, value_to_validate))
             message = 'Given ' + name_meaning + ' "' + value_to_validate \
                       + '" does not seem a valid one, please check your inputs!'
-        if is_fatal_error:
-            self.fn_timestamped_print(message)
+        return {
+            'is_fatal_error': is_fatal_error,
+            'message': message,
+        }
+
+    def fn_validate_single_value(self, value_to_validate, validation_type, name_meaning):
+        validation_details = self.fn_validate_one_value(value_to_validate, validation_type,
+                                                        name_meaning)
+        if validation_details['is_fatal_error']:
+            self.fn_timestamped_print(validation_details['message'])
             exit(1)
