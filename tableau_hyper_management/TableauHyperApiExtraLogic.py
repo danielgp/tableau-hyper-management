@@ -3,8 +3,10 @@ TableauHyperApiExtraLogic - a Hyper client library.
 
 This library allows packaging CSV content into HYPER format with data type checks
 """
+# package regular expression
+import re
 # package to handle numerical structures
-import numpy as nmpy
+import numpy
 # package to handle Data Frames (in this file)
 import pandas as pd
 # Custom classes from Tableau Hyper package
@@ -40,30 +42,19 @@ class TableauHyperApiExtraLogic:
     @staticmethod
     def fn_convert_to_hyper_types(given_type):
         switcher = {
-            'empty'                        : SqlType.text(),
-            'bool'                         : SqlType.bool(),
-            'int'                          : SqlType.big_int(),
-            'float-dot'                    : SqlType.double(),
-            'date-iso8601'                 : SqlType.date(),
-            'date-DMY-dash'                : SqlType.date(),
-            'date-DMY-dot'                 : SqlType.date(),
-            'date-DMY-slash'               : SqlType.date(),
-            'date-MDY'                     : SqlType.date(),
-            'date-MDY-medium'              : SqlType.date(),
-            'date-MDY-long'                : SqlType.date(),
-            'time-24'                      : SqlType.time(),
-            'time-24-micro-sec'            : SqlType.time(),
-            'time-12'                      : SqlType.time(),
-            'time-12-micro-sec'            : SqlType.time(),
-            'datetime-iso8601'             : SqlType.timestamp(),
-            'datetime-iso8601-micro-sec'   : SqlType.timestamp(),
-            'datetime-MDY'                 : SqlType.timestamp(),
-            'datetime-MDY-micro-sec'       : SqlType.timestamp(),
-            'datetime-MDY-medium'          : SqlType.timestamp(),
-            'datetime-MDY-medium-micro-sec': SqlType.timestamp(),
-            'datetime-MDY-long'            : SqlType.timestamp(),
-            'datetime-MDY-long-micro-sec'  : SqlType.timestamp(),
-            'str'                          : SqlType.text()
+            'empty': SqlType.text(),
+            'bool': SqlType.bool(),
+            'int': SqlType.big_int(),
+            'float-dot': SqlType.double(),
+            'date-YMD': SqlType.date(),
+            'date-MDY': SqlType.date(),
+            'date-DMY': SqlType.date(),
+            'time-24': SqlType.time(),
+            'time-12': SqlType.time(),
+            'datetime-24-YMD': SqlType.timestamp(),
+            'datetime-12-MDY': SqlType.timestamp(),
+            'datetime-24-DMY': SqlType.timestamp(),
+            'str': SqlType.text()
         }
         identified_type = switcher.get(given_type)
         if identified_type is None:
@@ -114,18 +105,19 @@ class TableauHyperApiExtraLogic:
                     hyper_insert.execute()
                 local_logger.info('Data has been inserted into Hyper table')
                 timmer.stop()
+                timmer.start()
                 # Number of rows in the <hyper_table> table.
                 # `execute_scalar_query` is for executing a query
                 # that returns exactly one row with one column.
-                row_count = hyper_connection.\
-                    execute_scalar_query(query=f'SELECT COUNT(*) FROM {hyper_table.table_name}')
-                local_logger.info(f'Number of rows in table {hyper_table.table_name} is {row_count}')
+                query_to_run = f'SELECT COUNT(*) FROM {hyper_table.table_name}'
+                row_count = hyper_connection.execute_scalar_query(query=query_to_run)
+                local_logger.info(f'Table {hyper_table.table_name} has {row_count} rows')
+                timmer.stop()
             local_logger.info('Connection to the Hyper engine file has been closed')
         local_logger.info('Hyper engine process has been shut down')
 
-    @staticmethod
-    def fn_rebuild_csv_content_for_hyper(logger, input_df, detected_fields_type):
-        input_df.replace(to_replace=[nmpy.nan], value=[None], inplace=True)
+    def fn_rebuild_csv_content_for_hyper(self, logger, input_df, detected_fields_type):
+        input_df.replace(to_replace=[numpy.nan], value=[None], inplace=True)
         # Cycle through all found columns
         for current_field in detected_fields_type:
             fld_nm = current_field['name']
@@ -135,7 +127,7 @@ class TableauHyperApiExtraLogic:
             if current_field['panda_type'] == 'float64' and current_field['type'] == 'int':
                 input_df[fld_nm] = input_df[fld_nm].fillna(0).astype('int64')
             elif current_field['type'][0:5] in ('date-', 'datet', 'time-'):
-                input_df[fld_nm] = pd.to_datetime(input_df[fld_nm])
+                input_df[fld_nm] = self.fn_string_to_date(fld_nm, input_df)
         return input_df.values
 
     def fn_run_hyper_creation(self, local_logger, timmer, input_data_frame, input_data_type,
@@ -146,3 +138,14 @@ class TableauHyperApiExtraLogic:
         except HyperException as ex:
             local_logger.error(str(ex).replace(chr(10), ' '))
             exit(1)
+
+    def fn_string_to_date(self, column_name, input_data_frame):
+        if re.match('-YMD', column_name):
+            input_data_frame[column_name] = pd.to_datetime(input_data_frame[column_name],
+                                                           yearfirst=True)
+        elif re.match('-DMY', column_name):
+            input_data_frame[column_name] = pd.to_datetime(input_data_frame[column_name],
+                                                           dayfirst=True)
+        else:
+            input_data_frame[column_name] = pd.to_datetime(input_data_frame[column_name])
+        return input_data_frame[column_name]
