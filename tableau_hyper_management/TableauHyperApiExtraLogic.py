@@ -125,8 +125,7 @@ class TableauHyperApiExtraLogic:
                 input_df[fld_nm] = input_df[fld_nm].fillna(0).astype('int64')
             elif current_field['type'][0:5] in ('date-', 'datet', 'time-'):
                 input_df[fld_nm] = self.fn_string_to_date(fld_nm, input_df)
-        logger.info('Re-building CSV content for maximum Hyper compatibility '
-                          + 'has been completed')
+        logger.info('Re-building CSV content for maximum Hyper compatibility has been completed')
         timmer.stop()
         return input_df.values
 
