@@ -9,6 +9,7 @@ thm/__pycache__/
 tableau_hyper_management/__pycache__/*
 tableau_hyper_management.egg-info/
 venv/
+virtual_environment/
 .pypirc
 /*.log
 /archive.zip

@@ -1,5 +1,9 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.2.16 - WIP
+- added input and output (where relevant) file statistics to log;
+- code cleanup;
+
 ## Version 1.2.15 release on 2020-04-03
 - implemented input validation for most important values;
 - corrected internal package name in the setup file;
