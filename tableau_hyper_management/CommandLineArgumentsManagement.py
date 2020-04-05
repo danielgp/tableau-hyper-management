@@ -4,14 +4,18 @@ CommandLineArgumentManagement - library to manage input parameters from command 
 This library allows handling pre-configured arguments to be received from command line and use them
 to call the main package functions
 """
-
+# package to handle arguments from command line
 import argparse
 
 
 class CommandLineArgumentsManagement:
 
     @staticmethod
-    def listing_parameter_values(local_logger, configuration_details, given_parameter_values):
+    def listing_parameter_values(local_logger, timmer, title, configuration_details,
+                                 given_parameter_values):
+        timmer.start()
+        local_logger.info('='*50)
+        local_logger.info(title + ' has started')
         local_logger.info('~' * 50)
         local_logger.info('Overview of input parameter given values')
         local_logger.info('~' * 50)
@@ -30,6 +34,7 @@ class CommandLineArgumentsManagement:
             # we finally write the feedback to logger
             local_logger.info(feedback)
         local_logger.info('~' * 50)
+        timmer.stop()
 
     def parse_arguments(self, configuration_details):
         parser = argparse.ArgumentParser()
