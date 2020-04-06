@@ -5,7 +5,7 @@
 
 Based on [Tableau Hyper API](https://help.tableau.com/current/api/hyper_api/en-us/) this repository is intended to manage importing any CSV file into Tableau-Hyper format (to be used with Tableau Desktop/Server) with minimal configuration (as column detection, content type detection and reinterpretation of content are part of the included logic), therefore speed up the process of building extract.
 
-Even better, can be used in conjunction with [Tableau Server Client](https://tableau.github.io/server-client-python/) to take resulted Tableau Hyper file and publish it to a Tableau Server, therefore automating the tedious task to refresh data on the server side (of course, only relevant in case no direct connection from Tableau Server to data source is possible or nature of content is not supported directly by data source: one real-life example can be daily snapshot of a dynamically changing content to capture big variations in time).
+Even better since 1st of April 2020 (not a joke) a publishing script allows to take resulted Tableau Hyper file and publish it to a Tableau Server, therefore automating the tedious task to refresh data on the server side (of course, only relevant in case no direct connection from Tableau Server to data source is possible or nature of content is not supported directly by data source: one real-life example can be daily snapshot of a dynamically changing content to capture big variations in time).
 
 
 ## Who do I talk to?
@@ -24,8 +24,10 @@ Installation can be completed in few steps as follows:
 >> For Windows you can do so from [Git for Windows](https://github.com/git-for-windows/git/releases/);
 * Download this project from Github:
 ```
-    $ git clone https://github.com/danielgp/tableau-hyper-management
+    $ git clone https://github.com/danielgp/tableau-hyper-management <local_folder_on_your_computer>
 ```
+- conventions used:
+    - <content_within_html_tags> = variables to be replaced with user values relevant strings
 * Create a Python Virtual Environment using following command executed from project root folder:
 ```
     $ python -m venv virtual_environment/
@@ -39,6 +41,16 @@ Installation can be completed in few steps as follows:
 ```
     $ python setup.py install
 ```
+
+
+## Maintaining local package up-to-date
+
+Once the package is installed is quite important to keep up with latest releases as such are addressing important code improvements and potential security issues, and this can be achieved by following command:
+```
+    $ git --work-tree=<local_folder_on_your_computer> --git-dir=<local_folder_on_your_computer>/.git/ --no-pager pull origin master
+```
+- conventions used:
+    - <content_within_html_tags> = variables to be replaced with user values relevant strings
 
 
 ## Usage

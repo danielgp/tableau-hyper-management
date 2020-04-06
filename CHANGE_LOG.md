@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.2.17 release on 2020-04-06
+- internal code restructure as all main scripts were moved to a sub-folder to ease further maintenance;
+
 ## Version 1.2.16 release on 2020-04-05
 - added input and output (where relevant) file statistics to log;
 - additional internal logic performance measuring added;
