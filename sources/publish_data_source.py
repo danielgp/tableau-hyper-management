@@ -9,11 +9,10 @@ import os.path
 # package to measure portions of code performance
 from codetiming import Timer
 # Custom classes specific to this package
-from sources.tableau_hyper_management.BasicNeeds import BasicNeeds
-from sources.tableau_hyper_management.LoggingNeeds import LoggingNeeds
-from sources.tableau_hyper_management.CommandLineArgumentsManagement \
-    import CommandLineArgumentsManagement
-from sources.tableau_hyper_management.TableauServerCommunicator import TableauServerCommunicator
+from tableau_hyper_management.BasicNeeds import BasicNeeds
+from tableau_hyper_management.LoggingNeeds import LoggingNeeds
+from tableau_hyper_management.CommandLineArgumentsManagement import CommandLineArgumentsManagement
+from tableau_hyper_management.TableauServerCommunicator import TableauServerCommunicator
 
 # get current script name
 current_script_name = os.path.basename(__file__).replace('.py', '')
