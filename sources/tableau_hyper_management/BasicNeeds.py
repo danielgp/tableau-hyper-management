@@ -63,9 +63,13 @@ class BasicNeeds:
                                       + 'expected either "json" or "raw" but got '
                                       + in_content_type)
 
-    def fn_get_file_statitics(self, file_to_evaluate):
-        file_sha512 = hashlib.sha512(open(file=file_to_evaluate, mode='r', encoding='utf-8')\
-                                     .read().encode()).hexdigest()
+    def fn_get_file_statistics(self, file_to_evaluate):
+        try:
+            file_sha512 = hashlib.sha512(open(file=file_to_evaluate, mode='r', encoding='utf-8')\
+                                         .read().encode()).hexdigest()
+        except UnicodeDecodeError:
+            file_sha512 = hashlib.sha512(open(file=file_to_evaluate, mode='r', encoding='mbcs')\
+                                         .read().encode()).hexdigest()
         file_dates = {
             'created': os.path.getctime(file_to_evaluate),
             'modified': os.path.getctime(file_to_evaluate),
@@ -103,7 +107,7 @@ class BasicNeeds:
         timmer.start()
         local_logger.info(file_meaning + ' file "' + file_name
                           + '" has the following characteristics: '
-                          + str(self.fn_get_file_statitics(file_name)))
+                          + str(self.fn_get_file_statistics(file_name)))
         timmer.stop()
 
     @staticmethod
