@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.2.18 release on 2020-04-07
+- file sha512 checksum calculation improved;
+
 ## Version 1.2.17 release on 2020-04-06
 - internal code restructure as all main scripts were moved to a sub-folder to ease further maintenance;
 
