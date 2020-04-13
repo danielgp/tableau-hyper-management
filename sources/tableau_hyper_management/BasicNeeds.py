@@ -22,6 +22,9 @@ class BasicNeeds:
         # checking log folder first as there's all further messages will be stored
         self.fn_validate_single_value(os.path.dirname(input_parameters.output_log_file), 'folder',
                                       'log file')
+        self.fn_check_inputs_script_specific(input_parameters, input_script)
+
+    def fn_check_inputs_script_specific(self, input_parameters, input_script):
         # checking input file as the main point of whole logic revolves around it
         self.fn_validate_single_value(input_parameters.input_file, 'file', 'input file')
         # checking script specific inputs
