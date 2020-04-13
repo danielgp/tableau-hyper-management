@@ -25,6 +25,8 @@ if __name__ == '__main__':
     c_bn = BasicNeeds()
     # load application configuration (inputs are defined into a json file)
     c_bn.fn_load_configuration()
+    # adding a special case data type
+    c_bn.cfg_dtls['data_types']['str'] = ''
     # instantiate Command Line Arguments class
     c_clam = CommandLineArgumentsManagement()
     parameters_in = c_clam.parse_arguments(c_bn.cfg_dtls['input_options']['converter'])

@@ -20,22 +20,23 @@ class BasicNeeds:
 
     def fn_check_inputs(self, input_parameters, input_script):
         # checking log folder first as there's all further messages will be stored
-        self.fn_validate_single_value(os.path.dirname(input_parameters.output_log_file), 'folder',
-                                      'log file')
+        self.fn_validate_single_value(os.path.dirname(input_parameters.output_log_file),
+                                      'folder', 'log file')
         self.fn_check_inputs_script_specific(input_parameters, input_script)
 
     def fn_check_inputs_script_specific(self, input_parameters, input_script):
         # checking input file as the main point of whole logic revolves around it
-        self.fn_validate_single_value(input_parameters.input_file, 'file', 'input file')
+        self.fn_validate_single_value(input_parameters.input_file,
+                                      'file', 'input file')
         # checking script specific inputs
         if input_script == 'converter':
-            self.fn_validate_single_value(os.path.dirname(input_parameters.output_file), 'folder',
-                                          'output file')
+            self.fn_validate_single_value(os.path.dirname(input_parameters.output_file),
+                                          'folder', 'output file')
         elif input_script == 'publish_data_source':
-            self.fn_validate_single_value(input_parameters.input_credentials_file, 'file',
-                                          'credentials file')
-            self.fn_validate_single_value(input_parameters.tableau_server, 'url',
-                                          'Tableau Server URL')
+            self.fn_validate_single_value(input_parameters.input_credentials_file,
+                                          'file', 'credentials file')
+            self.fn_validate_single_value(input_parameters.tableau_server,
+                                          'url', 'Tableau Server URL')
 
     def fn_final_message(self, local_logger, log_file_name, performance_in_seconds):
         total_time_string = str(timedelta(seconds=performance_in_seconds))
@@ -66,7 +67,8 @@ class BasicNeeds:
                                       + 'expected either "json" or "raw" but got '
                                       + in_content_type)
 
-    def fn_get_file_statistics(self, file_to_evaluate):
+    @staticmethod
+    def fn_get_file_statistics(file_to_evaluate):
         try:
             file_sha512 = hashlib.sha512(open(file=file_to_evaluate, mode='r', encoding='utf-8')\
                                          .read().encode()).hexdigest()
@@ -90,8 +92,18 @@ class BasicNeeds:
     def fn_load_configuration(self):
         relevant_file = os.path.join(os.path.dirname(__file__), 'config.json')
         self.cfg_dtls = self.fn_open_file_and_get_content(relevant_file)
-        # adding a special case data type
-        self.cfg_dtls['data_types']['str'] = ''
+
+    @staticmethod
+    def fn_multi_line_string_to_single_line(input_string):
+        string_to_return = input_string.replace('\n', ' ').replace('\r', ' ')
+        return re.sub(r'\s{2,100}', ' ', string_to_return).replace(' , ', ', ').strip()
+
+    @staticmethod
+    def fn_numbers_with_leading_zero(input_number_as_string, digits):
+        final_number = input_number_as_string
+        if len(input_number_as_string) < digits:
+            final_number = '0' * (digits - len(input_number_as_string)) + input_number_as_string
+        return final_number
 
     def fn_open_file_and_get_content(self, input_file, content_type='json'):
         if os.path.isfile(input_file):
