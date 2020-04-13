@@ -1,15 +1,11 @@
 {
     "Credentials": {
         "LDAP" : {
-            "LDAP": {
-                "LDAP": {
-                    "Production" : {
-                        "Default": {
-                            "Name": "Your Full Name Here",
-                            "Password": "your_password_goes_here",
-                            "Username": "your_username_goes_here"
-                        }
-                    }
+            "Production" : {
+                "Default": {
+                    "Name": "Your Full Name Here",
+                    "Password": "your_password_goes_here",
+                    "Username": "your_username_goes_here"
                 }
             }
         },
@@ -28,7 +24,7 @@
         },
         "SAP": {
             "HANA": {
-                "Cluster": {
+                "Your Company Server Group Name": {
                     "Development" : {
                         "Default": {
                             "Name": "Your Full Name Here",
