@@ -118,10 +118,11 @@ class TableauHyperApiExtraLogic:
         # Cycle through all found columns
         for current_field in detected_fields_type:
             fld_nm = current_field['name']
-            logger.debug(f'Column {fld_nm} has panda_type = '
-                         + str(current_field['panda_type'])
+            logger.debug(f'Column {fld_nm} has panda_type = ' + str(current_field['panda_type'])
                          + ' and python type = ' + str(current_field['type']))
-            if current_field['panda_type'] == 'float64' and current_field['type'] == 'int':
+            if current_field['type'] == 'str':
+                input_df[fld_nm] = input_df[fld_nm].astype(str)
+            elif current_field['panda_type'] == 'float64' and current_field['type'] == 'int':
                 input_df[fld_nm] = input_df[fld_nm].fillna(0).astype('int64')
             elif current_field['type'][0:5] in ('date-', 'datet', 'time-'):
                 input_df[fld_nm] = self.fn_string_to_date(fld_nm, input_df)
