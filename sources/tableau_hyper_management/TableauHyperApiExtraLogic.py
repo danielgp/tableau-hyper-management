@@ -120,15 +120,20 @@ class TableauHyperApiExtraLogic:
             fld_nm = current_field['name']
             logger.debug(f'Column {fld_nm} has panda_type = ' + str(current_field['panda_type'])
                          + ' and python type = ' + str(current_field['type']))
-            if current_field['type'] == 'str':
-                input_df[fld_nm] = input_df[fld_nm].astype(str)
-            elif current_field['panda_type'] == 'float64' and current_field['type'] == 'int':
-                input_df[fld_nm] = input_df[fld_nm].fillna(0).astype('int64')
-            elif current_field['type'][0:5] in ('date-', 'datet', 'time-'):
-                input_df[fld_nm] = self.fn_string_to_date(fld_nm, input_df)
+            input_df[fld_nm] = self.reevaluate_single_column(input_df, fld_nm, current_field)
         logger.info('Re-building CSV content for maximum Hyper compatibility has been completed')
         timmer.stop()
         return input_df.values
+
+    def reevaluate_single_column(self, given_df, given_field_name, current_field_details):
+        if current_field_details['type'] == 'str':
+            given_df[given_field_name] = given_df[given_field_name].astype(str)
+        elif current_field_details['panda_type'] == 'float64' \
+                and current_field_details['type'] == 'int':
+            given_df[given_field_name] = given_df[given_field_name].fillna(0).astype('int64')
+        elif current_field_details['type'][0:5] in ('date-', 'datet', 'time-'):
+            given_df[given_field_name] = self.fn_string_to_date(given_field_name, given_df)
+        return given_df[given_field_name]
 
     def fn_run_hyper_creation(self, local_logger, timmer, input_data_frame, input_data_type,
                               given_parameters):

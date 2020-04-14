@@ -120,9 +120,8 @@ class BasicNeeds:
     def fn_store_file_statistics(self, local_logger, timmer, file_name, file_meaning):
         timmer.start()
         file_name_variable_type = str(type(file_name))
-        if file_name_variable_type == "<class 'str'>":
-            list_file_names = [file_name]
-        elif file_name_variable_type == "<class 'list'>":
+        list_file_names = [file_name]
+        if file_name_variable_type == "<class 'list'>":
             list_file_names = file_name
         for current_file_name in list_file_names:
             local_logger.info(file_meaning + ' file "' + current_file_name

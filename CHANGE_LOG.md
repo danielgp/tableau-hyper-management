@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.3.1 release on 2020-04-14
+- minor code optimization to break a complex method to multiple smaller pieces;
+
 ## Version 1.3.0 release on 2020-04-14
 - implemented ability to use file pattern to get multiple files as input files instead of just single (very useful in case of multiple small files, which eliminates the need to merge them first);
 - multi-line logging message improved;
