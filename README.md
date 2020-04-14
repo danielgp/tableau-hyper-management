@@ -10,7 +10,7 @@ Even better since 1st of April 2020 (not a joke) a publishing script allows to t
 
 ## Who do I talk to?
 
-Repository owner is: [Daniel Popiniuc](mailto:daniel.popiniuc@honeywell.com)
+Repository owner is: [Daniel Popiniuc](mailto:danielpopiniuc@gmail.com)
 
 
 ## Installation
@@ -26,8 +26,8 @@ Installation can be completed in few steps as follows:
 ```
     $ git clone https://github.com/danielgp/tableau-hyper-management <local_folder_on_your_computer>
 ```
-- conventions used:
-    - <content_within_html_tags> = variables to be replaced with user values relevant strings
+> conventions used:
+>> <content_within_html_tags> = variables to be replaced with user values relevant strings
 * Create a Python Virtual Environment using following command executed from project root folder:
 ```
     $ python -m venv virtual_environment/
