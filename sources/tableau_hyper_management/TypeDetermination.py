@@ -7,9 +7,15 @@ This library allows data type determination based on data frame content
 import re
 # package to handle numerical structures
 import numpy as np
+# package to facilitate common operations
+from tableau_hyper_management.BasicNeeds import BasicNeeds
 
 
 class TypeDetermination:
+    lcl_bn = None
+
+    def __init__(self):
+        self.lcl_bn = BasicNeeds()
 
     def fn_analyze_field_content_to_establish_data_type(self, logger, field_characteristics,
                                                         data_types):
@@ -49,7 +55,7 @@ class TypeDetermination:
                              + field_characteristics['name'] + f'] has the value <{current_value}> '
                              + f'which means is of type "{crt_field_type}" '
                              + 'and this is stronger than previously thought '
-                             + 'to be as "' + field_structure['type'] + '}"')
+                             + 'to be as "' + field_structure['type'] + '"')
                 field_structure['type'] = crt_field_type
                 field_structure['type_index'] = crt_type_index
             # If currently determined field type is string makes not sense to scan any further
@@ -71,7 +77,7 @@ class TypeDetermination:
                 list_unique_values = self.fn_unique_values_isolation(logger, label, content,
                                                                      panda_determined_type,
                                                                      input_parameters)
-                preliminary_list = {
+                unique_v_list = {
                     'order': col_idx,
                     'name': label,
                     'nulls': counted_nulls,
@@ -79,11 +85,11 @@ class TypeDetermination:
                     'unique_values': list_unique_values
                 }
                 logger.debug('parameters used for further data analysis are: '
-                             + str(preliminary_list).replace(chr(10), ''))
+                             + self.lcl_bn.fn_multi_line_string_to_single_line(str(unique_v_list)))
                 csv_structure.append(col_idx)
                 csv_structure[col_idx] = self. \
                     fn_analyze_field_content_to_establish_data_type(logger,
-                                                                    preliminary_list,
+                                                                    unique_v_list,
                                                                     data_types)
             elif panda_determined_type in ('bool', 'int64'):
                 csv_structure.append(col_idx)
@@ -109,16 +115,16 @@ class TypeDetermination:
                     return current_data_type
             return 'str'
 
-    @staticmethod
-    def fn_unique_values_isolation(logger, label, content, panda_determined_type, in_prmtrs):
+    def fn_unique_values_isolation(self, logger, label, content, panda_determined_type, in_prmtrs):
         counted_values_not_null = content.notnull().sum()
         counted_values_unique = content.nunique()
         content = content.dropna()
         if panda_determined_type == 'float64':
             content = content.apply(lambda x: x if (int(x) != x) else int(x))
         list_unique_values = content.unique()[0:int(in_prmtrs.unique_values_to_analyze_limit)]
-        compact_unique_values = '>, <'.join(np.array(list_unique_values, dtype=str)) \
-            .replace('\n', ' ').replace('\r', '')
+        compact_unique_values = self. \
+            lcl_bn.fn_multi_line_string_to_single_line('>, <'.join(np.array(list_unique_values,
+                                                                            dtype=str)))
         logger.debug(f'additional characteristics for the field "{label}" are: ' +
                      f'count of not-null values: {counted_values_not_null}, ' +
                      f'count of unique values: {counted_values_unique}, ' +
