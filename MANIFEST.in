@@ -1,3 +1,4 @@
+include samples/*.json
 include sources/*.py
 include sources/tableau_hyper_management/*.py
 include sources/tableau_hyper_management/*.json
