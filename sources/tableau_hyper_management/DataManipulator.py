@@ -70,11 +70,10 @@ class DataManipulator:
         timmer.stop()
         return combined_csv
 
-    def fn_move_files(self, local_logger, timmer, source_folder, match_pattern, destination_folder):
-        csv_file_names = self.fn_build_relevant_file_list(local_logger, timmer,
-                                                          source_folder, match_pattern)
+    def fn_move_files(self, local_logger, timmer, source_folder, file_names, destination_folder):
         timmer.start()
-        for current_file in csv_file_names:
+        resulted_files = []
+        for current_file in file_names:
             new_file_name = current_file.replace(source_folder, destination_folder)
             if new_file_name.is_file():
                 os.replace(current_file, new_file_name)
@@ -84,7 +83,9 @@ class DataManipulator:
                 os.rename(current_file, new_file_name)
                 local_logger.info('File ' + current_file
                                   + ' has just been renamed as ' + new_file_name)
+            resulted_files.append(new_file_name)
         timmer.stop()
+        return resulted_files
 
     def fn_store_data_frame_to_file(self, local_logger, timmer, input_data_frame,
                                     destination_file_name, csv_delimiter):
