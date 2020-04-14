@@ -25,14 +25,13 @@ class BasicNeeds:
         self.fn_check_inputs_script_specific(input_parameters, input_script)
 
     def fn_check_inputs_script_specific(self, input_parameters, input_script):
-        # checking input file as the main point of whole logic revolves around it
-        self.fn_validate_single_value(input_parameters.input_file,
-                                      'file', 'input file')
         # checking script specific inputs
         if input_script == 'converter':
             self.fn_validate_single_value(os.path.dirname(input_parameters.output_file),
                                           'folder', 'output file')
         elif input_script == 'publish_data_source':
+            self.fn_validate_single_value(input_parameters.input_file,
+                                          'file', 'input file')
             self.fn_validate_single_value(input_parameters.input_credentials_file,
                                           'file', 'credentials file')
             self.fn_validate_single_value(input_parameters.tableau_server,
@@ -120,9 +119,15 @@ class BasicNeeds:
 
     def fn_store_file_statistics(self, local_logger, timmer, file_name, file_meaning):
         timmer.start()
-        local_logger.info(file_meaning + ' file "' + file_name
-                          + '" has the following characteristics: '
-                          + str(self.fn_get_file_statistics(file_name)))
+        file_name_variable_type = str(type(file_name))
+        if file_name_variable_type == "<class 'str'>":
+            list_file_names = [file_name]
+        elif file_name_variable_type == "<class 'list'>":
+            list_file_names = file_name
+        for current_file_name in list_file_names:
+            local_logger.info(file_meaning + ' file "' + current_file_name
+                              + '" has the following characteristics: '
+                              + str(self.fn_get_file_statistics(current_file_name)))
         timmer.stop()
 
     @staticmethod
