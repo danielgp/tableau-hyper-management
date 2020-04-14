@@ -58,7 +58,7 @@ Once the package is installed is quite important to keep up with latest releases
 
 ### Converting CSV file into Tableau Extract (Hyper format)
 ```
-    $ python <local_path_of_this_package>/converter.py --input-file <full_path_and_file_base_name_to_file_having_content_as_CSV>(.txt|.csv) --csv-field-separator ,|; --output-file <full_path_and_file_base_name_to_generated_file>(.hyper) (--output-log-file <full_path_and_file_name_to_log_running_details>) (--unique-values-to-analyze-limit 100|200=default_value_if_omitted|500|1000)
+    $ python <local_path_of_this_package>/converter.py --input-file <input_file_name__specific_or_with_pattern__having_content_as_CSV> --csv-field-separator ,|; --output-file <full_path_and_file_base_name_to_generated_file>(.hyper) (--output-log-file <full_path_and_file_name_to_log_running_details>) (--unique-values-to-analyze-limit 100|200=default_value_if_omitted|500|1000)
 ```
 - conventions used:
     - (content_within_round_parenthesis) = optional
@@ -78,6 +78,7 @@ Once the package is installed is quite important to keep up with latest releases
 
 ## Implemented features
 
+- conversion intake data from a single or multiple CSV files based on a single input parameter (can be specific or contain a file pattern);
 - dynamic fields detection based ont 1st line content and provided field separator (strategic advantage);
 - dynamic advanced content type detection covering following data types: integer, float-dot, date-iso8601, date-DMY-dash, date-DMY-dot, date-DMY-slash, date-MDY, date-MDY-medium, date-MDY-long, time-12, time-12-micro-sec, time-24, time-24-micro-sec, datetime-iso8601, datetime-iso8601-micro-sec, datetime-MDY, datetime-MDY-micro-sec, datetime-MDY-medium, datetime-MDY-medium-micro-sec, datetime-MDY-long, datetime-MDY-long-micro-sec, string;
 - support for empty field content for any data type (required re-interpreting CSV to be accepted by Hyper Inserter to ensure INT or DOUBLE data types are considered);
