@@ -30,7 +30,7 @@ if __name__ == '__main__':
     c_bn.fn_check_inputs(parameters_in, current_script_name)
     # get the secrets from provided file
     credentials = c_bn.fn_open_file_and_get_content(parameters_in.input_credentials_file, 'json')
-    credentials_dict = credentials['Credentials']['LDAP']['LDAP']['LDAP']['Production']['Default']
+    credentials_dict = credentials['Credentials']['LDAP']['Production']['Default']
     # instantiate Logger class
     c_ln = LoggingNeeds()
     # initiate logger

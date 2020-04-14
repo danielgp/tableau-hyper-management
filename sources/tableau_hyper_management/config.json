@@ -53,7 +53,7 @@
         "publisher": {
             "c": {
                 "default_value"         : "",
-                "option_description"    : "Configuration file with credentials file name is %s",
+                "option_description"    : "Configuration file name with credentials is %s",
                 "option_long"           : "input-credentials-file",
                 "option_required"       : true,
                 "option_sample_value"   : "input-credentials-file-name"

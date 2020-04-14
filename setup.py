@@ -29,9 +29,9 @@ else:
     url__tableau_hyper_api += '-py3-none-manylinux2014_x86_64.whl'
 
 setup(
-    author = 'Daniel Popiniuc',
-    author_email = 'danielpopiniuc@gmail.com',
-    classifiers = [
+    author='Daniel Popiniuc',
+    author_email='danielpopiniuc@gmail.com',
+    classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: Developers',
@@ -44,12 +44,12 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Topic :: Scientific/Engineering :: Information Analysis'
     ],
-    dependency_links = [
+    dependency_links=[
         url__tableau_hyper_api
     ],
-    description = 'Wrapper to ease data management into Tableau Hyper format from CSV files',
-    include_package_data = True,
-    install_requires = [
+    description='Wrapper to ease data management into Tableau Hyper format from CSV files',
+    include_package_data=True,
+    install_requires=[
         'cffi>=1.13.2,<2',
         'codetiming>=1.1,<=1.2',
         'numpy>=1.17.4,<=1.18.2',
@@ -57,28 +57,29 @@ setup(
         'tableauhyperapi==0.0.10309',
         'tableauserverclient==0.10'
     ],
-    keywords = [
+    keywords=[
         'tableau',
         'hyper',
         'csv'
     ],
-    license = 'LGPL3',
-    long_description = long_description_readme,
-    long_description_content_type = 'text/markdown',
-    name = 'tableau-hyper-management',
-    packages = find_packages('tableau_hyper_management'),
-    package_data = {
+    license='LGPL3',
+    long_description=long_description_readme,
+    long_description_content_type='text/markdown',
+    name='tableau-hyper-management',
+    packages=find_packages('tableau_hyper_management'),
+    package_data={
         'tableau_hyper_management': [
             '*.json',
             '*.md'
         ]
     },
-    project_urls = {
+    project_urls={
         'Documentation': this_package_website + '/blob/master/README.md',
-        'Issue Tracker': this_package_website + '/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc',
+        'Issue Tracker': this_package_website +
+                         '/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc',
         'Source Code': this_package_website
     },
-    python_requires = '>=3.6',
-    url = this_package_website + '/releases',  # project home page, if any
-    version = '1.2.18',
+    python_requires='>=3.6',
+    url=this_package_website + '/releases',  # project home page, if any
+    version='1.2.19',
 )
