@@ -3,10 +3,12 @@ Data Manipulation class
 """
 # package to facilitate operating system operations
 import os
-# package
+# package to facilitate os path manipulations
 import pathlib
 # package facilitating Data Frames manipulation
 import pandas as pd
+# package regular expressions
+import re
 
 
 class DataManipulator:
@@ -38,7 +40,22 @@ class DataManipulator:
         timmer.stop()
         return data_frame
 
-    def fn_build_relevant_file_list(self, local_logger, timmer, in_folder, matching_pattern):
+    def build_file_list(self, local_logger, timmer, given_input_file):
+        relevant_files_list = []
+        if re.search(r'(\*|\?)*', given_input_file):
+            local_logger.debug('Files pattern has been provided')
+            parent_directory = os.path.dirname(given_input_file)
+            # loading from a specific folder all files matching a given pattern into a file list
+            relevant_files_list = self.fn_build_relevant_file_list(local_logger, timmer,
+                                                                   parent_directory,
+                                                                   given_input_file)
+        else:
+            local_logger.debug('Specific file has been provided')
+            relevant_files_list = [given_input_file]
+        return relevant_files_list
+
+    @staticmethod
+    def fn_build_relevant_file_list(local_logger, timmer, in_folder, matching_pattern):
         timmer.start()
         local_logger.info('Will list all files within ' + in_folder
                           + ' folder looking for ' + matching_pattern + ' as matching pattern')
@@ -56,6 +73,20 @@ class DataManipulator:
         timmer.stop()
         return list_files
 
+    def fn_drop_certain_columns(self, local_logger, timmer, working_dictionary):
+        for current_file in working_dictionary['files']:
+            # load all relevant files into a single data frame
+            df = self.fn_load_file_list_to_data_frame(local_logger, timmer, [current_file],
+                                                      working_dictionary['csv_field_separator'])
+            save_necessary = False
+            for column_to_eliminate in working_dictionary['columns_to_eliminate']:
+                if column_to_eliminate in df:
+                    df.drop(columns = column_to_eliminate, inplace = True)
+                    save_necessary = True
+            if save_necessary:
+                self.fn_store_data_frame_to_file(local_logger, timmer, df, current_file,
+                                                 working_dictionary['csv_field_separator'])
+
     def fn_load_file_list_to_data_frame(self, local_logger, timmer, file_list, csv_delimiter):
         timmer.start()
         combined_csv = pd.concat([pd.read_csv(filepath_or_buffer = current_file,
@@ -70,7 +101,8 @@ class DataManipulator:
         timmer.stop()
         return combined_csv
 
-    def fn_move_files(self, local_logger, timmer, source_folder, file_names, destination_folder):
+    @staticmethod
+    def fn_move_files(local_logger, timmer, source_folder, file_names, destination_folder):
         timmer.start()
         resulted_files = []
         for current_file in file_names:
@@ -87,7 +119,8 @@ class DataManipulator:
         timmer.stop()
         return resulted_files
 
-    def fn_store_data_frame_to_file(self, local_logger, timmer, input_data_frame,
+    @staticmethod
+    def fn_store_data_frame_to_file(local_logger, timmer, input_data_frame,
                                     destination_file_name, csv_delimiter):
         timmer.start()
         input_data_frame.to_csv(path_or_buf = destination_file_name,
