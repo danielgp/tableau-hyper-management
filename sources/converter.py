@@ -5,12 +5,13 @@ This file is performing CSV read into HYPER file and measures time elapsed (perf
 """
 # standard Python packages
 import os.path
-# additional packages to be installed from PyPi
-import pandas as pd
+# package to manage regular expressions
+import re
 # Custom classes specific to this package
 from tableau_hyper_management.BasicNeeds import BasicNeeds
 from tableau_hyper_management.CommandLineArgumentsManagement import CommandLineArgumentsManagement
 from tableau_hyper_management.LoggingNeeds import LoggingNeeds
+from tableau_hyper_management.DataManipulator import DataManipulator
 from tableau_hyper_management.TableauHyperApiExtraLogic import TableauHyperApiExtraLogic
 from tableau_hyper_management.TypeDetermination import TypeDetermination
 # package to measure portions of code performance
@@ -41,21 +42,24 @@ if __name__ == '__main__':
     # reflect title and input parameters given values in the log
     c_clam.listing_parameter_values(c_ln.logger, t, 'Tableau Hyper Management',
                                     c_bn.cfg_dtls['input_options']['converter'], parameters_in)
-    # store statistics about input file
-    c_bn.fn_store_file_statistics(c_ln.logger, t, parameters_in.input_file, 'Input')
-    # intake given CSV file into a Pandas Data Frame
-    t.start()
-    csv_content_df = pd.read_csv(filepath_or_buffer=parameters_in.input_file,
-                                 delimiter=parameters_in.csv_field_separator,
-                                 cache_dates=True,
-                                 index_col=None,
-                                 memory_map=True,
-                                 low_memory=False,
-                                 encoding='utf-8',
-                                 )
-    c_ln.logger.info('Given CSV file ' + parameters_in.input_file
-                     + ' has been loaded into a Pandas Data Frame successfully')
-    t.stop()
+    # instantiate Data Manipulator class
+    c_dm = DataManipulator()
+    if re.search(r'(\*|\?)*', parameters_in.input_file):
+        c_ln.logger.debug('Files pattern has been provided')
+        parent_directory = os.path.dirname(parameters_in.input_file)
+        # loading from a specific folder all files matching a given pattern into a file list
+        relevant_files_list = c_dm.fn_build_relevant_file_list(c_ln.logger, t,
+                                                               parent_directory,
+                                                               parameters_in.input_file)
+    else:
+        c_ln.logger.debug('Specific file has been provided')
+        relevant_files_list = parameters_in.input_file
+    # log file statistic details
+    c_bn.fn_store_file_statistics(c_ln.logger, t, relevant_files_list, 'Input')
+    # loading from a specific folder all files matching a given pattern into a data frame
+    csv_content_df = c_dm.fn_load_file_list_to_data_frame(c_ln.logger, t,
+                                                          relevant_files_list,
+                                                          parameters_in.csv_field_separator)
     t.start()
     c_td = TypeDetermination()
     # advanced detection of data type within Data Frame
