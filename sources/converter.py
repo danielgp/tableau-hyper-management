@@ -3,12 +3,10 @@ main - entry point of the package
 
 This file is performing CSV read into HYPER file and measures time elapsed (performance)
 """
-# standard Python packages
-import os.path
 # package to manage regular expressions
 import re
 # Custom classes specific to this package
-from tableau_hyper_management.BasicNeedsForConverter import BasicNeeds, BasicNeedsForConverter
+from tableau_hyper_management.BasicNeedsForConverter import os, BasicNeeds, BasicNeedsForConverter
 from tableau_hyper_management.CommandLineArgumentsManagement import CommandLineArgumentsManagement
 from tableau_hyper_management.LoggingNeeds import LoggingNeeds
 from tableau_hyper_management.DataManipulator import DataManipulator

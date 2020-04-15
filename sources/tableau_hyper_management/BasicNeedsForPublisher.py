@@ -4,7 +4,7 @@ Class Publisher Specific Needs
 Handling specific needs for Publisher script
 """
 # package to facilitate common operations
-from tableau_hyper_management.BasicNeeds import BasicNeeds
+from tableau_hyper_management.BasicNeeds import os, BasicNeeds
 
 
 class BasicNeedsForPublisher:

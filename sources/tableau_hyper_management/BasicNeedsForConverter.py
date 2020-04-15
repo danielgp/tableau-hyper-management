@@ -3,10 +3,8 @@ Class Converter Specific Needs
 
 Handling specific needs for Extractor script
 """
-# package to handle files/folders and related metadata/operations
-import os.path
 # package to facilitate common operations
-from tableau_hyper_management.BasicNeeds import BasicNeeds
+from tableau_hyper_management.BasicNeeds import os, BasicNeeds
 
 
 class BasicNeedsForConverter:

@@ -10,7 +10,7 @@ import hashlib
 # package to handle json files
 import json
 # package to handle files/folders and related metadata/operations
-import os.path
+import os
 # package regular expressions
 import re
 
