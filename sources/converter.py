@@ -8,7 +8,7 @@ import os.path
 # package to manage regular expressions
 import re
 # Custom classes specific to this package
-from tableau_hyper_management.BasicNeeds import BasicNeeds
+from tableau_hyper_management.BasicNeedsForConverter import BasicNeeds, BasicNeedsForConverter
 from tableau_hyper_management.CommandLineArgumentsManagement import CommandLineArgumentsManagement
 from tableau_hyper_management.LoggingNeeds import LoggingNeeds
 from tableau_hyper_management.DataManipulator import DataManipulator
@@ -33,6 +33,10 @@ if __name__ == '__main__':
     parameters_in = c_clam.parse_arguments(c_bn.cfg_dtls['input_options']['converter'])
     # checking inputs, if anything is invalid an exit(1) will take place
     c_bn.fn_check_inputs(parameters_in, current_script_name)
+    # instantiate Extractor Specific Needs class
+    c_bnfc = BasicNeedsForConverter()
+    # checking inputs, if anything is invalid an exit(1) will take place
+    c_bnfc.fn_check_inputs_specific(parameters_in)
     # instantiate Logger class
     c_ln = LoggingNeeds()
     # initiate logger

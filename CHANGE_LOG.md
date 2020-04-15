@@ -1,5 +1,11 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.3.3 release on 2020-04-15
+- specific needs validation details moved to dedicated class files;
+
+## Version 1.3.2 release on 2020-04-14
+- sample user setting file (JSON format) moved to dedicated folder;
+
 ## Version 1.3.1 release on 2020-04-14
 - minor code optimization to break a complex method to multiple smaller pieces;
 

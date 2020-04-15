@@ -19,23 +19,10 @@ class BasicNeeds:
     cfg_dtls = {}
 
     def fn_check_inputs(self, input_parameters, input_script):
-        # checking log folder first as there's all further messages will be stored
-        self.fn_validate_single_value(os.path.dirname(input_parameters.output_log_file),
-                                      'folder', 'log file')
-        self.fn_check_inputs_script_specific(input_parameters, input_script)
-
-    def fn_check_inputs_script_specific(self, input_parameters, input_script):
-        # checking script specific inputs
-        if input_script == 'converter':
-            self.fn_validate_single_value(os.path.dirname(input_parameters.output_file),
-                                          'folder', 'output file')
-        elif input_script == 'publish_data_source':
-            self.fn_validate_single_value(input_parameters.input_file,
-                                          'file', 'input file')
-            self.fn_validate_single_value(input_parameters.input_credentials_file,
-                                          'file', 'credentials file')
-            self.fn_validate_single_value(input_parameters.tableau_server,
-                                          'url', 'Tableau Server URL')
+        if input_parameters.output_log_file is not None:
+            # checking log folder first as there's all further messages will be stored
+            self.fn_validate_single_value(os.path.dirname(input_parameters.output_log_file),
+                                          'folder', 'log file')
 
     def fn_final_message(self, local_logger, log_file_name, performance_in_seconds):
         total_time_string = str(timedelta(seconds=performance_in_seconds))
