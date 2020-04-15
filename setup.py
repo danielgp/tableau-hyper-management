@@ -68,9 +68,11 @@ setup(
     name='tableau-hyper-management',
     packages=find_packages('tableau_hyper_management'),
     package_data={
+        'samples': [
+            '*.json'
+        ],
         'tableau_hyper_management': [
-            '*.json',
-            '*.md'
+            '*.json'
         ]
     },
     project_urls={
@@ -81,5 +83,5 @@ setup(
     },
     python_requires='>=3.6',
     url=this_package_website + '/releases',  # project home page, if any
-    version='1.3.3',
+    version='1.3.4',
 )

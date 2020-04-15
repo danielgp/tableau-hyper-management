@@ -16,5 +16,5 @@ class BasicNeedsForConverter:
         self.lcl_bn = BasicNeeds()
 
     def fn_check_inputs_specific(self, input_parameters):
-        self.fn_validate_single_value(os.path.dirname(input_parameters.output_file),
-                                      'folder', 'output file')
+        self.lcl_bn.fn_validate_single_value(os.path.dirname(input_parameters.output_file),
+                                             'folder', 'output file')

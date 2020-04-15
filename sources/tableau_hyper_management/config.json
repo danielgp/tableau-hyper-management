@@ -21,6 +21,13 @@
                 "option_required"       : true,
                 "option_sample_value"   : "input-file-name"
             },
+            "s": {
+                "default_value"         : ",",
+                "option_description"    : "CSV file separator is %s",
+                "option_long"           : "csv-field-separator",
+                "option_required"       : false,
+                "option_sample_value"   : "csv-field-separator-character"
+            },
             "o": {
                 "default_value"         : "",
                 "option_description"    : "Output file name %s",
@@ -41,13 +48,6 @@
                 "option_long"           : "unique-values-to-analyze-limit",
                 "option_required"       : false,
                 "option_sample_value"   : "100|200 = default value|300|500|1000"
-            },
-            "s": {
-                "default_value"         : ",",
-                "option_description"    : "CSV file separator is %s",
-                "option_long"           : "csv-field-separator",
-                "option_required"       : false,
-                "option_sample_value"   : "csv-field-separator-character"
             }
         },
         "publisher": {

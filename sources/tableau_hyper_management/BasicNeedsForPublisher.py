@@ -14,9 +14,9 @@ class BasicNeedsForPublisher:
         self.lcl_bn = BasicNeeds()
 
     def fn_check_inputs_specific(self, input_parameters):
-        self.fn_validate_single_value(input_parameters.input_file,
-                                      'file', 'input file')
-        self.fn_validate_single_value(input_parameters.input_credentials_file,
-                                      'file', 'credentials file')
-        self.fn_validate_single_value(input_parameters.tableau_server,
-                                      'url', 'Tableau Server URL')
+        self.lcl_bn .fn_validate_single_value(input_parameters.input_file,
+                                              'file', 'input file')
+        self.lcl_bn .fn_validate_single_value(input_parameters.input_credentials_file,
+                                              'file', 'credentials file')
+        self.lcl_bn .fn_validate_single_value(input_parameters.tableau_server,
+                                              'url', 'Tableau Server URL')
