@@ -53,7 +53,7 @@ if __name__ == '__main__':
                                                                parameters_in.input_file)
     else:
         c_ln.logger.debug('Specific file has been provided')
-        relevant_files_list = parameters_in.input_file
+        relevant_files_list = [parameters_in.input_file]
     # log file statistic details
     c_bn.fn_store_file_statistics(c_ln.logger, t, relevant_files_list, 'Input')
     # loading from a specific folder all files matching a given pattern into a data frame
