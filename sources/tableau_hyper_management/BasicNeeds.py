@@ -4,7 +4,7 @@ BasicNeeds - useful functions library
 This library has functions useful to keep main logic short and simple
 """
 # package to handle date and times
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 # package to use for checksum calculations (in this file)
 import hashlib
 # package to handle json files
@@ -18,7 +18,7 @@ import re
 class BasicNeeds:
     cfg_dtls = {}
 
-    def fn_check_inputs(self, input_parameters, input_script):
+    def fn_check_inputs(self, input_parameters):
         if input_parameters.output_log_file is not None:
             # checking log folder first as there's all further messages will be stored
             self.fn_validate_single_value(os.path.dirname(input_parameters.output_log_file),
@@ -56,20 +56,19 @@ class BasicNeeds:
     @staticmethod
     def fn_get_file_statistics(file_to_evaluate):
         try:
-            file_sha512 = hashlib.sha512(open(file=file_to_evaluate, mode='r', encoding='utf-8')\
+            file_sha512 = hashlib.sha512(open(file=file_to_evaluate, mode='r', encoding='utf-8')
                                          .read().encode()).hexdigest()
         except UnicodeDecodeError:
-            file_sha512 = hashlib.sha512(open(file=file_to_evaluate, mode='r', encoding='mbcs')\
+            file_sha512 = hashlib.sha512(open(file=file_to_evaluate, mode='r', encoding='mbcs')
                                          .read().encode()).hexdigest()
         file_dates = {
-            'created': os.path.getctime(file_to_evaluate),
-            'modified': os.path.getctime(file_to_evaluate),
+            'created': datetime.fromtimestamp(os.path.getctime(file_to_evaluate)),
+            'modified': datetime.fromtimestamp(os.path.getctime(file_to_evaluate)),
         }
         file_info = {
-            'date when created': date.strftime(datetime.fromtimestamp(file_dates['created']),
-                                               '%Y-%m-%d %H:%M:%S.%f'),
-            'date when last modified': date.strftime(datetime.fromtimestamp(file_dates['modified']),
-                                                     '%Y-%m-%d %H:%M:%S.%f'),
+            'date when created': datetime.strftime(file_dates['created'], '%Y-%m-%d %H:%M:%S.%f'),
+            'date when last modified': datetime.strftime(file_dates['modified'],
+                                                         '%Y-%m-%d %H:%M:%S.%f'),
             'size [bytes]': os.path.getsize(file_to_evaluate),
             'SHA512-Checksum': file_sha512,
         }
