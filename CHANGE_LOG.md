@@ -1,6 +1,9 @@
 # Change Log for Tableau Hyper Management package
 
 ## Version 1.3.4 release on 2020-04-16
+- internal code optimizations;
+
+## Version 1.3.4 release on 2020-04-16
 - properly chain script specific class and common (BasicNeeds);
 
 ## Version 1.3.3 release on 2020-04-15
