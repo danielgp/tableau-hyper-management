@@ -25,7 +25,7 @@ if __name__ == '__main__':
     c_clam = CommandLineArgumentsManagement()
     parameters_in = c_clam.parse_arguments(c_bn.cfg_dtls['input_options']['publisher'])
     # checking inputs, if anything is invalid an exit(1) will take place
-    c_bn.fn_check_inputs(parameters_in, current_script_name)
+    c_bn.fn_check_inputs(parameters_in)
     # instantiate Extractor Specific Needs class
     c_bnfp = BasicNeedsForPublisher()
     # checking inputs, if anything is invalid an exit(1) will take place
