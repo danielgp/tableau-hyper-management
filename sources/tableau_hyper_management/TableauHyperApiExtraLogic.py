@@ -144,13 +144,12 @@ class TableauHyperApiExtraLogic:
             local_logger.error(str(ex).replace(chr(10), ' '))
             exit(1)
 
-    def fn_string_to_date(self, column_name, input_data_frame):
-        if re.match('-YMD', column_name):
-            input_data_frame[column_name] = pd.to_datetime(input_data_frame[column_name],
-                                                           yearfirst=True)
-        elif re.match('-DMY', column_name):
-            input_data_frame[column_name] = pd.to_datetime(input_data_frame[column_name],
-                                                           dayfirst=True)
+    @staticmethod
+    def fn_string_to_date(in_col_name, in_data_frame):
+        if re.match('-YMD', in_col_name):
+            in_data_frame[in_col_name] = pd.to_datetime(in_data_frame[in_col_name], yearfirst=True)
+        elif re.match('-DMY', in_col_name):
+            in_data_frame[in_col_name] = pd.to_datetime(in_data_frame[in_col_name], dayfirst=True)
         else:
-            input_data_frame[column_name] = pd.to_datetime(input_data_frame[column_name])
-        return input_data_frame[column_name]
+            in_data_frame[in_col_name] = pd.to_datetime(in_data_frame[in_col_name])
+        return in_data_frame[in_col_name]
