@@ -3,6 +3,8 @@ main - entry point of the package
 
 This file is performing CSV read into HYPER file and measures time elapsed (performance)
 """
+# package to measure portions of code performance
+from codetiming import Timer
 # package to manage regular expressions
 import re
 # Custom classes specific to this package
@@ -12,8 +14,6 @@ from tableau_hyper_management.LoggingNeeds import LoggingNeeds
 from tableau_hyper_management.DataManipulator import DataManipulator
 from tableau_hyper_management.TableauHyperApiExtraLogic import TableauHyperApiExtraLogic
 from tableau_hyper_management.TypeDetermination import TypeDetermination
-# package to measure portions of code performance
-from codetiming import Timer
 
 # get current script name
 current_script_name = os.path.basename(__file__).replace('.py', '')
@@ -28,9 +28,9 @@ if __name__ == '__main__':
     c_bn.cfg_dtls['data_types']['str'] = ''
     # instantiate Command Line Arguments class
     c_clam = CommandLineArgumentsManagement()
-    parameters_in = c_clam.parse_arguments(c_bn.cfg_dtls['input_options']['converter'])
+    parameters_in = c_clam.parse_arguments(c_bn.cfg_dtls['input_options'][current_script_name])
     # checking inputs, if anything is invalid an exit(1) will take place
-    c_bn.fn_check_inputs(parameters_in, current_script_name)
+    c_bn.fn_check_inputs(parameters_in)
     # instantiate Extractor Specific Needs class
     c_bnfc = BasicNeedsForConverter()
     # checking inputs, if anything is invalid an exit(1) will take place
@@ -38,12 +38,14 @@ if __name__ == '__main__':
     # instantiate Logger class
     c_ln = LoggingNeeds()
     # initiate logger
-    c_ln.initiate_logger(parameters_in.output_log_file, 'thm_converter')
+    c_ln.initiate_logger(parameters_in.output_log_file, 'thm_' + current_script_name)
     # define global timer to use
-    t = Timer('thm_converter', text='Time spent is {seconds} ', logger=c_ln.logger.debug)
+    t = Timer('thm_' + current_script_name, text='Time spent is {seconds} ',
+              logger=c_ln.logger.debug)
     # reflect title and input parameters given values in the log
     c_clam.listing_parameter_values(c_ln.logger, t, 'Tableau Hyper Management',
-                                    c_bn.cfg_dtls['input_options']['converter'], parameters_in)
+                                    c_bn.cfg_dtls['input_options'][current_script_name],
+                                    parameters_in)
     # instantiate Data Manipulator class
     c_dm = DataManipulator()
     if re.search(r'(\*|\?)*', parameters_in.input_file):
@@ -78,4 +80,4 @@ if __name__ == '__main__':
     c_bn.fn_store_file_statistics(c_ln.logger, t, parameters_in.output_log_file, 'Generated')
     # just final message
     c_bn.fn_final_message(c_ln.logger, parameters_in.output_log_file,
-                          t.timers.total('thm_converter'))
+                          t.timers.total('thm_' + current_script_name))

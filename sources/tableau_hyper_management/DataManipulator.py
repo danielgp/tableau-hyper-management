@@ -13,7 +13,8 @@ import re
 
 class DataManipulator:
 
-    def fn_apply_query_to_data_frame(self, local_logger, timmer, data_frame, extract_params):
+    @staticmethod
+    def fn_apply_query_to_data_frame(local_logger, timmer, data_frame, extract_params):
         timmer.start()
         query_expression = ''
         if extract_params['filter_to_apply'] == 'equal':
@@ -41,7 +42,6 @@ class DataManipulator:
         return data_frame
 
     def build_file_list(self, local_logger, timmer, given_input_file):
-        relevant_files_list = []
         if re.search(r'(\*|\?)*', given_input_file):
             local_logger.debug('Files pattern has been provided')
             parent_directory = os.path.dirname(given_input_file)
@@ -87,7 +87,8 @@ class DataManipulator:
                 self.fn_store_data_frame_to_file(local_logger, timmer, df, current_file,
                                                  working_dictionary['csv_field_separator'])
 
-    def fn_load_file_list_to_data_frame(self, local_logger, timmer, file_list, csv_delimiter):
+    @staticmethod
+    def fn_load_file_list_to_data_frame(local_logger, timmer, file_list, csv_delimiter):
         timmer.start()
         combined_csv = pd.concat([pd.read_csv(filepath_or_buffer = current_file,
                                               delimiter = csv_delimiter,

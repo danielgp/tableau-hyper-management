@@ -56,23 +56,21 @@ class BasicNeeds:
     @staticmethod
     def fn_get_file_statistics(file_to_evaluate):
         try:
-            file_sha512 = hashlib.sha512(open(file=file_to_evaluate, mode='r', encoding='utf-8')
-                                         .read().encode()).hexdigest()
+            file_content = open(file=file_to_evaluate, mode='r', encoding='utf-8').read().encode()
         except UnicodeDecodeError:
-            file_sha512 = hashlib.sha512(open(file=file_to_evaluate, mode='r', encoding='mbcs')
-                                         .read().encode()).hexdigest()
-        file_dates = {
+            file_content = open(file=file_to_evaluate, mode='r', encoding='mbcs').read().encode()
+        file_sha512 = hashlib.sha512(file_content).hexdigest()
+        file_content = None
+        f_dts = {
             'created': datetime.fromtimestamp(os.path.getctime(file_to_evaluate)),
             'modified': datetime.fromtimestamp(os.path.getctime(file_to_evaluate)),
         }
-        file_info = {
-            'date when created': datetime.strftime(file_dates['created'], '%Y-%m-%d %H:%M:%S.%f'),
-            'date when last modified': datetime.strftime(file_dates['modified'],
-                                                         '%Y-%m-%d %H:%M:%S.%f'),
+        return {
+            'date when created': datetime.strftime(f_dts['created'], '%Y-%m-%d %H:%M:%S.%f'),
+            'date when last modified': datetime.strftime(f_dts['modified'], '%Y-%m-%d %H:%M:%S.%f'),
             'size [bytes]': os.path.getsize(file_to_evaluate),
             'SHA512-Checksum': file_sha512,
         }
-        return file_info
 
     def fn_load_configuration(self):
         relevant_file = os.path.join(os.path.dirname(__file__), 'config.json')
@@ -117,8 +115,7 @@ class BasicNeeds:
 
     @staticmethod
     def fn_timestamped_print(string_to_print):
-        print(datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S.%f %Z")
-              + ' - ' + string_to_print)
+        print(datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S.%f %Z") + ' - ' + string_to_print)
 
     @staticmethod
     def fn_validate_one_value(value_to_validate, validation_type, name_meaning):
