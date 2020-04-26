@@ -3,12 +3,10 @@ TypeDetermination - a data type determination library
 
 This library allows data type determination based on data frame content
 """
-# standard Python packages
+# regular expression package
 import re
-# additional Python packages available from PyPi
+# package to handle numerical structures
 import numpy as np
-# Custom class specific to this package
-from tableau_hyper_management.BasicNeeds import BasicNeeds
 
 
 class TypeDetermination:
@@ -23,11 +21,11 @@ class TypeDetermination:
             crt_field_type = 'str'
         # write aside the determined value
         field_dict = {
-            'order'     : field_characteristics['order'],
-            'name'      : field_characteristics['name'],
-            'nulls'     : field_characteristics['nulls'],
+            'order': field_characteristics['order'],
+            'name': field_characteristics['name'],
+            'nulls': field_characteristics['nulls'],
             'panda_type': field_characteristics['panda_type'],
-            'type'      : crt_field_type,
+            'type': crt_field_type,
             'type_index': list(data_types.keys()).index(crt_field_type)
         }
         logger.debug('Column ' + str(field_characteristics['order'])
@@ -74,27 +72,27 @@ class TypeDetermination:
                                                                      panda_determined_type,
                                                                      input_parameters)
                 preliminary_list = {
-                    'order':            col_idx,
-                    'name':             label,
-                    'nulls':            counted_nulls,
-                    'panda_type':       panda_determined_type,
-                    'unique_values':    list_unique_values
+                    'order': col_idx,
+                    'name': label,
+                    'nulls': counted_nulls,
+                    'panda_type': panda_determined_type,
+                    'unique_values': list_unique_values
                 }
                 logger.debug('parameters used for further data analysis are: '
                              + str(preliminary_list).replace(chr(10), ''))
                 csv_structure.append(col_idx)
-                csv_structure[col_idx] = self.\
+                csv_structure[col_idx] = self. \
                     fn_analyze_field_content_to_establish_data_type(logger,
                                                                     preliminary_list,
                                                                     data_types)
             elif panda_determined_type in ('bool', 'int64'):
                 csv_structure.append(col_idx)
                 csv_structure[col_idx] = {
-                    'order':        col_idx,
-                    'name':         label,
-                    'nulls':        counted_nulls,
-                    'panda_type':   panda_determined_type,
-                    'type':         str(panda_determined_type).replace('64', ''),
+                    'order': col_idx,
+                    'name': label,
+                    'nulls': counted_nulls,
+                    'panda_type': panda_determined_type,
+                    'type': str(panda_determined_type).replace('64', ''),
                 }
             col_idx += 1
         return csv_structure
@@ -119,7 +117,7 @@ class TypeDetermination:
         if panda_determined_type == 'float64':
             content = content.apply(lambda x: x if (int(x) != x) else int(x))
         list_unique_values = content.unique()[0:int(in_prmtrs.unique_values_to_analyze_limit)]
-        compact_unique_values = '>, <'.join(np.array(list_unique_values, dtype=str))\
+        compact_unique_values = '>, <'.join(np.array(list_unique_values, dtype=str)) \
             .replace('\n', ' ').replace('\r', '')
         logger.debug(f'additional characteristics for the field "{label}" are: ' +
                      f'count of not-null values: {counted_values_not_null}, ' +
