@@ -6,21 +6,30 @@ to call the main package functions
 """
 # package to handle arguments from command line
 import argparse
+# package to add support for multi-language (i18n)
+import gettext
+# package to facilitate operating system operations
+import os
 
 
 class CommandLineArgumentsManagement:
+    locale = None
 
-    @staticmethod
-    def listing_parameter_values(local_logger, timmer, title, configuration_details,
-                                 given_parameter_values):
-        timmer.start()
-        local_logger.info('='*50)
-        local_logger.info(title + ' has started')
-        local_logger.info('~' * 50)
-        local_logger.info('Overview of input parameter given values')
-        local_logger.info('~' * 50)
+    def __init__(self, default_language='en_US'):
+        current_script = os.path.basename(__file__).replace('.py', '')
+        lang_folder = os.path.join(os.path.dirname(__file__), current_script + '_Locale')
+        self.locale = gettext.translation(current_script, lang_folder, languages=[default_language])
+
+    def listing_parameter_values(self, in_logger, timer, title, in_config, given_parameter_values):
+        timer.start()
+        in_logger.info('=' * 50)
+        in_logger.info(self.locale.gettext('{application_name} has started')
+                       .replace('{application_name}', title))
+        in_logger.info('~' * 50)
+        in_logger.info(self.locale.gettext('Overview of input parameter given values'))
+        in_logger.info('~' * 50)
         parameter_values_dictionary = given_parameter_values.__dict__
-        for input_key, attributes in configuration_details.items():
+        for input_key, attributes in in_config.items():
             # checking first if short key was provided, otherwise consider longer
             if input_key in parameter_values_dictionary:
                 key_value_to_consider = input_key
@@ -30,11 +39,12 @@ class CommandLineArgumentsManagement:
             value_to_consider = parameter_values_dictionary[key_value_to_consider]
             # we build the parameter feedback considering "option_description"
             # and replacing %s with parameter value
-            feedback = attributes['option_description'] % value_to_consider
+            feedback = self.locale.gettext(attributes['option_description']) \
+                .replace('%s', str(value_to_consider))
             # we finally write the feedback to logger
-            local_logger.info(feedback)
-        local_logger.info('~' * 50)
-        timmer.stop()
+            in_logger.info(feedback)
+        in_logger.info('~' * 50)
+        timer.stop()
 
     def parse_arguments(self, configuration_details):
         parser = argparse.ArgumentParser()

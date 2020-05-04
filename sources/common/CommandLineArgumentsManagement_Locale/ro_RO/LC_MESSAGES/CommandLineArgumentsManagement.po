@@ -1,0 +1,66 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the CommandLineArgumentsManagement package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CommandLineArgumentsManagement\n"
+"POT-Creation-Date: 2020-04-25 13:20+0200\n"
+"PO-Revision-Date: 2020-04-26 02:17+0300\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+
+msgid "{application_name} has started"
+msgstr "{application_name} a început"
+
+msgid "CSV field separator is %s"
+msgstr "Separatorul de câmp CSV este %s"
+
+msgid "Columns to eliminate JSON expression is %s"
+msgstr "Coloanele pentru a elimina expresia JSON este %s"
+
+msgid "Configuration file name with credentials is %s"
+msgstr "Numele fișierului de configurare cu datele de acreditare este %s"
+
+msgid "Configuration file name with extracting sequence(es) is %s"
+msgstr "Numele fișierului de configurare cu secvența (secvențele) de extragere este %s"
+
+msgid "Configuration file name with source systems is %s"
+msgstr "Numele fișierului de configurare cu sistemele sursă este %s"
+
+msgid "Filter expression is %s"
+msgstr "Expresia filtrului este %s"
+
+msgid "Input file name (simple or with matching pattern) is %s"
+msgstr "Numele fișierului de intrare (simplu sau cu model de potrivire) este %s"
+
+msgid "Output directory is %s"
+msgstr "Directorul de ieșire este %s"
+
+msgid "Output file name %s"
+msgstr "Numele fișierului de ieșire %s"
+
+msgid "Output log file name is %s"
+msgstr "Numele fișierului jurnal de ieșire este %s"
+
+msgid "Overview of input parameter given values"
+msgstr "Prezentare generală a valorilor date de parametrii de intrare"
+
+msgid "Publishing mode is %s"
+msgstr "Modul de publicare este %s"
+
+msgid "Tableau Project is %s"
+msgstr "Proiectul Tableau este %s"
+
+msgid "Tableau Server to consider is %s"
+msgstr "Serverul Tableau de luat în considerare este %s"
+
+msgid "Tableau Site is %s"
+msgstr "Site-ul Tableau este %s"
+
+msgid "Unique values to analyze is limited to %s"
+msgstr "Valorile unice de analizat sunt limitate la %s"

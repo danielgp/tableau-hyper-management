@@ -1,0 +1,66 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the CommandLineArgumentsManagement package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CommandLineArgumentsManagement\n"
+"POT-Creation-Date: 2020-04-25 13:20+0200\n"
+"PO-Revision-Date: 2020-04-26 02:17+0300\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "{application_name} has started"
+msgstr "{application_name} è iniziato"
+
+msgid "CSV field separator is %s"
+msgstr "Il separatore di campo CSV è %s"
+
+msgid "Columns to eliminate JSON expression is %s"
+msgstr "Colonne per eliminare l'espressione JSON è %s"
+
+msgid "Configuration file name with credentials is %s"
+msgstr "Il nome del file di configurazione con le credenziali è %s"
+
+msgid "Configuration file name with extracting sequence(es) is %s"
+msgstr "Il nome del file di configurazione con sequenza di estrazione è %s"
+
+msgid "Configuration file name with source systems is %s"
+msgstr "Il nome del file di configurazione con i sistemi sorgente è %s"
+
+msgid "Filter expression is %s"
+msgstr "L'espressione del filtro è %s"
+
+msgid "Input file name (simple or with matching pattern) is %s"
+msgstr "Il nome del file di input (semplice o con modello corrispondente) è %s"
+
+msgid "Output directory is %s"
+msgstr "La directory di uscita è %s"
+
+msgid "Output file name %s"
+msgstr "Nome del file di uscita %s"
+
+msgid "Output log file name is %s"
+msgstr "Il nome del file di log in uscita è %s"
+
+msgid "Overview of input parameter given values"
+msgstr "Panoramica dei valori dei parametri di ingresso dati"
+
+msgid "Publishing mode is %s"
+msgstr "La modalità di pubblicazione è %s"
+
+msgid "Tableau Project is %s"
+msgstr "Il Progetto Tableau è %s"
+
+msgid "Tableau Server to consider is %s"
+msgstr "Il Server Tableau da considerare è %s"
+
+msgid "Tableau Site is %s"
+msgstr "Il Sito Tableau è %s"
+
+msgid "Unique values to analyze is limited to %s"
+msgstr "I valori unici da analizzare sono limitati a %s"

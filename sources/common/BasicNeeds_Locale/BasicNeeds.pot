@@ -1,0 +1,35 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the PACKAGE package.
+#
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: BasicNeeds\n"
+"POT-Creation-Date: 2020-04-25 13:20+0200\n"
+"PO-Revision-Date: 2020-04-25 13:20+0200\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Application finished, for complete logged details please check {log_file_name}"
+msgstr "Applicazione terminata, per i dettagli completi registrati si prega di controllare {log_file_name}"
+
+msgid "Application finished, whole script took {total_time_string}"
+msgstr "Applicazione terminata, l'intero script ha durato {total_time_string}"
+
+msgid "Given file \"{value_to_validate}\" does not exist"
+msgstr "Il file specificato \"{value_to_validate}\" non esiste"
+
+msgid "Given folder \"{value_to_validate}\" does not exist"
+msgstr "La cartella specificata \"{value_to_validate}\" non esiste"
+
+msgid "Given url \"{value_to_validate}\" is not valid"
+msgstr "L'indirizo di internet \"{value_to_validate}\" non è valido"
+
+msgid "Total execution time was {total_time_string}"
+msgstr "Il tempo di esecuzione totale è stato {total_time_string}"
+
+msgid "log file"
+msgstr "file di registro"
