@@ -1,4 +1,7 @@
-include converter.py
-include publish_data_source.py
-include tableau_hyper_management/*.json
-include tableau_hyper_management/*.py
+include sources/converter.py
+include sources/publish_data_source.py
+include sources/common/*.py
+include sources/common/*.po
+include sources/config/*.json
+include sources/tableau_hyper_management/*.py
+include sources/tableau_hyper_management/*.po
