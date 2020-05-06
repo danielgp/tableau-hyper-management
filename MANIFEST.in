@@ -1,7 +1,6 @@
-include sources/converter.py
-include sources/publish_data_source.py
-include sources/common/*.py
-include sources/common/*.po
+include *.md
+include *.cfg
+include LICENSE
 include sources/config/*.json
-include sources/tableau_hyper_management/*.py
-include sources/tableau_hyper_management/*.po
+recursive-include sources/*.py
+recursive-include sources/*.po
