@@ -2,5 +2,5 @@ include *.md
 include *.cfg
 include LICENSE
 include sources/config/*.json
-recursive-include sources/*.py
-recursive-include sources/*.po
+recursive-include sources/ *.py
+recursive-include sources/ *.po
