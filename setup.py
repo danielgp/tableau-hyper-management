@@ -5,7 +5,7 @@ This file is ensuring proper package setup is performed to ensure all prerequisi
 and correct execution is possible
 """
 # package to handle files/folders and related metadata/operations
-import os.path
+import os
 # package to facilitate multiple operation system operations
 import platform
 # facilitate dependencies management
@@ -16,7 +16,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md'), 'r') as fh:
 
 this_package_website = 'https://github.com/danielgp/tableau-hyper-management'
 tableau_hyper_website_download = 'https://downloads.tableau.com/tssoftware/tableauhyperapi-'
-tableau_hyper_api__current_known_version = '0.0.10309'  # released on 2020-03-25
+tableau_hyper_api__current_known_version = '0.0.10622'  # released on 2020-04-22
 url__tableau_hyper_api = tableau_hyper_website_download + tableau_hyper_api__current_known_version
 
 if platform.system() == 'Windows':
@@ -50,19 +50,23 @@ setup(
     description='Wrapper to ease data management into Tableau Hyper format from CSV files',
     include_package_data=True,
     install_requires=[
+        'Babel>=2.8.0,<3',
         'cffi>=1.13.2,<2',
-        'codetiming>=1.1,<=1.2',
-        'numpy>=1.17.4,<=1.18.2',
-        'pandas>=0.25.3,<=1.0.3',
-        'tableauhyperapi==0.0.10309',
-        'tableauserverclient==0.10',
-        'xlrd>=1,<2.0',
-        'xlsxwriter>=1,<1.3'
+        'codetiming>=1.1,<2',
+        'numpy>=1.17.4,<2',
+        'pandas>=0.25.3,<1',
+        'tableauhyperapi==0.0.10622',
+        'tableauserverclient==0.11',
+        'xlrd>=1,<2',
+        'xlsxwriter>=1,<2'
     ],
     keywords=[
         'tableau',
         'hyper',
-        'csv'
+        'csv',
+        'json',
+        'excel',
+        'pickle'
     ],
     license='LGPL3',
     long_description=long_description_readme,
@@ -85,5 +89,5 @@ setup(
     },
     python_requires='>=3.6',
     url=this_package_website + '/releases',  # project home page, if any
-    version='1.3.5',
+    version='1.3.6',
 )
