@@ -12,10 +12,10 @@ import pandas
 class DataInputOutput:
     locale = None
 
-    def __init__(self, default_language='en_US'):
+    def __init__(self, in_language='en_US'):
         current_script = os.path.basename(__file__).replace('.py', '')
         lang_folder = os.path.join(os.path.dirname(__file__), current_script + '_Locale')
-        self.locale = gettext.translation(current_script, lang_folder, languages=[default_language])
+        self.locale = gettext.translation(current_script, lang_folder, languages=[in_language])
 
     @staticmethod
     def fn_add_missing_defaults_to_dict_message(in_dict):
@@ -70,6 +70,7 @@ class DataInputOutput:
             in_dict = self.fn_pack_dict_message(in_dict, in_dict['file list'])
             in_dict = self.fn_internal_load_csv_file_into_data_frame(in_dict)
             in_dict = self.fn_internal_load_excel_file_into_data_frame(in_dict)
+            in_dict = self.fn_internal_load_json_file_into_data_frame(in_dict)
             in_dict = self.fn_internal_load_pickle_file_into_data_frame(in_dict)
             self.fn_file_operation_logger(in_logger, in_dict)
         timer.stop()
@@ -80,14 +81,14 @@ class DataInputOutput:
         if in_dict['format'].lower() == 'csv':
             try:
                 in_dict['out data frame'] = pandas.concat(
-                        [pandas.read_csv(filepath_or_buffer=crt_file,
-                                         delimiter=in_dict['field delimiter'],
-                                         cache_dates=True,
-                                         index_col=None,
-                                         memory_map=True,
-                                         low_memory=False,
-                                         encoding='utf-8',
-                                         ) for crt_file in in_dict['files list']])
+                    [pandas.read_csv(filepath_or_buffer=crt_file,
+                                     delimiter=in_dict['field delimiter'],
+                                     cache_dates=True,
+                                     index_col=None,
+                                     memory_map=True,
+                                     low_memory=False,
+                                     encoding='utf-8',
+                                     ) for crt_file in in_dict['files list']])
             except Exception as err:
                 in_dict['error details'] = err
         return in_dict
@@ -97,9 +98,21 @@ class DataInputOutput:
         if in_dict['format'].lower() == 'excel':
             try:
                 in_dict['out data frame'] = pandas.concat(
-                        [pandas.read_excel(io=crt_file,
-                                           verbose=True,
-                                           ) for crt_file in in_dict['files list']])
+                    [pandas.read_excel(io=crt_file,
+                                       verbose=True,
+                                       ) for crt_file in in_dict['files list']])
+            except Exception as err:
+                in_dict['error details'] = err
+        return in_dict
+
+    @staticmethod
+    def fn_internal_load_json_file_into_data_frame(in_dict):
+        if in_dict['format'].lower() == 'json':
+            try:
+                in_dict['out data frame'] = pandas.concat(
+                    [pandas.read_json(filepath_or_buffer=crt_file,
+                                      compression=in_dict['compression'],
+                                      ) for crt_file in in_dict['files list']])
             except Exception as err:
                 in_dict['error details'] = err
         return in_dict
@@ -109,9 +122,9 @@ class DataInputOutput:
         if in_dict['format'].lower() == 'pickle':
             try:
                 in_dict['out data frame'] = pandas.concat(
-                        [pandas.read_pickle(filepath_or_buffer=crt_file,
-                                            compression=in_dict['compression'],
-                                            ) for crt_file in in_dict['files list']])
+                    [pandas.read_pickle(filepath_or_buffer=crt_file,
+                                        compression=in_dict['compression'],
+                                        ) for crt_file in in_dict['files list']])
             except Exception as err:
                 in_dict['error details'] = err
         return in_dict
@@ -136,7 +149,19 @@ class DataInputOutput:
                 in_dict['in data frame'].to_excel(excel_writer=in_dict['name'],
                                                   engine='xlsxwriter',
                                                   freeze_panes=(1, 1),
+                                                  encoding='utf-8',
+                                                  index=False,
                                                   verbose=True)
+            except Exception as err:
+                in_dict['error details'] = err
+        return in_dict
+
+    @staticmethod
+    def fn_internal_store_data_frame_to_json_file(in_dict):
+        if in_dict['format'].lower() == 'json':
+            try:
+                in_dict['in data frame'].to_json(path_or_buf=in_dict['name'],
+                                                 compression=in_dict['compression'])
             except Exception as err:
                 in_dict['error details'] = err
         return in_dict
@@ -175,6 +200,7 @@ class DataInputOutput:
             in_dict.update({'in data frame': in_data_frame})
             in_dict = self.fn_internal_store_data_frame_to_csv_file(in_dict)
             in_dict = self.fn_internal_store_data_frame_to_excel_file(in_dict)
+            in_dict = self.fn_internal_store_data_frame_to_json_file(in_dict)
             in_dict = self.fn_internal_store_data_frame_to_pickle_file(in_dict)
             self.fn_file_operation_logger(in_logger, in_dict)
         timer.stop()
@@ -182,7 +208,7 @@ class DataInputOutput:
     def fn_store_data_frame_to_file_validation(self, local_logger, in_file_details):
         given_format_is_implemented = False
         if 'format' in in_file_details:
-            implemented_file_formats = ['csv', 'excel', 'pickle']
+            implemented_file_formats = ['csv', 'excel', 'json', 'pickle']
             given_format = in_file_details['format'].lower()
             given_format_is_implemented = True
             if given_format not in implemented_file_formats:
