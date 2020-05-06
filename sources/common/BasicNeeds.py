@@ -16,10 +16,10 @@ import re
 class BasicNeeds:
     locale = None
 
-    def __init__(self, default_language='en_US'):
+    def __init__(self, in_language='en_US'):
         current_script = os.path.basename(__file__).replace('.py', '')
         lang_folder = os.path.join(os.path.dirname(__file__), current_script + '_Locale')
-        self.locale = gettext.translation(current_script, lang_folder, languages=[default_language])
+        self.locale = gettext.translation(current_script, lang_folder, languages=[in_language])
 
     def fn_add_value_to_dictionary(self, in_list, adding_value, adding_type, reference_column):
         add_type = adding_type.lower()

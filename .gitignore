@@ -16,3 +16,4 @@ virtual_environment/
 /build.txt
 /main.spec
 *.pyc
+*.mo
