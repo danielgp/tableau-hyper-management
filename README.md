@@ -1,5 +1,8 @@
 # Tableau-Hyper-Management
 
+## Code quality analysis and Build Status
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/build.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/build-status/master)
 
 ## What is this repository for?
 
@@ -15,16 +18,45 @@ Repository owner is: [Daniel Popiniuc](mailto:daniel.popiniuc@honeywell.com)
 
 ## Installation
 
-Installation is very easy. Either install it from PyPI:
+Installation can be completed in few steps as follows:
+* Ensure you have git available to your system:
 ```
-    $ pip install -U tableau-hyper-management
-    $ pip install -U git+https://github.com/danielgp/tableau-hyper-management
+    $ git --version
 ```
-or directly from GitHub:
+> If you get an error depending on your system you need to install it.
+>> For Windows you can do so from [Git for Windows](https://github.com/git-for-windows/git/releases/);
+* Download this project from Github:
 ```
-    $ git clone https://github.com/danielgp/tableau-hyper-management
-    $ python setup.py install
+    $ git clone https://github.com/danielgp/tableau-hyper-management <local_path_of_this_package>
 ```
+> conventions used:
+>> <content_within_html_tags> = variables to be replaced with user values relevant strings
+* Create a Python Virtual Environment using following command executed from project root folder:
+```
+    $ python(.exe) -m venv <local_folder_on_your_computer_for_this_package>/virtual_environment/
+```
+* Upgrade pip (PIP is a package manager for Python packages) and SetupTools using following command executed from newly created virtual environment and Scripts sub-folder:
+```
+    $ <local_path_of_this_package>/virtual_environment/Scripts/python(.exe) -m pip install --upgrade pip
+    $ <local_path_of_this_package>/virtual_environment/Scripts/pip(.exe) install --upgrade setuptools
+```
+* Install project prerequisites using following command executed from project root folder:
+```
+    $ <local_path_of_this_package>/virtual_environment/Scripts/python(.exe) <local_path_of_this_package>/setup.py install
+```
+* Ensure all localization source files are compile properly in order for the package to work properly
+```
+    $ <local_path_of_this_package>/virtual_environment/Scripts/python(.exe) <local_path_of_this_package>/sources/localizations_compile.py
+```
+
+## Maintaining local package up-to-date
+
+Once the package is installed is quite important to keep up with latest releases as such are addressing important code improvements and potential security issues, and this can be achieved by following command:
+```
+    $ git --work-tree=<local_path_of_this_package> --git-dir=<local_path_of_this_package>/.git/ --no-pager pull origin master
+```
+- conventions used:
+    - <content_within_html_tags> = variables to be replaced with user values relevant strings
 
 
 ## Usage
@@ -47,8 +79,7 @@ or directly from GitHub:
 - conventions used:
     - (content_within_round_parenthesis) = optional
     - <content_within_html_tags> = variables to be replaced with user values relevant strings
-    - single vertical pipeline = separator for alternative options 
-
+    - single vertical pipeline = separator for alternative options
 
 ## Implemented features
 
@@ -86,11 +117,3 @@ see [readme_software.md](readme_software.md)
 ## Used references
 
 see [readme_reference.md](readme_reference.md)
-
-
-## Code quality analysis
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/?branch=master)
-
-
-## Build Status
-[![Build Status](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/build.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/build-status/master)
