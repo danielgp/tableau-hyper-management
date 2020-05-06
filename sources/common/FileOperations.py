@@ -5,6 +5,8 @@ facilitates File Operations
 from datetime import datetime
 # package to add support for multi-language (i18n)
 import gettext
+# package to get ability to search file recursively
+import glob
 # package to use for checksum calculations (in this file)
 import hashlib
 # package to handle json files
@@ -21,10 +23,10 @@ class FileOperations:
     timestamp_format = '%Y-%m-%d %H:%M:%S.%f %Z'
     locale = None
 
-    def __init__(self, default_language='en_US'):
+    def __init__(self, in_language='en_US'):
         current_script = os.path.basename(__file__).replace('.py', '')
         lang_folder = os.path.join(os.path.dirname(__file__), current_script + '_Locale')
-        self.locale = gettext.translation(current_script, lang_folder, languages=[default_language])
+        self.locale = gettext.translation(current_script, lang_folder, languages=[in_language])
 
     def fn_build_file_list(self, local_logger, timer, given_input_file):
         timer.start()
@@ -32,38 +34,27 @@ class FileOperations:
             local_logger.debug(self.locale.gettext('File matching pattern identified'))
             parent_directory = os.path.dirname(given_input_file)
             # loading from a specific folder all files matching a given pattern into a file list
-            relevant_files_list = self.fn_build_relevant_file_list(local_logger,
-                                                                   parent_directory,
-                                                                   given_input_file)
+            relevant_files_list = self.fn_build_relevant_file_list(
+                local_logger, parent_directory, given_input_file)
         else:
             local_logger.debug(self.locale.gettext('Specific file name provided'))
             relevant_files_list = [given_input_file]
         timer.stop()
         return relevant_files_list
 
-    def fn_build_file_list_internal(self, local_logger, working_path, matching_pattern):
-        resulted_file_list = []
-        file_counter = 0
-        for current_file in working_path.iterdir():
-            if current_file.is_file() and current_file.match(matching_pattern):
-                resulted_file_list.append(file_counter)
-                resulted_file_list[file_counter] = str(current_file.absolute())
-                local_logger.info(self.locale.gettext('{file_name} identified')
-                                  .replace('{file_name}', str(current_file.absolute())))
-                file_counter = file_counter + 1
-        return resulted_file_list
-
     def fn_build_relevant_file_list(self, local_logger, in_folder, matching_pattern):
         local_logger.info(
-                self.locale.gettext('Listing all files within {in_folder} folder '
-                                    + 'looking for {matching_pattern} as matching pattern')
+            self.locale.gettext('Listing all files within {in_folder} folder '
+                                + 'looking for {matching_pattern} as matching pattern')
                     .replace('{in_folder}', in_folder)
                     .replace('{matching_pattern}', matching_pattern))
         list_files = []
         if os.path.isdir(in_folder):
             working_path = pathlib.Path(in_folder)
-            list_files = self.fn_build_file_list_internal(local_logger, working_path,
-                                                          matching_pattern)
+            search_pattern = matching_pattern.replace('/', '\\')\
+                .replace(str(working_path), '')\
+                .replace('\\', '')
+            list_files = glob.glob(search_pattern)
             file_counter = len(list_files)
             local_logger.info(self.locale.ngettext(
                 '{files_counted} file from {in_folder} folder identified',
