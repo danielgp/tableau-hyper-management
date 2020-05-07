@@ -88,10 +88,15 @@ class CustomizedLocalizationCompiling:
     def get_virtual_environment_python_binary():
         python_binary = 'python'
         if platform.system() == 'Windows':
-            python_binary = 'python.exe'
-        return os.path.normpath(os.path.join(
-                os.path.dirname(__file__).replace('sources', 'virtual_environment/Scripts'),
-                python_binary))
+            virtual_env_long = os.path.normpath(os.path.dirname(__file__)
+                                                .replace('sources', 'virtual_environment/Scripts'))
+            virtual_env_short = os.path.normpath(os.path.dirname(__file__)
+                                                 .replace('sources', 'venv/Scripts'))
+            if os.path.isdir(virtual_env_long):
+                python_binary = os.path.join(virtual_env_long, 'python.exe')
+            elif os.path.isdir(virtual_env_short):
+                python_binary = os.path.join(virtual_env_short, 'python.exe')
+        return python_binary
 
     def path_normalize(self, in_file_name):
         return os.path.join(os.path.normpath(os.path.dirname(in_file_name)),
