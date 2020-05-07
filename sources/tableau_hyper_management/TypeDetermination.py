@@ -8,19 +8,19 @@ import re
 # package to handle numerical structures
 import numpy as np
 # package to facilitate common operations
-from tableau_hyper_management.BasicNeeds import BasicNeeds
+from .BasicNeeds import BasicNeeds
 
 
 class TypeDetermination:
-    lcl_bn = None
+    class_bn = None
 
     def __init__(self):
-        self.lcl_bn = BasicNeeds()
+        self.class_bn = BasicNeeds()
 
     def fn_analyze_field_content_to_establish_data_type(self, logger, field_characteristics,
                                                         data_types):
-        crt_field_type = self.fn_type_determination(field_characteristics['unique_values'][0],
-                                                    data_types)
+        crt_field_type = self.fn_type_determination(
+                field_characteristics['unique_values'][0], data_types)
         # since date fields are not accepted to have ny null value by Tableau Hyper API
         # following forced String type is enforced
         if crt_field_type[:4] == 'date' and field_characteristics['nulls'] != 0:
@@ -74,9 +74,8 @@ class TypeDetermination:
                          + f'is of type "{panda_determined_type}" '
                          + f'with {counted_nulls} counted NULLs')
             if panda_determined_type in ('float64', 'object'):
-                list_unique_values = self.fn_unique_values_isolation(logger, label, content,
-                                                                     panda_determined_type,
-                                                                     input_parameters)
+                list_unique_values = self.fn_unique_values_isolation(
+                        logger, label, content, panda_determined_type, input_parameters)
                 unique_v_list = {
                     'order': col_idx,
                     'name': label,
@@ -85,12 +84,11 @@ class TypeDetermination:
                     'unique_values': list_unique_values
                 }
                 logger.debug('parameters used for further data analysis are: '
-                             + self.lcl_bn.fn_multi_line_string_to_single_line(str(unique_v_list)))
+                             + self.class_bn.fn_multi_line_string_to_single(str(unique_v_list)))
                 csv_structure.append(col_idx)
-                csv_structure[col_idx] = self. \
-                    fn_analyze_field_content_to_establish_data_type(logger,
-                                                                    unique_v_list,
-                                                                    data_types)
+                csv_structure[col_idx] = \
+                    self.fn_analyze_field_content_to_establish_data_type(
+                            logger, unique_v_list, data_types)
             elif panda_determined_type in ('bool', 'int64'):
                 csv_structure.append(col_idx)
                 csv_structure[col_idx] = {
@@ -122,9 +120,9 @@ class TypeDetermination:
         if panda_determined_type == 'float64':
             content = content.apply(lambda x: x if (int(x) != x) else int(x))
         list_unique_values = content.unique()[0:int(in_prmtrs.unique_values_to_analyze_limit)]
-        compact_unique_values = self. \
-            lcl_bn.fn_multi_line_string_to_single_line('>, <'.join(np.array(list_unique_values,
-                                                                            dtype=str)))
+        compact_unique_values = \
+            self.class_bn.fn_multi_line_string_to_single(
+                    '>, <'.join(np.array(list_unique_values, dtype=str)))
         logger.debug(f'additional characteristics for the field "{label}" are: ' +
                      f'count of not-null values: {counted_values_not_null}, ' +
                      f'count of unique values: {counted_values_unique}, ' +

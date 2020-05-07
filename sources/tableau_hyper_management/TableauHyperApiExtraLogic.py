@@ -68,9 +68,8 @@ class TableauHyperApiExtraLogic:
                                       in_data_type, given_parameters):
         hyper_cols = self.fn_build_hyper_columns_for_csv(local_logger, timmer, in_data_type)
         # The rows to insert into the <hyper_table> table.
-        data_to_insert = self.fn_rebuild_csv_content_for_hyper(local_logger, timmer,
-                                                               input_csv_data_frame,
-                                                               in_data_type)
+        data_to_insert = self.fn_rebuild_csv_content_for_hyper(
+                local_logger, timmer, input_csv_data_frame, in_data_type)
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
         # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
         # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
@@ -121,6 +120,13 @@ class TableauHyperApiExtraLogic:
             logger.debug(f'Column {fld_nm} has panda_type = ' + str(current_field['panda_type'])
                          + ' and python type = ' + str(current_field['type']))
             input_df[fld_nm] = self.reevaluate_single_column(input_df, fld_nm, current_field)
+            if current_field['panda_type'] == 'object' \
+                and current_field['type'] == 'int':
+                input_df[fld_nm] = input_df[fld_nm].fillna(0).astype('int64')
+                print('Coloana ' + fld_nm + ' a fost fortat convertita in Int')
+            if str(current_field['type']) == 'float-dot':
+                input_df[fld_nm] = input_df[fld_nm].astype(float)
+                print('Coloana ' + fld_nm + ' a fost fortat convertita in Float')
         logger.info('Re-building CSV content for maximum Hyper compatibility has been completed')
         timmer.stop()
         return input_df.values

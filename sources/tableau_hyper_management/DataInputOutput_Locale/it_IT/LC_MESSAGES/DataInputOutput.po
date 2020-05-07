@@ -1,0 +1,33 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the DataInputOutput package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DataInputOutput\n"
+"POT-Creation-Date: 2020-04-25 13:20+0200\n"
+"PO-Revision-Date: 2020-05-02 01:16+0300\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "All {files_counted} files of type {file_type} were successfully added to a Pandas Data Frame"
+msgstr "Tutti i file {files_counted} di tipo {file_type} sono stati aggiunti correttamente ad una Strutura di Dati Pandas"
+
+msgid "Error encountered on loading Pandas Data Frame from {file_type} file type (see below)"
+msgstr "Si è verificato un errore durante il caricamento di Strutura di Dati Pandas dal tipo di file {file_type} (vedi sotto)"
+
+msgid "Error encountered on saving Pandas Data Frame into a {file_type} file type (see below)"
+msgstr "Si è verificato un errore durante il salvataggio di Strutura di Dati Pandas in un tipo di file {file_type} (vedi sotto)"
+
+msgid "File \"format\" attribute has a value of \"{format_value}\" which is not among currently implemented values: \"{implemented_file_formats}\", therefore desired file operation is not possible"
+msgstr "L'attributo file \"format\" ha un valore di \"{format_value}\" che non è tra i valori attualmente implementati: \"{implemented_file_formats}\", pertanto l'operazione di file desiderata non è possibile"
+
+msgid "File \"format\" attribute is mandatory in the file setting, but missing, therefore desired file operation is not possible"
+msgstr "L'attributo file \"format\" è obbligatorio nell'impostazione del file, ma manca, pertanto l'operazione di file desiderata non è possibile"
+
+msgid "Pandas Data Frame has just been saved to file \"{file_name}\", considering {file_type} as file type"
+msgstr "La Strutura di Dati Pandas è stato appena salvato nel file \"{file_name}\", considerando {file_type} come tipo di file"

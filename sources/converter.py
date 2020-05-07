@@ -3,81 +3,103 @@ main - entry point of the package
 
 This file is performing CSV read into HYPER file and measures time elapsed (performance)
 """
-# package to measure portions of code performance
-from codetiming import Timer
-# package to manage regular expressions
-import re
+# package to facilitate operating system locale detection
+import locale
+# package to handle files/folders and related metadata/operations
+import os
+# package to facilitate multiple operation system operations
+import platform
 # Custom classes specific to this package
-from tableau_hyper_management.BasicNeedsForConverter import os, BasicNeeds, BasicNeedsForConverter
-from tableau_hyper_management.CommandLineArgumentsManagement import CommandLineArgumentsManagement
-from tableau_hyper_management.LoggingNeeds import LoggingNeeds
-from tableau_hyper_management.DataManipulator import DataManipulator
+from tableau_hyper_management.ProjectNeeds import ProjectNeeds
 from tableau_hyper_management.TableauHyperApiExtraLogic import TableauHyperApiExtraLogic
 from tableau_hyper_management.TypeDetermination import TypeDetermination
-
 # get current script name
-current_script_name = os.path.basename(__file__).replace('.py', '')
+SCRIPT_NAME = os.path.basename(__file__).replace('.py', '')
 
 # main execution logic
 if __name__ == '__main__':
-    # instantiate Basic Needs class
-    c_bn = BasicNeeds()
-    # load application configuration (inputs are defined into a json file)
-    c_bn.fn_load_configuration()
-    # adding a special case data type
-    c_bn.cfg_dtls['data_types']['str'] = ''
-    # instantiate Command Line Arguments class
-    c_clam = CommandLineArgumentsManagement()
-    parameters_in = c_clam.parse_arguments(c_bn.cfg_dtls['input_options'][current_script_name])
-    # checking inputs, if anything is invalid an exit(1) will take place
-    c_bn.fn_check_inputs(parameters_in)
+    python_binary = 'python'
+    if platform.system() == 'Windows':
+        python_binary += '.exe'
+    os.system(python_binary + ' ' + os.path.join(os.path.normpath(os.path.dirname(__file__)),
+                                                 'localizations_compile.py'))
+    locale_implemented = [
+        'en_US',
+        'it_IT',
+        'ro_RO',
+    ]
+    try:
+        region_language = locale.getdefaultlocale('LC_ALL')
+        if region_language[0] not in locale_implemented:
+            language_to_use = locale_implemented[0]
+        else:
+            language_to_use = region_language[0]
+    except ValueError as err:
+        language_to_use = locale_implemented[0]
     # instantiate Extractor Specific Needs class
-    c_bnfc = BasicNeedsForConverter()
-    # checking inputs, if anything is invalid an exit(1) will take place
-    c_bnfc.fn_check_inputs_specific(parameters_in)
-    # instantiate Logger class
-    c_ln = LoggingNeeds()
-    # initiate logger
-    c_ln.initiate_logger(parameters_in.output_log_file, 'thm_' + current_script_name)
-    # define global timer to use
-    t = Timer('thm_' + current_script_name, text='Time spent is {seconds} ',
-              logger=c_ln.logger.debug)
+    class_pn = ProjectNeeds(SCRIPT_NAME, language_to_use)
+    # load application configuration (inputs are defined into a json file)
+    class_pn.load_configuration()
+    # adding a special case data type
+    class_pn.config['data_types']['empty'] = '^$'
+    class_pn.config['data_types']['str'] = ''
+    # initiate Logging sequence
+    class_pn.initiate_logger_and_timer()
     # reflect title and input parameters given values in the log
-    c_clam.listing_parameter_values(c_ln.logger, t, 'Tableau Hyper Management',
-                                    c_bn.cfg_dtls['input_options'][current_script_name],
-                                    parameters_in)
-    # instantiate Data Manipulator class
-    c_dm = DataManipulator()
-    if re.search(r'(\*|\?)*', parameters_in.input_file):
-        c_ln.logger.debug('Files pattern has been provided')
-        parent_directory = os.path.dirname(parameters_in.input_file)
-        # loading from a specific folder all files matching a given pattern into a file list
-        relevant_files_list = c_dm.fn_build_relevant_file_list(c_ln.logger, t,
-                                                               parent_directory,
-                                                               parameters_in.input_file)
-    else:
-        c_ln.logger.debug('Specific file has been provided')
-        relevant_files_list = [parameters_in.input_file]
+    class_pn.class_clam.listing_parameter_values(
+        class_pn.class_ln.logger, class_pn.timer, 'Tableau Hyper Converter',
+        class_pn.config['input_options'][SCRIPT_NAME], class_pn.parameters)
+    relevant_files_list = class_pn.class_fo.fn_build_file_list(
+            class_pn.class_ln.logger, class_pn.timer, class_pn.parameters.input_file)
     # log file statistic details
-    c_bn.fn_store_file_statistics(c_ln.logger, t, relevant_files_list, 'Input')
+    class_pn.class_fo.fn_store_file_statistics(
+            class_pn.class_ln.logger, class_pn.timer, relevant_files_list, 'Input')
     # loading from a specific folder all files matching a given pattern into a data frame
-    csv_content_df = c_dm.fn_load_file_list_to_data_frame(c_ln.logger, t,
-                                                          relevant_files_list,
-                                                          parameters_in.csv_field_separator)
-    t.start()
-    c_td = TypeDetermination()
-    # advanced detection of data type within Data Frame
-    detected_csv_structure = c_td.fn_detect_csv_structure(c_ln.logger, csv_content_df,
-                                                          parameters_in,
-                                                          c_bn.cfg_dtls['data_types'])
-    t.stop()
-    # instantiate Tableau Hyper Api Extra Logic class
-    c_thael = TableauHyperApiExtraLogic()
-    # create HYPER from Data Frame
-    c_thael.fn_run_hyper_creation(c_ln.logger, t, csv_content_df, detected_csv_structure,
-                                  parameters_in)
-    # store statistics about output file
-    c_bn.fn_store_file_statistics(c_ln.logger, t, parameters_in.output_log_file, 'Generated')
+    input_dict = {
+        'compression': class_pn.parameters.input_file_compression,
+        'field delimiter': class_pn.parameters.csv_field_separator,
+        'file list': relevant_files_list,
+        'format': class_pn.parameters.input_file_format,
+        'name': 'irrelevant',
+    }
+    working_data_frame = class_pn.class_dio.fn_load_file_into_data_frame(
+            class_pn.class_ln.logger, class_pn.timer, input_dict)
+    if working_data_frame is not None:
+        if class_pn.parameters.output_file_format.lower() in ('csv', 'excel', 'pickle'):
+            output_dict = input_dict
+            output_dict['file list'] = 'irrelevant'
+            output_dict['format'] = class_pn.parameters.output_file_format
+            output_dict['name'] = class_pn.parameters.output_file
+            class_pn.class_dio.fn_store_data_frame_to_file(
+                class_pn.class_ln.logger, class_pn.timer, working_data_frame, output_dict)
+            # store statistics about output file
+            class_pn.class_fo.fn_store_file_statistics(
+                class_pn.class_ln.logger, class_pn.timer,
+                class_pn.parameters.output_file, 'Generated')
+        elif class_pn.parameters.output_file_format.lower() == 'hyper':
+            if class_pn.parameters.input_file_format.lower() == 'csv':
+                class_pn.timer.start()
+                c_td = TypeDetermination()
+                # advanced detection of data type within Data Frame
+                detected_csv_structure = c_td.fn_detect_csv_structure(
+                    class_pn.class_ln.logger, working_data_frame, class_pn.parameters,
+                    class_pn.config['data_types'])
+                class_pn.timer.stop()
+                # instantiate Tableau Hyper Api Extra Logic class
+                class_thael = TableauHyperApiExtraLogic()
+                # create HYPER from Data Frame
+                class_thael.fn_run_hyper_creation(
+                    class_pn.class_ln.logger, class_pn.timer, working_data_frame,
+                    detected_csv_structure, class_pn.parameters)
+                # store statistics about output file
+                class_pn.class_fo.fn_store_file_statistics(
+                    class_pn.class_ln.logger, class_pn.timer,
+                    class_pn.parameters.output_file, 'Generated')
+            else:
+                print('For time being only CSV file types are supported as input file type '
+                      + 'in combination with Hyper as output file type.'
+                      + 'An enhanced version will be deployed in near future!')
     # just final message
-    c_bn.fn_final_message(c_ln.logger, parameters_in.output_log_file,
-                          t.timers.total('thm_' + current_script_name))
+    class_pn.class_bn.fn_final_message(
+            class_pn.class_ln.logger, class_pn.parameters.output_log_file,
+            class_pn.timer.timers.total(SCRIPT_NAME))

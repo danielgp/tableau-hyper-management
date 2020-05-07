@@ -1,0 +1,50 @@
+{
+    "Credentials": {
+        "LDAP" : {
+            "LDAP": {
+                "LDAP": {
+                    "Production" : {
+                        "Default": {
+                            "Name": "Your Full Name Here",
+                            "Password": "your_password_goes_here",
+                            "Username": "your_username_goes_here"
+                        }
+                    }
+                }
+            }
+        },
+        "Oracle": {
+            "MySQL": {
+                "Localhost": {
+                    "Production": {
+                        "Default": {
+                            "Name": "Your Full Name Here",
+                            "Password": "your_password_goes_here",
+                            "Username": "your_username_goes_here"
+                        }
+                    }
+                }
+            }
+        },
+        "SAP": {
+            "HANA": {
+                "Cluster": {
+                    "Development" : {
+                        "Default": {
+                            "Name": "Your Full Name Here",
+                            "Password": "your_password_goes_here",
+                            "Username": "your_username_goes_here"
+                        }
+                    },
+                    "Production" : {
+                        "Default": {
+                            "Name": "Your Full Name Here",
+                            "Password": "your_password_goes_here",
+                            "Username": "your_username_goes_here"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

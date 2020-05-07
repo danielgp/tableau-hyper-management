@@ -3,6 +3,7 @@ LoggingNeeds
 
 This library sets all required parameters for a rotating LOG file
 """
+from datetime import datetime
 # package for Log management
 import logging
 import logging.handlers as handlers
@@ -25,10 +26,13 @@ class LoggingNeeds:
                                                             interval=1,
                                                             backupCount=5,
                                                             encoding='utf-8',
-                                                            utc=False)
+                                                            utc=True)
+            # ensure timestamps are reported as UTC time-zone
+            my_converter = lambda x, y: datetime.utcnow().timetuple()
+            logging.Formatter.converter = my_converter
             # Here we define our formatter
-            string_format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-            log_formatter = logging.Formatter(string_format)
+            log_formatter = logging.Formatter(
+                    '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             # Here we set our logHandler's formatter
             log_handler.setFormatter(log_formatter)
             # pairing the handler with logging

@@ -1,0 +1,33 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the DataInputOutput package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DataInputOutput\n"
+"POT-Creation-Date: 2020-04-25 13:20+0200\n"
+"PO-Revision-Date: 2020-05-02 01:16+0300\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+
+msgid "All {files_counted} files of type {file_type} were successfully added to a Pandas Data Frame"
+msgstr "Toate {file_counted} fișiere de tip {file_type} au fost adăugate cu succes într-un Cadru de Date Pandas"
+
+msgid "Error encountered on loading Pandas Data Frame from {file_type} file type (see below)"
+msgstr "Eroare întâmpinată la încărcarea Cadrului de Date Pandas de la tipul de fișier {file_type} (vezi mai jos)"
+
+msgid "Error encountered on saving Pandas Data Frame into a {file_type} file type (see below)"
+msgstr "Eroare întâmpinată la salvarea Cadrului de date Pandas într-un tip de fișier {file_type} (consultați mai jos)"
+
+msgid "File \"format\" attribute has a value of \"{format_value}\" which is not among currently implemented values: \"{implemented_file_formats}\", therefore file saving is not possible"
+msgstr "Atributul \"format\" al fișierului are o valoare \"{format_value}\" care nu se află printre valorile implementate în prezent: \"{implemented_file_formats}\", ca urmare operația dorită a se efectua nu este posibilă"
+
+msgid "File \"format\" attribute is mandatory in the file setting, but missing, therefore desired file operation is not possible"
+msgstr "Atributul \"format\" al fișierului este obligatoriu, dar acesta lipsește, ca urmare operația dorită a se efectua nu este posibilă"
+
+msgid "Pandas Data Frame has just been saved to file \"{file_name}\", considering {file_type} as file type"
+msgstr "Cadru de Date Pandas tocmai a fost salvat în fișierul \"{file_name}\", considerând {file_type} ca tip de fișier"

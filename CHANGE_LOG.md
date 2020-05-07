@@ -1,38 +1,20 @@
 # Change Log for Tableau Hyper Management package
 
-## Version 1.3.4 release on 2020-04-16
-- internal code optimizations;
+## Version 1.3.12 release on 2020-05-07
+- region language detection improved.
 
-## Version 1.3.4 release on 2020-04-16
-- properly chain script specific class and common (BasicNeeds);
+## Version 1.3.11 release on 2020-05-07
+- internal project restructure.
 
-## Version 1.3.3 release on 2020-04-15
-- specific needs validation details moved to dedicated class files;
+## Version 1.3.10 release on 2020-05-07
+- added localisation (currently covering en_US, it_IT, ro_RO locales);
+- operating system current region locale is auto-detected and if 
+- added support to convert Excel, Pickle and JSON formats into CSV;
+- revised internal code towards a more manageable one.
 
-## Version 1.3.2 release on 2020-04-14
-- sample user setting file (JSON format) moved to dedicated folder;
-
-## Version 1.3.1 release on 2020-04-14
-- minor code optimization to break a complex method to multiple smaller pieces;
-
-## Version 1.3.0 release on 2020-04-14
-- implemented ability to use file pattern to get multiple files as input files instead of just single (very useful in case of multiple small files, which eliminates the need to merge them first);
-- multi-line logging message improved;
-- to ensure case of mixed unique values are always treated same way when combination of integer, float and strings are encountered now a forced string conversion is applied;
-
-## Version 1.2.19 release on 2020-04-13
-- minor security file structure change (simpler hierarchy);
-- internal code optimization and standardization;
-
-## Version 1.2.18 release on 2020-04-07
-- file sha512 checksum calculation improved;
-
-## Version 1.2.17 release on 2020-04-06
-- internal code restructure as all main scripts were moved to a sub-folder to ease further maintenance;
-
-## Version 1.2.16 release on 2020-04-05
+## Version 1.2.16 release on 2020-04-04
 - added input and output (where relevant) file statistics to log;
-- additional internal logic performance measuring added;
+- code cleanup;
 
 ## Version 1.2.15 release on 2020-04-03
 - implemented input validation for most important values;

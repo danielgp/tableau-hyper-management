@@ -1,0 +1,103 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the PACKAGE package.
+#
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FileOperations\n"
+"POT-Creation-Date: 2020-04-25 13:20+0200\n"
+"PO-Revision-Date: 2020-04-25 13:20+0200\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "{file_name} identified"
+msgstr ""
+
+msgid "{files_counted} file from {in_folder} folder identified"
+msgid_plural "{files_counted} files from {in_folder} folder identified"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Checksum"
+msgstr ""
+
+msgid "Entire file content read"
+msgstr ""
+
+msgid "Error encountered when trying to interpret JSON"
+msgstr ""
+
+msgid "File \"{file_name}\" has the following characteristics: {file_statistics}"
+msgstr ""
+
+msgid "File \"{file_name}\" which has the {created_or_modified} datetime as \"{file_datetime}\" vs. \"{reference_datetime}\" has a verdict = {verdict}"
+msgstr ""
+
+msgid "File matching pattern identified"
+msgstr ""
+
+msgid "File {file_name} does not exist"
+msgstr ""
+
+msgid "File {file_name} has just been opened"
+msgstr ""
+
+msgid "File {file_name} has just been overwritten as {new_file_name}"
+msgstr ""
+
+msgid "File {file_name} has just been renamed as {new_file_name}"
+msgstr ""
+
+msgid "File {file_name} will be overwritten"
+msgstr ""
+
+msgid "File {file_name} will be renamed as {new_file_name}"
+msgstr ""
+
+msgid "Folder {folder_name} does not exist"
+msgstr ""
+
+msgid "JSON structure interpreted"
+msgstr ""
+
+msgid "Listing all files within {in_folder} folder looking for {matching_pattern} as matching pattern"
+msgstr ""
+
+msgid "Specific file name provided"
+msgstr ""
+
+msgid "Unknown file datetime choice, expected is one of the following choices \"{implemented_choices}\" but provided was \"{created_or_modified}\"..."
+msgstr ""
+
+msgid "Unknown file type provided, expected either \"json\" or \"raw\", but got {in_file_type}"
+msgstr ""
+
+msgid "created"
+msgstr ""
+
+msgid "date when created"
+msgstr ""
+
+msgid "date when last modified"
+msgstr ""
+
+msgid "newer"
+msgstr ""
+
+msgid "older"
+msgstr ""
+
+msgid "last modified"
+msgstr ""
+
+msgid "same"
+msgstr ""
+
+msgid "size [bytes]"
+msgstr ""
+
+msgid "unknown"
+msgstr ""

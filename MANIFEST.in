@@ -1,4 +1,6 @@
-include samples/*.json
-include sources/*.py
-include sources/tableau_hyper_management/*.py
-include sources/tableau_hyper_management/*.json
+include *.md
+include *.cfg
+include LICENSE
+recursive-include sources *.json
+recursive-include sources *.py
+recursive-include sources *.po

@@ -1,0 +1,32 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the PACKAGE package.
+#
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DataInputOutput\n"
+"POT-Creation-Date: 2020-04-25 13:20+0200\n"
+"PO-Revision-Date: 2020-04-25 13:20+0200\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "All {files_counted} files of type {file_type} were successfully added to a Pandas Data Frame"
+msgstr ""
+
+msgid "Error encountered on loading Pandas Data Frame from {file_type} file type (see below)"
+msgstr ""
+
+msgid "Error encountered on saving Pandas Data Frame into a {file_type} file type (see below)"
+msgstr ""
+
+msgid "File \"format\" attribute has a value of \"{format_value}\" which is not among currently implemented values: \"{implemented_file_formats}\", therefore desired file operation is not possible"
+msgstr ""
+
+msgid "File \"format\" attribute is mandatory in the file setting, but missing, therefore desired file operation is not possible"
+msgstr ""
+
+msgid "Pandas Data Frame has just been saved to file \"{file_name}\", considering {file_type} as file type"
+msgstr ""

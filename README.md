@@ -1,5 +1,8 @@
 # Tableau-Hyper-Management
 
+## Code quality analysis and Build Status
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/build.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/build-status/master)
 
 ## What is this repository for?
 
@@ -24,30 +27,33 @@ Installation can be completed in few steps as follows:
 >> For Windows you can do so from [Git for Windows](https://github.com/git-for-windows/git/releases/);
 * Download this project from Github:
 ```
-    $ git clone https://github.com/danielgp/tableau-hyper-management <local_folder_on_your_computer>
+    $ git clone https://github.com/danielgp/tableau-hyper-management <local_path_of_this_package>
 ```
 > conventions used:
 >> <content_within_html_tags> = variables to be replaced with user values relevant strings
 * Create a Python Virtual Environment using following command executed from project root folder:
 ```
-    $ python -m venv virtual_environment/
+    $ python(.exe) -m venv <local_folder_on_your_computer_for_this_package>/virtual_environment/
 ```
 * Upgrade pip (PIP is a package manager for Python packages) and SetupTools using following command executed from newly created virtual environment and Scripts sub-folder:
 ```
-    $ python -m pip install --upgrade pip
-    $ pip install --upgrade setuptools
+    $ <local_path_of_this_package>/virtual_environment/Scripts/python(.exe) -m pip install --upgrade pip
+    $ <local_path_of_this_package>/virtual_environment/Scripts/pip(.exe) install --upgrade setuptools
 ```
 * Install project prerequisites using following command executed from project root folder:
 ```
-    $ python setup.py install
+    $ <local_path_of_this_package>/virtual_environment/Scripts/python(.exe) <local_path_of_this_package>/setup.py install
 ```
-
+* Ensure all localization source files are compile properly in order for the package to work properly
+```
+    $ <local_path_of_this_package>/virtual_environment/Scripts/python(.exe) <local_path_of_this_package>/sources/localizations_compile.py
+```
 
 ## Maintaining local package up-to-date
 
 Once the package is installed is quite important to keep up with latest releases as such are addressing important code improvements and potential security issues, and this can be achieved by following command:
 ```
-    $ git --work-tree=<local_folder_on_your_computer> --git-dir=<local_folder_on_your_computer>/.git/ --no-pager pull origin master
+    $ git --work-tree=<local_path_of_this_package> --git-dir=<local_path_of_this_package>/.git/ --no-pager pull origin master
 ```
 - conventions used:
     - <content_within_html_tags> = variables to be replaced with user values relevant strings
@@ -58,7 +64,7 @@ Once the package is installed is quite important to keep up with latest releases
 
 ### Converting CSV file into Tableau Extract (Hyper format)
 ```
-    $ python <local_path_of_this_package>/converter.py --input-file <input_file_name__specific_or_with_pattern__having_content_as_CSV> --csv-field-separator ,|; --output-file <full_path_and_file_base_name_to_generated_file>(.hyper) (--output-log-file <full_path_and_file_name_to_log_running_details>) (--unique-values-to-analyze-limit 100|200=default_value_if_omitted|500|1000)
+    $ python <local_path_of_this_package>/tableau_hyper_management/converter.py --input-file <full_path_and_file_base_name_to_file_having_content_as_CSV>(.txt|.csv) --csv-field-separator ,|; --output-file <full_path_and_file_base_name_to_generated_file>(.hyper) (--output-log-file <full_path_and_file_name_to_log_running_details>) (--unique-values-to-analyze-limit 100|200=default_value_if_omitted|500|1000)
 ```
 - conventions used:
     - (content_within_round_parenthesis) = optional
@@ -68,13 +74,12 @@ Once the package is installed is quite important to keep up with latest releases
 
 ### Publishing a Tableau Extract (Hyper format) to a Tableau Server
 ```
-    $ python <local_path_of_this_package>/publish_data_source.py --input-file <full_path_and_file_base_name_with_tableau_extract>(.hyper) --tableau-server <tableau_server_url> --tableau-site <tableau_server_site_to_publish_to> --tableau-project <tableau_server_project_to_publish_to> --publishing-mode Append|CreateNew|Overwrite==default_if_omitted --input-credentials-file %credentials_file% (--output-log-file <full_path_and_file_name_to_log_running_details>)
+    $ python <local_path_of_this_package>/tableau_hyper_management/publish_data_source.py --input-file <full_path_and_file_base_name_with_tableau_extract>(.hyper) --tableau-server <tableau_server_url> --tableau-site <tableau_server_site_to_publish_to> --tableau-project <tableau_server_project_to_publish_to> --publishing-mode Append|CreateNew|Overwrite==default_if_omitted --input-credentials-file %credentials_file% (--output-log-file <full_path_and_file_name_to_log_running_details>)
 ```
 - conventions used:
     - (content_within_round_parenthesis) = optional
     - <content_within_html_tags> = variables to be replaced with user values relevant strings
-    - single vertical pipeline = separator for alternative options 
-
+    - single vertical pipeline = separator for alternative options
 
 ## Implemented features
 
@@ -113,11 +118,3 @@ see [readme_software.md](readme_software.md)
 ## Used references
 
 see [readme_reference.md](readme_reference.md)
-
-
-## Code quality analysis
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/?branch=master)
-
-
-## Build Status
-[![Build Status](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/build.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/build-status/master)

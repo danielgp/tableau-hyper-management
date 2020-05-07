@@ -1,5 +1,7 @@
 .idea/
+.tox/
 .vscode/
+UNKNOWN.egg-info/
 build/
 dist/
 examples/
@@ -15,3 +17,5 @@ virtual_environment/
 /archive.zip
 /build.txt
 /main.spec
+*.pyc
+*.mo
