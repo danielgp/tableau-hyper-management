@@ -35,14 +35,26 @@ msgstr "Configuration file name with source systems is %s"
 msgid "Filter expression is %s"
 msgstr "Filter expression is %s"
 
+msgid "Input file compression is %s"
+msgstr "Input file compression is %s"
+
+msgid "Input file format is %s"
+msgstr "Input file format is %s"
+
 msgid "Input file name (simple or with matching pattern) is %s"
 msgstr "Input file name (simple or with matching pattern) is %s"
 
 msgid "Output directory is %s"
 msgstr "Output directory is %s"
 
-msgid "Output file name %s"
-msgstr "Output file name %s"
+msgid "Output file compression is %s"
+msgstr "Output file compression is %s"
+
+msgid "Output file format is %s"
+msgstr "Output file format is %s"
+
+msgid "Output file name is %s"
+msgstr "Output file name is %s"
 
 msgid "Output log file name is %s"
 msgstr "Output log file name is %s"

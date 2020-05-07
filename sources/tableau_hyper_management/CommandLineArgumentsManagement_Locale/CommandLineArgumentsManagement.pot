@@ -34,13 +34,25 @@ msgstr ""
 msgid "Filter expression is %s"
 msgstr ""
 
+msgid "Input file compression is %s"
+msgstr ""
+
+msgid "Input file format is %s"
+msgstr ""
+
 msgid "Input file name (simple or with matching pattern) is %s"
 msgstr ""
 
 msgid "Output directory is %s"
 msgstr ""
 
-msgid "Output file name %s"
+msgid "Output file compression is %s"
+msgstr ""
+
+msgid "Output file format is %s"
+msgstr ""
+
+msgid "Output file name is %s"
 msgstr ""
 
 msgid "Output log file name is %s"
