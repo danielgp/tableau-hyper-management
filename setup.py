@@ -40,8 +40,8 @@ setup(
         'codetiming>=1.1,<2',
         'numpy>=1.17.4,<2',
         'pandas>=0.25.3,<1',
-        'tableauhyperapi==0.0.10622',
-        'tableauserverclient==0.11',
+        'tableauhyperapi',
+        'tableauserverclient',
         'xlrd>=1,<2',
         'xlsxwriter>=1,<2'
     ],
