@@ -70,6 +70,7 @@ if __name__ == '__main__':
             output_dict['file list'] = 'irrelevant'
             output_dict['format'] = class_pn.parameters.output_file_format
             output_dict['name'] = class_pn.parameters.output_file
+            output_dict['compression'] = class_pn.parameters.output_file_compression
             class_pn.class_dio.fn_store_data_frame_to_file(
                 class_pn.class_ln.logger, class_pn.timer, working_data_frame, output_dict)
             # store statistics about output file
