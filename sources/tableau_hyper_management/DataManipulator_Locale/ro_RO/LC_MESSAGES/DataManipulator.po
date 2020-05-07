@@ -1,0 +1,42 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the FileOperations package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DataManipulator\n"
+"POT-Creation-Date: 2020-04-25 13:20+0200\n"
+"PO-Revision-Date: 2020-04-26 13:55+0300\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+
+msgid "{deviation_type} Deviation Number is {deviation_number} to be applied to Current index, became {index_to_apply}"
+msgstr "Numărul Devierii {deviation_type} este {deviation_number} care trebuie aplicat indexului curent, a devenit {index_to_apply}"
+
+msgid "Current index has been determined to be {index_current_value}"
+msgstr "Indicele curent a fost determinat a fi {index_current_value}"
+
+msgid "Lower"
+msgstr "Inferior"
+
+msgid "Query expression to apply is: {query_expression}"
+msgstr "Expresia de interogare de aplicat este: {query_expression}"
+
+msgid "Upper"
+msgstr "Superior"
+
+msgid "Will retain only values {filter_type} \"{filter_values}\" within the field \"{column_to_filter}\""
+msgstr "Se vor păstra doar valorile {filter_type} \"{filter_values}\" în câmpul \"{column_to_filter}\""
+
+msgid "different than"
+msgstr "diferit de"
+
+msgid "equal with"
+msgstr "eqal cu"
+
+msgid "matching any of these values"
+msgstr "potrivire cu oricare dintre aceste valori"

@@ -23,8 +23,8 @@ msgstr "Eroare întâmpinată la încărcarea Cadrului de Date Pandas de la tipu
 msgid "Error encountered on saving Pandas Data Frame into a {file_type} file type (see below)"
 msgstr "Eroare întâmpinată la salvarea Cadrului de date Pandas într-un tip de fișier {file_type} (consultați mai jos)"
 
-msgid "File \"format\" attribute has a value of \"{format_value}\" which is not among currently implemented values: \"{implemented_file_formats}\", therefore file saving is not possible"
-msgstr "Atributul \"format\" al fișierului are o valoare \"{format_value}\" care nu se află printre valorile implementate în prezent: \"{implemented_file_formats}\", ca urmare operația dorită a se efectua nu este posibilă"
+msgid "File \"format\" attribute has a value of \"{format_value}\" which is not among currently implemented values: \"{implemented_file_formats}\", therefore desired file operation is not possible"
+msgstr "Atributul \"format\" are valoarea \"{format_value}\" care nu se află printre valorile implementate în prezent: \"{implemented_file_formats}\", ca urmare operația dorită nu este posibilă"
 
 msgid "File \"format\" attribute is mandatory in the file setting, but missing, therefore desired file operation is not possible"
 msgstr "Atributul \"format\" al fișierului este obligatoriu, dar acesta lipsește, ca urmare operația dorită a se efectua nu este posibilă"
