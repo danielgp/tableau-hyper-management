@@ -8,7 +8,7 @@ import re
 # package to handle numerical structures
 import numpy as np
 # package to facilitate common operations
-from common.BasicNeeds import BasicNeeds
+from .BasicNeeds import BasicNeeds
 
 
 class TypeDetermination:

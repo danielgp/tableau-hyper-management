@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.3.11 release on 2020-05-07
+- internal project restructure.
+
 ## Version 1.3.10 release on 2020-05-07
 - added localisation (currently covering en_US, it_IT, ro_RO locales);
 - operating system current region locale is auto-detected and if 

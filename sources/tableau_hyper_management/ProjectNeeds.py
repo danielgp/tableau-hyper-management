@@ -10,11 +10,11 @@ import gettext
 # package to facilitate operating system operations
 import os
 # package to facilitate common operations
-from common.BasicNeeds import BasicNeeds
-from common.CommandLineArgumentsManagement import CommandLineArgumentsManagement
-from common.DataInputOutput import DataInputOutput
-from common.FileOperations import FileOperations
-from common.LoggingNeeds import LoggingNeeds
+from .BasicNeeds import BasicNeeds
+from .CommandLineArgumentsManagement import CommandLineArgumentsManagement
+from .DataInputOutput import DataInputOutput
+from .FileOperations import FileOperations
+from .LoggingNeeds import LoggingNeeds
 
 
 class ProjectNeeds:

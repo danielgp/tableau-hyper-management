@@ -58,14 +58,6 @@ setup(
     long_description_content_type='text/markdown',
     name='tableau-hyper-management',
     packages=find_packages('tableau_hyper_management'),
-    package_data={
-        'samples': [
-            '*.json'
-        ],
-        'tableau_hyper_management': [
-            '*.json'
-        ]
-    },
     project_urls={
         'Documentation': this_package_website + '/blob/master/README.md',
         'Issue Tracker': this_package_website +
@@ -74,5 +66,5 @@ setup(
     },
     python_requires='>=3.6',
     url=this_package_website + '/releases',  # project home page, if any
-    version='1.3.10'
+    version='1.3.11'
 )
