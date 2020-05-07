@@ -3,18 +3,26 @@ TypeDetermination - a data type determination library
 
 This library allows data type determination based on data frame content
 """
+# package to add support for multi-language (i18n)
+import gettext
+# package to handle numerical structures
+import numpy
+# package to handle files/folders and related metadata/operations
+import os
 # regular expression package
 import re
-# package to handle numerical structures
-import numpy as np
 # package to facilitate common operations
 from .BasicNeeds import BasicNeeds
 
 
 class TypeDetermination:
     class_bn = None
+    locale = None
 
-    def __init__(self):
+    def __init__(self, in_language='en_US'):
+        current_script = os.path.basename(__file__).replace('.py', '')
+        lang_folder = os.path.join(os.path.dirname(__file__), current_script + '_Locale')
+        self.locale = gettext.translation(current_script, lang_folder, languages=[in_language])
         self.class_bn = BasicNeeds()
 
     def fn_analyze_field_content_to_establish_data_type(self, logger, field_characteristics,
@@ -34,10 +42,13 @@ class TypeDetermination:
             'type': crt_field_type,
             'type_index': list(data_types.keys()).index(crt_field_type)
         }
-        logger.debug('Column ' + str(field_characteristics['order'])
-                     + ' having the name [' + field_characteristics['name'] + '] has the value <'
-                     + str(field_characteristics['unique_values'][0])
-                     + f'> which mean is of type "{crt_field_type}"')
+        logger.debug(self.locale.gettext(
+            'Column {column_order} having the name {column_name} '
+            + 'has the value <{unique_values}> which means is of type "{field_type}"')
+                     .replace('{column_order}', str(field_characteristics['order']))
+                     .replace('{column_name}', field_characteristics['name'])
+                     .replace('{unique_values}', str(field_characteristics['unique_values'][0]))
+                     .replace('{field_type}', crt_field_type))
         if crt_field_type == 'str':
             return field_dict
         else:
@@ -51,11 +62,15 @@ class TypeDetermination:
             crt_type_index = list(data_types.keys()).index(crt_field_type)
             # is the current type is more important?
             if crt_type_index > field_structure['type_index']:
-                logger.debug('Column ' + str(field_characteristics['order']) + ' having the name ['
-                             + field_characteristics['name'] + f'] has the value <{current_value}> '
-                             + f'which means is of type "{crt_field_type}" '
-                             + 'and this is stronger than previously thought '
-                             + 'to be as "' + field_structure['type'] + '"')
+                logger.debug(self.locale.gettext(
+                    'Column {column_order} having the name [{column_name}] '
+                    + 'has the value <{current_value}> which means is of type "{column_type}" '
+                    + 'and this is stronger than previously thought to be as "{column_type_old}"')
+                             .replace('{column_order}', str(field_characteristics['order']))
+                             .replace('{column_name}', field_characteristics['name'])
+                             .replace('{current_value}', current_value)
+                             .replace('{column_type}', crt_field_type)
+                             .replace('{column_type_old}', field_structure['type']))
                 field_structure['type'] = crt_field_type
                 field_structure['type_index'] = crt_type_index
             # If currently determined field type is string makes not sense to scan any further
@@ -70,9 +85,13 @@ class TypeDetermination:
         for label, content in input_csv_data_frame.items():
             panda_determined_type = content.infer_objects().dtypes
             counted_nulls = content.isnull().sum()
-            logger.debug(f'Field "{label}" according to Pandas package '
-                         + f'is of type "{panda_determined_type}" '
-                         + f'with {counted_nulls} counted NULLs')
+            logger.debug(self.locale.gettext(
+                'Field "{column_name}" according to Pandas package '
+                + 'is of type "{panda_determined_type}" '
+                + 'with {counted_nulls} counted NULLs')
+                         .replace('{column_name}', label)
+                         .replace('{panda_determined_type}', panda_determined_type)
+                         .replace('{counted_nulls}', counted_nulls))
             if panda_determined_type in ('float64', 'object'):
                 list_unique_values = self.fn_unique_values_isolation(
                         logger, label, content, panda_determined_type, input_parameters)
@@ -83,8 +102,10 @@ class TypeDetermination:
                     'panda_type': panda_determined_type,
                     'unique_values': list_unique_values
                 }
-                logger.debug('parameters used for further data analysis are: '
-                             + self.class_bn.fn_multi_line_string_to_single(str(unique_v_list)))
+                str_unique_values = self.class_bn.fn_multi_line_string_to_single(str(unique_v_list))
+                logger.debug(self.locale.gettext(
+                    'Unique list of values is: {unique_values_list}')
+                             .replace('{unique_values_list}', str_unique_values))
                 csv_structure.append(col_idx)
                 csv_structure[col_idx] = \
                     self.fn_analyze_field_content_to_establish_data_type(
@@ -122,9 +143,14 @@ class TypeDetermination:
         list_unique_values = content.unique()[0:int(in_prmtrs.unique_values_to_analyze_limit)]
         compact_unique_values = \
             self.class_bn.fn_multi_line_string_to_single(
-                    '>, <'.join(np.array(list_unique_values, dtype=str)))
-        logger.debug(f'additional characteristics for the field "{label}" are: ' +
-                     f'count of not-null values: {counted_values_not_null}, ' +
-                     f'count of unique values: {counted_values_unique}, ' +
-                     f'list of not-null and unique values is: <' + compact_unique_values + '>')
+                '>, <'.join(numpy.array(list_unique_values, dtype=str)))
+        logger.debug(self.locale.gettext(
+            'Additional characteristics for the field "{column_name}" are: '
+            + 'count of not-null values = {counted_values_not_null}, '
+            + 'count of unique values = {counted_values_unique}, '
+            + 'list of not-null and unique values is = <{compact_unique_values}>')
+                     .replace('{column_name}', label)
+                     .replace('{counted_values_not_null}', counted_values_not_null)
+                     .replace('{counted_values_unique}', counted_values_unique)
+                     .replace('{compact_unique_values}', compact_unique_values))
         return list_unique_values

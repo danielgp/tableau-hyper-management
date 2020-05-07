@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CommandLineArgumentsManagement\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-04-26 02:17+0300\n"
-"Last-Translator: <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2020-05-07 23:50+0300\n"
+"Last-Translator: Daniel Popiniuc <danielpopiniuc@gmail.com>\n"
 "Language-Team: Romanian\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -35,14 +35,26 @@ msgstr "Numele fișierului de configurare cu sistemele sursă este %s"
 msgid "Filter expression is %s"
 msgstr "Expresia filtrului este %s"
 
+msgid "Input file compression is %s"
+msgstr "Comprimarea fișierului de intrare este %s"
+
+msgid "Input file format is %s"
+msgstr "Formatul fișierului de intrare este %s"
+
 msgid "Input file name (simple or with matching pattern) is %s"
 msgstr "Numele fișierului de intrare (simplu sau cu model de potrivire) este %s"
 
 msgid "Output directory is %s"
 msgstr "Directorul de ieșire este %s"
 
-msgid "Output file name %s"
-msgstr "Numele fișierului de ieșire %s"
+msgid "Output file compression is %s"
+msgstr "Comprimarea fișierelor de ieșire este %s"
+
+msgid "Output file format is %s"
+msgstr "Formatul fișierului de ieșire este %s"
+
+msgid "Output file name is %s"
+msgstr "Numele fișierului de ieșire este %s"
 
 msgid "Output log file name is %s"
 msgstr "Numele fișierului jurnal de ieșire este %s"

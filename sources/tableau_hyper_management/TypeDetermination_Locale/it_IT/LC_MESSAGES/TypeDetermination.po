@@ -1,0 +1,27 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the TypeDetermination package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TypeDetermination\n"
+"POT-Creation-Date: 2020-05-07 13:20+0200\n"
+"PO-Revision-Date: 2020-05-08 02:04+0300\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: Italian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Column {column_order} having the name [{column_name}] has the value <{current_value}> which means is of type \"{column_type}\" and this is stronger than previously thought to be as \"{column_type_old}\""
+msgstr "La colonna {column_order} che ha il nome [{column_name}] ha il valore <{current_value}> che significa che è di tipo \"{column_type}\" e questo è più forte di quanto si pensasse in precedenza come \"{column_type_old}\""
+
+msgid "Column {column_order} having the name {column_name} has the value <{unique_values}> which means is of type \"field_type\""
+msgstr "La colonna {column_order} che ha il nome {column_name} ha il valore <{unique_values}> che significa che è di tipo \"{field_type}\""
+
+msgid "Field \"{column_name}\" according to Pandas package is of type \"{panda_determined_type}\" with {counted_nulls} counted NULLs"
+msgstr "Il campo \"{column_name}\" secondo il pacchetto Pandas è di tipo \"{panda_determined_type}\" con {counted_nulls} valori NULL"
+
+msgid "Unique list of values is: {unique_values_list}"
+msgstr "Elenco di valori unici è: {unique_values_list}"

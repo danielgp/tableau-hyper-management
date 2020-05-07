@@ -1,0 +1,41 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the PACKAGE package.
+#
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DataManipulator\n"
+"POT-Creation-Date: 2020-04-25 13:20+0200\n"
+"PO-Revision-Date: 2020-04-25 13:20+0200\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "{deviation_type} Deviation Number is {deviation_number} to be applied to Current index, became {index_to_apply}"
+msgstr ""
+
+msgid "Current index has been determined to be {index_current_value}"
+msgstr ""
+
+msgid "Lower"
+msgstr ""
+
+msgid "Query expression to apply is: {query_expression}"
+msgstr ""
+
+msgid "Upper"
+msgstr ""
+
+msgid "Will retain only values {filter_type} \"{filter_values}\" within the field \"{column_to_filter}\""
+msgstr ""
+
+msgid "different than"
+msgstr ""
+
+msgid "equal with"
+msgstr ""
+
+msgid "matching any of these values"
+msgstr ""
