@@ -15,18 +15,6 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md'), 'r') as fh:
     long_description_readme = fh.read()
 
 this_package_website = 'https://github.com/danielgp/tableau-hyper-management'
-tableau_hyper_website_download = 'https://downloads.tableau.com/tssoftware/tableauhyperapi-'
-tableau_hyper_api__current_known_version = '0.0.10622'  # released on 2020-04-22
-url__tableau_hyper_api = tableau_hyper_website_download + tableau_hyper_api__current_known_version
-
-if platform.system() == 'Windows':
-    url__tableau_hyper_api += '-py3-none-win_amd64.whl'
-elif platform.system() == 'Darwin':
-    url__tableau_hyper_api += '-py3-none-macosx_10_11_x86_64.whl'
-elif platform.system() == 'Linux':
-    url__tableau_hyper_api += '-py3-none-manylinux2014_x86_64.whl'
-else:
-    url__tableau_hyper_api += '-py3-none-manylinux2014_x86_64.whl'
 
 setup(
     author='Daniel Popiniuc',
@@ -43,9 +31,6 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Topic :: Scientific/Engineering :: Information Analysis'
-    ],
-    dependency_links=[
-        url__tableau_hyper_api
     ],
     description='Wrapper to ease data management into Tableau Hyper format from CSV files',
     include_package_data=True,
@@ -89,5 +74,5 @@ setup(
     },
     python_requires='>=3.6',
     url=this_package_website + '/releases',  # project home page, if any
-    version='1.3.7'
+    version='1.3.8'
 )
