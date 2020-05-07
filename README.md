@@ -8,12 +8,12 @@
 
 Based on [Tableau Hyper API](https://help.tableau.com/current/api/hyper_api/en-us/) this repository is intended to manage importing any CSV file into Tableau-Hyper format (to be used with Tableau Desktop/Server) with minimal configuration (as column detection, content type detection and reinterpretation of content are part of the included logic), therefore speed up the process of building extract.
 
-Even better, can be used in conjunction with [Tableau Server Client](https://tableau.github.io/server-client-python/) to take resulted Tableau Hyper file and publish it to a Tableau Server, therefore automating the tedious task to refresh data on the server side (of course, only relevant in case no direct connection from Tableau Server to data source is possible or nature of content is not supported directly by data source: one real-life example can be daily snapshot of a dynamically changing content to capture big variations in time).
+Even better since 1st of April 2020 (not a joke) a publishing script allows to take resulted Tableau Hyper file and publish it to a Tableau Server, therefore automating the tedious task to refresh data on the server side (of course, only relevant in case no direct connection from Tableau Server to data source is possible or nature of content is not supported directly by data source: one real-life example can be daily snapshot of a dynamically changing content to capture big variations in time).
 
 
 ## Who do I talk to?
 
-Repository owner is: [Daniel Popiniuc](mailto:daniel.popiniuc@honeywell.com)
+Repository owner is: [Daniel Popiniuc](mailto:danielpopiniuc@gmail.com)
 
 
 ## Installation
@@ -83,6 +83,7 @@ Once the package is installed is quite important to keep up with latest releases
 
 ## Implemented features
 
+- conversion intake data from a single or multiple CSV files based on a single input parameter (can be specific or contain a file pattern);
 - dynamic fields detection based ont 1st line content and provided field separator (strategic advantage);
 - dynamic advanced content type detection covering following data types: integer, float-dot, date-iso8601, date-DMY-dash, date-DMY-dot, date-DMY-slash, date-MDY, date-MDY-medium, date-MDY-long, time-12, time-12-micro-sec, time-24, time-24-micro-sec, datetime-iso8601, datetime-iso8601-micro-sec, datetime-MDY, datetime-MDY-micro-sec, datetime-MDY-medium, datetime-MDY-medium-micro-sec, datetime-MDY-long, datetime-MDY-long-micro-sec, string;
 - support for empty field content for any data type (required re-interpreting CSV to be accepted by Hyper Inserter to ensure INT or DOUBLE data types are considered);
