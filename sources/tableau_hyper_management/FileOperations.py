@@ -43,18 +43,16 @@ class FileOperations:
         return relevant_files_list
 
     def fn_build_relevant_file_list(self, local_logger, in_folder, matching_pattern):
+        folder_parts = pathlib.Path(matching_pattern).parts
+        search_pattern = folder_parts[(len(folder_parts)-1)]
         local_logger.info(
             self.locale.gettext('Listing all files within {in_folder} folder '
                                 + 'looking for {matching_pattern} as matching pattern')
                     .replace('{in_folder}', in_folder)
-                    .replace('{matching_pattern}', matching_pattern))
+                    .replace('{matching_pattern}', search_pattern))
         list_files = []
         if os.path.isdir(in_folder):
-            working_path = pathlib.Path(in_folder)
-            search_pattern = matching_pattern.replace('/', '\\')\
-                .replace(str(working_path), '')\
-                .replace('\\', '')
-            list_files = glob.glob(search_pattern)
+            list_files = glob.glob(matching_pattern)
             file_counter = len(list_files)
             local_logger.info(self.locale.ngettext(
                 '{files_counted} file from {in_folder} folder identified',
