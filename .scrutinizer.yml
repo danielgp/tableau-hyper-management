@@ -8,6 +8,10 @@ build:
             version: "3.7.1"
             # Whether to setup a virtualenv in the repository root directory.
             virtualenv: true
+    dependencies:
+        before:
+            - python -m pip install --upgrade pip
+            - pip install --upgrade setuptools
     nodes:
         analysis:
             project_setup:
