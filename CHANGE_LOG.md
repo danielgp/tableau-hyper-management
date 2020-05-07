@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.3.12 release on 2020-05-07
+- region language detection improved.
+
 ## Version 1.3.11 release on 2020-05-07
 - internal project restructure.
 
