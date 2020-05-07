@@ -1,5 +1,7 @@
 .idea/
+.tox/
 .vscode/
+UNKNOWN.egg-info/
 build/
 dist/
 examples/
