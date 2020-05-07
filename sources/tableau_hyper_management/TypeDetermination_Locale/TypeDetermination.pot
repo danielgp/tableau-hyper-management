@@ -1,0 +1,26 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the PACKAGE package.
+#
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TypeDetermination\n"
+"POT-Creation-Date: 2020-05-07 13:20+0200\n"
+"PO-Revision-Date: 2020-05-07 23:20+0200\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Column {column_order} having the name [{column_name}] has the value <{current_value}> which means is of type \"{column_type}\" and this is stronger than previously thought to be as \"{column_type_old}\""
+msgstr ""
+
+msgid "Column {column_order} having the name {column_name} has the value <{unique_values}> which means is of type \"{field_type}\""
+msgstr ""
+
+msgid "Field \"{column_name}\" according to Pandas package is of type \"{panda_determined_type}\" with {counted_nulls} counted NULLs"
+msgstr ""
+
+msgid "Unique list of values is: {unique_values_list}"
+msgstr ""
