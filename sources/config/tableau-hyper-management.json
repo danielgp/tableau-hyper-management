@@ -16,21 +16,21 @@
         "converter": {
             "i": {
                 "default_value"         : "",
-                "option_description"    : "Input file name %s",
+                "option_description"    : "Input file name (simple or with matching pattern) is %s",
                 "option_long"           : "input-file",
                 "option_required"       : true,
                 "option_sample_value"   : "input-file-name"
             },
             "f": {
                 "default_value"         : "",
-                "option_description"    : "Input file format %s",
+                "option_description"    : "Input file format is %s",
                 "option_long"           : "input-file-format",
                 "option_required"       : true,
                 "option_sample_value"   : "input-file-format"
             },
             "c": {
-                "default_value"         : "",
-                "option_description"    : "Input file compression %s",
+                "default_value"         : "infer",
+                "option_description"    : "Input file compression is %s",
                 "option_long"           : "input-file-compression",
                 "option_required"       : false,
                 "option_sample_value"   : "input-file-compression"
@@ -51,10 +51,17 @@
             },
             "m": {
                 "default_value"         : "hyper",
-                "option_description"    : "Output file format %s",
+                "option_description"    : "Output file format is %s",
                 "option_long"           : "output-file-format",
                 "option_required"       : false,
                 "option_sample_value"   : "output-file-format"
+            },
+            "k": {
+                "default_value"         : "infer",
+                "option_description"    : "Output file compression is %s",
+                "option_long"           : "output-file-compression",
+                "option_required"       : false,
+                "option_sample_value"   : "output-file-compression"
             },
             "l": {
                 "default_value"         : "None",
@@ -81,7 +88,7 @@
             },
             "i": {
                 "default_value"         : "",
-                "option_description"    : "Input file name is %s",
+                "option_description"    : "Input file name (simple or with matching pattern) is %s",
                 "option_long"           : "input-file",
                 "option_required"       : true,
                 "option_sample_value"   : "input-file-name"
