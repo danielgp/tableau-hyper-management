@@ -15,7 +15,6 @@ from tableau_hyper_management.TableauHyperApiExtraLogic import TableauHyperApiEx
 from tableau_hyper_management.TypeDetermination import TypeDetermination
 # get current script name
 SCRIPT_NAME = os.path.basename(__file__).replace('.py', '')
-SCRIPT_LANGUAGE = locale.getdefaultlocale('LC_ALL')[0]
 
 # main execution logic
 if __name__ == '__main__':
@@ -29,10 +28,14 @@ if __name__ == '__main__':
         'it_IT',
         'ro_RO',
     ]
-    if SCRIPT_LANGUAGE not in locale_implemented:
+    try:
+        region_language = locale.getdefaultlocale('LC_ALL')
+        if region_language[0] not in locale_implemented:
+            language_to_use = locale_implemented[0]
+        else:
+            language_to_use = region_language[0]
+    except ValueError as err:
         language_to_use = locale_implemented[0]
-    else:
-        language_to_use = SCRIPT_LANGUAGE
     # instantiate Extractor Specific Needs class
     class_pn = ProjectNeeds(SCRIPT_NAME, language_to_use)
     # load application configuration (inputs are defined into a json file)
