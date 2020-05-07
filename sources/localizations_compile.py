@@ -24,8 +24,8 @@ class CustomizedLocalizationCompiling:
             print('For all Localization source files there is a pair of compiled localization file '
                   + 'which has same date or newer, so no compiling is necessary!')
 
-    @staticmethod
-    def evaluate_compilation_necessity(in_list_localisation_source_files):
+    def evaluate_compilation_necessity(self, in_list_localisation_source_files):
+        list_size = len(in_list_localisation_source_files)
         localisation_compilation_is_required = False
         file_list_paring_complete = False
         file_counter = 0
@@ -68,9 +68,15 @@ class CustomizedLocalizationCompiling:
                 }
                 compiling_files_counter += 1
             file_counter += 1
-            if file_counter == len(in_list_localisation_source_files):
-                file_list_paring_complete = True
+            file_list_paring_complete = self.file_counter_limit(file_counter, list_size)
         return localisation_compilation_is_required, domains_to_compile
+
+    @staticmethod
+    def file_counter_limit(in_file_counter, in_file_list_size):
+        file_list_paring_complete = False
+        if in_file_counter == in_file_list_size:
+            file_list_paring_complete = True
+        return file_list_paring_complete
 
     @staticmethod
     def get_project_localisation_source_files():
