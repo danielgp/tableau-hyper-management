@@ -7,6 +7,8 @@ This file is performing CSV read into HYPER file and measures time elapsed (perf
 import locale
 # package to handle files/folders and related metadata/operations
 import os
+# package to facilitate multiple operation system operations
+import platform
 # Custom classes specific to this package
 from tableau_hyper_management.ProjectNeeds import ProjectNeeds
 from tableau_hyper_management.TableauHyperApiExtraLogic import TableauHyperApiExtraLogic
@@ -17,8 +19,22 @@ SCRIPT_LANGUAGE = locale.getdefaultlocale('LC_ALL')[0]
 
 # main execution logic
 if __name__ == '__main__':
+    python_binary = 'python'
+    if platform.system() == 'Windows':
+        python_binary += '.exe'
+    os.system(python_binary + ' ' + os.path.join(os.path.normpath(os.path.dirname(__file__)),
+                                                 'localizations_compile.py'))
+    locale_implemented = [
+        'en_US',
+        'it_IT',
+        'ro_RO',
+    ]
+    if SCRIPT_LANGUAGE not in locale_implemented:
+        language_to_use = locale_implemented[0]
+    else:
+        language_to_use = SCRIPT_LANGUAGE
     # instantiate Extractor Specific Needs class
-    class_pn = ProjectNeeds(SCRIPT_NAME, SCRIPT_LANGUAGE)
+    class_pn = ProjectNeeds(SCRIPT_NAME, language_to_use)
     # load application configuration (inputs are defined into a json file)
     class_pn.load_configuration()
     # adding a special case data type

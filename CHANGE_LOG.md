@@ -1,5 +1,11 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.3.10 release on 2020-05-07
+- added localisation (currently covering en_US, it_IT, ro_RO locales);
+- operating system current region locale is auto-detected and if 
+- added support to convert Excel, Pickle and JSON formats into CSV;
+- revised internal code towards a more manageable one.
+
 ## Version 1.2.16 release on 2020-04-04
 - added input and output (where relevant) file statistics to log;
 - code cleanup;
