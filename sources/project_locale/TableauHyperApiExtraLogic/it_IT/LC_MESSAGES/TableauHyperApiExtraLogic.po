@@ -1,0 +1,55 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version:  TableauHyperApiExtraLogic\n"
+"Report-Msgid-Bugs-To: danielppiniuc@gmail.com\n"
+"POT-Creation-Date: 2020-05-09 15:10+0200\n"
+"PO-Revision-Date: 2020-05-09 16:19+0300\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language: it_IT\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+msgid "Building Hyper columns completed"
+msgstr "Creazione di colonne Hyper completata"
+
+msgid ""
+"Column {column_order} having name [{column_name}] and type "
+"\"{column_type}\" will become \"{column_type_new}\""
+msgstr "La colonna {column_order} che ha il nome [{column_name}] di tipo \"{tipo_colonna}\" diventerà \"{column_type_new}\""
+
+msgid ""
+"Column {column_name} has pandas data type = {column_pandas_type} and python "
+"data type = {column_python_type}"
+msgstr "La colonna {column_name} ha il tipo di dati panda = {column_pandas_type} e il tipo di dati python = {column_python_type}"
+
+msgid "Column {column_name} has been forced converted to {forced_type}"
+msgstr "La colonna {column_name} è stata forzata convertita in {forced_type}"
+
+msgid "Connection to the Hyper engine file has been closed"
+msgstr "La connessione al Hyper engine è stata chiusa"
+
+msgid "Data has been inserted into Hyper table"
+msgstr "I dati sono stati inseriti nella tabella Hyper"
+
+msgid "Hyper engine process has been shut down"
+msgstr "Il processo dell'hyper engine è stato chiuso"
+
+msgid "Hyper schema \"{hyper_schema_name}\" has been created"
+msgstr "La schema Hyper \"{hyper_schema_name}\" è stata creata"
+
+msgid "Hyper table \"{hyper_table_name}\" has been created"
+msgstr "La tabella Hyper \"{hyper_table_name}\" è stata creata"
+
+msgid "Re-building CSV content for maximum Hyper compatibility has been completed"
+msgstr "La ricostruzione del contenuto CSV per la massima compatibilità con Hyper è stata completata"
+
+msgid "Table {hyper_table_name} has {row_count} rows"
+msgstr "La tabella {hyper_table_name} ha {row_count} righe"
+

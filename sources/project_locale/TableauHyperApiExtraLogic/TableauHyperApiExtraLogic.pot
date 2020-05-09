@@ -1,0 +1,47 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the PACKAGE package.
+#
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TableauHyperApiExtraLogic\n"
+"POT-Creation-Date: 2020-05-09 15:10+0200\n"
+"PO-Revision-Date: 2020-05-09 16:20+0200\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Building Hyper columns completed"
+msgstr ""
+
+msgid "Column {column_order} having name [{column_name}] and type \"{column_type}\" will become \"{column_type_new}\""
+msgstr ""
+
+msgid "Column {column_name} has pandas data type = {column_pandas_type} and python data type = {column_python_type}"
+msgstr ""
+
+msgid "Column {column_name} has been forced converted to {forced_type}"
+msgstr ""
+
+msgid "Connection to the Hyper engine file has been closed"
+msgstr ""
+
+msgid "Data has been inserted into Hyper table"
+msgstr ""
+
+msgid "Hyper engine process has been shut down"
+msgstr ""
+
+msgid "Hyper schema \"{hyper_schema_name}\" has been created"
+msgstr ""
+
+msgid "Hyper table \"{hyper_table_name}\" has been created"
+msgstr ""
+
+msgid "Re-building CSV content for maximum Hyper compatibility has been completed"
+msgstr ""
+
+msgid "Table {hyper_table_name} has {row_count} rows"
+msgstr ""

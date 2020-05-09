@@ -1,0 +1,56 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version:  TableauHyperApiExtraLogic\n"
+"Report-Msgid-Bugs-To: danielppiniuc@gmail.com\n"
+"POT-Creation-Date: 2020-05-09 15:10+0200\n"
+"PO-Revision-Date: 2020-05-09 16:19+0300\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language: ro_RO\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100"
+" < 20)) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+msgid "Building Hyper columns completed"
+msgstr "Colectarea coloanelor Hyper a fost finalizată"
+
+msgid ""
+"Column {column_order} having name [{column_name}] and type "
+"\"{column_type}\" will become \"{column_type_new}\""
+msgstr "Coloana {column_order} având numele [{column_name}] și tipul \"{column_type}\" va deveni \"{column_type_new}\""
+
+msgid ""
+"Column {column_name} has pandas data type = {column_pandas_type} and python "
+"data type = {column_python_type}"
+msgstr "Coloana {column_name} are tipul de date pandas = {column_pandas_type} și tipul de date python = {column_python_type}"
+
+msgid "Column {column_name} has been forced converted to {forced_type}"
+msgstr "Coloana {column_name} a fost transformată forțat în {forced_type}"
+
+msgid "Connection to the Hyper engine file has been closed"
+msgstr "Conexiunea la Hyper engine a fost închisă"
+
+msgid "Data has been inserted into Hyper table"
+msgstr "Datele au fost introduse în tabelul Hyper"
+
+msgid "Hyper engine process has been shut down"
+msgstr "Procesul Hyper engine a fost oprit"
+
+msgid "Hyper schema \"{hyper_schema_name}\" has been created"
+msgstr "Schema Hyper \"{hyper_schema_name}\" a fost creată"
+
+msgid "Hyper table \"{hyper_table_name}\" has been created"
+msgstr "Tabelul Hyper \"{hyper_table_name}\" a fost creat"
+
+msgid "Re-building CSV content for maximum Hyper compatibility has been completed"
+msgstr "Reconstruirea conținutului CSV pentru o compatibilitate maximă Hyper a fost finalizată"
+
+msgid "Table {hyper_table_name} has {row_count} rows"
+msgstr "Tabelul {hyper_table_name} are {row_count} rânduri"
+

@@ -3,6 +3,10 @@ TableauHyperApiExtraLogic - a Hyper client library.
 
 This library allows packaging CSV content into HYPER format with data type checks
 """
+# package to add support for multi-language (i18n)
+import gettext
+# package to handle files/folders and related metadata/operations
+import os
 # package regular expression
 import re
 # package to handle numerical structures
@@ -19,17 +23,30 @@ from tableauhyperapi import HyperProcess, Telemetry, \
 
 
 class TableauHyperApiExtraLogic:
+    locale = None
 
-    def fn_build_hyper_columns_for_csv(self, logger, timmer, detected_csv_structure):
-        timmer.start()
+    def __init__(self, in_language='en_US'):
+        file_parts = os.path.normpath(os.path.abspath(__file__)).replace('\\', os.path.altsep)\
+            .split(os.path.altsep)
+        locale_domain = file_parts[(len(file_parts)-1)].replace('.py', '')
+        locale_folder = os.path.normpath(os.path.join(
+            os.path.join(os.path.altsep.join(file_parts[:-2]), 'project_locale'), locale_domain))
+        self.locale = gettext.translation(locale_domain, localedir=locale_folder,
+                                          languages=[in_language], fallback=True)
+
+    def fn_build_hyper_columns_for_csv(self, logger, timer, detected_csv_structure):
+        timer.start()
         list_to_return = []
         for current_field_structure in detected_csv_structure:
             list_to_return.append(current_field_structure['order'])
             current_column_type = self.fn_convert_to_hyper_types(current_field_structure['type'])
-            logger.debug('Column ' + str(current_field_structure['order']) + ' having name "'
-                         + current_field_structure['name'] + '" and type "'
-                         + current_field_structure['type'] + '" will become "'
-                         + str(current_column_type) + '"')
+            logger.debug(self.locale.gettext(
+                'Column {column_order} having name [{column_name}] and type "{column_type}" '
+                + 'will become "{column_type_new}"')
+                         .replace('{column_order}', str(current_field_structure['order']))
+                         .replace('{column_name}', current_field_structure['name'])
+                         .replace('{column_type}', current_field_structure['type'])
+                         .replace('{column_type_new}', str(current_column_type)))
             nullability_value = NULLABLE
             if current_field_structure['nulls'] == 0:
                 nullability_value = NOT_NULLABLE
@@ -38,8 +55,8 @@ class TableauHyperApiExtraLogic:
                 type=current_column_type,
                 nullability=nullability_value
             )
-        logger.info('Building Hyper columns completed')
-        timmer.stop()
+        logger.info(self.locale.gettext('Building Hyper columns completed'))
+        timer.stop()
         return list_to_return
 
     @staticmethod
@@ -64,74 +81,123 @@ class TableauHyperApiExtraLogic:
             identified_type = SqlType.text()
         return identified_type
 
-    def fn_create_hyper_file_from_csv(self, local_logger, timmer, input_csv_data_frame,
+    def fn_create_hyper_file_from_csv(self, local_logger, timer, input_csv_data_frame,
                                       in_data_type, given_parameters):
-        hyper_cols = self.fn_build_hyper_columns_for_csv(local_logger, timmer, in_data_type)
+        hyper_cols = self.fn_build_hyper_columns_for_csv(local_logger, timer, in_data_type)
         # The rows to insert into the <hyper_table> table.
         data_to_insert = self.fn_rebuild_csv_content_for_hyper(
-                local_logger, timmer, input_csv_data_frame, in_data_type)
+                local_logger, timer, input_csv_data_frame, in_data_type)
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
         # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
         # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
         with HyperProcess(telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU) as hyper:
             # Creates new Hyper file <output_hyper_file>
             # Replaces file with CreateMode.CREATE_AND_REPLACE if it already exists.
-            timmer.start()
+            timer.start()
             with Connection(endpoint=hyper.endpoint,
                             database=given_parameters.output_file,
                             create_mode=CreateMode.CREATE_AND_REPLACE) as hyper_connection:
                 local_logger.info('Connection to the Hyper engine '
                                   + f'file "{given_parameters.output_file}" has been created.')
-                timmer.stop()
-                timmer.start()
-                hyper_connection.catalog.create_schema("Extract")
-                local_logger.info('Hyper schema "Extract" has been created.')
-                hyper_table = TableDefinition(
-                    TableName("Extract", "Extract"),
-                    columns=hyper_cols
-                )
-                hyper_connection.catalog.create_table(table_definition=hyper_table)
-                local_logger.info('Hyper table "Extract" has been created.')
-                timmer.stop()
-                timmer.start()
-                # Execute the actual insert
-                with Inserter(hyper_connection, hyper_table) as hyper_insert:
-                    hyper_insert.add_rows(rows=data_to_insert)
-                    hyper_insert.execute()
-                local_logger.info('Data has been inserted into Hyper table')
-                timmer.stop()
-                timmer.start()
-                # Number of rows in the <hyper_table> table.
-                # `execute_scalar_query` is for executing a query
-                # that returns exactly one row with one column.
-                query_to_run = f'SELECT COUNT(*) FROM {hyper_table.table_name}'
-                row_count = hyper_connection.execute_scalar_query(query=query_to_run)
-                local_logger.info(f'Table {hyper_table.table_name} has {row_count} rows')
-                timmer.stop()
-            local_logger.info('Connection to the Hyper engine file has been closed')
-        local_logger.info('Hyper engine process has been shut down')
+                timer.stop()
+                schema_name = 'Extract'
+                self.fn_create_hyper_schema(local_logger, timer, hyper_connection, schema_name)
+                hyper_table_name = 'Extract'
+                hyper_table = self.fn_create_hyper_table(local_logger, timer, {
+                    'columns': hyper_cols,
+                    'connection': hyper_connection,
+                    'schema name': schema_name,
+                    'table name': hyper_table_name,
+                })
+                self.fn_insert_data_into_hyper_table(local_logger, timer, {
+                    'connection': hyper_connection,
+                    'data': data_to_insert,
+                    'table': hyper_table,
+                })
+                self.fn_get_records_count_from_table(local_logger, timer, {
+                    'connection': hyper_connection,
+                    'table name': hyper_table_name,
+                })
+            local_logger.info(self.locale.gettext(
+                'Connection to the Hyper engine file has been closed'))
+        local_logger.info(self.locale.gettext('Hyper engine process has been shut down'))
 
-    def fn_rebuild_csv_content_for_hyper(self, logger, timmer, input_df, detected_fields_type):
-        timmer.start()
+    def fn_insert_data_into_hyper_table(self, local_logger, timer, in_dict):
+        timer.start()
+        # Execute the actual insert
+        with Inserter(in_dict['connection'], in_dict['table']) as hyper_insert:
+            hyper_insert.add_rows(rows=in_dict['data'])
+            hyper_insert.execute()
+        local_logger.info(self.locale.gettext('Data has been inserted into Hyper table'))
+        timer.stop()
+
+    def fn_create_hyper_schema(self, local_logger, timer, in_hyper_connection, in_schema_name):
+        timer.start()
+        in_hyper_connection.catalog.create_schema(in_schema_name)
+        local_logger.info(self.locale.gettext(
+            'Hyper schema "{hyper_schema_name}" has been created')
+                          .replace('{hyper_schema_name}', in_schema_name))
+        timer.stop()
+
+    def fn_create_hyper_table(self, local_logger, timer, in_dict):
+        timer.start()
+        out_hyper_table = TableDefinition(
+            TableName(in_dict['schema name'], in_dict['table name']),
+            columns=in_dict['columns'],
+        )
+        in_dict['connection'].catalog.create_table(table_definition=out_hyper_table)
+        local_logger.info(self.locale.gettext(
+            'Hyper table "{hyper_table_name}" has been created')
+                          .replace('{hyper_table_name}', in_dict['table name']))
+        timer.stop()
+        return out_hyper_table
+
+    def fn_get_records_count_from_table(self, local_logger, timer, in_dict):
+        timer.start()
+        # Number of rows in the <hyper_table> table.
+        # `execute_scalar_query` is for executing a query
+        # that returns exactly one row with one column.
+        query_to_run = 'SELECT COUNT(*) FROM {hyper_table_name}'\
+            .replace('{hyper_table_name}', in_dict['table name'])
+        row_count = in_dict['connection'].execute_scalar_query(query=query_to_run)
+        local_logger.info(self.locale.gettext(
+            'Table {hyper_table_name} has {row_count} rows')
+                          .replace('{hyper_table_name}', in_dict['table name'])
+                          .replace('{row_count}', row_count))
+        timer.stop()
+
+    def fn_rebuild_csv_content_for_hyper(self, in_logger, timer, input_df, detected_fields_type):
+        timer.start()
         input_df.replace(to_replace=[numpy.nan], value=[None], inplace=True)
         # Cycle through all found columns
         for current_field in detected_fields_type:
             fld_nm = current_field['name']
-            logger.debug(f'Column {fld_nm} has panda_type = ' + str(current_field['panda_type'])
-                         + ' and python type = ' + str(current_field['type']))
-            input_df[fld_nm] = self.reevaluate_single_column(input_df, fld_nm, current_field)
+            in_logger.debug(self.locale.gettext(
+                'Column {column_name} has pandas data type = {column_pandas_type} '
+                + 'and python data type = {column_python_type}')
+                            .replace('{column_name}', current_field['name'])
+                            .replace('{column_pandas_type}', str(current_field['panda_type']))
+                            .replace('{column_python_type}', str(current_field['type'])))
+            input_df[fld_nm] = self.fn_reevaluate_single_column(input_df, fld_nm, current_field)
             if current_field['panda_type'] == 'object' \
                 and current_field['type'] == 'int':
                 input_df[fld_nm] = input_df[fld_nm].fillna(0).astype('int64')
-                print('Coloana ' + fld_nm + ' a fost fortat convertita in Int')
+                in_logger.debug(self.locale.gettext(
+                    'Column {column_name} has been forced converted to {forced_type}')
+                                .replace('{column_name}', current_field['name'])
+                                .replace('{forced_type}', 'Int'))
             if str(current_field['type']) == 'float-dot':
                 input_df[fld_nm] = input_df[fld_nm].astype(float)
-                print('Coloana ' + fld_nm + ' a fost fortat convertita in Float')
-        logger.info('Re-building CSV content for maximum Hyper compatibility has been completed')
-        timmer.stop()
+                in_logger.debug(self.locale.gettext(
+                    'Column {column_name} has been forced converted to {forced_type}')
+                                .replace('{column_name}', current_field['name'])
+                                .replace('{forced_type}', 'Float'))
+        in_logger.info(self.locale.gettext(
+            'Re-building CSV content for maximum Hyper compatibility has been completed'))
+        timer.stop()
         return input_df.values
 
-    def reevaluate_single_column(self, given_df, given_field_name, current_field_details):
+    def fn_reevaluate_single_column(self, given_df, given_field_name, current_field_details):
         if current_field_details['type'] == 'str':
             given_df[given_field_name] = given_df[given_field_name].astype(str)
         elif current_field_details['panda_type'] == 'float64' \
@@ -141,10 +207,10 @@ class TableauHyperApiExtraLogic:
             given_df[given_field_name] = self.fn_string_to_date(given_field_name, given_df)
         return given_df[given_field_name]
 
-    def fn_run_hyper_creation(self, local_logger, timmer, input_data_frame, input_data_type,
+    def fn_run_hyper_creation(self, local_logger, timer, input_data_frame, input_data_type,
                               given_parameters):
         try:
-            self.fn_create_hyper_file_from_csv(local_logger, timmer, input_data_frame,
+            self.fn_create_hyper_file_from_csv(local_logger, timer, input_data_frame,
                                                input_data_type, given_parameters)
         except HyperException as ex:
             local_logger.error(str(ex).replace(chr(10), ' '))
