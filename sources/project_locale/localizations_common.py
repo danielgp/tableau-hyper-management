@@ -13,7 +13,6 @@ import platform
 
 class LocalizationsCommon:
     locale_implemented = [
-        'en_US',
         'it_IT',
         'ro_RO',
     ]
