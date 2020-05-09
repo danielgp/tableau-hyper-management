@@ -48,7 +48,7 @@ msgid "Output directory is %s"
 msgstr "Directorul de ieșire este %s"
 
 msgid "Output file compression is %s"
-msgstr "Comprimarea fișierelor de ieșire este %s"
+msgstr "Comprimarea fișierului de ieșire este %s"
 
 msgid "Output file format is %s"
 msgstr "Formatul fișierului de ieșire este %s"

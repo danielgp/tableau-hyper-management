@@ -1,0 +1,54 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the PACKAGE package.
+#
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TableauServerCommunicator\n"
+"POT-Creation-Date: 2020-05-08 23:20+0200\n"
+"PO-Revision-Date: 2020-05-08 23:29+0200\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "A number of {projects_counted} projects have been identified"
+msgstr ""
+
+msgid "A single project identifier was found \"{project_guid}\", so I will proceed with publishing provided file there"
+msgstr ""
+
+msgid "About to connect to Tableau Server with URL: {tableau_server}, Site {tableau_site} with Username = {user_name}"
+msgstr ""
+
+msgid "About to start publishing"
+msgstr ""
+
+msgid "Check your input parameter values for accuracy and try again!"
+msgstr ""
+
+msgid "Connection to the Tableau Server has been established successfully!"
+msgstr ""
+
+msgid "Connection to the Tableau Server has been terminated!"
+msgstr ""
+
+msgid "No project with provided name \"{project_name}\" has been found"
+msgstr ""
+
+msgid "No publishing action will take place!"
+msgstr ""
+
+msgid "Publishing completed successfully!"
+msgstr ""
+
+msgid "Reading list of all projects available has been completed"
+msgstr ""
+
+msgid "Retaining the projects according to filtering type provided ({filter_type}) has been completed"
+msgstr ""
+
+msgid "Stay tuned for the confirmation"
+msgstr ""
+
