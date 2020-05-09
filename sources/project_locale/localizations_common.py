@@ -77,8 +77,7 @@ class LocalizationsCommon:
         return os.path.dirname(__file__)
 
     def get_project_localisation_source_files(self, in_extension):
-        file_pattern = os.path.join(os.path.dirname(__file__), '**/*.' + in_extension) \
-            .replace('test', 'sources')
+        file_pattern = os.path.join(os.path.dirname(__file__), '**/*.' + in_extension)
         initial_list = glob.glob(file_pattern, recursive=True)
         normalizer = lambda x: self.path_normalize(x)
         return list(map(normalizer, initial_list))
