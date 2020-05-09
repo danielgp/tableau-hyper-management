@@ -92,8 +92,8 @@ class TypeDetermination(BasicNeeds):
                 + 'is of type "{panda_determined_type}" '
                 + 'with {counted_nulls} counted NULLs')
                          .replace('{column_name}', label)
-                         .replace('{panda_determined_type}', panda_determined_type)
-                         .replace('{counted_nulls}', counted_nulls))
+                         .replace('{panda_determined_type}', str(panda_determined_type))
+                         .replace('{counted_nulls}', str(counted_nulls)))
             if panda_determined_type in ('float64', 'object'):
                 list_unique_values = self.fn_unique_values_isolation(
                         logger, label, content, panda_determined_type, input_parameters)
@@ -152,7 +152,7 @@ class TypeDetermination(BasicNeeds):
             + 'count of unique values = {counted_values_unique}, '
             + 'list of not-null and unique values is = <{compact_unique_values}>')
                      .replace('{column_name}', label)
-                     .replace('{counted_values_not_null}', counted_values_not_null)
-                     .replace('{counted_values_unique}', counted_values_unique)
-                     .replace('{compact_unique_values}', compact_unique_values))
+                     .replace('{counted_values_not_null}', str(counted_values_not_null))
+                     .replace('{counted_values_unique}', str(counted_values_unique))
+                     .replace('{compact_unique_values}', str(compact_unique_values)))
         return list_unique_values
