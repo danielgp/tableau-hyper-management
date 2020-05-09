@@ -15,15 +15,17 @@ import re
 from .BasicNeeds import BasicNeeds
 
 
-class TypeDetermination:
-    class_bn = None
+class TypeDetermination(BasicNeeds):
     locale = None
 
     def __init__(self, in_language='en_US'):
-        current_script = os.path.basename(__file__).replace('.py', '')
-        lang_folder = os.path.join(os.path.dirname(__file__), current_script + '_Locale')
-        self.locale = gettext.translation(current_script, lang_folder, languages=[in_language])
-        self.class_bn = BasicNeeds()
+        file_parts = os.path.normpath(os.path.abspath(__file__)).replace('\\', os.path.altsep)\
+            .split(os.path.altsep)
+        locale_domain = file_parts[(len(file_parts)-1)].replace('.py', '')
+        locale_folder = os.path.normpath(os.path.join(
+            os.path.join(os.path.altsep.join(file_parts[:-2]), 'project_locale'), locale_domain))
+        self.locale = gettext.translation(locale_domain, localedir=locale_folder,
+                                          languages=[in_language], fallback=True)
 
     def fn_analyze_field_content_to_establish_data_type(self, logger, field_characteristics,
                                                         data_types):
@@ -102,7 +104,7 @@ class TypeDetermination:
                     'panda_type': panda_determined_type,
                     'unique_values': list_unique_values
                 }
-                str_unique_values = self.class_bn.fn_multi_line_string_to_single(str(unique_v_list))
+                str_unique_values = self.fn_multi_line_string_to_single(str(unique_v_list))
                 logger.debug(self.locale.gettext(
                     'Unique list of values is: {unique_values_list}')
                              .replace('{unique_values_list}', str_unique_values))
@@ -142,7 +144,7 @@ class TypeDetermination:
             content = content.apply(lambda x: x if (int(x) != x) else int(x))
         list_unique_values = content.unique()[0:int(in_prmtrs.unique_values_to_analyze_limit)]
         compact_unique_values = \
-            self.class_bn.fn_multi_line_string_to_single(
+            self.fn_multi_line_string_to_single(
                 '>, <'.join(numpy.array(list_unique_values, dtype=str)))
         logger.debug(self.locale.gettext(
             'Additional characteristics for the field "{column_name}" are: '

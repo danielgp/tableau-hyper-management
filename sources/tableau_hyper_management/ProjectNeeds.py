@@ -30,10 +30,13 @@ class ProjectNeeds:
 
     def __init__(self, destination_script, default_language='en_US'):
         self.script = destination_script
-        current_file_basename = os.path.basename(__file__).replace('.py', '')
-        lang_folder = os.path.join(os.path.dirname(__file__), current_file_basename + '_Locale')
-        self.locale = gettext.translation(current_file_basename, lang_folder,
-                                          languages=[default_language])
+        file_parts = os.path.normpath(os.path.abspath(__file__)).replace('\\', os.path.altsep)\
+            .split(os.path.altsep)
+        locale_domain = file_parts[(len(file_parts)-1)].replace('.py', '')
+        locale_folder = os.path.normpath(os.path.join(
+            os.path.join(os.path.altsep.join(file_parts[:-2]), 'project_locale'), locale_domain))
+        self.locale = gettext.translation(locale_domain, localedir=locale_folder,
+                                          languages=[default_language], fallback=True)
         # instantiate Basic Needs class
         self.class_bn = BasicNeeds(default_language)
         # instantiate File Operations class
