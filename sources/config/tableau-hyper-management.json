@@ -37,14 +37,14 @@
             },
             "s": {
                 "default_value"         : ",",
-                "option_description"    : "CSV file separator is %s",
+                "option_description"    : "CSV field separator is %s",
                 "option_long"           : "csv-field-separator",
                 "option_required"       : false,
                 "option_sample_value"   : "csv-field-separator-character"
             },
             "o": {
                 "default_value"         : "",
-                "option_description"    : "Output file name %s",
+                "option_description"    : "Output file name is %s",
                 "option_long"           : "output-file",
                 "option_required"       : true,
                 "option_sample_value"   : "output-file-name"
