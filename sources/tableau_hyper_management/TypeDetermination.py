@@ -70,7 +70,7 @@ class TypeDetermination(BasicNeeds):
                     + 'and this is stronger than previously thought to be as "{column_type_old}"')
                              .replace('{column_order}', str(field_characteristics['order']))
                              .replace('{column_name}', field_characteristics['name'])
-                             .replace('{current_value}', current_value)
+                             .replace('{current_value}', str(current_value))
                              .replace('{column_type}', crt_field_type)
                              .replace('{column_type_old}', field_structure['type']))
                 field_structure['type'] = crt_field_type
