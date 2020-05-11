@@ -10,11 +10,30 @@ Based on [Tableau Hyper API](https://help.tableau.com/current/api/hyper_api/en-u
 
 Also a publishing data source script allows to take resulted Tableau Hyper file and publish it to a Tableau Server, therefore automating the tedious task to refresh data on the server side (of course, only relevant in case no direct connection from Tableau Server to data source is possible or nature of content is not supported directly by data source: one real-life example can be daily snapshot of a dynamically changing content to capture big variations in time).
 
-
 ## Who do I talk to?
 
 Repository owner is: [Daniel Popiniuc](mailto:danielpopiniuc@gmail.com)
 
+## Implemented features
+
+- conversion intake data from a single or multiple CSV files based on a single input parameter (can be specific or contain a file pattern);
+- dynamic fields detection based ont 1st line content and provided field separator (strategic advantage);
+- dynamic advanced content type detection covering following data types: integer, float-dot, date-iso8601, date-DMY-dash, date-DMY-dot, date-DMY-slash, date-MDY, date-MDY-medium, date-MDY-long, time-12, time-12-micro-sec, time-24, time-24-micro-sec, datetime-iso8601, datetime-iso8601-micro-sec, datetime-MDY, datetime-MDY-micro-sec, datetime-MDY-medium, datetime-MDY-medium-micro-sec, datetime-MDY-long, datetime-MDY-long-micro-sec, string;
+- support for empty field content for any data type (required re-interpreting CSV to be accepted by Hyper Inserter to ensure INT or DOUBLE data types are considered);
+- use Panda package to benefit of Data Frames speed and flexibility;
+- log file to capture entire logic details (very useful for either traceability but also debugging);
+- most of the logic actions are not timed for performance measuring so you can plan better your needs;
+- publishing a Tableau Extract (Hyper format) to a Tableau Server (specifying Site and Project);
+- detection of operating system current region language and log all feedback details using that.
+
+## Combinations of file types supported
+
+| Input (down) File Type/Format Output (right) | Comma Separated Values | Excel | Pickle | Tableau Extract (Hyper) |
+|:-----------------|:----------------------:|:-----:|:------:|:-----------------------:|
+| Comma Separated Values | :x: | :x: | :x: | :x: |
+| Excel | :x: | :x: | :x: | :red_circle: |
+| Tableau Extract (Hyper) | :red_circle: | :red_circle: | :red_circle: | :red_circle: |
+| Pickle | :x: | :x: | :x: | :red_circle: |
 
 ## Installation
 
@@ -81,18 +100,6 @@ Once the package is installed is quite important to keep up with latest releases
     - <content_within_html_tags> = variables to be replaced with user values relevant strings
     - single vertical pipeline = separator for alternative options
 
-## Implemented features
-
-- conversion intake data from a single or multiple CSV files based on a single input parameter (can be specific or contain a file pattern);
-- dynamic fields detection based ont 1st line content and provided field separator (strategic advantage);
-- dynamic advanced content type detection covering following data types: integer, float-dot, date-iso8601, date-DMY-dash, date-DMY-dot, date-DMY-slash, date-MDY, date-MDY-medium, date-MDY-long, time-12, time-12-micro-sec, time-24, time-24-micro-sec, datetime-iso8601, datetime-iso8601-micro-sec, datetime-MDY, datetime-MDY-micro-sec, datetime-MDY-medium, datetime-MDY-medium-micro-sec, datetime-MDY-long, datetime-MDY-long-micro-sec, string;
-- support for empty field content for any data type (required re-interpreting CSV to be accepted by Hyper Inserter to ensure INT or DOUBLE data types are considered);
-- use Panda package to benefit of Data Frames speed and flexibility;
-- log file to capture entire logic details (very useful for either traceability but also debugging);
-- most of the logic actions are not timed for performance measuring so you can plan better your needs;
-- publishing a Tableau Extract (Hyper format) to a Tableau Server (specifying Site and Project);
-- detection of operating system current region language and log all feedback details using that.
-
 ## Change Log / Releases detailed
 
 see [CHANGE_LOG.md](CHANGE_LOG.md)
@@ -104,7 +111,6 @@ see [CHANGE_LOG.md](CHANGE_LOG.md)
     - float-EU,
     - float-EU-thousand-separator;
     - geographical identifiers (Country, US - Zip Codes)
-
 
 ## Features to request template
 

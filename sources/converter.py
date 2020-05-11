@@ -63,7 +63,8 @@ if __name__ == '__main__':
                 class_pn.class_ln.logger, class_pn.timer,
                 class_pn.parameters.output_file, 'Generated')
         elif class_pn.parameters.output_file_format.lower() == 'hyper':
-            if class_pn.parameters.input_file_format.lower() == 'csv':
+            #if class_pn.parameters.input_file_format.lower() == 'csv':
+            if class_pn.parameters.input_file_format.lower() in ('csv', 'pickle'):
                 class_pn.timer.start()
                 c_td = TypeDetermination()
                 # advanced detection of data type within Data Frame
@@ -83,7 +84,7 @@ if __name__ == '__main__':
                     class_pn.parameters.output_file, 'Generated')
             else:
                 print('For time being only CSV file types are supported as input file type '
-                      + 'in combination with Hyper as output file type.'
+                      + 'in combination with Hyper as output file type. '
                       + 'An enhanced version will be deployed in near future!')
     # just final message
     class_pn.class_bn.fn_final_message(

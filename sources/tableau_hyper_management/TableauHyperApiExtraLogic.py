@@ -85,8 +85,9 @@ class TableauHyperApiExtraLogic:
                                       in_data_type, given_parameters):
         hyper_cols = self.fn_build_hyper_columns_for_csv(local_logger, timer, in_data_type)
         # The rows to insert into the <hyper_table> table.
-        data_to_insert = self.fn_rebuild_csv_content_for_hyper(
-                local_logger, timer, input_csv_data_frame, in_data_type)
+        data_to_insert = input_csv_data_frame.to_numpy()
+        #data_to_insert = self.fn_rebuild_csv_content_for_hyper(
+        #        local_logger, timer, input_csv_data_frame, in_data_type)
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
         # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
         # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
@@ -116,7 +117,7 @@ class TableauHyperApiExtraLogic:
                 })
                 self.fn_get_records_count_from_table(local_logger, timer, {
                     'connection': hyper_connection,
-                    'table name': hyper_table_name,
+                    'table': hyper_table,
                 })
             local_logger.info(self.locale.gettext(
                 'Connection to the Hyper engine file has been closed'))
@@ -158,12 +159,12 @@ class TableauHyperApiExtraLogic:
         # `execute_scalar_query` is for executing a query
         # that returns exactly one row with one column.
         query_to_run = 'SELECT COUNT(*) FROM {hyper_table_name}'\
-            .replace('{hyper_table_name}', in_dict['table name'])
+            .replace('{hyper_table_name}', str(in_dict['table'].table_name))
         row_count = in_dict['connection'].execute_scalar_query(query=query_to_run)
         local_logger.info(self.locale.gettext(
             'Table {hyper_table_name} has {row_count} rows')
-                          .replace('{hyper_table_name}', in_dict['table name'])
-                          .replace('{row_count}', row_count))
+                          .replace('{hyper_table_name}', str(in_dict['table'].table_name))
+                          .replace('{row_count}', str(row_count)))
         timer.stop()
 
     def fn_rebuild_csv_content_for_hyper(self, in_logger, timer, input_df, detected_fields_type):
