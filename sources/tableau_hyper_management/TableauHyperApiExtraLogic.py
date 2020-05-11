@@ -85,9 +85,11 @@ class TableauHyperApiExtraLogic:
                                       in_data_type, given_parameters):
         hyper_cols = self.fn_build_hyper_columns_for_csv(local_logger, timer, in_data_type)
         # The rows to insert into the <hyper_table> table.
-        data_to_insert = input_csv_data_frame.to_numpy()
-        #data_to_insert = self.fn_rebuild_csv_content_for_hyper(
-        #        local_logger, timer, input_csv_data_frame, in_data_type)
+        if given_parameters.input_file_format == 'csv':
+            data_to_insert = self.fn_rebuild_csv_content_for_hyper(
+                    local_logger, timer, input_csv_data_frame, in_data_type)
+        else:
+            data_to_insert = input_csv_data_frame.to_numpy()
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
         # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
         # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
