@@ -6,8 +6,6 @@ and correct execution is possible
 """
 # package to handle files/folders and related metadata/operations
 import os
-# package to facilitate multiple operation system operations
-import platform
 # facilitate dependencies management
 from setuptools import setup, find_packages
 
@@ -43,7 +41,8 @@ setup(
         'tableauhyperapi',
         'tableauserverclient',
         'xlrd>=1,<2',
-        'xlsxwriter>=1,<2'
+        'xlsxwriter>=1,<2',
+        'wheel>=0.34.2,<1.0'
     ],
     keywords=[
         'tableau',
@@ -66,5 +65,5 @@ setup(
     },
     python_requires='>=3.6',
     url=this_package_website + '/releases',  # project home page, if any
-    version='1.3.14'
+    version='1.3.15'
 )
