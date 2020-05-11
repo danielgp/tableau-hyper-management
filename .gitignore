@@ -19,3 +19,4 @@ virtual_environment/
 /main.spec
 *.pyc
 *.mo
+hyperd.log
