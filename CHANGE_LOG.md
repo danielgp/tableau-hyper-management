@@ -1,6 +1,9 @@
 # Change Log for Tableau Hyper Management package
 
-## Version 1.3.14 release on 2020-05-10
+## Version 1.3.14 release on 2020-05-11
+- tweaked the localization logic that manages language to use based on operating system default region language.
+
+## Version 1.3.13 release on 2020-05-10
 - forced a value to be string converted when logged.
 
 ## Version 1.3.12 release on 2020-05-09
