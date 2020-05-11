@@ -28,12 +28,12 @@ Repository owner is: [Daniel Popiniuc](mailto:danielpopiniuc@gmail.com)
 
 ## Combinations of file types supported
 
-| Input (down) File Type/Format Output (right) | Comma Separated Values | Excel | Pickle | Tableau Extract (Hyper) |
-|:-----------------|:----------------------:|:-----:|:------:|:-----------------------:|
-| Comma Separated Values | :x: | :x: | :x: | :x: |
-| Excel | :x: | :x: | :x: | :red_circle: |
-| Tableau Extract (Hyper) | :red_circle: | :red_circle: | :red_circle: | :red_circle: |
-| Pickle | :x: | :x: | :x: | :red_circle: |
+| Input (down) File Type/Format Output (right) | Comma Separated Values | Excel              | Pickle             | Tableau Extract (Hyper) |
+|:---------------------------------------------|:----------------------:|:------------------:|:------------------:|:-----------------------:|
+| Comma Separated Values                       | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
+| Excel                                        | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :no_entry:              |
+| Tableau Extract (Hyper)                      | :no_entry:             | :no_entry:         | :no_entry:         | :no_entry:              |
+| Pickle                                       | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :no_entry:              |
 
 ## Installation
 
