@@ -58,18 +58,15 @@ class LocalizationsCommon:
         return file_list_paring_complete
 
     def get_region_language_to_use_from_operating_system(self):
+        language_to_use = ''
         try:
             region_language_to_use = locale.getdefaultlocale('LC_ALL')
-            if region_language_to_use[0] not in self.locale_implemented:
-                language_to_use = self.locale_implemented[0]
-            else:
+            if region_language_to_use[0] in self.locale_implemented:
                 language_to_use = region_language_to_use[0]
         except AttributeError as err:
             print(err)
-            language_to_use = self.locale_implemented[0]
         except ValueError as err:
             print(err)
-            language_to_use = self.locale_implemented[0]
         return language_to_use
 
     @staticmethod
