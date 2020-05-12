@@ -121,6 +121,15 @@ class TypeDetermination(BasicNeeds):
                     'panda_type': panda_determined_type,
                     'type': str(panda_determined_type).replace('64', ''),
                 }
+            elif panda_determined_type in ('datetime64', 'datetime64[ms]', 'datetime64[ns]'):
+                csv_structure.append(col_idx)
+                csv_structure[col_idx] = {
+                    'order': col_idx,
+                    'name': label,
+                    'nulls': counted_nulls,
+                    'panda_type': panda_determined_type,
+                    'type': 'datetime-24-YMD',
+                }
             col_idx += 1
         return csv_structure
 
