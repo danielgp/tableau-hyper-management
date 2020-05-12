@@ -61,6 +61,26 @@ class DataInputOutput(DataDiskRead, DataDiskWrite):
             }
         return messages
 
+    def fn_implemented_file_format_validation(self, local_logger, in_file_details):
+        given_format_is_implemented = False
+        if 'format' in in_file_details:
+            given_format_is_implemented = True
+            if in_file_details['format'].lower() not in self.implemented_disk_write_file_types:
+                given_format_is_implemented = False
+                local_logger.error(self.locale.gettext(
+                        'File "format" attribute has a value of "{format_value}" '
+                        + 'which is not among currently implemented values: '
+                        + '"{implemented_file_formats}", '
+                        + 'therefore desired file operation is not possible')
+                                   .replace('{format_value}', in_file_details['format'].lower())
+                                   .replace('{implemented_file_formats}',
+                                            '", "'.join(self.implemented_disk_write_file_types)))
+        else:
+            local_logger.error(self.locale.gettext(
+                    'File "format" attribute is mandatory in the file setting, but missing, '
+                    + 'therefore desired file operation is not possible'))
+        return given_format_is_implemented
+
     def fn_file_operation_logger(self, local_logger, in_logger_dict):
         messages = self.fn_build_feedback_for_logger(in_logger_dict)
         if in_logger_dict['error details'] is None:
@@ -71,7 +91,7 @@ class DataInputOutput(DataDiskRead, DataDiskWrite):
 
     def fn_load_file_into_data_frame(self, in_logger, timer, in_dict):
         timer.start()
-        if self.fn_store_data_frame_to_file_validation(in_logger, in_dict):
+        if self.fn_implemented_file_format_validation(in_logger, in_dict):
             in_dict = self.fn_add_missing_defaults_to_dict_message(in_dict)
             in_dict.update({'operation': 'load'})
             in_dict = self.fn_pack_dict_message(in_dict, in_dict['file list'])
@@ -104,7 +124,7 @@ class DataInputOutput(DataDiskRead, DataDiskWrite):
 
     def fn_store_data_frame_to_file(self, in_logger, timer, in_data_frame, in_dict):
         timer.start()
-        if self.fn_store_data_frame_to_file_validation(in_logger, in_dict):
+        if self.fn_implemented_file_format_validation(in_logger, in_dict):
             in_dict = self.fn_add_missing_defaults_to_dict_message(in_dict)
             in_dict.update({'operation': 'save'})
             in_dict = self.fn_pack_dict_message(in_dict, [])
@@ -117,25 +137,3 @@ class DataInputOutput(DataDiskRead, DataDiskWrite):
             in_dict = self.fn_internal_store_data_frame_to_pickle_file(in_dict)
             self.fn_file_operation_logger(in_logger, in_dict)
         timer.stop()
-
-    def fn_store_data_frame_to_file_validation(self, local_logger, in_file_details):
-        given_format_is_implemented = False
-        if 'format' in in_file_details:
-            implemented_file_formats = ['csv', 'excel', 'json', 'parquet', 'pickle']
-            given_format = in_file_details['format'].lower()
-            given_format_is_implemented = True
-            if given_format not in implemented_file_formats:
-                given_format_is_implemented = False
-                local_logger.error(self.locale.gettext(
-                        'File "format" attribute has a value of "{format_value}" '
-                        + 'which is not among currently implemented values: '
-                        + '"{implemented_file_formats}", '
-                        + 'therefore desired file operation is not possible')
-                                   .replace('{format_value}', given_format)
-                                   .replace('{implemented_file_formats}',
-                                            '", "'.join(implemented_file_formats)))
-        else:
-            local_logger.error(self.locale.gettext(
-                    'File "format" attribute is mandatory in the file setting, but missing, '
-                    + 'therefore desired file operation is not possible'))
-        return given_format_is_implemented
