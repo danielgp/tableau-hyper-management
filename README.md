@@ -29,7 +29,7 @@ Repository owner is: [Daniel Popiniuc](mailto:danielpopiniuc@gmail.com)
 
 ## Combinations of file types supported
 
-| .          Output (right)<br>File Type/Format<br>Input (down)          . | Comma Separated Values | Excel | Parquet | Pickle | Tableau Extract (Hyper) |
+| __________Output (right)<br>_____File Type/Format_____<br>Input (down)__________ | Comma Separated Values | Excel | Parquet | Pickle | Tableau Extract (Hyper) |
 |:-------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|
 | Comma Separated Values   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | Excel                    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :no_entry:         |
