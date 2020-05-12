@@ -92,7 +92,8 @@ class DataInputOutput:
                                      memory_map=True,
                                      low_memory=False,
                                      encoding='utf-8',
-                                     ) for crt_file in in_dict['files list']])
+                                     ) for crt_file in in_dict['files list']],
+                    sort=False)
             except Exception as err:
                 in_dict['error details'] = err
         return in_dict
@@ -104,7 +105,8 @@ class DataInputOutput:
                 in_dict['out data frame'] = pandas.concat(
                     [pandas.read_excel(io=crt_file,
                                        verbose=True,
-                                       ) for crt_file in in_dict['files list']])
+                                       ) for crt_file in in_dict['files list']],
+                    sort=False)
             except Exception as err:
                 in_dict['error details'] = err
         return in_dict
@@ -116,7 +118,8 @@ class DataInputOutput:
                 in_dict['out data frame'] = pandas.concat(
                     [pandas.read_json(path_or_buf=crt_file,
                                       compression=in_dict['compression'],
-                                      ) for crt_file in in_dict['files list']])
+                                      ) for crt_file in in_dict['files list']],
+                    sort=False)
             except Exception as err:
                 in_dict['error details'] = err
         return in_dict
@@ -128,7 +131,8 @@ class DataInputOutput:
                 in_dict['out data frame'] = pandas.concat(
                     [pandas.read_pickle(path=crt_file,
                                         compression=in_dict['compression'],
-                                        ) for crt_file in in_dict['files list']])
+                                        ) for crt_file in in_dict['files list']],
+                    sort=False)
             except Exception as err:
                 in_dict['error details'] = err
         return in_dict
