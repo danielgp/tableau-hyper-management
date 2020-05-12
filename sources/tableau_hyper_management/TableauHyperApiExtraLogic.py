@@ -35,7 +35,7 @@ class TableauHyperApiExtraLogic:
         self.locale = gettext.translation(locale_domain, localedir=locale_folder,
                                           languages=[in_language], fallback=True)
 
-    def fn_build_hyper_columns_for_csv(self, logger, timer, detected_csv_structure):
+    def fn_build_hyper_columns(self, logger, timer, detected_csv_structure):
         timer.start()
         list_to_return = []
         for current_field_structure in detected_csv_structure:
@@ -82,12 +82,12 @@ class TableauHyperApiExtraLogic:
             identified_type = SqlType.text()
         return identified_type
 
-    def fn_create_hyper_file_from_csv(self, local_logger, timer, input_csv_data_frame,
-                                      in_data_type, given_parameters):
-        hyper_cols = self.fn_build_hyper_columns_for_csv(local_logger, timer, in_data_type)
+    def fn_create_hyper_file_from_data_frame(self, in_logger, timer, in_data_frame,
+                                             in_types, in_parameters):
+        hyper_cols = self.fn_build_hyper_columns(in_logger, timer, in_types)
         # The rows to insert into the <hyper_table> table.
         data_to_insert = self.fn_rebuild_csv_content_for_hyper(
-                local_logger, timer, input_csv_data_frame, in_data_type)
+            in_logger, timer, in_data_frame, in_types)
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
         # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
         # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
@@ -96,32 +96,32 @@ class TableauHyperApiExtraLogic:
             # Replaces file with CreateMode.CREATE_AND_REPLACE if it already exists.
             timer.start()
             with Connection(endpoint=hyper.endpoint,
-                            database=given_parameters.output_file,
+                            database=in_parameters.output_file,
                             create_mode=CreateMode.CREATE_AND_REPLACE) as hyper_connection:
-                local_logger.info('Connection to the Hyper engine '
-                                  + f'file "{given_parameters.output_file}" has been created.')
+                in_logger.info('Connection to the Hyper engine '
+                               + f'file "{in_parameters.output_file}" has been created.')
                 timer.stop()
                 schema_name = 'Extract'
-                self.fn_create_hyper_schema(local_logger, timer, hyper_connection, schema_name)
+                self.fn_create_hyper_schema(in_logger, timer, hyper_connection, schema_name)
                 hyper_table_name = 'Extract'
-                hyper_table = self.fn_create_hyper_table(local_logger, timer, {
+                hyper_table = self.fn_create_hyper_table(in_logger, timer, {
                     'columns': hyper_cols,
                     'connection': hyper_connection,
                     'schema name': schema_name,
                     'table name': hyper_table_name,
                 })
-                self.fn_insert_data_into_hyper_table(local_logger, timer, {
+                self.fn_insert_data_into_hyper_table(in_logger, timer, {
                     'connection': hyper_connection,
                     'data': data_to_insert,
                     'table': hyper_table,
                 })
-                self.fn_get_records_count_from_table(local_logger, timer, {
+                self.fn_get_records_count_from_table(in_logger, timer, {
                     'connection': hyper_connection,
                     'table': hyper_table,
                 })
-            local_logger.info(self.locale.gettext(
+            in_logger.info(self.locale.gettext(
                 'Connection to the Hyper engine file has been closed'))
-        local_logger.info(self.locale.gettext('Hyper engine process has been shut down'))
+        in_logger.info(self.locale.gettext('Hyper engine process has been shut down'))
 
     def fn_insert_data_into_hyper_table(self, local_logger, timer, in_dict):
         timer.start()
@@ -152,6 +152,30 @@ class TableauHyperApiExtraLogic:
                           .replace('{hyper_table_name}', in_dict['table name']))
         timer.stop()
         return out_hyper_table
+
+    def fn_get_data_from_hyper(self, in_logger, timer, in_parameters):
+        timer.start()
+        out_data_frame = None
+        try:
+            # Starts Hyper Process with telemetry enabled/disabled to send data to Tableau or not
+            # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
+            # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
+            with HyperProcess(telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU) as hyper:
+                #  Connect to an existing .hyper file (CreateMode.NONE)
+                with Connection(endpoint=hyper.endpoint,
+                                database=in_parameters.input_file,
+                                create_mode=CreateMode.NONE) as connection:
+                    # once Hyper is opened we can get data out
+                    query_to_run = f"SELECT * FROM {TableName('Extract', 'Extract')}"
+                    result_set = connection.execute_list_query(query=query_to_run)
+                    out_data_frame = pd.DataFrame(result_set)
+                    in_logger.debug(len(out_data_frame))
+                    in_logger.info(self.locale.gettext('Success!'))
+        except HyperException as ex:
+            in_logger.error(str(ex).replace(chr(10), ' '))
+            exit(1)
+        timer.stop()
+        return out_data_frame
 
     def fn_get_records_count_from_table(self, local_logger, timer, in_dict):
         timer.start()
@@ -205,11 +229,10 @@ class TableauHyperApiExtraLogic:
             given_df[given_field_name] = self.fn_string_to_date(given_field_name, given_df)
         return given_df[given_field_name]
 
-    def fn_run_hyper_creation(self, local_logger, timer, input_data_frame, input_data_type,
-                              given_parameters):
+    def fn_run_hyper_creation(self, local_logger, timer, in_data_frame, in_types, in_parameters):
         try:
-            self.fn_create_hyper_file_from_csv(local_logger, timer, input_data_frame,
-                                               input_data_type, given_parameters)
+            self.fn_create_hyper_file_from_data_frame(
+                local_logger, timer, in_data_frame, in_types, in_parameters)
         except HyperException as ex:
             local_logger.error(str(ex).replace(chr(10), ' '))
             exit(1)

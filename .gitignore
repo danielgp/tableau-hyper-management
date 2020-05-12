@@ -20,3 +20,4 @@ virtual_environment/
 *.pyc
 *.mo
 hyperd.log
+/samples/*.log

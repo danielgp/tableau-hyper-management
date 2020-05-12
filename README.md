@@ -8,7 +8,8 @@
 
 Based on [Tableau Hyper API](https://help.tableau.com/current/api/hyper_api/en-us/) this repository is intended to manage importing any CSV file into Tableau-Hyper format (to be used with Tableau Desktop/Server) with minimal configuration (as column detection, content type detection and reinterpretation of content are part of the included logic), therefore speed up the process of building extract.
 
-Also a publishing data source script allows to take resulted Tableau Hyper file and publish it to a Tableau Server, therefore automating the tedious task to refresh data on the server side (of course, only relevant in case no direct connection from Tableau Server to data source is possible or nature of content is not supported directly by data source: one real-life example can be daily snapshot of a dynamically changing content to capture big variations in time).
+Also a publishing data source script allows to take resulted Tableau Hyper file and publish it to a Tableau Server. This is possible thank to excellent Tableau supported logic: [Tableau Server Client (Python)](https://github.com/tableau/server-client-python) package.
+> This features allows you to automate tedious tasks to refresh data on the server side (one real-life example could be a daily/weekly snapshot of a dynamically changing content to capture big variations in time in Development or Quality layer before reaching Production environment).
 
 ## Who do I talk to?
 
@@ -28,13 +29,13 @@ Repository owner is: [Daniel Popiniuc](mailto:danielpopiniuc@gmail.com)
 
 ## Combinations of file types supported
 
-| Input (down) File Type/Format Output (right) | Comma Separated Values | Excel              | Pickle             | Tableau Extract (Hyper) |
-|:---------------------------------------------|:----------------------:|:------------------:|:------------------:|:-----------------------:|
-| Comma Separated Values                       | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
-| Excel                                        | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :no_entry:              |
-| Tableau Extract (Hyper)                      | :soon:                 | :soon:             | :soon:             | :no_entry:              |
-| Parquet                                      | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
-| Pickle                                       | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
+| Output (right) <br> File Type/Format <br> Input (down) | Comma Separated Values | Excel              | Parquet            | Pickle             | Tableau Extract (Hyper) |
+|:-------------------------------------------------------|:----------------------:|:------------------:|:------------------:|:------------------:|:-----------------------:|
+| Comma Separated Values                                 | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
+| Excel                                                  | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :no_entry:              |
+| Tableau Extract (Hyper)                                | :soon:                 | :soon:             | :soon:             | :soon:             | :no_entry:              |
+| Parquet                                                | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
+| Pickle                                                 | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
 
 ## Installation
 
