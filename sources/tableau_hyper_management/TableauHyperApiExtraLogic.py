@@ -45,7 +45,7 @@ class TableauHyperApiExtraLogic:
                 + 'will become "{column_type_new}"')
                          .replace('{column_order}', str(current_field_structure['order']))
                          .replace('{column_name}', current_field_structure['name'])
-                         .replace('{column_type}', current_field_structure['type'])
+                         .replace('{column_type}', str(current_field_structure['type']))
                          .replace('{column_type_new}', str(current_column_type)))
             nullability_value = NULLABLE
             if current_field_structure['nulls'] == 0:
@@ -85,11 +85,8 @@ class TableauHyperApiExtraLogic:
                                       in_data_type, given_parameters):
         hyper_cols = self.fn_build_hyper_columns_for_csv(local_logger, timer, in_data_type)
         # The rows to insert into the <hyper_table> table.
-        if given_parameters.input_file_format == 'csv':
-            data_to_insert = self.fn_rebuild_csv_content_for_hyper(
-                    local_logger, timer, input_csv_data_frame, in_data_type)
-        else:
-            data_to_insert = input_csv_data_frame.to_numpy()
+        data_to_insert = self.fn_rebuild_csv_content_for_hyper(
+                local_logger, timer, input_csv_data_frame, in_data_type)
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
         # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
         # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
@@ -182,7 +179,7 @@ class TableauHyperApiExtraLogic:
                             .replace('{column_pandas_type}', str(current_field['panda_type']))
                             .replace('{column_python_type}', str(current_field['type'])))
             input_df[fld_nm] = self.fn_reevaluate_single_column(input_df, fld_nm, current_field)
-            if current_field['panda_type'] == 'object' \
+            if current_field['panda_type'] in ('object', 'float64') \
                 and current_field['type'] == 'int':
                 input_df[fld_nm] = input_df[fld_nm].fillna(0).astype('int64')
                 in_logger.debug(self.locale.gettext(
@@ -203,9 +200,6 @@ class TableauHyperApiExtraLogic:
     def fn_reevaluate_single_column(self, given_df, given_field_name, current_field_details):
         if current_field_details['type'] == 'str':
             given_df[given_field_name] = given_df[given_field_name].astype(str)
-        elif current_field_details['panda_type'] == 'float64' \
-                and current_field_details['type'] == 'int':
-            given_df[given_field_name] = given_df[given_field_name].fillna(0).astype('int64')
         elif current_field_details['type'][0:5] in ('date-', 'datet', 'time-'):
             given_df[given_field_name] = self.fn_string_to_date(given_field_name, given_df)
         return given_df[given_field_name]
