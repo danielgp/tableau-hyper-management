@@ -114,7 +114,7 @@ class DataInputOutput:
         if in_dict['format'].lower() == 'json':
             try:
                 in_dict['out data frame'] = pandas.concat(
-                    [pandas.read_json(filepath_or_buffer=crt_file,
+                    [pandas.read_json(path_or_buf=crt_file,
                                       compression=in_dict['compression'],
                                       ) for crt_file in in_dict['files list']])
             except Exception as err:
