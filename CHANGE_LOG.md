@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.4.2 release on 2020-05-12
+- supported files are now used internally for validation purposes which makes code more maintainable if and when new file types will be implemented with changes in fewer places.
+
 ## Version 1.4.1 release on 2020-05-12
 - added support for Parquet file format (full coverage: both input and output).
 
