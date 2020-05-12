@@ -1,5 +1,10 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.4.0 release on 2020-05-12
+- extended support for Pickle and JSON file format which now can be used as input files in combination with Tableau Extract (Hyper) as output file;
+- field type timestamp properly recognized;
+- added a matrix of file combination in documentation (should make usage much clearer).
+
 ## Version 1.3.14 release on 2020-05-11
 - tweaked the localization logic that manages language to use based on operating system default region language.
 
