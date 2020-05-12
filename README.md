@@ -29,13 +29,13 @@ Repository owner is: [Daniel Popiniuc](mailto:danielpopiniuc@gmail.com)
 
 ## Combinations of file types supported
 
-| Output (right) <br> File Type/Format <br> Input (down) | Comma Separated Values | Excel              | Parquet            | Pickle             | Tableau Extract (Hyper) |
-|:-------------------------------------------------------|:----------------------:|:------------------:|:------------------:|:------------------:|:-----------------------:|
-| Comma Separated Values                                 | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
-| Excel                                                  | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :no_entry:              |
-| Tableau Extract (Hyper)                                | :soon:                 | :soon:             | :soon:             | :soon:             | :no_entry:              |
-| Parquet                                                | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
-| Pickle                                                 | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
+| .          Output (right)<br>File Type/Format<br>Input (down)          . | Comma Separated Values | Excel | Parquet | Pickle | Tableau Extract (Hyper) |
+|:-------------------------|:------------------:|:------------------:|:------------------:|:------------------:|:------------------:|
+| Comma Separated Values   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| Excel                    | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :no_entry:         |
+| Tableau Extract (Hyper)  | :soon:             | :soon:             | :soon:             | :soon:             | :no_entry:         |
+| Parquet                  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| Pickle                   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 
 ## Installation
 
