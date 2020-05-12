@@ -34,10 +34,10 @@ setup(
     include_package_data=True,
     install_requires=[
         'Babel>=2.8.0,<3',
-        'cffi>=1.13.2,<2',
         'codetiming>=1.1,<2',
         'numpy>=1.17.4,<2',
-        'pandas>=0.25.3,<1',
+        'pandas>=1.0,<2',
+        'pyarrow>=0.17,<1.0',
         'tableauhyperapi',
         'tableauserverclient',
         'xlrd>=1,<2',
@@ -65,5 +65,5 @@ setup(
     },
     python_requires='>=3.6',
     url=this_package_website + '/releases',  # project home page, if any
-    version='1.4.0'
+    version='1.4.1'
 )

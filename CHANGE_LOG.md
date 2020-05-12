@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.4.1 release on 2020-05-12
+- added support for Parquet file format (full coverage: both input and output).
+
 ## Version 1.4.0 release on 2020-05-12
 - extended support for Pickle and JSON file format which now can be used as input files in combination with Tableau Extract (Hyper) as output file;
 - field type timestamp properly recognized;

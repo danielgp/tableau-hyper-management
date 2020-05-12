@@ -33,6 +33,7 @@ Repository owner is: [Daniel Popiniuc](mailto:danielpopiniuc@gmail.com)
 | Comma Separated Values                       | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
 | Excel                                        | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :no_entry:              |
 | Tableau Extract (Hyper)                      | :soon:                 | :soon:             | :soon:             | :no_entry:              |
+| Parquet                                      | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
 | Pickle                                       | :heavy_check_mark:     | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:      |
 
 ## Installation
