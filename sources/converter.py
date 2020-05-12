@@ -50,7 +50,8 @@ if __name__ == '__main__':
     working_data_frame = class_pn.class_dio.fn_load_file_into_data_frame(
             class_pn.class_ln.logger, class_pn.timer, input_dict)
     if working_data_frame is not None:
-        if class_pn.parameters.output_file_format.lower() in ('csv', 'excel', 'json', 'pickle'):
+        tuple_supported_file_types = class_pn.class_dio.implemented_disk_write_file_types
+        if class_pn.parameters.output_file_format.lower() in tuple_supported_file_types:
             output_dict = input_dict
             output_dict['file list'] = 'irrelevant'
             output_dict['format'] = class_pn.parameters.output_file_format
@@ -63,16 +64,17 @@ if __name__ == '__main__':
                 class_pn.class_ln.logger, class_pn.timer,
                 class_pn.parameters.output_file, 'Generated')
         elif class_pn.parameters.output_file_format.lower() == 'hyper':
-            if class_pn.parameters.input_file_format.lower() in ('csv', 'json', 'pickle'):
+            # instantiate Tableau Hyper Api Extra Logic class
+            class_thael = TableauHyperApiExtraLogic(language_to_use)
+            supported_types = class_thael.supported_input_file_types
+            if class_pn.parameters.input_file_format.lower() in supported_types:
                 class_pn.timer.start()
-                c_td = TypeDetermination()
+                c_td = TypeDetermination(language_to_use)
                 # advanced detection of data type within Data Frame
                 detected_csv_structure = c_td.fn_detect_csv_structure(
                     class_pn.class_ln.logger, working_data_frame, class_pn.parameters,
                     class_pn.config['data_types'])
                 class_pn.timer.stop()
-                # instantiate Tableau Hyper Api Extra Logic class
-                class_thael = TableauHyperApiExtraLogic()
                 # create HYPER from Data Frame
                 class_thael.fn_run_hyper_creation(
                     class_pn.class_ln.logger, class_pn.timer, working_data_frame,
