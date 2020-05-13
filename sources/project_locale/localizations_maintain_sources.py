@@ -40,7 +40,7 @@ class LocalizationsMaintainSources(LocalizationsCommon):
                     operation_to_execute = 'init_catalog'
                 elif 'newer' in file_situation_verdict:
                     operation_to_execute = 'update_catalog'
-                    operation_final_flags = ' --previous'
+                    operation_final_flags = ' --previous --no-fuzzy-matching'
                 if operation_check_result:
                     domains_locale_to_update.append(compiling_files_counter)
                     domains_locale_to_update[compiling_files_counter] = {
@@ -60,5 +60,4 @@ my_class = LocalizationsMaintainSources()
 
 locale_source_files = my_class.get_project_localisation_source_files('pot')
 operation_locale_dict = my_class.evaluate_update_necessity(locale_source_files)
-print(operation_locale_dict)
 my_class.operate_localisation_files(operation_locale_dict)
