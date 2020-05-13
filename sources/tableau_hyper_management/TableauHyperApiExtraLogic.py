@@ -91,15 +91,21 @@ class TableauHyperApiExtraLogic:
         # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
         # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
         # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
-        with HyperProcess(telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU) as hyper:
+        telemetry_chosen = Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU
+        with HyperProcess(telemetry=telemetry_chosen) as hyper:
+            in_logger.debug(self.locale.gettext('Hyper engine process initialized'))
+            in_logger.debug(self.locale.gettext('Chosen Telemetry is {telemetry_value}')
+                            .replace('{telemetry_value}', str(telemetry_chosen)))
             # Creates new Hyper file <output_hyper_file>
             # Replaces file with CreateMode.CREATE_AND_REPLACE if it already exists.
             timer.start()
             with Connection(endpoint=hyper.endpoint,
                             database=in_parameters.output_file,
                             create_mode=CreateMode.CREATE_AND_REPLACE) as hyper_connection:
-                in_logger.info('Connection to the Hyper engine '
-                               + f'file "{in_parameters.output_file}" has been created.')
+                in_logger.debug(self.locale.gettext(
+                    'Connection to the Hyper engine using file name "{file_name}" '
+                    + 'has been established')
+                               .replace('{file_name}', in_parameters.output_file))
                 timer.stop()
                 schema_name = 'Extract'
                 self.fn_create_hyper_schema(in_logger, timer, hyper_connection, schema_name)
@@ -160,17 +166,29 @@ class TableauHyperApiExtraLogic:
             # Starts Hyper Process with telemetry enabled/disabled to send data to Tableau or not
             # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
             # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
-            with HyperProcess(telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU) as hyper:
+            telemetry_chosen = Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU
+            with HyperProcess(telemetry=telemetry_chosen) as hyper:
+                in_logger.debug(self.locale.gettext('Hyper engine process initialized'))
+                in_logger.debug(self.locale.gettext('Chosen Telemetry is {telemetry_value}')
+                                .replace('{telemetry_value}', str(telemetry_chosen)))
                 #  Connect to an existing .hyper file (CreateMode.NONE)
                 with Connection(endpoint=hyper.endpoint,
                                 database=in_parameters.input_file,
                                 create_mode=CreateMode.NONE) as connection:
+                    in_logger.debug(self.locale.gettext(
+                        'Connection to the Hyper engine using file name "{file_name}" '
+                        + 'has been established')
+                                   .replace('{file_name}', in_parameters.input_file))
                     # once Hyper is opened we can get data out
                     query_to_run = f"SELECT * FROM {TableName('Extract', 'Extract')}"
+                    in_logger.debug(self.locale.gettext(
+                        'Hyper SQL about to be executed is: {hyper_sql}')
+                                    .replace('{hyper_sql}', str(query_to_run)))
                     result_set = connection.execute_list_query(query=query_to_run)
                     out_data_frame = pd.DataFrame(result_set)
-                    in_logger.debug(len(out_data_frame))
-                    in_logger.info(self.locale.gettext('Success!'))
+                    in_logger.debug(self.locale.gettext(
+                        'Hyper SQL executed with success and {rows_counted} have been retrieved')
+                                    .replace('{rows_counted}', str(len(out_data_frame))))
         except HyperException as ex:
             in_logger.error(str(ex).replace(chr(10), ' '))
             exit(1)

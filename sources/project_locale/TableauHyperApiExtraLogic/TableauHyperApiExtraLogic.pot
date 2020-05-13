@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TableauHyperApiExtraLogic\n"
 "POT-Creation-Date: 2020-05-09 15:10+0200\n"
-"PO-Revision-Date: 2020-05-09 16:20+0200\n"
+"PO-Revision-Date: 2020-05-13 00:02+0200\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -14,6 +14,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "Building Hyper columns completed"
+msgstr ""
+
+msgid "Chosen Telemetry is {telemetry_value}"
 msgstr ""
 
 msgid "Column {column_order} having name [{column_name}] and type \"{column_type}\" will become \"{column_type_new}\""
@@ -28,10 +31,22 @@ msgstr ""
 msgid "Connection to the Hyper engine file has been closed"
 msgstr ""
 
+msgid "Connection to the Hyper engine using file name \"{file_name}\" has been established"
+msgstr ""
+
 msgid "Data has been inserted into Hyper table"
 msgstr ""
 
+msgid "Hyper SQL about to be executed is: {hyper_sql}"
+msgstr ""
+
+msgid "Hyper SQL executed with success and {rows_counted} have been retrieved"
+msgstr ""
+
 msgid "Hyper engine process has been shut down"
+msgstr ""
+
+msgid "Hyper engine process initialized"
 msgstr ""
 
 msgid "Hyper schema \"{hyper_schema_name}\" has been created"
