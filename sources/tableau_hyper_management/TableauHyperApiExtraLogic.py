@@ -159,6 +159,21 @@ class TableauHyperApiExtraLogic:
         timer.stop()
         return out_hyper_table
 
+    def fn_get_column_names_from_table(self, in_logger, in_dict):
+        columns_counted = in_dict['table definition'].column_count
+        in_logger.debug(self.locale.gettext('A number of {column_count} columns were found')
+                        .replace('{column_count}', str(columns_counted)))
+        columns_counter = 0
+        table_columns = []
+        while columns_counter < columns_counted:
+            table_columns.append(columns_counter)
+            table_columns[columns_counter] = str(in_dict['table definition'].get_column(
+                columns_counter).name).replace('"', '')
+            columns_counter += 1
+        in_logger.debug(self.locale.gettext('And these columns are: {column_list}')
+                        .replace('{column_list}', str(table_columns)))
+        return table_columns
+
     def fn_get_data_from_hyper(self, in_logger, timer, in_parameters):
         timer.start()
         out_data_frame = None
@@ -189,6 +204,12 @@ class TableauHyperApiExtraLogic:
                     in_logger.debug(self.locale.gettext(
                         'Hyper SQL executed with success and {rows_counted} have been retrieved')
                                     .replace('{rows_counted}', str(len(out_data_frame))))
+                    table_definition = connection.catalog.get_table_definition(
+                        name=TableName('Extract', 'Extract'))
+                    table_columns = self.fn_get_column_names_from_table(in_logger, {
+                        'table definition': table_definition,
+                    })
+                    out_data_frame.set_axis(table_columns,axis='columns',inplace=True)
         except HyperException as ex:
             in_logger.error(str(ex).replace(chr(10), ' '))
             exit(1)
