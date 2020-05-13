@@ -21,3 +21,4 @@ virtual_environment/
 *.mo
 hyperd.log
 /samples/*.log
+/samples/*.log.*
