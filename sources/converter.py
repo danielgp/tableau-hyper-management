@@ -62,7 +62,7 @@ if __name__ == '__main__':
         output_dict['format'] = class_pn.parameters.output_file_format
         output_dict['name'] = class_pn.parameters.output_file
         output_dict['compression'] = class_pn.parameters.output_file_compression
-        if class_pn.parameters.input_file_format.to_lower() == 'hyper':
+        if class_pn.parameters.input_file_format.lower() == 'hyper':
             tuple_supported_file_types = ('csv', 'pickle')
         else:
             tuple_supported_file_types = class_pn.class_dio.implemented_disk_write_file_types
