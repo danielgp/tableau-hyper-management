@@ -1,18 +1,21 @@
 # Copyright (C) 2020 Daniel Popiniuc
-# This file is distributed under the same license as the CommandLineArgumentsManagement package.
+# This file is distributed under the same license as the
+# CommandLineArgumentsManagement package.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: CommandLineArgumentsManagement\n"
+"Report-Msgid-Bugs-To: danielppiniuc@gmail.com\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-05-07 23:50+0300\n"
+"PO-Revision-Date: 2020-05-17 01:21+0300\n"
 "Last-Translator: Daniel Popiniuc <danielpopiniuc@gmail.com>\n"
 "Language-Team: Romanian\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2\n"
+"Generated-By: Babel 2.8.0\n"
 
 msgid "{application_name} has started"
 msgstr "{application_name} a început"
@@ -61,6 +64,9 @@ msgstr "Numele fișierului jurnal de ieșire este %s"
 
 msgid "Overview of input parameter given values"
 msgstr "Prezentare generală a valorilor date de parametrii de intrare"
+
+msgid "Policy to handle Tableau Extract (Hyper format) is %s"
+msgstr "Politica de gestionare a Extractului Tableau (format Hyper) este %s"
 
 msgid "Publishing mode is %s"
 msgstr "Modul de publicare este %s"

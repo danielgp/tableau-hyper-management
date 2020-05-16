@@ -26,7 +26,7 @@
                 "option_description"    : "Input file format is %s",
                 "option_long"           : "input-file-format",
                 "option_required"       : true,
-                "option_sample_value"   : "input-file-format"
+                "option_sample_value"   : "csv|excel|hyper|parquet|pickle"
             },
             "c": {
                 "default_value"         : "infer",
@@ -40,7 +40,7 @@
                 "option_description"    : "CSV field separator is %s",
                 "option_long"           : "csv-field-separator",
                 "option_required"       : false,
-                "option_sample_value"   : "csv-field-separator-character"
+                "option_sample_value"   : ",|;"
             },
             "o": {
                 "default_value"         : "",
@@ -54,7 +54,7 @@
                 "option_description"    : "Output file format is %s",
                 "option_long"           : "output-file-format",
                 "option_required"       : false,
-                "option_sample_value"   : "output-file-format"
+                "option_sample_value"   : "csv|excel|hyper|parquet|pickle"
             },
             "k": {
                 "default_value"         : "infer",
@@ -68,7 +68,14 @@
                 "option_description"    : "Output log file name is %s",
                 "option_long"           : "output-log-file",
                 "option_required"       : false,
-                "option_sample_value"   : "output-log-file-name"
+                "option_sample_value"   : "output_processing_details.log"
+            },
+            "p": {
+                "default_value"         : "overwrite",
+                "option_description"    : "Policy to handle Tableau Extract (Hyper format) is %s",
+                "option_long"           : "policy-to-handle-hyper-file",
+                "option_required"       : false,
+                "option_sample_value"   : "append|overwrite|read"
             },
             "a": {
                 "default_value"         : 200,

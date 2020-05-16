@@ -1,18 +1,21 @@
 # Copyright (C) 2020 Daniel Popiniuc
-# This file is distributed under the same license as the CommandLineArgumentsManagement package.
+# This file is distributed under the same license as the
+# CommandLineArgumentsManagement package.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: CommandLineArgumentsManagement\n"
+"Report-Msgid-Bugs-To: danielppiniuc@gmail.com\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-04-26 02:17+0300\n"
+"PO-Revision-Date: 2020-05-17 01:17+0300\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
-"Language-Team: Italian\n"
 "Language: it\n"
+"Language-Team: Italian\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.8.0\n"
 
 msgid "{application_name} has started"
 msgstr "{application_name} è iniziato"
@@ -61,6 +64,9 @@ msgstr "Il nome del file di log in uscita è %s"
 
 msgid "Overview of input parameter given values"
 msgstr "Panoramica dei valori dei parametri di ingresso dati"
+
+msgid "Policy to handle Tableau Extract (Hyper format) is %s"
+msgstr "La politica per gestire l'Estratto Tableau (formato Hyper) è %s"
 
 msgid "Publishing mode is %s"
 msgstr "La modalità di pubblicazione è %s"

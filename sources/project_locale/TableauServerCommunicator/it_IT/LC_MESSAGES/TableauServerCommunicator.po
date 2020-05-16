@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:  TableauServerCommunicator\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"Report-Msgid-Bugs-To: danielppiniuc@gmail.com\n"
 "POT-Creation-Date: 2020-05-08 23:20+0200\n"
 "PO-Revision-Date: 2020-05-09 12:09+0300\n"
 "Last-Translator: danielppiniuc@gmail.com\n"

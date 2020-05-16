@@ -61,6 +61,9 @@ msgstr ""
 msgid "Overview of input parameter given values"
 msgstr ""
 
+msgid "Policy to handle Tableau Extract (Hyper format) is %s"
+msgstr ""
+
 msgid "Publishing mode is %s"
 msgstr ""
 
