@@ -1,5 +1,10 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.4.5 release on 2020-05-15
+- added support for 2 additional file format in a combination with output file format = Hyper;
+- few additional file formats combination checks to avoid runtime errors;
+- improved localized feedback captured in log files.
+
 ## Version 1.4.2 release on 2020-05-12
 - supported files are now used internally for validation purposes which makes code more maintainable if and when new file types will be implemented with changes in fewer places.
 
