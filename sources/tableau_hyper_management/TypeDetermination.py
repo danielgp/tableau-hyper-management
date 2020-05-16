@@ -80,57 +80,59 @@ class TypeDetermination(BasicNeeds):
                 return field_structure
         return field_structure
 
-    def fn_detect_csv_structure(self, logger, input_csv_data_frame, input_parameters, data_types):
+    def fn_get_data_frame_structure(self, in_logger, timer, in_dict):
+        timer.start()
         col_idx = 0
         csv_structure = []
         # Cycle through all found columns
-        for label, content in input_csv_data_frame.items():
-            panda_determined_type = content.infer_objects().dtypes
+        for label, content in in_dict['data frame'].items():
+            panda_data_types = content.infer_objects().dtypes
             counted_nulls = content.isnull().sum()
-            logger.debug(self.locale.gettext(
+            in_logger.debug(self.locale.gettext(
                 'Field "{column_name}" according to Pandas package '
                 + 'is of type "{panda_determined_type}" '
                 + 'with {counted_nulls} counted NULLs')
-                         .replace('{column_name}', label)
-                         .replace('{panda_determined_type}', str(panda_determined_type))
-                         .replace('{counted_nulls}', str(counted_nulls)))
-            if panda_determined_type in ('float64', 'object'):
+                            .replace('{column_name}', label)
+                            .replace('{panda_determined_type}', str(panda_data_types))
+                            .replace('{counted_nulls}', str(counted_nulls)))
+            if panda_data_types in ('float64', 'object'):
                 list_unique_values = self.fn_unique_values_isolation(
-                        logger, label, content, panda_determined_type, input_parameters)
+                        in_logger, label, content, panda_data_types, in_dict['input parameters'])
                 unique_v_list = {
                     'order': col_idx,
                     'name': label,
                     'nulls': counted_nulls,
-                    'panda_type': panda_determined_type,
+                    'panda_type': panda_data_types,
                     'unique_values': list_unique_values
                 }
                 str_unique_values = self.fn_multi_line_string_to_single(str(unique_v_list))
-                logger.debug(self.locale.gettext(
+                in_logger.debug(self.locale.gettext(
                     'Unique list of values is: {unique_values_list}')
-                             .replace('{unique_values_list}', str_unique_values))
+                                .replace('{unique_values_list}', str_unique_values))
                 csv_structure.append(col_idx)
                 csv_structure[col_idx] = \
                     self.fn_analyze_field_content_to_establish_data_type(
-                            logger, unique_v_list, data_types)
-            elif panda_determined_type in ('bool', 'int64'):
+                            in_logger, unique_v_list, in_dict['input data types'])
+            elif panda_data_types in ('bool', 'int64'):
                 csv_structure.append(col_idx)
                 csv_structure[col_idx] = {
                     'order': col_idx,
                     'name': label,
                     'nulls': counted_nulls,
-                    'panda_type': panda_determined_type,
-                    'type': str(panda_determined_type).replace('64', ''),
+                    'panda_type': panda_data_types,
+                    'type': str(panda_data_types).replace('64', ''),
                 }
-            elif panda_determined_type in ('datetime64', 'datetime64[ms]', 'datetime64[ns]'):
+            elif panda_data_types in ('datetime64', 'datetime64[ms]', 'datetime64[ns]'):
                 csv_structure.append(col_idx)
                 csv_structure[col_idx] = {
                     'order': col_idx,
                     'name': label,
                     'nulls': counted_nulls,
-                    'panda_type': panda_determined_type,
+                    'panda_type': panda_data_types,
                     'type': 'datetime-24-YMD',
                 }
             col_idx += 1
+        timer.stop()
         return csv_structure
 
     @staticmethod
