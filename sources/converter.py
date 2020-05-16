@@ -49,9 +49,13 @@ if __name__ == '__main__':
         'format': class_pn.parameters.input_file_format,
         'name': 'irrelevant',
     }
+    working_data_frame = None
     if class_pn.parameters.input_file_format == 'hyper':
-        working_data_frame = class_thael.fn_get_data_from_hyper(
-            class_pn.class_ln.logger, class_pn.timer, class_pn.parameters)
+        if relevant_files_list:
+            input_dict['action'] = 'read from existing hyper'
+            input_dict['hyper file'] = relevant_files_list[0]
+            working_data_frame = class_thael.fn_hyper_handle(
+                class_pn.class_ln.logger, class_pn.timer, input_dict)
     else:
         working_data_frame = class_pn.class_dio.fn_load_file_into_data_frame(
             class_pn.class_ln.logger, class_pn.timer, input_dict)
@@ -63,7 +67,7 @@ if __name__ == '__main__':
         output_dict['name'] = class_pn.parameters.output_file
         output_dict['compression'] = class_pn.parameters.output_file_compression
         if class_pn.parameters.input_file_format.lower() == 'hyper':
-            tuple_supported_file_types = ('csv', 'pickle')
+            tuple_supported_file_types = ('csv', 'parquet', 'pickle')
         else:
             tuple_supported_file_types = class_pn.class_dio.implemented_disk_write_file_types
         if class_pn.parameters.output_file_format.lower() in tuple_supported_file_types:
@@ -76,17 +80,30 @@ if __name__ == '__main__':
         elif class_pn.parameters.output_file_format.lower() == 'hyper':
             supported_types = class_thael.supported_input_file_types
             if class_pn.parameters.input_file_format.lower() in supported_types:
-                class_pn.timer.start()
                 c_td = TypeDetermination(language_to_use)
+                fn_dict = {
+                    'data frame': working_data_frame,
+                    'input parameters': class_pn.parameters,
+                    'input data types': class_pn.config['data_types'],
+                    'hyper file': class_pn.parameters.output_file,
+                }
                 # advanced detection of data type within Data Frame
-                detected_csv_structure = c_td.fn_detect_csv_structure(
-                    class_pn.class_ln.logger, working_data_frame, class_pn.parameters,
-                    class_pn.config['data_types'])
-                class_pn.timer.stop()
-                # create HYPER from Data Frame
-                class_thael.fn_run_hyper_creation(
-                    class_pn.class_ln.logger, class_pn.timer, working_data_frame,
-                    detected_csv_structure, class_pn.parameters)
+                fn_dict['data frame structure'] = c_td.fn_get_data_frame_structure(
+                    class_pn.class_ln.logger, class_pn.timer, fn_dict)
+                # determine Hyper Table Columns
+                fn_dict['hyper table columns'] = class_thael.fn_build_hyper_columns(
+                    class_pn.class_ln.logger, class_pn.timer, fn_dict['data frame structure'])
+                # The rows to insert into the <hyper_table> table.
+                fn_dict['data'] = class_thael.fn_rebuild_data_frame_content_for_hyper(
+                    class_pn.class_ln.logger, class_pn.timer, fn_dict)
+                fn_dict['action'] = class_pn.parameters.policy_to_handle_hyper_file
+                # check if output Hyper file does not exists
+                # and if so action will be always "overwrite"
+                # which will trigger internal Hyper structure creation (schema and table)
+                if not os.path.isfile(fn_dict['hyper file']):
+                    fn_dict['action'] = 'overwrite'
+                    # manipulate destination Tableau Extract (Hyper)
+                class_thael.fn_hyper_handle(class_pn.class_ln.logger, class_pn.timer, fn_dict)
                 # store statistics about output file
                 class_pn.class_fo.fn_store_file_statistics(
                     class_pn.class_ln.logger, class_pn.timer,

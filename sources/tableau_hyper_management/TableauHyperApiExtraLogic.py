@@ -35,10 +35,10 @@ class TableauHyperApiExtraLogic:
         self.locale = gettext.translation(locale_domain, localedir=locale_folder,
                                           languages=[in_language], fallback=True)
 
-    def fn_build_hyper_columns(self, logger, timer, detected_csv_structure):
+    def fn_build_hyper_columns(self, logger, timer, in_data_frame_structure):
         timer.start()
         list_to_return = []
-        for current_field_structure in detected_csv_structure:
+        for current_field_structure in in_data_frame_structure:
             list_to_return.append(current_field_structure['order'])
             current_column_type = self.fn_convert_to_hyper_types(current_field_structure['type'])
             logger.debug(self.locale.gettext(
@@ -82,53 +82,6 @@ class TableauHyperApiExtraLogic:
             identified_type = SqlType.text()
         return identified_type
 
-    def fn_create_hyper_file_from_data_frame(self, in_logger, timer, in_data_frame,
-                                             in_types, in_parameters):
-        hyper_cols = self.fn_build_hyper_columns(in_logger, timer, in_types)
-        # The rows to insert into the <hyper_table> table.
-        data_to_insert = self.fn_rebuild_csv_content_for_hyper(
-            in_logger, timer, in_data_frame, in_types)
-        # Starts the Hyper Process with telemetry enabled/disabled to send data to Tableau or not
-        # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
-        # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
-        telemetry_chosen = Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU
-        with HyperProcess(telemetry=telemetry_chosen) as hyper:
-            in_logger.debug(self.locale.gettext('Hyper engine process initialized'))
-            in_logger.debug(self.locale.gettext('Chosen Telemetry is {telemetry_value}')
-                            .replace('{telemetry_value}', str(telemetry_chosen)))
-            # Creates new Hyper file <output_hyper_file>
-            # Replaces file with CreateMode.CREATE_AND_REPLACE if it already exists.
-            timer.start()
-            with Connection(endpoint=hyper.endpoint,
-                            database=in_parameters.output_file,
-                            create_mode=CreateMode.CREATE_AND_REPLACE) as hyper_connection:
-                in_logger.debug(self.locale.gettext(
-                    'Connection to the Hyper engine using file name "{file_name}" '
-                    + 'has been established')
-                               .replace('{file_name}', in_parameters.output_file))
-                timer.stop()
-                schema_name = 'Extract'
-                self.fn_create_hyper_schema(in_logger, timer, hyper_connection, schema_name)
-                hyper_table_name = 'Extract'
-                hyper_table = self.fn_create_hyper_table(in_logger, timer, {
-                    'columns': hyper_cols,
-                    'connection': hyper_connection,
-                    'schema name': schema_name,
-                    'table name': hyper_table_name,
-                })
-                self.fn_insert_data_into_hyper_table(in_logger, timer, {
-                    'connection': hyper_connection,
-                    'data': data_to_insert,
-                    'table': hyper_table,
-                })
-                self.fn_get_records_count_from_table(in_logger, timer, {
-                    'connection': hyper_connection,
-                    'table': hyper_table,
-                })
-            in_logger.info(self.locale.gettext(
-                'Connection to the Hyper engine file has been closed'))
-        in_logger.info(self.locale.gettext('Hyper engine process has been shut down'))
-
     def fn_insert_data_into_hyper_table(self, local_logger, timer, in_dict):
         timer.start()
         # Execute the actual insert
@@ -138,12 +91,12 @@ class TableauHyperApiExtraLogic:
         local_logger.info(self.locale.gettext('Data has been inserted into Hyper table'))
         timer.stop()
 
-    def fn_create_hyper_schema(self, local_logger, timer, in_hyper_connection, in_schema_name):
+    def fn_create_hyper_schema(self, local_logger, timer, in_dict):
         timer.start()
-        in_hyper_connection.catalog.create_schema(in_schema_name)
+        in_dict['connection'].catalog.create_schema(in_dict['schema name'])
         local_logger.info(self.locale.gettext(
             'Hyper schema "{hyper_schema_name}" has been created')
-                          .replace('{hyper_schema_name}', in_schema_name))
+                          .replace('{hyper_schema_name}', in_dict['schema name']))
         timer.stop()
 
     def fn_create_hyper_table(self, local_logger, timer, in_dict):
@@ -174,67 +127,95 @@ class TableauHyperApiExtraLogic:
                         .replace('{column_list}', str(table_columns)))
         return table_columns
 
-    def fn_get_data_from_hyper(self, in_logger, timer, in_parameters):
+    def fn_get_records_count_from_table(self, local_logger, timer, in_dict):
         timer.start()
+        # Number of rows in the <hyper_table> table.
+        # `execute_scalar_query` is for executing a query
+        # that returns exactly one row with one column.
+        query_to_run = 'SELECT COUNT(*) FROM "{hyper_schema_name}"."{hyper_table_name}"'\
+            .replace('{hyper_schema_name}', in_dict['schema name'])\
+            .replace('{hyper_table_name}', in_dict['table name'])
+        row_count = in_dict['connection'].execute_scalar_query(query=query_to_run)
+        local_logger.info(self.locale.gettext('Table {hyper_table_name} has {row_count} rows')
+                          .replace('{hyper_schema_name}', in_dict['schema name'])\
+                          .replace('{hyper_table_name}', in_dict['table name'])\
+                          .replace('{row_count}', str(row_count)))
+        timer.stop()
+
+    def fn_hyper_handle(self, in_logger, timer, in_dict):
+        timer.start()
+        hyper_create_mode = {
+            'append': CreateMode.NONE,
+            'overwrite': CreateMode.CREATE_AND_REPLACE,
+            'read': CreateMode.NONE,
+        }
         out_data_frame = None
         try:
             # Starts Hyper Process with telemetry enabled/disabled to send data to Tableau or not
             # To opt in, simply set telemetry=Telemetry.SEND_USAGE_DATA_TO_TABLEAU.
             # To opt out, simply set telemetry=Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU.
             telemetry_chosen = Telemetry.DO_NOT_SEND_USAGE_DATA_TO_TABLEAU
-            with HyperProcess(telemetry=telemetry_chosen) as hyper:
+            with HyperProcess(telemetry=telemetry_chosen) as hyper_process:
                 in_logger.debug(self.locale.gettext('Hyper engine process initialized'))
                 in_logger.debug(self.locale.gettext('Chosen Telemetry is {telemetry_value}')
                                 .replace('{telemetry_value}', str(telemetry_chosen)))
-                #  Connect to an existing .hyper file (CreateMode.NONE)
-                with Connection(endpoint=hyper.endpoint,
-                                database=in_parameters.input_file,
-                                create_mode=CreateMode.NONE) as connection:
+                timer.stop()
+                timer.start()
+                #  Connect to an existing .hyper file
+                with Connection(endpoint=hyper_process.endpoint,
+                                database=in_dict['hyper file'],
+                                create_mode=hyper_create_mode.get(in_dict['action'])
+                                ) as hyper_connection:
                     in_logger.debug(self.locale.gettext(
                         'Connection to the Hyper engine using file name "{file_name}" '
                         + 'has been established')
-                                   .replace('{file_name}', in_parameters.input_file))
-                    # once Hyper is opened we can get data out
-                    query_to_run = f"SELECT * FROM {TableName('Extract', 'Extract')}"
-                    in_logger.debug(self.locale.gettext(
-                        'Hyper SQL about to be executed is: {hyper_sql}')
-                                    .replace('{hyper_sql}', str(query_to_run)))
-                    result_set = connection.execute_list_query(query=query_to_run)
-                    out_data_frame = pd.DataFrame(result_set)
-                    in_logger.debug(self.locale.gettext(
-                        'Hyper SQL executed with success and {rows_counted} have been retrieved')
-                                    .replace('{rows_counted}', str(len(out_data_frame))))
-                    table_definition = connection.catalog.get_table_definition(
-                        name=TableName('Extract', 'Extract'))
-                    table_columns = self.fn_get_column_names_from_table(in_logger, {
-                        'table definition': table_definition,
-                    })
-                    out_data_frame.set_axis(table_columns,axis='columns',inplace=True)
+                                   .replace('{file_name}', in_dict['hyper file']))
+                    timer.stop()
+                    schema_name = 'Extract'
+                    hyper_table_name = 'Extract'
+                    if in_dict['action'] == 'read':
+                        out_data_frame = self.fn_hyper_read(in_logger, timer, hyper_connection)
+                    elif in_dict['action'] in ('append', 'overwrite'):
+                        in_dict['connection'] = hyper_connection
+                        in_dict['schema name'] = schema_name
+                        in_dict['table name'] = hyper_table_name
+                        self.fn_write_data_into_hyper_file(in_logger, timer, in_dict)
+            in_logger.info(self.locale.gettext(
+                'Connection to the Hyper engine file has been closed'))
+            in_logger.info(self.locale.gettext('Hyper engine process has been shut down'))
         except HyperException as ex:
             in_logger.error(str(ex).replace(chr(10), ' '))
+            timer.stop()
             exit(1)
+        return out_data_frame
+
+    def fn_hyper_read(self, in_logger, timer, in_connection):
+        timer.start()
+        # once Hyper is opened we can get data out
+        query_to_run = f"SELECT * FROM {TableName('Extract', 'Extract')}"
+        in_logger.debug(self.locale.gettext(
+            'Hyper SQL about to be executed is: {hyper_sql}')
+                        .replace('{hyper_sql}', str(query_to_run)))
+        result_set = in_connection.execute_list_query(query=query_to_run)
+        out_data_frame = pd.DataFrame(result_set)
+        in_logger.debug(self.locale.gettext(
+            'Hyper SQL executed with success and {rows_counted} have been retrieved')
+                        .replace('{rows_counted}', str(len(out_data_frame))))
+        table_definition = in_connection.catalog.get_table_definition(
+            name=TableName('Extract', 'Extract'))
+        table_columns = self.fn_get_column_names_from_table(in_logger, {
+            'table definition': table_definition,
+        })
+        out_data_frame.set_axis(table_columns, axis='columns', inplace=True)
         timer.stop()
         return out_data_frame
 
-    def fn_get_records_count_from_table(self, local_logger, timer, in_dict):
+    def fn_rebuild_data_frame_content_for_hyper(self, in_logger, timer, in_dict):
         timer.start()
-        # Number of rows in the <hyper_table> table.
-        # `execute_scalar_query` is for executing a query
-        # that returns exactly one row with one column.
-        query_to_run = 'SELECT COUNT(*) FROM {hyper_table_name}'\
-            .replace('{hyper_table_name}', str(in_dict['table'].table_name))
-        row_count = in_dict['connection'].execute_scalar_query(query=query_to_run)
-        local_logger.info(self.locale.gettext(
-            'Table {hyper_table_name} has {row_count} rows')
-                          .replace('{hyper_table_name}', str(in_dict['table'].table_name))
-                          .replace('{row_count}', str(row_count)))
-        timer.stop()
-
-    def fn_rebuild_csv_content_for_hyper(self, in_logger, timer, input_df, detected_fields_type):
-        timer.start()
+        input_df = in_dict['data frame']
         input_df.replace(to_replace=[numpy.nan], value=[None], inplace=True)
         # Cycle through all found columns
-        for current_field in detected_fields_type:
+        for current_field in in_dict['data frame structure']:
             fld_nm = current_field['name']
             in_logger.debug(self.locale.gettext(
                 'Column {column_name} has pandas data type = {column_pandas_type} '
@@ -268,14 +249,6 @@ class TableauHyperApiExtraLogic:
             given_df[given_field_name] = self.fn_string_to_date(given_field_name, given_df)
         return given_df[given_field_name]
 
-    def fn_run_hyper_creation(self, local_logger, timer, in_data_frame, in_types, in_parameters):
-        try:
-            self.fn_create_hyper_file_from_data_frame(
-                local_logger, timer, in_data_frame, in_types, in_parameters)
-        except HyperException as ex:
-            local_logger.error(str(ex).replace(chr(10), ' '))
-            exit(1)
-
     @staticmethod
     def fn_string_to_date(in_col_name, in_data_frame):
         if re.match('-YMD', in_col_name):
@@ -285,3 +258,30 @@ class TableauHyperApiExtraLogic:
         else:
             in_data_frame[in_col_name] = pd.to_datetime(in_data_frame[in_col_name])
         return in_data_frame[in_col_name]
+
+    def fn_write_data_into_hyper_file(self, in_logger, timer, in_dict):
+        if in_dict['action'] == 'append':
+            self.fn_get_records_count_from_table(in_logger, timer, {
+                'connection': in_dict['connection'],
+                'schema name': in_dict['schema name'],
+                'table name': in_dict['table name'],
+            })
+            hyper_table = in_dict['connection'].catalog.get_table_names(in_dict['schema name'])[0]
+        elif in_dict['action'] == 'overwrite':
+            self.fn_create_hyper_schema(in_logger, timer, in_dict)
+            hyper_table = self.fn_create_hyper_table(in_logger, timer, {
+                'columns': in_dict['hyper table columns'],
+                'connection': in_dict['connection'],
+                'schema name': in_dict['schema name'],
+                'table name': in_dict['table name'],
+            })
+        self.fn_insert_data_into_hyper_table(in_logger, timer, {
+            'connection': in_dict['connection'],
+            'data': in_dict['data'],
+            'table': hyper_table,
+        })
+        self.fn_get_records_count_from_table(in_logger, timer, {
+            'connection': in_dict['connection'],
+            'schema name': in_dict['schema name'],
+            'table name': in_dict['table name'],
+        })
