@@ -34,6 +34,9 @@ msgstr ""
 msgid "Filter expression is %s"
 msgstr ""
 
+msgid "Hyper SQL query to handle data is %s"
+msgstr ""
+
 msgid "Input file compression is %s"
 msgstr ""
 
