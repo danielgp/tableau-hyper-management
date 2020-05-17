@@ -1,5 +1,9 @@
 # Change Log for Tableau Hyper Management package
 
+
+## Version 1.4.6 release on 2020-05-17
+- added additional input parameter to have be able to create (or recreate if hyper file already exists) new hyper file and add data from input files OR just use existing hyper file and append data from input files (can be very useful in case of large data sets).  
+
 ## Version 1.4.5 release on 2020-05-15
 - added support for 2 additional file format in a combination with output file format = Hyper;
 - few additional file formats combination checks to avoid runtime errors;
