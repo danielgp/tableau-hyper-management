@@ -82,7 +82,7 @@
                 "option_description"    : "Hyper SQL query to handle data is %s",
                 "option_long"           : "sql-query-to-handle-data",
                 "option_required"       : false,
-                "option_sample_value"   : "DELETE * FROM \"Extract\".\"Extract\" WHERE (\" Column Name\" = 'Value')"
+                "option_sample_value"   : "SELECT * FROM \"Extract\".\"Extract\" WHERE (\" Column Name\" = 'Value')"
             },
             "a": {
                 "default_value"         : 200,
