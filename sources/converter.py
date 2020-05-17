@@ -48,6 +48,9 @@ if __name__ == '__main__':
         'file list': relevant_files_list,
         'format': class_pn.parameters.input_file_format,
         'name': 'irrelevant',
+        'query': class_pn.parameters.sql_query_to_handle_data,
+        'schema name': 'Extract',
+        'table name': 'Extract',
     }
     working_data_frame = None
     if class_pn.parameters.input_file_format == 'hyper':
