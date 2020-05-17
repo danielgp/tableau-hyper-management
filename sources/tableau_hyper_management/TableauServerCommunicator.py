@@ -18,7 +18,7 @@ class TableauServerCommunicator:
     tableau_server = None
     locale = None
 
-    def __init__(self, in_language='en_US'):
+    def __init__(self, in_language):
         file_parts = os.path.normpath(os.path.abspath(__file__)).replace('\\', os.path.altsep)\
             .split(os.path.altsep)
         locale_domain = file_parts[(len(file_parts)-1)].replace('.py', '')
@@ -76,7 +76,7 @@ class TableauServerCommunicator:
             self.no_publishing_feedback()
         else:
             publish_possible = True
-            local_logger.error(self.locale.gettext(
+            local_logger.info(self.locale.gettext(
                 'A single project identifier was found "{project_guid}", '
                 + 'so I will proceed with publishing provided file there')
                                .replace('{project_guid}', relevant_project_ids[0]))
