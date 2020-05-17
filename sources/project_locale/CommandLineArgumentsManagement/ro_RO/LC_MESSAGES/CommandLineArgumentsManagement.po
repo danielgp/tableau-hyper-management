@@ -38,6 +38,9 @@ msgstr "Numele fișierului de configurare cu sistemele sursă este %s"
 msgid "Filter expression is %s"
 msgstr "Expresia filtrului este %s"
 
+msgid "Hyper SQL query to handle data is %s"
+msgstr "Interogarea Hyper SQL pentru gestionarea datelor este %s"
+
 msgid "Input file compression is %s"
 msgstr "Comprimarea fișierului de intrare este %s"
 

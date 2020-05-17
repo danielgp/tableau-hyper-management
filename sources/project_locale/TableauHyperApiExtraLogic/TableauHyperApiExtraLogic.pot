@@ -1,17 +1,19 @@
 # Copyright (C) 2020 Daniel Popiniuc
 # This file is distributed under the same license as the PACKAGE package.
 #
-#,fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: TableauHyperApiExtraLogic\n"
 "POT-Creation-Date: 2020-05-09 15:10+0200\n"
-"PO-Revision-Date: 2020-05-13 00:02+0200\n"
+"PO-Revision-Date: 2020-05-17 14:32+0200\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "{rows_counted} records were prepared in this process"
+msgstr ""
 
 msgid "Building Hyper columns completed"
 msgstr ""

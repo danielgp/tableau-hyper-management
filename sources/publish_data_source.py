@@ -48,7 +48,7 @@ if __name__ == '__main__':
             class_pn.parameters.input_credentials_file, 'json')
     credentials_dict = credentials['Credentials']['LDAP']['Production']['Default']
     # instantiate main library that ensure Tableau Server communication
-    c_tsc = TableauServerCommunicator()
+    c_tsc = TableauServerCommunicator(language_to_use)
     # initiate Tableau Server connection
     c_tsc.connect_to_tableau_server(class_pn.class_ln.logger, class_pn.timer, {
         'Tableau Server': class_pn.parameters.tableau_server,
