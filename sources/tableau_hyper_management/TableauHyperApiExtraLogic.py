@@ -248,6 +248,9 @@ class TableauHyperApiExtraLogic:
                                 .replace('{forced_type}', 'Float'))
         in_logger.info(self.locale.gettext(
             'Re-building CSV content for maximum Hyper compatibility has been completed'))
+        in_logger.info(self.locale.gettext(
+            '{rows_counted} records were prepared in this process')
+                       .replace('{rows_counted}', str(len(input_df))))
         timer.stop()
         return input_df.values
 

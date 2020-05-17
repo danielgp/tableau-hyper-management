@@ -16,6 +16,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
+msgid "{rows_counted} records were prepared in this process"
+msgstr "In questo processo sono stati preparati {rows_counted} record"
+
 msgid "Building Hyper columns completed"
 msgstr "Creazione di colonne Hyper completata"
 
