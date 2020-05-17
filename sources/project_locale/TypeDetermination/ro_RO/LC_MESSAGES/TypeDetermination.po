@@ -21,7 +21,7 @@ msgid "Column {column_order} having the name {column_name} has the value <{uniqu
 msgstr "Coloana {column_order} având numele {column_name} are valoarea <{unique_values}> ceea ce înseamnă că este de tip \"field_type\""
 
 msgid "Field \"{column_name}\" according to Pandas package is of type \"{panda_determined_type}\" with {counted_nulls} counted NULLs"
-msgstr "Câmpul \"{column_name}\" conform pachetului Pandas este de tip \"{panda_determined_type}\" cu {count_nulls} numărate NULLs"
+msgstr "Câmpul \"{column_name}\" conform pachetului Pandas este de tip \"{panda_determined_type}\" cu {counted_nulls} numărate NULLs"
 
 msgid "Unique list of values is: {unique_values_list}"
 msgstr "Lista unică de valori este: {unique_values_list}"
