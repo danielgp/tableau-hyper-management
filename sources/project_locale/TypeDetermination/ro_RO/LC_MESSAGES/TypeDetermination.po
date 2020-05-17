@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 
 msgid "Column {column_order} having the name [{column_name}] has the value <{current_value}> which means is of type \"{column_type}\" and this is stronger than previously thought to be as \"{column_type_old}\""
-msgstr "Coloana {column_order} având numele [{column_name}] are valoarea <{current_value}> ceea ce înseamnă că este de tip \"{column_type}\" și aceasta este mai puternică decât se credea anterior ca fiind \"column_type_old}\""
+msgstr "Coloana {column_order} având numele [{column_name}] are valoarea <{current_value}> ceea ce înseamnă că este de tip \"{column_type}\" și aceasta este mai puternică decât se credea anterior ca fiind \"{column_type_old}\""
 
 msgid "Column {column_order} having the name {column_name} has the value <{unique_values}> which means is of type \"field_type\""
 msgstr "Coloana {column_order} având numele {column_name} are valoarea <{unique_values}> ceea ce înseamnă că este de tip \"field_type\""
