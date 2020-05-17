@@ -78,6 +78,17 @@ class TableauHyperApiExtraLogic:
             identified_type = SqlType.text()
         return identified_type
 
+    def fn_delete_data_from_hyper(self, in_logger, timer, in_dict):
+        timer.start()
+        in_logger.debug(self.locale.gettext(
+            'Hyper SQL about to be executed is: {hyper_sql}')
+                        .replace('{hyper_sql}', in_dict['sql query']))
+        row_count = in_dict['connection'].execute_command(command=in_dict['query'])
+        in_logger.debug(self.locale.gettext(
+            'Hyper SQL executed with success and {rows_counted} have been retrieved')
+                        .replace('{rows_counted}', str(row_count)))
+        timer.stop()
+
     def fn_insert_data_into_hyper_table(self, local_logger, timer, in_dict):
         timer.start()
         # Execute the actual insert
@@ -140,13 +151,6 @@ class TableauHyperApiExtraLogic:
 
     def fn_hyper_handle(self, in_logger, timer, in_dict):
         timer.start()
-        hyper_create_mode = {
-            'append': CreateMode.NONE,
-            'overwrite': CreateMode.CREATE_AND_REPLACE,
-            'read': CreateMode.NONE,
-            'remove': CreateMode.NONE,
-            'update': CreateMode.NONE,
-        }
         out_data_frame = None
         try:
             # Starts Hyper Process with telemetry enabled/disabled to send data to Tableau or not
@@ -159,6 +163,13 @@ class TableauHyperApiExtraLogic:
                                 .replace('{telemetry_value}', str(telemetry_chosen)))
                 timer.stop()
                 timer.start()
+                hyper_create_mode = {
+                    'append': CreateMode.NONE,
+                    'overwrite': CreateMode.CREATE_AND_REPLACE,
+                    'read': CreateMode.NONE,
+                    'delete': CreateMode.NONE,
+                    'update': CreateMode.NONE,
+                }
                 #  Connect to an existing .hyper file
                 with Connection(endpoint=hyper_process.endpoint,
                                 database=in_dict['hyper file'],
@@ -169,26 +180,14 @@ class TableauHyperApiExtraLogic:
                         + 'has been established')
                                     .replace('{file_name}', in_dict['hyper file']))
                     timer.stop()
-                    schema_name = 'Extract'
-                    hyper_table_name = 'Extract'
+                    in_dict['connection'] = hyper_connection
                     if in_dict['action'] == 'read':
-                        out_data_frame = self.fn_hyper_read(in_logger, timer, hyper_connection)
+                        out_data_frame = self.fn_hyper_read(in_logger, timer, in_dict)
                     elif in_dict['action'] in ('append', 'overwrite'):
-                        in_dict['connection'] = hyper_connection
-                        in_dict['schema name'] = schema_name
-                        in_dict['table name'] = hyper_table_name
                         self.fn_write_data_into_hyper_file(in_logger, timer, in_dict)
-                    elif in_dict['action'] in ('remove', 'update'):
-                        self.fn_remove_data_from_hyper(in_logger, timer, {
-                            'connection': hyper_connection,
-                            'sql query':
-                                in_dict['input parameters'].sql_query_to_remove_or_update_data,
-                        })
-                        self.fn_get_records_count_from_table(in_logger, timer, {
-                            'connection': hyper_connection,
-                            'schema name': schema_name,
-                            'table name': hyper_table_name,
-                        })
+                    elif in_dict['action'] in ('delete', 'update'):
+                        self.fn_delete_data_from_hyper(in_logger, timer, in_dict)
+                        self.fn_get_records_count_from_table(in_logger, timer, in_dict)
             in_logger.info(self.locale.gettext(
                 'Connection to the Hyper engine file has been closed'))
             in_logger.info(self.locale.gettext('Hyper engine process has been shut down'))
@@ -198,19 +197,19 @@ class TableauHyperApiExtraLogic:
             exit(1)
         return out_data_frame
 
-    def fn_hyper_read(self, in_logger, timer, in_connection):
+    def fn_hyper_read(self, in_logger, timer, in_dict):
         timer.start()
         # once Hyper is opened we can get data out
         query_to_run = f"SELECT * FROM {TableName('Extract', 'Extract')}"
         in_logger.debug(self.locale.gettext(
             'Hyper SQL about to be executed is: {hyper_sql}')
                         .replace('{hyper_sql}', str(query_to_run)))
-        result_set = in_connection.execute_list_query(query=query_to_run)
+        result_set = in_dict['connection'].execute_list_query(query=query_to_run)
         out_data_frame = pd.DataFrame(result_set)
         in_logger.debug(self.locale.gettext(
             'Hyper SQL executed with success and {rows_counted} have been retrieved')
                         .replace('{rows_counted}', str(len(out_data_frame))))
-        table_definition = in_connection.catalog.get_table_definition(
+        table_definition = in_dict['connection'].catalog.get_table_definition(
             name=TableName('Extract', 'Extract'))
         table_columns = self.fn_get_column_names_from_table(in_logger, {
             'table definition': table_definition,
@@ -261,17 +260,6 @@ class TableauHyperApiExtraLogic:
             given_df[given_field_name] = self.fn_string_to_date(
                 given_field_name, current_field_details['type'], given_df)
         return given_df[given_field_name]
-
-    def fn_remove_data_from_hyper(self, in_logger, timer, in_dict):
-        timer.start()
-        in_logger.debug(self.locale.gettext(
-            'Hyper SQL about to be executed is: {hyper_sql}')
-                        .replace('{hyper_sql}', in_dict['sql query']))
-        row_count = in_dict['connection'].execute_command(command=in_dict['sql query'])
-        in_logger.debug(self.locale.gettext(
-            'Hyper SQL executed with success and {rows_counted} have been retrieved')
-                        .replace('{rows_counted}', str(row_count)))
-        timer.stop()
 
     @staticmethod
     def fn_string_to_date(in_col_name, in_data_type, in_data_frame):
