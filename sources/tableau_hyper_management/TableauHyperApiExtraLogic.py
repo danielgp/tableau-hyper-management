@@ -258,7 +258,8 @@ class TableauHyperApiExtraLogic:
         if current_field_details['type'] == 'str':
             given_df[given_field_name] = given_df[given_field_name].astype(str)
         elif current_field_details['type'][0:5] in ('date-', 'datet', 'time-'):
-            given_df[given_field_name] = self.fn_string_to_date(given_field_name, given_df)
+            given_df[given_field_name] = self.fn_string_to_date(
+                given_field_name, current_field_details['type'], given_df)
         return given_df[given_field_name]
 
     def fn_remove_data_from_hyper(self, in_logger, timer, in_dict):
@@ -273,10 +274,10 @@ class TableauHyperApiExtraLogic:
         timer.stop()
 
     @staticmethod
-    def fn_string_to_date(in_col_name, in_data_frame):
-        if re.match('-YMD', in_col_name):
+    def fn_string_to_date(in_col_name, in_data_type, in_data_frame):
+        if re.match('-YMD', in_data_type):
             in_data_frame[in_col_name] = pd.to_datetime(in_data_frame[in_col_name], yearfirst=True)
-        elif re.match('-DMY', in_col_name):
+        elif re.match('-DMY', in_data_type):
             in_data_frame[in_col_name] = pd.to_datetime(in_data_frame[in_col_name], dayfirst=True)
         else:
             in_data_frame[in_col_name] = pd.to_datetime(in_data_frame[in_col_name])
@@ -289,7 +290,9 @@ class TableauHyperApiExtraLogic:
                 'schema name': in_dict['schema name'],
                 'table name': in_dict['table name'],
             })
-            hyper_table = in_dict['connection'].catalog.get_table_names(in_dict['schema name'])[0]
+            #hyper_table = in_dict['connection'].catalog.get_table_names(in_dict['schema name'])[0]
+            hyper_table = in_dict['connection'].catalog.get_table_definition(
+                TableName('Extract', 'Extract'))
         elif in_dict['action'] == 'overwrite':
             self.fn_create_hyper_schema(in_logger, timer, in_dict)
             hyper_table = self.fn_create_hyper_table(in_logger, timer, {
