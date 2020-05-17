@@ -14,12 +14,8 @@ import numpy
 # package to handle Data Frames (in this file)
 import pandas as pd
 # Custom classes from Tableau Hyper package
-from tableauhyperapi import HyperProcess, Telemetry, \
-    Connection, CreateMode, \
-    NOT_NULLABLE, NULLABLE, SqlType, TableDefinition, \
-    Inserter, \
-    TableName, \
-    HyperException
+from tableauhyperapi import HyperProcess, Telemetry, Connection, CreateMode, \
+    NOT_NULLABLE, NULLABLE, SqlType, TableDefinition, TableName, Inserter, HyperException
 
 
 class TableauHyperApiExtraLogic:
@@ -27,9 +23,9 @@ class TableauHyperApiExtraLogic:
     supported_input_file_types = ('csv', 'json', 'parquet', 'pickle')
 
     def __init__(self, in_language):
-        file_parts = os.path.normpath(os.path.abspath(__file__)).replace('\\', os.path.altsep)\
+        file_parts = os.path.normpath(os.path.abspath(__file__)).replace('\\', os.path.altsep) \
             .split(os.path.altsep)
-        locale_domain = file_parts[(len(file_parts)-1)].replace('.py', '')
+        locale_domain = file_parts[(len(file_parts) - 1)].replace('.py', '')
         locale_folder = os.path.normpath(os.path.join(
             os.path.join(os.path.altsep.join(file_parts[:-2]), 'project_locale'), locale_domain))
         self.locale = gettext.translation(locale_domain, localedir=locale_folder,
@@ -132,13 +128,13 @@ class TableauHyperApiExtraLogic:
         # Number of rows in the <hyper_table> table.
         # `execute_scalar_query` is for executing a query
         # that returns exactly one row with one column.
-        query_to_run = 'SELECT COUNT(*) FROM "{hyper_schema_name}"."{hyper_table_name}"'\
-            .replace('{hyper_schema_name}', in_dict['schema name'])\
+        query_to_run = 'SELECT COUNT(*) FROM "{hyper_schema_name}"."{hyper_table_name}"' \
+            .replace('{hyper_schema_name}', in_dict['schema name']) \
             .replace('{hyper_table_name}', in_dict['table name'])
         row_count = in_dict['connection'].execute_scalar_query(query=query_to_run)
         local_logger.info(self.locale.gettext('Table {hyper_table_name} has {row_count} rows')
-                          .replace('{hyper_schema_name}', in_dict['schema name'])\
-                          .replace('{hyper_table_name}', in_dict['table name'])\
+                          .replace('{hyper_schema_name}', in_dict['schema name']) \
+                          .replace('{hyper_table_name}', in_dict['table name']) \
                           .replace('{row_count}', str(row_count)))
         timer.stop()
 
@@ -148,6 +144,8 @@ class TableauHyperApiExtraLogic:
             'append': CreateMode.NONE,
             'overwrite': CreateMode.CREATE_AND_REPLACE,
             'read': CreateMode.NONE,
+            'remove': CreateMode.NONE,
+            'update': CreateMode.NONE,
         }
         out_data_frame = None
         try:
@@ -169,7 +167,7 @@ class TableauHyperApiExtraLogic:
                     in_logger.debug(self.locale.gettext(
                         'Connection to the Hyper engine using file name "{file_name}" '
                         + 'has been established')
-                                   .replace('{file_name}', in_dict['hyper file']))
+                                    .replace('{file_name}', in_dict['hyper file']))
                     timer.stop()
                     schema_name = 'Extract'
                     hyper_table_name = 'Extract'
@@ -180,6 +178,17 @@ class TableauHyperApiExtraLogic:
                         in_dict['schema name'] = schema_name
                         in_dict['table name'] = hyper_table_name
                         self.fn_write_data_into_hyper_file(in_logger, timer, in_dict)
+                    elif in_dict['action'] in ('remove', 'update'):
+                        self.fn_remove_data_from_hyper(in_logger, timer, {
+                            'connection': hyper_connection,
+                            'sql query':
+                                in_dict['input parameters'].sql_query_to_remove_or_update_data,
+                        })
+                        self.fn_get_records_count_from_table(in_logger, timer, {
+                            'connection': hyper_connection,
+                            'schema name': schema_name,
+                            'table name': hyper_table_name,
+                        })
             in_logger.info(self.locale.gettext(
                 'Connection to the Hyper engine file has been closed'))
             in_logger.info(self.locale.gettext('Hyper engine process has been shut down'))
@@ -225,7 +234,7 @@ class TableauHyperApiExtraLogic:
                             .replace('{column_python_type}', str(current_field['type'])))
             input_df[fld_nm] = self.fn_reevaluate_single_column(input_df, fld_nm, current_field)
             if current_field['panda_type'] in ('object', 'float64') \
-                and current_field['type'] == 'int':
+                    and current_field['type'] == 'int':
                 input_df[fld_nm] = input_df[fld_nm].fillna(0).astype('int64')
                 in_logger.debug(self.locale.gettext(
                     'Column {column_name} has been forced converted to {forced_type}')
@@ -248,6 +257,17 @@ class TableauHyperApiExtraLogic:
         elif current_field_details['type'][0:5] in ('date-', 'datet', 'time-'):
             given_df[given_field_name] = self.fn_string_to_date(given_field_name, given_df)
         return given_df[given_field_name]
+
+    def fn_remove_data_from_hyper(self, in_logger, timer, in_dict):
+        timer.start()
+        in_logger.debug(self.locale.gettext(
+            'Hyper SQL about to be executed is: {hyper_sql}')
+                        .replace('{hyper_sql}', in_dict['sql query']))
+        row_count = in_dict['connection'].execute_command(command=in_dict['sql query'])
+        in_logger.debug(self.locale.gettext(
+            'Hyper SQL executed with success and {rows_counted} have been retrieved')
+                        .replace('{rows_counted}', str(row_count)))
+        timer.stop()
 
     @staticmethod
     def fn_string_to_date(in_col_name, in_data_frame):

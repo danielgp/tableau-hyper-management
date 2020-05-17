@@ -82,27 +82,28 @@ if __name__ == '__main__':
             if class_pn.parameters.input_file_format.lower() in supported_types:
                 c_td = TypeDetermination(language_to_use)
                 fn_dict = {
+                    'action': class_pn.parameters.policy_to_handle_hyper_file,
                     'data frame': working_data_frame,
                     'input parameters': class_pn.parameters,
                     'input data types': class_pn.config['data_types'],
                     'hyper file': class_pn.parameters.output_file,
                 }
-                # advanced detection of data type within Data Frame
-                fn_dict['data frame structure'] = c_td.fn_get_data_frame_structure(
-                    class_pn.class_ln.logger, class_pn.timer, fn_dict)
-                # determine Hyper Table Columns
-                fn_dict['hyper table columns'] = class_thael.fn_build_hyper_columns(
-                    class_pn.class_ln.logger, class_pn.timer, fn_dict['data frame structure'])
-                # The rows to insert into the <hyper_table> table.
-                fn_dict['data'] = class_thael.fn_rebuild_data_frame_content_for_hyper(
-                    class_pn.class_ln.logger, class_pn.timer, fn_dict)
-                fn_dict['action'] = class_pn.parameters.policy_to_handle_hyper_file
-                # check if output Hyper file does not exists
-                # and if so action will be always "overwrite"
-                # which will trigger internal Hyper structure creation (schema and table)
-                if not os.path.isfile(fn_dict['hyper file']):
-                    fn_dict['action'] = 'overwrite'
-                    # manipulate destination Tableau Extract (Hyper)
+                if fn_dict['action'] in ('append', 'overwrite'):
+                    # advanced detection of data type within Data Frame
+                    fn_dict['data frame structure'] = c_td.fn_get_data_frame_structure(
+                        class_pn.class_ln.logger, class_pn.timer, fn_dict)
+                    # determine Hyper Table Columns
+                    fn_dict['hyper table columns'] = class_thael.fn_build_hyper_columns(
+                        class_pn.class_ln.logger, class_pn.timer, fn_dict['data frame structure'])
+                    # The rows to insert into the <hyper_table> table.
+                    fn_dict['data'] = class_thael.fn_rebuild_data_frame_content_for_hyper(
+                        class_pn.class_ln.logger, class_pn.timer, fn_dict)
+                    # check if output Hyper file does not exists
+                    # and if so action will be always "overwrite"
+                    # which will trigger internal Hyper structure creation (schema and table)
+                    if not os.path.isfile(fn_dict['hyper file']):
+                        fn_dict['action'] = 'overwrite'
+                # manipulate destination Tableau Extract (Hyper)
                 class_thael.fn_hyper_handle(class_pn.class_ln.logger, class_pn.timer, fn_dict)
                 # store statistics about output file
                 class_pn.class_fo.fn_store_file_statistics(

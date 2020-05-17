@@ -75,7 +75,14 @@
                 "option_description"    : "Policy to handle Tableau Extract (Hyper format) is %s",
                 "option_long"           : "policy-to-handle-hyper-file",
                 "option_required"       : false,
-                "option_sample_value"   : "append|overwrite|read"
+                "option_sample_value"   : "append|overwrite|read|remove|update"
+            },
+            "q": {
+                "default_value"         : "",
+                "option_description"    : "Hyper SQL query to remove or update data is %s",
+                "option_long"           : "sql-query-to-remove-or-update-data",
+                "option_required"       : false,
+                "option_sample_value"   : "DELETE * FROM \"Extract\".\"Extract\" WHERE (\" Column Name\" = 'Value')"
             },
             "a": {
                 "default_value"         : 200,
