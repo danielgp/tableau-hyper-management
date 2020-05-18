@@ -90,6 +90,8 @@ if __name__ == '__main__':
                     'input parameters': class_pn.parameters,
                     'input data types': class_pn.config['data_types'],
                     'hyper file': class_pn.parameters.output_file,
+                    'schema name': input_dict['schema name'],
+                    'table name': input_dict['table name'],
                 }
                 if fn_dict['action'] in ('append', 'overwrite'):
                     # advanced detection of data type within Data Frame
