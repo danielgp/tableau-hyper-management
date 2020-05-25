@@ -40,9 +40,6 @@ msgstr ""
 "Coloana {column_name} are tipul de date pandas = {column_pandas_type} și "
 "tipul de date python = {column_python_type}"
 
-msgid "Column {column_name} has been forced converted to {forced_type}"
-msgstr "Coloana {column_name} a fost transformată forțat în {forced_type}"
-
 msgid "Connection to the Hyper engine file has been closed"
 msgstr "Conexiunea la Hyper engine a fost închisă"
 
@@ -53,6 +50,9 @@ msgstr "S-a stabilit conexiunea la Hyper engine cu fișierul \"{file_name}\""
 
 msgid "Data has been inserted into Hyper table"
 msgstr "Datele au fost introduse în tabelul Hyper"
+
+msgid "Filling empty values with NAN finished"
+msgstr "Umplerea valorilor goale cu NAN finalizată"
 
 msgid "Hyper SQL about to be executed is: {hyper_sql}"
 msgstr "Hyper SQL care urmează să fie executat este: {hyper_sql}"
@@ -79,4 +79,7 @@ msgstr ""
 
 msgid "Table {hyper_table_name} has {row_count} rows"
 msgstr "Tabelul {hyper_table_name} are {row_count} rânduri"
+
+#~ msgid "Column {column_name} has been forced converted to {forced_type}"
+#~ msgstr "Coloana {column_name} a fost transformată forțat în {forced_type}"
 

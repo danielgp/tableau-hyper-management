@@ -27,9 +27,6 @@ msgstr ""
 msgid "Column {column_name} has pandas data type = {column_pandas_type} and python data type = {column_python_type}"
 msgstr ""
 
-msgid "Column {column_name} has been forced converted to {forced_type}"
-msgstr ""
-
 msgid "Connection to the Hyper engine file has been closed"
 msgstr ""
 
@@ -37,6 +34,9 @@ msgid "Connection to the Hyper engine using file name \"{file_name}\" has been e
 msgstr ""
 
 msgid "Data has been inserted into Hyper table"
+msgstr ""
+
+msgid "Filling empty values with NAN finished"
 msgstr ""
 
 msgid "Hyper SQL about to be executed is: {hyper_sql}"

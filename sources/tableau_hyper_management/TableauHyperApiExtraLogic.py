@@ -188,9 +188,12 @@ class TableauHyperApiExtraLogic:
                     elif in_dict['action'] in ('delete', 'update'):
                         self.fn_delete_data_from_hyper(in_logger, timer, in_dict)
                         self.fn_get_records_count_from_table(in_logger, timer, in_dict)
+            timer.start()
+            hyper_connection.close()
             in_logger.info(self.locale.gettext(
                 'Connection to the Hyper engine file has been closed'))
             in_logger.info(self.locale.gettext('Hyper engine process has been shut down'))
+            timer.stop()
         except HyperException as ex:
             in_logger.error(str(ex).replace(chr(10), ' '))
             timer.stop()
@@ -220,56 +223,57 @@ class TableauHyperApiExtraLogic:
 
     def fn_rebuild_data_frame_content_for_hyper(self, in_logger, timer, in_dict):
         timer.start()
-        input_df = in_dict['data frame']
-        input_df.replace(to_replace=[numpy.nan], value=[None], inplace=True)
+        in_dict['data frame'].replace(to_replace=[numpy.nan], value=[None], inplace=True)
+        in_logger.info(self.locale.gettext(
+            'Filling empty values with NAN finished'))
+        timer.stop()
         # Cycle through all found columns
         for current_field in in_dict['data frame structure']:
-            fld_nm = current_field['name']
+            timer.start()
             in_logger.debug(self.locale.gettext(
                 'Column {column_name} has pandas data type = {column_pandas_type} '
                 + 'and python data type = {column_python_type}')
                             .replace('{column_name}', current_field['name'])
                             .replace('{column_pandas_type}', str(current_field['panda_type']))
                             .replace('{column_python_type}', str(current_field['type'])))
-            input_df[fld_nm] = self.fn_reevaluate_single_column(input_df, fld_nm, current_field)
-            if current_field['panda_type'] in ('object', 'float64') \
-                    and current_field['type'] == 'int':
-                input_df[fld_nm] = input_df[fld_nm].fillna(0).astype('int64')
-                in_logger.debug(self.locale.gettext(
-                    'Column {column_name} has been forced converted to {forced_type}')
-                                .replace('{column_name}', current_field['name'])
-                                .replace('{forced_type}', 'Int'))
-            if str(current_field['type']) == 'float-dot':
-                input_df[fld_nm] = input_df[fld_nm].astype(float)
-                in_logger.debug(self.locale.gettext(
-                    'Column {column_name} has been forced converted to {forced_type}')
-                                .replace('{column_name}', current_field['name'])
-                                .replace('{forced_type}', 'Float'))
+            in_dict['data frame'][current_field['name']] = self.fn_reevaluate_single_column(
+                in_dict['data frame'][current_field['name']], current_field)
+            timer.stop()
         in_logger.info(self.locale.gettext(
             'Re-building CSV content for maximum Hyper compatibility has been completed'))
+        timer.start()
         in_logger.info(self.locale.gettext(
             '{rows_counted} records were prepared in this process')
-                       .replace('{rows_counted}', str(len(input_df))))
+                       .replace('{rows_counted}', str(len(in_dict['data frame']))))
         timer.stop()
-        return input_df.values
+        return in_dict['data frame'].values
 
-    def fn_reevaluate_single_column(self, given_df, given_field_name, current_field_details):
-        if current_field_details['type'] == 'str':
-            given_df[given_field_name] = given_df[given_field_name].astype(str)
-        elif current_field_details['type'][0:5] in ('date-', 'datet', 'time-'):
-            given_df[given_field_name] = self.fn_string_to_date(
-                given_field_name, current_field_details['type'], given_df)
-        return given_df[given_field_name]
+    def fn_reevaluate_single_column(self, df_column, in_field_details):
+        if in_field_details['type'] == 'str':
+            df_column = df_column.astype(str)
+        elif in_field_details['type'][0:5] in ('date-', 'datet', 'time-'):
+            df_column = self.fn_string_to_date(df_column, in_field_details['type'])
+        else:
+            df_column = self.fn_reevaluate_single_column_additional(df_column, in_field_details)
+        return df_column
+
+    def fn_reevaluate_single_column_additional(self, in_df_column, in_field_details):
+        if in_field_details['panda_type'] in ('object', 'float64') \
+                and in_field_details['type'] == 'int':
+            in_df_column = in_df_column.fillna(0).astype('int64')
+        elif str(in_field_details['type']) == 'float-dot':
+            in_df_column = in_df_column.astype(float)
+        return in_df_column
 
     @staticmethod
-    def fn_string_to_date(in_col_name, in_data_type, in_data_frame):
+    def fn_string_to_date(in_df_column, in_data_type):
         if re.match('-YMD', in_data_type):
-            in_data_frame[in_col_name] = pd.to_datetime(in_data_frame[in_col_name], yearfirst=True)
+            in_df_column = pd.to_datetime(in_df_column, yearfirst=True)
         elif re.match('-DMY', in_data_type):
-            in_data_frame[in_col_name] = pd.to_datetime(in_data_frame[in_col_name], dayfirst=True)
+            in_df_column = pd.to_datetime(in_df_column, dayfirst=True)
         else:
-            in_data_frame[in_col_name] = pd.to_datetime(in_data_frame[in_col_name])
-        return in_data_frame[in_col_name]
+            in_df_column = pd.to_datetime(in_df_column)
+        return in_df_column
 
     def fn_write_data_into_hyper_file(self, in_logger, timer, in_dict):
         if in_dict['action'] == 'append':
@@ -278,7 +282,6 @@ class TableauHyperApiExtraLogic:
                 'schema name': in_dict['schema name'],
                 'table name': in_dict['table name'],
             })
-            #hyper_table = in_dict['connection'].catalog.get_table_names(in_dict['schema name'])[0]
             hyper_table = in_dict['connection'].catalog.get_table_definition(
                 TableName('Extract', 'Extract'))
         elif in_dict['action'] == 'overwrite':
