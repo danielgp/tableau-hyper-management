@@ -21,6 +21,7 @@ from tableauhyperapi import HyperProcess, Telemetry, Connection, CreateMode, \
 class TableauHyperApiExtraLogic:
     locale = None
     supported_input_file_types = ('csv', 'json', 'parquet', 'pickle')
+    supported_output_file_types = ('csv', 'parquet', 'pickle')
     columns_for_hyper_conversion = {}
     hyper_conversion_dtypes = ['str', 'int64', 'float']
 

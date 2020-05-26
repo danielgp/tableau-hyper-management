@@ -20,8 +20,7 @@ if __name__ == '__main__':
     # ensure all compiled localization files are in place (as needed for localized messages later)
     class_lc.run_localization_compile()
     # establish localization language to use
-#    language_to_use = class_lc.get_region_language_to_use_from_operating_system()
-    language_to_use = 'en_US'
+    language_to_use = class_lc.get_region_language_to_use_from_operating_system()
     # instantiate Extractor Specific Needs class
     class_pn = ProjectNeeds(SCRIPT_NAME, language_to_use)
     # load application configuration (inputs are defined into a json file)
@@ -53,9 +52,15 @@ if __name__ == '__main__':
         if os.path.isfile(class_pn.parameters.output_file):
             load_data_frame_necessary = False
             relevant_files_list = []
-            feedback = 'As the Tableau Extract (Hyper format) already exists and handle instruction is "create" there is nothing else to be performed'
-            class_pn.class_ln.logger.info(feedback)
-            class_pn.class_bn.fn_timestamped_print(feedback)
+            feedback = [
+                'The output file defined as {file_name} already exists',
+                'As handle hyper action is set to "create", nothing else can be done',
+            ]
+            for crt_feedback in feedback:
+                class_pn.class_ln.logger.error(class_pn.locale.gettext(
+                    feedback.replace('{file_name}', class_pn.parameters.output_file)))
+                class_pn.class_bn.fn_timestamped_print(class_pn.locale.gettext(
+                    feedback.replace('{file_name}', class_pn.parameters.output_file)))
     if load_data_frame_necessary:
         # identify all files matching input file information
         relevant_files_list = class_pn.class_fo.fn_build_file_list(
@@ -95,9 +100,10 @@ if __name__ == '__main__':
         output_dict['name'] = class_pn.parameters.output_file
         output_dict['compression'] = class_pn.parameters.output_file_compression
         if class_pn.parameters.input_file_format.lower() == 'hyper':
-            tuple_supported_file_types = ('csv', 'parquet', 'pickle')
+            tuple_supported_file_types = class_thael.supported_output_file_types
         else:
             tuple_supported_file_types = class_pn.class_dio.implemented_disk_write_file_types
+        wanted_output_format = class_pn.parameters.output_file_format.lower()
         if class_pn.parameters.output_file_format.lower() in tuple_supported_file_types:
             class_pn.class_dio.fn_store_data_frame_to_file(
                 class_pn.class_ln.logger, class_pn.timer, working_data_frame, output_dict)
@@ -105,7 +111,7 @@ if __name__ == '__main__':
             class_pn.class_fo.fn_store_file_statistics(
                 class_pn.class_ln.logger, class_pn.timer,
                 class_pn.parameters.output_file, 'Generated')
-        elif class_pn.parameters.output_file_format.lower() == 'hyper':
+        elif wanted_output_format == 'hyper':
             supported_types = class_thael.supported_input_file_types
             if class_pn.parameters.input_file_format.lower() in supported_types:
                 c_td = TypeDetermination(language_to_use)
@@ -140,9 +146,13 @@ if __name__ == '__main__':
                     class_pn.class_ln.logger, class_pn.timer,
                     class_pn.parameters.output_file, 'Generated')
             else:
-                print('For time being only CSV, JSON and Pickle file types are supported'
-                      + ' as input file type in combination with '
-                      + 'Tableau Extract (Hyper) as output file type.')
+                class_pn.class_ln.logger.error(
+                    class_pn.locale.gettext(
+                        'Only certain file types are supported as input file type '
+                        + 'in combination with Tableau Extract (Hyper) as output file type. '
+                        + 'And {given_file_type} is not among "{supported_file_types}"')
+                        .replace('{given_file_type}', wanted_output_format)
+                        .replace('{supported_file_types}', '", "'.join(supported_types)))
     # just final message
     class_pn.class_bn.fn_final_message(
         class_pn.class_ln.logger, class_pn.parameters.output_log_file,

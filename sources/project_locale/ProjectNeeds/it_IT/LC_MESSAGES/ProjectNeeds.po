@@ -1,18 +1,33 @@
 # Copyright (C) 2020 Daniel Popiniuc
-# This file is distributed under the same license as the ConverterNeeds package.
+# This file is distributed under the same license as the ConverterNeeds
+# package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ProjectNeeds\n"
-"POT-Creation-Date: 2020-05-03 19:20+0200\n"
+"Project-Id-Version:  ProjectNeeds\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-05-03 19:20+0300\n"
 "PO-Revision-Date: 2020-05-03 20:40+0300\n"
 "Last-Translator: danielpopiniuc@gmail.com\n"
-"Language-Team: Italian\n"
 "Language: it\n"
+"Language-Team: Italian\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.8.0\n"
+
+msgid "As handle hyper action is set to \"create\", nothing else can be done"
+msgstr "Poiché handle hyper action è impostato comme \"create\", nient'altro può essere fatto"
+
+msgid ""
+"Only certain file types are supported as input file type in combination "
+"with Tableau Extract (Hyper) as output file type. And {given_file_type} "
+"is not among \"{supported_file_types}\""
+msgstr "Solo alcuni tipi di file sono supportati come tipo di file di input in combinazione con Tableau Extract (Hyper) come tipo di file di output. E {given_file_type} non è tra \"{supported_file_types}\""
+
+msgid "The output file defined as {file_name} already exists"
+msgstr "Il file di output definito come {file_name} esiste già"
 
 msgid "Time spent is {seconds}"
 msgstr "Il tempo trascorso è di {seconds}"
