@@ -4,13 +4,8 @@ main - entry point of the package
 This file is connecting to a Tableau Server and publishes a local HYPER file
 measuring time elapsed (performance)
 """
-
-# package to facilitate operating system project_locale detection
-import locale
 # package to handle files/folders and related metadata/operations
-import os
-# package to facilitate multiple operation system operations
-import platform
+# import os
 
 # Custom classes specific to this package
 from project_locale.localizations_common import LocalizationsCommon
@@ -38,6 +33,14 @@ if __name__ == '__main__':
     class_pn.class_clam.listing_parameter_values(
         class_pn.class_ln.logger, class_pn.timer, 'Tableau Data Source Publisher',
         class_pn.config['input_options'][SCRIPT_NAME], class_pn.parameters)
+    # as input and/or output file might contain CalculatedDate expression
+    # an evaluation is required
+    class_pn.parameters.input_file = class_pn.class_ph.eval_expression(
+        class_pn.class_ln.logger, class_pn.parameters.input_file, 7)
+    # validate input file existence
+    class_pn.class_bn.fn_validate_single_value(
+        class_pn.parameters.input_file, 'file')
+    # get the input file into a list
     relevant_files_list = class_pn.class_fo.fn_build_file_list(
             class_pn.class_ln.logger, class_pn.timer, class_pn.parameters.input_file)
     # log file statistic details

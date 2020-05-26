@@ -55,8 +55,6 @@ class ProjectNeeds:
     def fn_check_inputs_specific(self, input_parameters):
         if self.script == 'publisher':
             self.class_bn.fn_validate_single_value(
-                    input_parameters.input_file, 'file')
-            self.class_bn.fn_validate_single_value(
                     input_parameters.input_credentials_file, 'file')
             self.class_bn.fn_validate_single_value(
                     input_parameters.tableau_server, 'url')
