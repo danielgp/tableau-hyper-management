@@ -21,6 +21,8 @@ from tableauhyperapi import HyperProcess, Telemetry, Connection, CreateMode, \
 class TableauHyperApiExtraLogic:
     locale = None
     supported_input_file_types = ('csv', 'json', 'parquet', 'pickle')
+    columns_for_hyper_conversion = {}
+    hyper_conversion_dtypes = ['str', 'int64', 'float']
 
     def __init__(self, in_language):
         file_parts = os.path.normpath(os.path.abspath(__file__)).replace('\\', os.path.altsep) \
@@ -55,6 +57,24 @@ class TableauHyperApiExtraLogic:
         logger.info(self.locale.gettext('Building Hyper columns completed'))
         timer.stop()
         return list_to_return
+
+    def fn_convert_multiple_columns(self, in_logger, timer, in_data_frame, in_target_dtype):
+        # if there's a list of columns to be converted to Integer do that
+        if in_target_dtype in self.columns_for_hyper_conversion:
+            timer.start()
+            col_to_convert = self.columns_for_hyper_conversion[in_target_dtype]
+            if in_target_dtype in ('int64', 'float'):
+                in_data_frame[col_to_convert] = in_data_frame[col_to_convert]\
+                    .fillna(0).astype(in_target_dtype)
+            else:
+                in_data_frame[col_to_convert] = in_data_frame[col_to_convert]\
+                    .astype(in_target_dtype)
+            in_logger.info(self.locale.gettext(
+                'Converting multiple columns "{column_list}" to {target_data_type} completed')
+                           .replace('{column_list}', '", "'.join(col_to_convert))
+                           .replace('{target_data_type}', in_target_dtype.upper()))
+            timer.stop()
+        return in_data_frame
 
     @staticmethod
     def fn_convert_to_hyper_types(given_type):
@@ -224,12 +244,11 @@ class TableauHyperApiExtraLogic:
     def fn_rebuild_data_frame_content_for_hyper(self, in_logger, timer, in_dict):
         timer.start()
         in_dict['data frame'].replace(to_replace=[numpy.nan], value=[None], inplace=True)
-        in_logger.info(self.locale.gettext(
-            'Filling empty values with NAN finished'))
+        in_logger.info(self.locale.gettext('Filling empty values with NAN finished'))
         timer.stop()
+        timer.start()
         # Cycle through all found columns
         for current_field in in_dict['data frame structure']:
-            timer.start()
             in_logger.debug(self.locale.gettext(
                 'Column {column_name} has pandas data type = {column_pandas_type} '
                 + 'and python data type = {column_python_type}')
@@ -238,10 +257,13 @@ class TableauHyperApiExtraLogic:
                             .replace('{column_python_type}', str(current_field['type'])))
             in_dict['data frame'][current_field['name']] = self.fn_reevaluate_single_column(
                 in_dict['data frame'][current_field['name']], current_field)
-            timer.stop()
+        timer.stop()
+        for converting_data_type in self.hyper_conversion_dtypes:
+            in_dict['data frame'] = self.fn_convert_multiple_columns(
+                in_logger, timer, in_dict['data frame'], converting_data_type)
+        timer.start()
         in_logger.info(self.locale.gettext(
             'Re-building CSV content for maximum Hyper compatibility has been completed'))
-        timer.start()
         in_logger.info(self.locale.gettext(
             '{rows_counted} records were prepared in this process')
                        .replace('{rows_counted}', str(len(in_dict['data frame']))))
@@ -249,21 +271,35 @@ class TableauHyperApiExtraLogic:
         return in_dict['data frame'].values
 
     def fn_reevaluate_single_column(self, df_column, in_field_details):
-        if in_field_details['type'] == 'str':
-            df_column = df_column.astype(str)
-        elif in_field_details['type'][0:5] in ('date-', 'datet', 'time-'):
+        if in_field_details['type'][0:5] in ('date-', 'datet', 'time-'):
             df_column = self.fn_string_to_date(df_column, in_field_details['type'])
         else:
             df_column = self.fn_reevaluate_single_column_additional(df_column, in_field_details)
         return df_column
 
-    def fn_reevaluate_single_column_additional(self, in_df_column, in_field_details):
-        if in_field_details['panda_type'] in ('object', 'float64') \
-                and in_field_details['type'] == 'int':
-            in_df_column = in_df_column.fillna(0).astype('int64')
-        elif str(in_field_details['type']) == 'float-dot':
-            in_df_column = in_df_column.astype(float)
+    def fn_reevaluate_single_column_additional(self, in_df_column, in_field):
+        target_data_type = self.fn_standardize_data_type(in_field)
+        if target_data_type != '':
+            if target_data_type in self.columns_for_hyper_conversion:
+                new_index = len(self.columns_for_hyper_conversion[target_data_type])
+                self.columns_for_hyper_conversion[target_data_type].append(new_index)
+                self.columns_for_hyper_conversion[target_data_type][new_index] = in_field['name']
+            else:
+                self.columns_for_hyper_conversion[target_data_type] = [in_field['name']]
         return in_df_column
+
+    @staticmethod
+    def fn_standardize_data_type(in_field):
+        target_data_type = ''
+        if in_field['panda_type'] in ('object', 'float64') and in_field['type'] == 'int':
+            target_data_type = 'int64'
+        elif str(in_field['type']) in ('float-dot', 'str'):
+            known_types = {
+                'float-dot': 'float',
+                'str': 'str',
+            }
+            target_data_type = known_types.get(in_field['type'])
+        return target_data_type
 
     @staticmethod
     def fn_string_to_date(in_df_column, in_data_type):
