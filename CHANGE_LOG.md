@@ -1,5 +1,13 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.5.0 release on 2020-05-26
+- extended functionality and now input file and/or output file are aware of Calculated Date expressions, making possible this way to use dynamic name interpreted at run time;
+- added "create" as option for "policy-to-handle-hyper-file" input parameter that allows skipping recreating "hyper" file if already exists;
+- improved feedback. 
+
+## Version 1.4.9 release on 2020-05-19
+- bug fixes on internal code structure.
+
 ## Version 1.4.8 release on 2020-05-17
 - extended the sql input parameter to be used in conjunction with Read action, this way a user customized query can be used to extract partial data (besides existing full extract one)
 - few internal code and localization messages enhancements and corrections.
