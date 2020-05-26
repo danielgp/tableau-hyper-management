@@ -1,0 +1,60 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the FileOperations package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ParameterHandling\n"
+"POT-Creation-Date: 2020-04-26 14:29+0200\n"
+"PO-Revision-Date: 2020-04-26 15:04+0300\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "A known expression \"{expression_parts}\" has to be interpreted"
+msgstr "Un'espressione nota \"{expression_parts}\" deve essere interpretata"
+
+msgid "Current Parameter is {parameter_type} and has the value: \"{str_value}\""
+msgstr "Current Parameter è {parameter_type} e ha il valore: \"str_value\""
+
+msgid "Current Parameter is STR and has been re-interpreted as value: \"{str_value}\""
+msgstr "Il parametro corrente è TIPO CARATTERI ed è stato reinterpretato come valore: \"{str_value}\""
+
+msgid "DICT"
+msgstr "DIZIONARIO"
+
+msgid "Final Tuple for Parameters is: {final_tuple}"
+msgstr "La tupla finale per i parametri è: {final_tuple}"
+
+msgid "Initial query expects {expected_parameters_counted} but only {given_parameters_counted} were provided"
+msgstr "La interogazione iniziale prevede {expected_parameters_counted} ma sono stati forniti solo {given_parameters_counted}"
+
+msgid "Initial Tuple for Parameters is: {parameters_tuple}"
+msgstr "La tupla iniziale è: {parameters_tuple}"
+
+msgid "Known expression \"{expression_parts}\" has been interpreted as {final_string}"
+msgstr "L'espressione nota \"{expression_parts}\" è stata interpretata come {final_string}"
+
+msgid "Known expression \"{expression_parts}\" has to be interpreted"
+msgstr "L'espressione nota \"{expression_parts}\" deve essere interpretata"
+
+msgid "LIST"
+msgstr "ELENCO"
+
+msgid "Parameters type is {parameter_type}"
+msgstr "Il tipo di parametri è {parameter_type}"
+
+msgid "STR"
+msgstr "SPAGO"
+
+msgid "Seen Parameters are: {parameters}"
+msgstr "I parametri visti sono: {parameters}"
+
+msgid "Unexpected parameter type, either Dictionary or List expected, but seen was {parameter_type}"
+msgstr "Tipo di parametro imprevisto, previsto dizionario o elenco, ma visto {parametro_tipo}"
+
+msgid "Unknown expression encountered: provided was \"{given_expression}\" which is not among known ones: \"{all_known_expressions}\""
+msgstr "Espressione sconosciuta rilevata: fornito era \"{given_expression}\" che non è tra quelli noti: \"{all_known_expressions}\""

@@ -1,0 +1,60 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the FileOperations package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ParameterHandling\n"
+"POT-Creation-Date: 2020-04-26 14:29+0200\n"
+"PO-Revision-Date: 2020-04-26 15:04+0300\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+
+msgid "A known expression \"{expression_parts}\" has to be interpreted"
+msgstr "Trebuie interpretată o expresie cunoscută \"{expression_parts}\""
+
+msgid "Current Parameter is {parameter_type} and has the value: \"{str_value}\""
+msgstr "Parametrul curent este {parameter_type} și are valoarea: \"{str_value}\""
+
+msgid "Current Parameter is STR and has been re-interpreted as value: \"{str_value}\""
+msgstr "Parametrul curent este ȘIR și a fost reinterpretat ca valoare: \"{str_value}\""
+
+msgid "DICT"
+msgstr "DICȚIONAR"
+
+msgid "Final Tuple for Parameters is: {final_tuple}"
+msgstr "Tuple-ul final pentru parametri este: {final_tuple}"
+
+msgid "Initial query expects {expected_parameters_counted} but only {given_parameters_counted} were provided"
+msgstr "Interogarea inițială așteaptă {expected_parameters_counted}, dar numai {given_parameters_counted} au fost furnizate"
+
+msgid "Initial Tuple for Parameters is: {parameters_tuple}"
+msgstr "Tuple-ul inițial pentru parametri este: {parameters_tuple}"
+
+msgid "Known expression \"{expression_parts}\" has been interpreted as {final_string}"
+msgstr "Expresia cunoscută \"{expression_parts}\" a fost interpretată ca {final_string}"
+
+msgid "Known expression \"{expression_parts}\" has to be interpreted"
+msgstr "Expresia cunoscută \"{expression_parts}\" trebuie interpretată"
+
+msgid "LIST"
+msgstr "LISTĂ"
+
+msgid "Parameters type is {parameter_type}"
+msgstr "Tipul parametrilor este {parameter_type}"
+
+msgid "STR"
+msgstr "ȘIR"
+
+msgid "Seen Parameters are: {parameters}"
+msgstr "Parametrii văzuți sunt: {parameters}"
+
+msgid "Unexpected parameter type, either Dictionary or List expected, but seen was {parameter_type}"
+msgstr "Tipul de parametru neașteptat, fie Dicționar, fie Listă așteptat, dar văzut a fost {parameter_type}"
+
+msgid "Unknown expression encountered: provided was \"{given_expression}\" which is not among known ones: \"{all_known_expressions}\""
+msgstr "Expresie necunoscută întâlnită: oferită a fost \"{given_expression}\" care nu se numără printre cele cunoscute: \"{all_known_expressions}\""

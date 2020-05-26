@@ -20,7 +20,8 @@ if __name__ == '__main__':
     # ensure all compiled localization files are in place (as needed for localized messages later)
     class_lc.run_localization_compile()
     # establish localization language to use
-    language_to_use = class_lc.get_region_language_to_use_from_operating_system()
+#    language_to_use = class_lc.get_region_language_to_use_from_operating_system()
+    language_to_use = 'en_US'
     # instantiate Extractor Specific Needs class
     class_pn = ProjectNeeds(SCRIPT_NAME, language_to_use)
     # load application configuration (inputs are defined into a json file)
@@ -34,6 +35,17 @@ if __name__ == '__main__':
     class_pn.class_clam.listing_parameter_values(
         class_pn.class_ln.logger, class_pn.timer, 'Tableau Hyper Converter',
         class_pn.config['input_options'][SCRIPT_NAME], class_pn.parameters)
+    # as input and/or output file might contain CalculatedDate expression
+    # an evaluation is required
+    class_pn.parameters.input_file = class_pn.class_ph.eval_expression(
+        class_pn.class_ln.logger, class_pn.parameters.input_file, 7)
+    class_pn.parameters.output_file = class_pn.class_ph.eval_expression(
+        class_pn.class_ln.logger, class_pn.parameters.output_file, 7)
+    # as destination folder could be dynamic and not existent safety measure is required
+    destination_folder = os.path.dirname(class_pn.parameters.output_file)
+    if not os.path.exists(destination_folder):
+        os.makedirs(destination_folder)
+    # identify all files matching input file information
     relevant_files_list = class_pn.class_fo.fn_build_file_list(
         class_pn.class_ln.logger, class_pn.timer, class_pn.parameters.input_file)
     # log file statistic details

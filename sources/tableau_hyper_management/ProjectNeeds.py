@@ -14,6 +14,7 @@ from .BasicNeeds import BasicNeeds
 from .CommandLineArgumentsManagement import CommandLineArgumentsManagement
 from .DataInputOutput import DataInputOutput
 from .FileOperations import FileOperations
+from .ParameterHandling import ParameterHandling
 from .LoggingNeeds import LoggingNeeds
 
 
@@ -22,6 +23,7 @@ class ProjectNeeds:
     class_clam = None
     class_dio = None
     class_fo = None
+    class_ph = None
     config = None
     locale = None
     parameters = None
@@ -47,11 +49,10 @@ class ProjectNeeds:
         self.class_dio = DataInputOutput(default_language)
         # instantiate Logger class
         self.class_ln = LoggingNeeds()
+        # instantiate Parameter Handling class
+        self.class_ph = ParameterHandling(default_language)
 
     def fn_check_inputs_specific(self, input_parameters):
-        if self.script == 'converter':
-            self.class_bn.fn_validate_single_value(
-                    os.path.dirname(input_parameters.output_file), 'folder')
         if self.script == 'publisher':
             self.class_bn.fn_validate_single_value(
                     input_parameters.input_file, 'file')

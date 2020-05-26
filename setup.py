@@ -35,6 +35,7 @@ setup(
     install_requires=[
         'Babel>=2.8.0,<3',
         'codetiming>=1.1,<2',
+        'datedelta>=1.3,<2.0',
         'numpy>=1.17.4,<2',
         'pandas>=1.0,<2',
         'pyarrow>=0.17,<1.0',
