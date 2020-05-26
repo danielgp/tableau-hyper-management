@@ -75,7 +75,7 @@
                 "option_description"    : "Policy to handle Tableau Extract (Hyper format) is %s",
                 "option_long"           : "policy-to-handle-hyper-file",
                 "option_required"       : false,
-                "option_sample_value"   : "append|delete|overwrite|read|update"
+                "option_sample_value"   : "append|create|delete|overwrite|read|update"
             },
             "q": {
                 "default_value"         : "",

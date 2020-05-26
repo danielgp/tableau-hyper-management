@@ -45,16 +45,29 @@ if __name__ == '__main__':
     destination_folder = os.path.dirname(class_pn.parameters.output_file)
     if not os.path.exists(destination_folder):
         os.makedirs(destination_folder)
-    # identify all files matching input file information
-    relevant_files_list = class_pn.class_fo.fn_build_file_list(
-        class_pn.class_ln.logger, class_pn.timer, class_pn.parameters.input_file)
-    # log file statistic details
-    class_pn.class_fo.fn_store_file_statistics(
-        class_pn.class_ln.logger, class_pn.timer, relevant_files_list, 'Input')
+    # check if proceeding is necessary
+    load_data_frame_necessary = True
+    if class_pn.parameters.input_file_format != 'hyper' \
+        and class_pn.parameters.output_file_format == 'hyper' \
+            and class_pn.parameters.policy_to_handle_hyper_file == 'create':
+        if os.path.isfile(class_pn.parameters.output_file):
+            load_data_frame_necessary = False
+            relevant_files_list = []
+            feedback = 'As the Tableau Extract (Hyper format) already exists and handle instruction is "create" there is nothing else to be performed'
+            class_pn.class_ln.logger.info(feedback)
+            class_pn.class_bn.fn_timestamped_print(feedback)
+    if load_data_frame_necessary:
+        # identify all files matching input file information
+        relevant_files_list = class_pn.class_fo.fn_build_file_list(
+            class_pn.class_ln.logger, class_pn.timer, class_pn.parameters.input_file)
+        # log file statistic details
+        class_pn.class_fo.fn_store_file_statistics(
+            class_pn.class_ln.logger, class_pn.timer, relevant_files_list, 'Input')
     # instantiate Tableau Hyper Api Extra Logic class
     class_thael = TableauHyperApiExtraLogic(language_to_use)
     # loading from a specific folder all files matching a given pattern into a data frame
     input_dict = {
+        'action': class_pn.parameters.policy_to_handle_hyper_file,
         'compression': class_pn.parameters.input_file_compression,
         'field delimiter': class_pn.parameters.csv_field_separator,
         'file list': relevant_files_list,
@@ -71,7 +84,7 @@ if __name__ == '__main__':
             input_dict['hyper file'] = relevant_files_list[0]
             working_data_frame = class_thael.fn_hyper_handle(
                 class_pn.class_ln.logger, class_pn.timer, input_dict)
-    else:
+    elif load_data_frame_necessary:
         working_data_frame = class_pn.class_dio.fn_load_file_into_data_frame(
             class_pn.class_ln.logger, class_pn.timer, input_dict)
     if working_data_frame is not None:
@@ -97,7 +110,7 @@ if __name__ == '__main__':
             if class_pn.parameters.input_file_format.lower() in supported_types:
                 c_td = TypeDetermination(language_to_use)
                 fn_dict = {
-                    'action': class_pn.parameters.policy_to_handle_hyper_file,
+                    'action': input_dict['action'],
                     'data frame': working_data_frame,
                     'input parameters': class_pn.parameters,
                     'input data types': class_pn.config['data_types'],
@@ -105,7 +118,7 @@ if __name__ == '__main__':
                     'schema name': input_dict['schema name'],
                     'table name': input_dict['table name'],
                 }
-                if fn_dict['action'] in ('append', 'overwrite'):
+                if fn_dict['action'] in ('append', 'create', 'overwrite'):
                     # advanced detection of data type within Data Frame
                     fn_dict['data frame structure'] = c_td.fn_get_data_frame_structure(
                         class_pn.class_ln.logger, class_pn.timer, fn_dict)
