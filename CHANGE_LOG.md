@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.5.1 release on 2020-05-29
+- added an extra verification for the scenario when at least one of the source files is newer than destination "overwrite" decision will be stronger than given "create" (safer to data accuracy).
+
 ## Version 1.5.0 release on 2020-05-26
 - extended functionality and now input file and/or output file are aware of Calculated Date expressions, making possible this way to use dynamic name interpreted at run time;
 - added "create" as option for "policy-to-handle-hyper-file" input parameter that allows skipping recreating "hyper" file if already exists;

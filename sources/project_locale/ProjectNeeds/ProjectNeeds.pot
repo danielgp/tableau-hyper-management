@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "As handle hyper action is set to \"create\", nothing else can be done"
+msgid "As handle hyper action is set to \"create\", further checks will happen to ensure none of the source files is newer than destination"
 msgstr ""
 
 msgid "Only certain file types are supported as input file type in combination with Tableau Extract (Hyper) as output file type. And {given_file_type} is not among \"{supported_file_types}\""
