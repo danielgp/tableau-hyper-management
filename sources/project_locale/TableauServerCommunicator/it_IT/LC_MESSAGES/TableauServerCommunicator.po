@@ -69,3 +69,8 @@ msgstr ""
 msgid "Stay tuned for the confirmation"
 msgstr "Restate sintonizzati per la conferma"
 
+msgid ""
+"There are {projects_counted} projects with provided name "
+"\"{project_name}\" but a unique identifier is expected"
+msgstr ""
+
