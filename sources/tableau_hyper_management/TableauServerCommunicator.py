@@ -8,13 +8,13 @@ import gettext
 # package to handle files/folders and related metadata/operations
 import os
 # package to ensure communication with Tableau Server
-import tableauserverclient as tsc
+import tableauserverclient
 # Path manager
 from pathlib import Path
 
 
 class TableauServerCommunicator:
-    req_opts = tsc.RequestOptions(pagesize=1000)
+    req_opts = tableauserverclient.RequestOptions(pagesize=1000)
     tableau_server = None
     locale = None
 
@@ -24,8 +24,8 @@ class TableauServerCommunicator:
         locale_domain = file_parts[(len(file_parts)-1)].replace('.py', '')
         locale_folder = os.path.normpath(os.path.join(
             os.path.join(os.path.altsep.join(file_parts[:-2]), 'project_locale'), locale_domain))
-        self.locale = gettext.translation(locale_domain, localedir=locale_folder,
-                                          languages=[in_language], fallback=True)
+        self.locale = gettext.translation(
+            locale_domain, localedir=locale_folder, languages=[in_language], fallback=True)
 
     def connect_to_tableau_server(self, local_logger, timer, in_connection):
         timer.start()
@@ -35,8 +35,8 @@ class TableauServerCommunicator:
                            .replace('{tableau_server}', in_connection['Tableau Server'])
                            .replace('{tableau_site}', in_connection['Tableau Site'])
                            .replace('{user_name}', in_connection['Username']))
-        self.tableau_server = tsc.Server(in_connection['Tableau Server'], True)
-        tableau_auth = tsc.TableauAuth(
+        self.tableau_server = tableauserverclient.Server(in_connection['Tableau Server'], True)
+        tableau_auth = tableauserverclient.TableauAuth(
             in_connection['Username'], in_connection['Password'], in_connection['Tableau Site'])
         self.tableau_server.auth.sign_in(tableau_auth)
         local_logger.debug(self.locale.gettext(
@@ -71,8 +71,11 @@ class TableauServerCommunicator:
                                .replace('{project_name}', relevant_project_name))
             self.no_publishing_feedback()
         elif int_found_projects > 1:
-            local_logger.error(f'There are {str(int_found_projects)} projects with provided name "'
-                               + relevant_project_name + ' but a unique identifier is expected')
+            local_logger.error(self.locale.gettext(
+                'There are {projects_counted} projects with provided name "'
+                + '{project_name}" but a unique identifier is expected')
+                               .replace('{projects_counted}', str(int_found_projects))
+                               .replace('{project_name}', relevant_project_name))
             self.no_publishing_feedback()
         else:
             publish_possible = True
@@ -122,7 +125,8 @@ class TableauServerCommunicator:
         local_logger.info(self.locale.gettext('About to start publishing'))
         data_source_name = Path(publish_details['Tableau Extract File'])\
             .name.replace('.hyper', '') + " Extract"
-        project_data_source = tsc.DatasourceItem(publish_details['Project ID'], data_source_name)
+        project_data_source = tableauserverclient.DatasourceItem(
+            publish_details['Project ID'], data_source_name)
         self.tableau_server.datasources.publish(
             project_data_source, publish_details['Tableau Extract File'],
             publish_details['Publishing Mode'])
