@@ -1,6 +1,11 @@
 """
 localizations_common - common class for various localizations tasks
 """
+# package to handle date and times
+from datetime import datetime
+# package to add support for multi-language (i18n)
+import gettext
+# glob package
 import glob
 # package to facilitate operating system project_locale detection
 import locale
@@ -12,41 +17,67 @@ import platform
 
 
 class LocalizationsCommon:
+    locale = None
     locale_implemented = [
         'it_IT',
         'ro_RO',
     ]
     operation_is_required = False
 
+    def __init__(self, in_language='en_US'):
+        file_parts = os.path.normpath(os.path.abspath(__file__)).replace('\\', os.path.altsep)\
+            .split(os.path.altsep)
+        locale_domain = file_parts[(len(file_parts)-1)].replace('.py', '')
+        locale_folder = os.path.normpath(os.path.join(
+            os.path.join(os.path.altsep.join(file_parts), 'project_locale'), locale_domain))
+        self.locale = gettext.translation(
+            locale_domain, localedir=locale_folder, languages=[in_language], fallback=True)
+
     def check_file_pairs(self, in_dict):
         get_details_to_operate = False
         file_situation_verdict = ''
         if os.path.lexists(pathlib.Path(in_dict['destination'])):
             source_last_modified = os.path.getmtime(in_dict['source'])
-            compiled_last_modified = os.path.getmtime(in_dict['destination'])
-            if source_last_modified > compiled_last_modified:
+            destination_last_modified = os.path.getmtime(in_dict['destination'])
+            if source_last_modified > destination_last_modified:
                 self.operation_is_required = True
                 get_details_to_operate = True
-                print('#' + str(in_dict['counter']) + ', '
-                      + 'For locale ' + in_dict['locale']
-                      + ' the ' + in_dict['source file type name'] + ' file '
-                      + os.path.basename(in_dict['source'])
-                      + ' is newer than compiled one '
-                      + os.path.basename(in_dict['destination'])
-                      + ' therefore to remedy this, '
-                      + in_dict['destination operation name'] + ' is required')
-                print('===>' + in_dict['source'] + ' has ' + str(source_last_modified)
-                      + ' vs. ' + str(compiled_last_modified))
+                print(self.locale.gettext(
+                    '#{file_counter}, For locale {locale_name} the {source_file_type} file '
+                    + '{source_file_name} is newer than compiled one {destination_file_name}, '
+                    + 'therefore to remedy this, {destination_operation_name} is required')
+                      .replace('{file_counter}', str(in_dict['counter']))
+                      .replace('{locale_name}', in_dict['locale'])
+                      .replace('{source_file_type}', in_dict['source file type name'])
+                      .replace('{source_file_name}', os.path.basename(in_dict['source']))
+                      .replace('{destination_file_name}', os.path.basename(in_dict['destination']))
+                      .replace('{destination_operation_name}',
+                               in_dict['destination operation name']))
+                print(self.locale.gettext('===> source file {source_file_name} '
+                                          + 'has {source_last_modified} '
+                                          + 'vs. {destination_last_modified} of the '
+                                          + 'destination file {destination_file_name}')
+                      .replace('{source_file_name}', os.path.basename(in_dict['source']))
+                      .replace('{source_last_modified}',
+                           str(datetime.fromtimestamp(source_last_modified)))
+                      .replace('{destination_last_modified}',
+                           str(datetime.fromtimestamp(destination_last_modified)))
+                      .replace('{destination_file_name}', os.path.basename(in_dict['destination'])))
                 file_situation_verdict = 'newer'
         else:
             self.operation_is_required = True
             get_details_to_operate = True
-            print('#' + str(in_dict['counter']) + ', '
-                  + 'The file ' + os.path.basename(in_dict['source'])
-                  + ' does not have compiled file for ' + in_dict['locale']
-                  + ' therefore will require '
-                  + in_dict['destination operation name'] + ' into following folder: '
-                  + os.path.normpath(os.path.dirname(in_dict['destination'])))
+            print(self.locale.gettext(
+                '#{file_counter}, For locale {locale_name} the file {source_file_name}'
+                + 'is missing, therefore to remedy this, '
+                + '{destination_operation_name} is required into following folder: '
+                + '{destination_folder}')
+                  .replace('{file_counter}', str(in_dict['counter']))
+                  .replace('{locale_name}', in_dict['locale'])
+                  .replace('{source_file_name}', os.path.basename(in_dict['source']))
+                  .replace('{destination_operation_name}', in_dict['destination operation name'])
+                  .replace('{destination_folder}',
+                           os.path.normpath(os.path.dirname(in_dict['destination']))))
             file_situation_verdict = 'missing'
         return get_details_to_operate, file_situation_verdict
 
@@ -120,13 +151,16 @@ class LocalizationsCommon:
         return os.path.join(os.path.normpath(os.path.dirname(in_file_name)),
                             os.path.basename(in_file_name))
 
-    def run_localization_compile(self):
+    def run_localization_action(self, in_action):
+        known_actions = {
+            'compile': 'localizations_compile.py',
+            'maintain_sources': 'localizations_maintain_sources.py',
+        }
         command_parts_to_run = [
             self.get_virtual_environment_python_binary(),
             ' ',
             self.get_this_file_folder(),
             os.path.altsep,
-            'localizations_compile.py',
+            known_actions.get(in_action),
         ]
         os.system(''.join(command_parts_to_run))
-
