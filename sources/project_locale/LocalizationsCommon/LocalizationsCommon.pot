@@ -1,0 +1,19 @@
+# Copyright (C) 2020 Daniel Popiniuc
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TypeDetermination\n"
+"POT-Creation-Date: 2020-05-30 20:20+0200\n"
+"PO-Revision-Date: 2020-05-30 20:20+0200\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "#{file_counter}, For locale {locale_name} the {source_file_type} file {source_file_name} is newer than compiled one {destination_file_name}, therefore to remedy this, {destination_operation_name} is required"
+msgstr "# {file_counter}, Per le impostazioni locali {locale_name} il file del tipo {source_file_type} chiamato {source_file_name} è più recente di uno compilato {destination_file_name}, quindi per porre rimedio a ciò è necessario {destination_operation_name}"
+
+msgid "===> source file {source_file_name} has {source_last_modified} vs. {destination_last_modified} of the destination file {destination_file_name}"
+msgstr "il file di origine {source_file_name} ha {source_last_modified} vs. {destination_last_modified} del file di destinazione {destination_file_name}"
