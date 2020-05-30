@@ -50,24 +50,40 @@ if __name__ == '__main__':
         and class_pn.parameters.output_file_format == 'hyper' \
             and class_pn.parameters.policy_to_handle_hyper_file == 'create':
         if os.path.isfile(class_pn.parameters.output_file):
+            # initial assumption is no further load is necessary
             load_data_frame_necessary = False
             relevant_files_list = []
             feedback = [
                 'The output file defined as {file_name} already exists',
-                'As handle hyper action is set to "create", nothing else can be done',
+                'As handle hyper action is set to "create", '
+                + 'further checks will happen to ensure none of the source files '
+                + 'is newer than destination',
             ]
             for crt_feedback in feedback:
                 class_pn.class_ln.logger.error(class_pn.locale.gettext(
-                    feedback.replace('{file_name}', class_pn.parameters.output_file)))
+                    crt_feedback.replace('{file_name}', class_pn.parameters.output_file)))
                 class_pn.class_bn.fn_timestamped_print(class_pn.locale.gettext(
-                    feedback.replace('{file_name}', class_pn.parameters.output_file)))
-    if load_data_frame_necessary:
-        # identify all files matching input file information
-        relevant_files_list = class_pn.class_fo.fn_build_file_list(
-            class_pn.class_ln.logger, class_pn.timer, class_pn.parameters.input_file)
-        # log file statistic details
-        class_pn.class_fo.fn_store_file_statistics(
-            class_pn.class_ln.logger, class_pn.timer, relevant_files_list, 'Input')
+                    crt_feedback.replace('{file_name}', class_pn.parameters.output_file)))
+    # Even if the Hyper file exists already, can happen one of the source file is newer
+    # so an overwrite might be more appropriate in such case
+    # identify all files matching input file information
+    relevant_files_list = class_pn.class_fo.fn_build_file_list(
+        class_pn.class_ln.logger, class_pn.timer, class_pn.parameters.input_file)
+    # log file statistic details
+    class_pn.class_fo.fn_store_file_statistics(
+        class_pn.class_ln.logger, class_pn.timer, relevant_files_list, 'Input')
+    # further could be required to assess "load_data_frame_necessary" value
+    if not load_data_frame_necessary:
+        final_verdict = class_pn.source_vs_destination_file_modification_assesment(
+            class_pn.class_ln.logger, class_pn.timer, {
+                'destination file': class_pn.parameters.output_file,
+                'list source files': relevant_files_list,
+            })
+        # as final_verdict values could be different depending on localization used/detected
+        # only a check of None or not None is possible
+        if final_verdict is not None:
+            load_data_frame_necessary = True
+            class_pn.parameters.policy_to_handle_hyper_file = 'overwrite'
     # instantiate Tableau Hyper Api Extra Logic class
     class_thael = TableauHyperApiExtraLogic(language_to_use)
     # loading from a specific folder all files matching a given pattern into a data frame

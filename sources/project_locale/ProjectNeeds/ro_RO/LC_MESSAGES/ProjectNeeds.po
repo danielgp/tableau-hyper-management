@@ -19,7 +19,7 @@ msgstr ""
 "Generated-By: Babel 2.8.0\n"
 
 msgid "As handle hyper action is set to \"create\", nothing else can be done"
-msgstr "Deoarece acțiunea hyper este setată pe \"create\", nu se poate face nimic altceva"
+msgstr "Deoarece acțiunea hyper este setată pe \"create\", se vor face verificări suplimentare pentru a se asigura că niciunul dintre fișierele sursă nu este mai nou decât destinația"
 
 msgid ""
 "Only certain file types are supported as input file type in combination "

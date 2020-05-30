@@ -105,3 +105,29 @@ class ProjectNeeds:
             in_logger.info(feedback)
         in_logger.info('~' * 50)
         timer.stop()
+
+    def source_vs_destination_file_modification_assesment(self, in_logger, timer, in_dict):
+        """
+        Checks if any source file is newer than destination
+
+        :param in_logger: logger handler to capture running details
+        :param timer: pointer to measure code performance
+        :param in_dict: dictionary containing following keys with relevant values:
+            "destination file" and "list source files"
+        :return: either None or localized term for "newer"
+        """
+        timer.start()
+        destination_file_times = self.class_fo.fn_get_file_dates_raw(in_dict['destination file'])
+        source_files_count = len(in_dict['list source files'])
+        loop_counter = 0
+        stop_verdict = self.class_fo.locale.gettext('newer')
+        verdict = None
+        while verdict != stop_verdict and loop_counter < source_files_count:
+            crt_file = in_dict['list source files'][loop_counter]
+            crt_verdict = self.class_fo.fn_get_file_datetime_verdict(
+                in_logger, crt_file, 'last modified', destination_file_times['last modified'])
+            if crt_verdict == stop_verdict:
+                verdict = crt_verdict
+            loop_counter += 1
+        timer.stop()
+        return verdict

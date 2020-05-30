@@ -91,6 +91,13 @@ class FileOperations:
                   .replace('{in_file_type}', in_file_type))
 
     @staticmethod
+    def fn_get_file_dates_raw(file_to_evaluate):
+        return {
+            'created': os.path.getctime(file_to_evaluate),
+            'last modified': os.path.getmtime(file_to_evaluate),
+        }
+
+    @staticmethod
     def fn_get_file_dates(file_to_evaluate):
         return {
             'created': datetime.fromtimestamp(os.path.getctime(file_to_evaluate)),
@@ -127,7 +134,7 @@ class FileOperations:
                                      created_or_modified, reference_datetime):
         implemented_choices = ['created', 'last modified']
         verdict = self.locale.gettext('unknown')
-        file_date_time = self.fn_get_file_dates(file_to_evaluate)
+        file_date_time = self.fn_get_file_dates_raw(file_to_evaluate)
         if created_or_modified in implemented_choices:
             which_datetime = file_date_time.get(created_or_modified)
             verdict = self.locale.gettext('older')
@@ -135,8 +142,10 @@ class FileOperations:
                 verdict = self.locale.gettext('newer')
             elif which_datetime == reference_datetime:
                 verdict = self.locale.gettext('same')
-            str_file_datetime = datetime.strftime(which_datetime, self.timestamp_format).strip()
-            str_reference = datetime.strftime(reference_datetime, self.timestamp_format).strip()
+            str_file_datetime = datetime.strftime(
+                datetime.fromtimestamp(which_datetime), self.timestamp_format).strip()
+            str_reference = datetime.strftime(
+                datetime.fromtimestamp(reference_datetime), self.timestamp_format).strip()
             local_logger.debug(self.locale.gettext(
                     'File "{file_name}" which has the {created_or_modified} datetime '
                     + 'as "{file_datetime}" vs. "{reference_datetime}" '
