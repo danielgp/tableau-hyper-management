@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-05-31 11:31\n"
+"PO-Revision-Date: 2020-05-31 12:07\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Romanian\n"
 "MIME-Version: 1.0\n"
@@ -16,71 +16,71 @@ msgstr ""
 "Language: ro_RO\n"
 
 msgid "{application_name} has started"
-msgstr ""
+msgstr "{application_name} a început"
 
 msgid "CSV field separator is %s"
-msgstr ""
+msgstr "Separatorul de câmp CSV este %s"
 
 msgid "Columns to eliminate JSON expression is %s"
-msgstr ""
+msgstr "Coloanele pentru a elimina expresia JSON este %s"
 
 msgid "Configuration file name with credentials is %s"
-msgstr ""
+msgstr "Numele fișierului de configurare cu datele de acreditare este %s"
 
 msgid "Configuration file name with extracting sequence(es) is %s"
-msgstr ""
+msgstr "Numele fișierului de configurare cu secvența (secvențele) de extragere este %s"
 
 msgid "Configuration file name with source systems is %s"
-msgstr ""
+msgstr "Numele fișierului de configurare cu sistemele sursă este %s"
 
 msgid "Filter expression is %s"
-msgstr ""
+msgstr "Expresia filtrului este %s"
 
 msgid "Hyper SQL query to handle data is %s"
-msgstr ""
+msgstr "Interogarea Hyper SQL pentru gestionarea datelor este %s"
 
 msgid "Input file compression is %s"
-msgstr ""
+msgstr "Comprimarea fișierului de intrare este %s"
 
 msgid "Input file format is %s"
-msgstr ""
+msgstr "Formatul fișierului de intrare este %s"
 
 msgid "Input file name (simple or with matching pattern) is %s"
-msgstr ""
+msgstr "Numele fișierului de intrare (simplu sau cu model de potrivire) este %s"
 
 msgid "Output directory is %s"
-msgstr ""
+msgstr "Directorul de ieșire este %s"
 
 msgid "Output file compression is %s"
-msgstr ""
+msgstr "Comprimarea fișierului de ieșire este %s"
 
 msgid "Output file format is %s"
-msgstr ""
+msgstr "Formatul fișierului de ieșire este %s"
 
 msgid "Output file name is %s"
-msgstr ""
+msgstr "Numele fișierului de ieșire este %s"
 
 msgid "Output log file name is %s"
-msgstr ""
+msgstr "Numele fișierului jurnal de ieșire este %s"
 
 msgid "Overview of input parameter given values"
-msgstr ""
+msgstr "Prezentare generală a valorilor date de parametrii de intrare"
 
 msgid "Policy to handle Tableau Extract (Hyper format) is %s"
-msgstr ""
+msgstr "Politica de gestionare a Extractului Tableau (format Hyper) este %s"
 
 msgid "Publishing mode is %s"
-msgstr ""
+msgstr "Modul de publicare este %s"
 
 msgid "Tableau Project is %s"
-msgstr ""
+msgstr "Proiectul Tableau este %s"
 
 msgid "Tableau Server to consider is %s"
-msgstr ""
+msgstr "Serverul Tableau de luat în considerare este %s"
 
 msgid "Tableau Site is %s"
-msgstr ""
+msgstr "Site-ul Tableau este %s"
 
 msgid "Unique values to analyze is limited to %s"
-msgstr ""
+msgstr "Valorile unice de analizat sunt limitate la %s"
 
