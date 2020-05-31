@@ -1,0 +1,22 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tableau-hyper-management\n"
+"POT-Creation-Date: 2020-05-30 20:20+0200\n"
+"PO-Revision-Date: 2020-05-31 13:19\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: Romanian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100>0 && n%100<20)) ? 1 : 2);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: ro\n"
+"X-Crowdin-File: /develop/sources/project_locale/LocalizationsCommon/LocalizationsCommon.pot\n"
+"Language: ro_RO\n"
+
+msgid "#{file_counter}, For locale {locale_name} the {source_file_type} file {source_file_name} is newer than compiled one {destination_file_name}, therefore to remedy this, {destination_operation_name} is required"
+msgstr "#{file_counter}, Pentru localizarea {locale_name} fișierul {source_file_type} {source_file_name} este mai nou decât cel compilat {destination_file_name}, prin urmare pentru a remedia acest lucru, {destination_operation_name} este necesară"
+
+msgid "===> source file {source_file_name} has {source_last_modified} vs. {destination_last_modified} of the destination file {destination_file_name}"
+msgstr "fișierul sursă {source_file_name} are {source_last_modified} vs. {destination_last_modified} al fișierului de destinație {destination_file_name}"
+
