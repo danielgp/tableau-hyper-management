@@ -37,8 +37,8 @@ class ProjectNeeds:
         locale_domain = file_parts[(len(file_parts)-1)].replace('.py', '')
         locale_folder = os.path.normpath(os.path.join(
             os.path.join(os.path.altsep.join(file_parts[:-2]), 'project_locale'), locale_domain))
-        self.locale = gettext.translation(locale_domain, localedir=locale_folder,
-                                          languages=[default_language], fallback=True)
+        self.locale = gettext.translation(
+            locale_domain, localedir=locale_folder, languages=[default_language], fallback=True)
         # instantiate Basic Needs class
         self.class_bn = BasicNeeds(default_language)
         # instantiate File Operations class
@@ -54,8 +54,10 @@ class ProjectNeeds:
 
     def fn_check_inputs_specific(self, input_parameters):
         if self.script == 'publisher':
+            print(self.locale.gettext('Checking if provided input credentials file exists'))
             self.class_bn.fn_validate_single_value(
                     input_parameters.input_credentials_file, 'file')
+            print(self.locale.gettext('Checking if provided Tableau Server url is valid'))
             self.class_bn.fn_validate_single_value(
                     input_parameters.tableau_server, 'url')
 

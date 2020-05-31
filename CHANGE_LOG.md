@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.5.4 release on 2020-05-31
+- added few additional feedback on internal validation about to happen, to enhance user understanding in case of such values are deemed to be invalid.
+
 ## Version 1.5.3 release on 2020-05-31
 - BUG FIX: a default value for log input parameter is properly treated on log folder check (aka check is circumvented);
 - added Spanish localisation;

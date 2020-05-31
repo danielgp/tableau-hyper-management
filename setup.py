@@ -41,6 +41,7 @@ setup(
         'pyarrow>=0.17,<1.0',
         'tableauhyperapi',
         'tableauserverclient',
+        'twine>3,<4',
         'xlrd>=1,<2',
         'xlsxwriter>=1,<2',
         'wheel>=0.34.2,<1.0'
@@ -66,5 +67,5 @@ setup(
     },
     python_requires='>=3.6',
     url=this_package_website + '/releases',  # project home page
-    version='1.5.3'
+    version='1.5.4'
 )
