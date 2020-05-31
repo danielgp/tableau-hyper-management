@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-05-31 12:24\n"
+"PO-Revision-Date: 2020-05-31 13:19\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Spanish\n"
 "MIME-Version: 1.0\n"
@@ -16,16 +16,16 @@ msgstr ""
 "Language: es_ES\n"
 
 msgid "{application_name} has started"
-msgstr ""
+msgstr "{application_name} ha comenzado"
 
 msgid "CSV field separator is %s"
-msgstr ""
+msgstr "Separador de campos CSV es %s"
 
 msgid "Columns to eliminate JSON expression is %s"
-msgstr ""
+msgstr "Las columnas para eliminar la expresión JSON son %s"
 
 msgid "Configuration file name with credentials is %s"
-msgstr ""
+msgstr "Nombre del archivo de configuración con credenciales es %s"
 
 msgid "Configuration file name with extracting sequence(es) is %s"
 msgstr ""
@@ -34,7 +34,7 @@ msgid "Configuration file name with source systems is %s"
 msgstr ""
 
 msgid "Filter expression is %s"
-msgstr ""
+msgstr "Expresión de filtro es %s"
 
 msgid "Hyper SQL query to handle data is %s"
 msgstr ""
