@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-05-08 23:20+0200\n"
-"PO-Revision-Date: 2020-05-31 12:43\n"
+"PO-Revision-Date: 2020-05-31 13:19\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Romanian\n"
 "MIME-Version: 1.0\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Language: ro_RO\n"
 
 msgid "A number of {projects_counted} projects have been identified"
-msgstr "Au fost identificate un număr de {proiecte_counted} proiecte"
+msgstr "Au fost identificate un număr de {projects_counted} proiecte"
 
 msgid "A single project identifier was found \"{project_guid}\", so I will proceed with publishing provided file there"
-msgstr ""
+msgstr "Un singur identificator de proiect a fost găsit \"{project_guid}\", așa că voi continua cu publicarea fișierului furnizat"
 
 msgid "About to connect to Tableau Server with URL: {tableau_server}, Site {tableau_site} with Username = {user_name}"
 msgstr "Sunt pe cale să mă conectez la Tableau Server cu URL-ul: {tableau_server}, Site-ul {tableau_site} cu nume de utilizator = {user_name}"
@@ -55,5 +55,5 @@ msgid "Stay tuned for the confirmation"
 msgstr "Stay tuned pentru confirmare"
 
 msgid "There are {projects_counted} projects with provided name \"{project_name}\" but a unique identifier is expected"
-msgstr ""
+msgstr "Există {projects_counted} proiecte cu numele furnizat \"{project_name}\", dar este așteptat un identificator unic"
 
