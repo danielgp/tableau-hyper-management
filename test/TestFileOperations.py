@@ -14,7 +14,8 @@ class TestFileOperations(unittest.TestCase):
             python_binary += '.exe'
         os.system(python_binary + ' '
                   + os.path.join(os.path.normpath(os.path.dirname(__file__))
-                                 .replace('test', 'sources'), 'localizations_compile.py'))
+                                 .replace('test', 'sources/project_locale'),
+                                 'localizations_compile.py'))
 
     def test_file_statistics(self):
         class_fo = FileOperations()
