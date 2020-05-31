@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-05-31 11:26\n"
+"PO-Revision-Date: 2020-05-31 12:07\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Romanian\n"
 "MIME-Version: 1.0\n"
@@ -16,23 +16,23 @@ msgstr ""
 "Language: ro_RO\n"
 
 msgid "Application finished, for complete logged details please check {log_file_name}"
-msgstr ""
+msgstr "Aplicație terminată, pentru detalii complet jurnalizate vă rugăm să verificați {log_file_name}"
 
 msgid "Application finished, whole script took {total_time_string}"
-msgstr ""
+msgstr "Aplicație terminată, întregul script a durat {total_time_string}"
 
 msgid "Given file \"{value_to_validate}\" does not exist"
-msgstr ""
+msgstr "Fișierul furnizat \"{value_to_validate}\" nu există"
 
 msgid "Given folder \"{value_to_validate}\" does not exist"
-msgstr ""
+msgstr "Folderul furnizat \"{value_to_validate}\" nu există"
 
 msgid "Given url \"{value_to_validate}\" is not valid"
-msgstr ""
+msgstr "Adresa de internet \"{value_to_validate}\" nu este validă"
 
 msgid "Total execution time was {total_time_string}"
-msgstr ""
+msgstr "Durata totală de execuție a fost {total_time_string}"
 
 msgid "log file"
-msgstr ""
+msgstr "fișier jurnal"
 
