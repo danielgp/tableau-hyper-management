@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-05-08 23:20+0200\n"
-"PO-Revision-Date: 2020-05-31 12:31\n"
+"PO-Revision-Date: 2020-05-31 12:43\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Romanian\n"
 "MIME-Version: 1.0\n"
@@ -16,43 +16,43 @@ msgstr ""
 "Language: ro_RO\n"
 
 msgid "A number of {projects_counted} projects have been identified"
-msgstr ""
+msgstr "Au fost identificate un număr de {proiecte_counted} proiecte"
 
 msgid "A single project identifier was found \"{project_guid}\", so I will proceed with publishing provided file there"
 msgstr ""
 
 msgid "About to connect to Tableau Server with URL: {tableau_server}, Site {tableau_site} with Username = {user_name}"
-msgstr ""
+msgstr "Sunt pe cale să mă conectez la Tableau Server cu URL-ul: {tableau_server}, Site-ul {tableau_site} cu nume de utilizator = {user_name}"
 
 msgid "About to start publishing"
-msgstr ""
+msgstr "Sunt pe cale de a începe publicarea"
 
 msgid "Check your input parameter values for accuracy and try again!"
-msgstr ""
+msgstr "Verificați valorile parametrilor de intrare pentru precizie și încercați din nou!"
 
 msgid "Connection to the Tableau Server has been established successfully!"
-msgstr ""
+msgstr "Conexiunea la serverul Tableau a fost stabilită cu succes!"
 
 msgid "Connection to the Tableau Server has been terminated!"
-msgstr ""
+msgstr "Conexiunea la serverul Tableau s-a terminat!"
 
 msgid "No project with provided name \"{project_name}\" has been found"
-msgstr ""
+msgstr "Nu s-a găsit niciun proiect cu numele furnizat \"{project_name}\""
 
 msgid "No publishing action will take place!"
-msgstr ""
+msgstr "Nu va avea loc nicio acțiune de publicare!"
 
 msgid "Publishing completed successfully!"
-msgstr ""
+msgstr "Publicarea s-a terminat cu succes!"
 
 msgid "Reading list of all projects available has been completed"
-msgstr ""
+msgstr "Lista de lectură a tuturor proiectelor disponibile a fost finalizată"
 
 msgid "Retaining the projects according to filtering type provided ({filter_type}) has been completed"
-msgstr ""
+msgstr "Păstrarea proiectelor în funcție de tipul de filtrare furnizat ({filter_type}) a fost finalizată"
 
 msgid "Stay tuned for the confirmation"
-msgstr ""
+msgstr "Stay tuned pentru confirmare"
 
 msgid "There are {projects_counted} projects with provided name \"{project_name}\" but a unique identifier is expected"
 msgstr ""
