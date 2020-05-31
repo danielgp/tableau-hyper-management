@@ -9,3 +9,9 @@ files:
   - source: /sources/project_locale/DataInputOutput/DataInputOutput.pot
     translation: >-
       /sources/project_locale/DataInputOutput/%locale_with_underscore%/LC_MESSAGES/DataInputOutput.po
+  - source: /sources/project_locale/DataManipulator/DataManipulator.pot
+    translation: >-
+      /sources/project_locale/DataManipulator/%locale_with_underscore%/LC_MESSAGES/DataManipulator.po
+  - source: /sources/project_locale/FileOperations/FileOperations.pot
+    translation: >-
+      /sources/project_locale/FileOperations/%locale_with_underscore%/LC_MESSAGES/FileOperations.po
