@@ -3,84 +3,84 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-05-31 11:58\n"
+"PO-Revision-Date: 2020-05-31 13:49\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
-"Language-Team: Italian\n"
+"Language-Team: Spanish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: tableau-hyper-management\n"
-"X-Crowdin-Language: it\n"
+"X-Crowdin-Language: es-ES\n"
 "X-Crowdin-File: /develop/sources/project_locale/CommandLineArgumentsManagement/CommandLineArgumentsManagement.pot\n"
-"Language: it_IT\n"
+"Language: es_ES\n"
 
 msgid "{application_name} has started"
-msgstr "{application_name} è iniziato"
+msgstr "{application_name} ha comenzado"
 
 msgid "CSV field separator is %s"
-msgstr "Il separatore di campo CSV è %s"
+msgstr "Separador de campos CSV es %s"
 
 msgid "Columns to eliminate JSON expression is %s"
-msgstr "Colonne per eliminare l'espressione JSON è %s"
+msgstr "Las columnas para eliminar la expresión JSON son %s"
 
 msgid "Configuration file name with credentials is %s"
-msgstr "Il nome del file di configurazione con le credenziali è %s"
+msgstr "Nombre del archivo de configuración con credenciales es %s"
 
 msgid "Configuration file name with extracting sequence(es) is %s"
-msgstr "Il nome del file di configurazione con sequenza di estrazione è %s"
+msgstr "Nombre del archivo de configuración con secuencia(s) de extracción es %s"
 
 msgid "Configuration file name with source systems is %s"
-msgstr "Il nome del file di configurazione con i sistemi sorgente è %s"
+msgstr "Nombre del archivo de configuración con sistemas de origen es %s"
 
 msgid "Filter expression is %s"
-msgstr "L'espressione del filtro è %s"
+msgstr "Expresión de filtro es %s"
 
 msgid "Hyper SQL query to handle data is %s"
-msgstr "La query Hyper SQL per la gestione dei dati è %s"
+msgstr "La consulta Hyper SQL para manejar datos es %s"
 
 msgid "Input file compression is %s"
-msgstr "La compressione del file di input è %s"
+msgstr "Compresión del archivo de entrada es %s"
 
 msgid "Input file format is %s"
-msgstr "Il formato del file di input è%s"
+msgstr "Formato de archivo de entrada es %s"
 
 msgid "Input file name (simple or with matching pattern) is %s"
-msgstr "Il nome del file di input (semplice o con modello corrispondente) è %s"
+msgstr "Nombre del archivo de entrada (simple o con patrón coincidente) es %s"
 
 msgid "Output directory is %s"
-msgstr "La directory di uscita è %s"
+msgstr "Directorio de salida es %s"
 
 msgid "Output file compression is %s"
-msgstr "La compressione del file di uscita è %s"
+msgstr "Compresión del archivo de salida es %s"
 
 msgid "Output file format is %s"
-msgstr "Il formato del file di uscita è%s"
+msgstr "Formato de archivo de salida es %s"
 
 msgid "Output file name is %s"
-msgstr "Nome del file di uscita è %s"
+msgstr "Nombre del archivo de salida es %s"
 
 msgid "Output log file name is %s"
-msgstr "Il nome del file di log in uscita è %s"
+msgstr "Nombre del archivo de registro de salida es %s"
 
 msgid "Overview of input parameter given values"
-msgstr "Panoramica dei valori dei parametri di ingresso dati"
+msgstr "Resumen del parámetro de entrada valores dados"
 
 msgid "Policy to handle Tableau Extract (Hyper format) is %s"
-msgstr "La politica per gestire l'Estratto Tableau (formato Hyper) è %s"
+msgstr "La política para manejar el Extracto de Tableau (formato Hyper) es %s"
 
 msgid "Publishing mode is %s"
-msgstr "La modalità di pubblicazione è %s"
+msgstr "Modo de publicación es %s"
 
 msgid "Tableau Project is %s"
-msgstr "Il Progetto Tableau è %s"
+msgstr "Proyecto Tableau es %s"
 
 msgid "Tableau Server to consider is %s"
-msgstr "Il Server Tableau da considerare è %s"
+msgstr "Servidor Tableau a considerar es %s"
 
 msgid "Tableau Site is %s"
-msgstr "Il Sito Tableau è %s"
+msgstr "Sitio de Tableau es %s"
 
 msgid "Unique values to analyze is limited to %s"
-msgstr "I valori unici da analizzare sono limitati a %s"
+msgstr "Valores únicos a analizar está limitado a %s"
 

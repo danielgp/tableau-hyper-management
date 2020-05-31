@@ -3,57 +3,57 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-05-08 23:20+0200\n"
-"PO-Revision-Date: 2020-05-31 13:19\n"
+"PO-Revision-Date: 2020-05-31 15:04\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
-"Language-Team: Romanian\n"
+"Language-Team: Spanish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100>0 && n%100<20)) ? 1 : 2);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: tableau-hyper-management\n"
-"X-Crowdin-Language: ro\n"
+"X-Crowdin-Language: es-ES\n"
 "X-Crowdin-File: /develop/sources/project_locale/TableauServerCommunicator/TableauServerCommunicator.pot\n"
-"Language: ro_RO\n"
+"Language: es_ES\n"
 
 msgid "A number of {projects_counted} projects have been identified"
-msgstr "Au fost identificate un număr de {projects_counted} proiecte"
+msgstr "Se ha identificado un número de {projects_counted} proyectos"
 
 msgid "A single project identifier was found \"{project_guid}\", so I will proceed with publishing provided file there"
-msgstr "Un singur identificator de proiect a fost găsit \"{project_guid}\", așa că voi continua cu publicarea fișierului furnizat"
+msgstr "Se ha encontrado un único identificador de proyecto \"{project_guid}\", así que procederé con la publicación del archivo proporcionado allí"
 
 msgid "About to connect to Tableau Server with URL: {tableau_server}, Site {tableau_site} with Username = {user_name}"
-msgstr "Sunt pe cale să mă conectez la Tableau Server cu URL-ul: {tableau_server}, Site-ul {tableau_site} cu nume de utilizator = {user_name}"
+msgstr "A punto de conectarse al Servidor Tableau con la URL: {tableau_server}, Sitio {tableau_site} con Nombre de Usuario = {user_name}"
 
 msgid "About to start publishing"
-msgstr "Sunt pe cale de a începe publicarea"
+msgstr "A punto de empezar a publicar"
 
 msgid "Check your input parameter values for accuracy and try again!"
-msgstr "Verificați valorile parametrilor de intrare pentru precizie și încercați din nou!"
+msgstr "Compruebe los valores de los parámetros de entrada para obtener precisión e inténtelo de nuevo!"
 
 msgid "Connection to the Tableau Server has been established successfully!"
-msgstr "Conexiunea la serverul Tableau a fost stabilită cu succes!"
+msgstr "¡La conexión con el Servidor de Tableau se ha establecido correctamente!"
 
 msgid "Connection to the Tableau Server has been terminated!"
-msgstr "Conexiunea la serverul Tableau s-a terminat!"
+msgstr "¡La conexión al Servidor de Tableau ha sido terminado!"
 
 msgid "No project with provided name \"{project_name}\" has been found"
-msgstr "Nu s-a găsit niciun proiect cu numele furnizat \"{project_name}\""
+msgstr "No se encontró ningún proyecto con el nombre proporcionado \"{project_name}\""
 
 msgid "No publishing action will take place!"
-msgstr "Nu va avea loc nicio acțiune de publicare!"
+msgstr "¡No se realizará ninguna acción de publicación!"
 
 msgid "Publishing completed successfully!"
-msgstr "Publicarea s-a terminat cu succes!"
+msgstr "¡Publicación completada correctamente!"
 
 msgid "Reading list of all projects available has been completed"
-msgstr "Lista de lectură a tuturor proiectelor disponibile a fost finalizată"
+msgstr "La lista de lectura de todos los proyectos disponibles ha sido completa"
 
 msgid "Retaining the projects according to filtering type provided ({filter_type}) has been completed"
-msgstr "Păstrarea proiectelor în funcție de tipul de filtrare furnizat ({filter_type}) a fost finalizată"
+msgstr "La retención de los proyectos según el tipo de filtro proporcionado ({filter_type}) ha sido completada"
 
 msgid "Stay tuned for the confirmation"
-msgstr "Stay tuned pentru confirmare"
+msgstr "Manténgase atento para la confirmación"
 
 msgid "There are {projects_counted} projects with provided name \"{project_name}\" but a unique identifier is expected"
-msgstr "Există {projects_counted} proiecte cu numele furnizat \"{project_name}\", dar este așteptat un identificator unic"
+msgstr "Hay {projects_counted} proyectos con nombre proporcionado \"{project_name}\" pero se espera un identificador único"
 

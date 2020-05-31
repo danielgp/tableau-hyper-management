@@ -1,18 +1,19 @@
-# Copyright (C) 2020 Daniel Popiniuc
-# This file is distributed under the same license as the FileOperations package.
-#
+#,fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: DataManipulator\n"
+"Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-04-26 13:55+0300\n"
+"PO-Revision-Date: 2020-05-31 13:19\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Romanian\n"
-"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100>0 && n%100<20)) ? 1 : 2);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: ro\n"
+"X-Crowdin-File: /develop/sources/project_locale/DataManipulator/DataManipulator.pot\n"
+"Language: ro_RO\n"
 
 msgid "{deviation_type} Deviation Number is {deviation_number} to be applied to Current index, became {index_to_apply}"
 msgstr "Numărul Devierii {deviation_type} este {deviation_number} care trebuie aplicat indexului curent, a devenit {index_to_apply}"
@@ -36,7 +37,8 @@ msgid "different than"
 msgstr "diferit de"
 
 msgid "equal with"
-msgstr "eqal cu"
+msgstr "egal cu"
 
 msgid "matching any of these values"
 msgstr "potrivire cu oricare dintre aceste valori"
+
