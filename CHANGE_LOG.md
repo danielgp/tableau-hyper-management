@@ -1,5 +1,9 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.5.5 release on 2020-05-31
+- added a encoding sequence to ensure possible unicode characters in file are not causing fatal error duing checksum calculation sequence;
+- switch from a regular print to a timestamped one for recently added feedback targeting internal validations.
+
 ## Version 1.5.4 release on 2020-05-31
 - added few additional feedback on internal validation about to happen, to enhance user understanding in case of such values are deemed to be invalid.
 
