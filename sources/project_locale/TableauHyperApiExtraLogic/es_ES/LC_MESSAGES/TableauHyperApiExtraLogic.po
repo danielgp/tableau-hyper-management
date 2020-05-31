@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-05-09 15:10+0200\n"
-"PO-Revision-Date: 2020-05-31 14:49\n"
+"PO-Revision-Date: 2020-05-31 15:04\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Spanish\n"
 "MIME-Version: 1.0\n"
@@ -45,23 +45,23 @@ msgid "Hyper SQL about to be executed is: {hyper_sql}"
 msgstr "Hyper SQL a punto de ser ejecutado es: {hyper_sql}"
 
 msgid "Hyper SQL executed with success and {rows_counted} have been retrieved"
-msgstr ""
+msgstr "Hyper SQL ejecutado con éxito y {rows_counted} se han recuperado"
 
 msgid "Hyper engine process has been shut down"
-msgstr ""
+msgstr "El proceso del motor Hyper ha sido cerrado"
 
 msgid "Hyper engine process initialized"
-msgstr ""
+msgstr "Proceso del motor Hyper inicializado"
 
 msgid "Hyper schema \"{hyper_schema_name}\" has been created"
-msgstr ""
+msgstr "El esquema Hyper \"{hyper_schema_name}\" ha sido creado"
 
 msgid "Hyper table \"{hyper_table_name}\" has been created"
-msgstr ""
+msgstr "La tabla Hyper \"{hyper_table_name}\" ha sido creada"
 
 msgid "Re-building CSV content for maximum Hyper compatibility has been completed"
-msgstr ""
+msgstr "Reconstruir contenido CSV para la máxima compatibilidad con Hyper ha sido completado"
 
 msgid "Table {hyper_table_name} has {row_count} rows"
-msgstr ""
+msgstr "Tabla {hyper_table_name} tiene {row_count} filas"
 
