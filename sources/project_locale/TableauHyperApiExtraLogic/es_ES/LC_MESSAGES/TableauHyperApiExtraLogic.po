@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-05-09 15:10+0200\n"
-"PO-Revision-Date: 2020-05-31 12:31\n"
+"PO-Revision-Date: 2020-05-31 14:49\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Spanish\n"
 "MIME-Version: 1.0\n"
@@ -15,34 +15,34 @@ msgstr ""
 "Language: es_ES\n"
 
 msgid "{rows_counted} records were prepared in this process"
-msgstr ""
+msgstr "Se han preparado {rows_counted} registros en este proceso"
 
 msgid "Building Hyper columns completed"
-msgstr ""
+msgstr "Construcción de columnas Hyper completadas"
 
 msgid "Chosen Telemetry is {telemetry_value}"
-msgstr ""
+msgstr "La telemetría elegida es {telemetry_value}"
 
 msgid "Column {column_order} having name [{column_name}] and type \"{column_type}\" will become \"{column_type_new}\""
-msgstr ""
+msgstr "La columna {column_order} que tenga nombre [{column_name}] y escriba \"{column_type}\" se convertirá en \"{column_type_new}\""
 
 msgid "Column {column_name} has pandas data type = {column_pandas_type} and python data type = {column_python_type}"
-msgstr ""
+msgstr "La columna {column_name} tiene un tipo de datos de pandas = {column_pandas_type} y el tipo de datos de python = {column_python_type}"
 
 msgid "Connection to the Hyper engine file has been closed"
-msgstr ""
+msgstr "Se ha cerrado la conexión al archivo del motor Hyper"
 
 msgid "Connection to the Hyper engine using file name \"{file_name}\" has been established"
-msgstr ""
+msgstr "Se ha establecido la conexión al motor Hyper usando el nombre del archivo \"{file_name}\""
 
 msgid "Data has been inserted into Hyper table"
-msgstr ""
+msgstr "Los datos han sido insertados en la tabla Hyper"
 
 msgid "Filling empty values with NAN finished"
-msgstr ""
+msgstr "Completando valores vacíos con NAN finalizado"
 
 msgid "Hyper SQL about to be executed is: {hyper_sql}"
-msgstr ""
+msgstr "Hyper SQL a punto de ser ejecutado es: {hyper_sql}"
 
 msgid "Hyper SQL executed with success and {rows_counted} have been retrieved"
 msgstr ""
