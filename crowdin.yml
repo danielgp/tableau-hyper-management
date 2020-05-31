@@ -15,3 +15,6 @@ files:
   - source: /sources/project_locale/FileOperations/FileOperations.pot
     translation: >-
       /sources/project_locale/FileOperations/%locale_with_underscore%/LC_MESSAGES/FileOperations.po
+  - source: /sources/project_locale/LocalizationsCommon/LocalizationsCommon.pot
+    translation: >-
+      /sources/project_locale/LocalizationsCommon/%locale_with_underscore%/LC_MESSAGES/LocalizationsCommon.po
