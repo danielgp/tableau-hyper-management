@@ -120,7 +120,7 @@ class FileOperations:
             file_handler = open(file=file_to_evaluate, mode='r', encoding='mbcs')
         except UnicodeDecodeError:
             file_handler = open(file=file_to_evaluate, mode='r', encoding='utf-8')
-        file_content = file_handler.read().encode()
+        file_content = file_handler.read().encode('utf-8', 'xmlcharrefreplace')
         file_handler.close()
         file_statistics['MD5 Checksum'] = hashlib.md5(file_content).hexdigest()
         file_statistics['SHA1 Checksum'] = hashlib.sha1(file_content).hexdigest()
