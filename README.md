@@ -1,8 +1,8 @@
 # Tableau-Hyper-Management
 
-## Code quality analysis and Build Status
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/build.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/build-status/master)
+[![Crowdin](https://badges.crowdin.net/tableau-hyper-management/localized.svg)](https://crowdin.com/project/tableau-hyper-management)
 
 ## What is this repository for?
 
