@@ -1,105 +1,107 @@
-# Copyright (C) 2020 Daniel Popiniuc
-# This file is distributed under the same license as the Common_FileOperations package.
-#
+#,fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FileOperations\n"
+"Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-04-25 17:13+0300\n"
+"PO-Revision-Date: 2020-05-31 12:24\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Romanian\n"
-"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100>0 && n%100<20)) ? 1 : 2);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: ro\n"
+"X-Crowdin-File: /develop/sources/project_locale/FileOperations/FileOperations.pot\n"
+"Language: ro_RO\n"
 
 msgid "{file_name} identified"
-msgstr "{file_name} identificat"
+msgstr ""
 
 msgid "{files_counted} file from {in_folder} folder identified"
 msgid_plural "{files_counted} files from {in_folder} folder identified"
-msgstr[0] "{files_counted} fișier din dosarul {in_folder} identificat"
-msgstr[1] "{files_counted} fișiere din dosarul {in_folder} identificate"
-msgstr[2] "{files_counted} fișiere din dosarul {in_folder} identificate"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Checksum"
-msgstr "Suma de control"
+msgstr ""
 
 msgid "Entire file content read"
-msgstr "Întreg conținutul citit"
+msgstr ""
 
 msgid "Error encountered when trying to interpret JSON"
-msgstr "Eroare întâmpinată la încercarea interpretării JSON"
+msgstr ""
 
 msgid "File \"{file_name}\" has the following characteristics: {file_statistics}"
-msgstr "Fișierul \"{file_name}\" are următoarele caracteristici: {file_statistics}"
+msgstr ""
 
 msgid "File \"{file_name}\" which has the {created_or_modified} datetime as \"{file_datetime}\" vs. \"{reference_datetime}\" has a verdict = {verdict}"
-msgstr "Fișierul \"{file_name}\" care are data {created_or_modified} ca \"{file_datetime}\" versus \"{reference_datetime}\" are un verdict = {verdict}"
+msgstr ""
 
 msgid "File matching pattern identified"
-msgstr "Model de potrivire fișiere identificat"
+msgstr ""
 
 msgid "File {file_name} does not exist"
-msgstr "Fișierul {file_name} nu există"
+msgstr ""
 
 msgid "File {file_name} has just been opened"
-msgstr "Fișierul {file_name} tocmai a fost deschis"
+msgstr ""
 
 msgid "File {file_name} has just been overwritten as {new_file_name}"
-msgstr "Fișierul {file_name} tocmai a fost suprascris ca și {new_file_name}"
+msgstr ""
 
 msgid "File {file_name} has just been renamed as {new_file_name}"
-msgstr "Fișierul {file_name} tocmai a fost redenumit ca și {new_file_name}"
+msgstr ""
 
 msgid "File {file_name} will be overwritten"
-msgstr "Fișierul {file_name} va fi suprascris"
+msgstr ""
 
 msgid "File {file_name} will be renamed as {new_file_name}"
-msgstr "Fișierul {file_name} va fi redenumit ca și {new_file_name}"
+msgstr ""
 
 msgid "Folder {folder_name} does not exist"
-msgstr "Dosarul {folder_name} nu există"
+msgstr ""
 
 msgid "JSON structure interpreted"
-msgstr "structura JSON interpretată"
+msgstr ""
 
 msgid "Listing all files within {in_folder} folder looking for {matching_pattern} as matching pattern"
-msgstr "Listarea tuturor fișierelor din folderul {in_folder} în căutare de {matching_pattern} ca model de potrivire"
+msgstr ""
 
 msgid "Specific file name provided"
-msgstr "Nume de fișier specific furnizat"
+msgstr ""
 
 msgid "Unknown file datetime choice, expected is one of the following choices \"{implemented_choices}\" but provided was \"{created_or_modified}\"..."
-msgstr "Tipul de datetime a fișierului este necunoscut, așteptată a fost una dintre următoarele opțiuni \"{implemented_choices}\", dar furnizată a fost \"{create_or_modified}\"..."
+msgstr ""
 
 msgid "Unknown file type provided, expected either \"json\" or \"raw\", but got {in_file_type}"
-msgstr "Tip de fișier necunoscut, așteptat fie \"json\" sau \"raw\", dar primit {in_file_type}"
+msgstr ""
 
 msgid "created"
-msgstr "creată"
+msgstr ""
 
 msgid "date when created"
-msgstr "data la care a fost creat"
+msgstr ""
 
 msgid "date when last modified"
-msgstr "data la care a fost modificat ultima dată"
+msgstr ""
 
 msgid "newer"
-msgstr "mai nou"
+msgstr ""
 
 msgid "older"
-msgstr "mai vechi"
+msgstr ""
 
 msgid "last modified"
-msgstr "ultima modificare"
+msgstr ""
 
 msgid "same"
-msgstr "aceeași"
+msgstr ""
 
 msgid "size [bytes]"
-msgstr "dimensiune [bytes]"
+msgstr ""
 
 msgid "unknown"
-msgstr "necunoscut"
+msgstr ""
+
