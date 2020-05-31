@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-05-31 12:24\n"
+"PO-Revision-Date: 2020-05-31 12:26\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Romanian\n"
 "MIME-Version: 1.0\n"
@@ -16,29 +16,29 @@ msgstr ""
 "Language: ro_RO\n"
 
 msgid "{deviation_type} Deviation Number is {deviation_number} to be applied to Current index, became {index_to_apply}"
-msgstr ""
+msgstr "Numărul Devierii {deviation_type} este {deviation_number} care trebuie aplicat indexului curent, a devenit {index_to_apply}"
 
 msgid "Current index has been determined to be {index_current_value}"
-msgstr ""
+msgstr "Indicele curent a fost determinat a fi {index_current_value}"
 
 msgid "Lower"
-msgstr ""
+msgstr "Inferior"
 
 msgid "Query expression to apply is: {query_expression}"
-msgstr ""
+msgstr "Expresia de interogare de aplicat este: {query_expression}"
 
 msgid "Upper"
-msgstr ""
+msgstr "Superior"
 
 msgid "Will retain only values {filter_type} \"{filter_values}\" within the field \"{column_to_filter}\""
-msgstr ""
+msgstr "Se vor păstra doar valorile {filter_type} \"{filter_values}\" în câmpul \"{column_to_filter}\""
 
 msgid "different than"
-msgstr ""
+msgstr "diferit de"
 
 msgid "equal with"
-msgstr ""
+msgstr "eqal cu"
 
 msgid "matching any of these values"
-msgstr ""
+msgstr "potrivire cu oricare dintre aceste valori"
 
