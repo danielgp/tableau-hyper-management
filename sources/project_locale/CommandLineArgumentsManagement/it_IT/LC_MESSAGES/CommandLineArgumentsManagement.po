@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-05-31 11:31\n"
+"PO-Revision-Date: 2020-05-31 11:58\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -16,71 +16,71 @@ msgstr ""
 "Language: it_IT\n"
 
 msgid "{application_name} has started"
-msgstr ""
+msgstr "{application_name} è iniziato"
 
 msgid "CSV field separator is %s"
-msgstr ""
+msgstr "Il separatore di campo CSV è %s"
 
 msgid "Columns to eliminate JSON expression is %s"
-msgstr ""
+msgstr "Colonne per eliminare l'espressione JSON è %s"
 
 msgid "Configuration file name with credentials is %s"
-msgstr ""
+msgstr "Il nome del file di configurazione con le credenziali è %s"
 
 msgid "Configuration file name with extracting sequence(es) is %s"
-msgstr ""
+msgstr "Il nome del file di configurazione con sequenza di estrazione è %s"
 
 msgid "Configuration file name with source systems is %s"
-msgstr ""
+msgstr "Il nome del file di configurazione con i sistemi sorgente è %s"
 
 msgid "Filter expression is %s"
-msgstr ""
+msgstr "L'espressione del filtro è %s"
 
 msgid "Hyper SQL query to handle data is %s"
-msgstr ""
+msgstr "La query Hyper SQL per la gestione dei dati è %s"
 
 msgid "Input file compression is %s"
-msgstr ""
+msgstr "La compressione del file di input è %s"
 
 msgid "Input file format is %s"
-msgstr ""
+msgstr "Il formato del file di input è%s"
 
 msgid "Input file name (simple or with matching pattern) is %s"
-msgstr ""
+msgstr "Il nome del file di input (semplice o con modello corrispondente) è %s"
 
 msgid "Output directory is %s"
-msgstr ""
+msgstr "La directory di uscita è %s"
 
 msgid "Output file compression is %s"
-msgstr ""
+msgstr "La compressione del file di uscita è %s"
 
 msgid "Output file format is %s"
-msgstr ""
+msgstr "Il formato del file di uscita è%s"
 
 msgid "Output file name is %s"
-msgstr ""
+msgstr "Nome del file di uscita è %s"
 
 msgid "Output log file name is %s"
-msgstr ""
+msgstr "Il nome del file di log in uscita è %s"
 
 msgid "Overview of input parameter given values"
-msgstr ""
+msgstr "Panoramica dei valori dei parametri di ingresso dati"
 
 msgid "Policy to handle Tableau Extract (Hyper format) is %s"
-msgstr ""
+msgstr "La politica per gestire l'Estratto Tableau (formato Hyper) è %s"
 
 msgid "Publishing mode is %s"
-msgstr ""
+msgstr "La modalità di pubblicazione è %s"
 
 msgid "Tableau Project is %s"
-msgstr ""
+msgstr "Il Progetto Tableau è %s"
 
 msgid "Tableau Server to consider is %s"
-msgstr ""
+msgstr "Il Server Tableau da considerare è %s"
 
 msgid "Tableau Site is %s"
-msgstr ""
+msgstr "Il Sito Tableau è %s"
 
 msgid "Unique values to analyze is limited to %s"
-msgstr ""
+msgstr "I valori unici da analizzare sono limitati a %s"
 
