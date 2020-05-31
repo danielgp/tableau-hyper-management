@@ -18,3 +18,20 @@ files:
   - source: /sources/project_locale/LocalizationsCommon/LocalizationsCommon.pot
     translation: >-
       /sources/project_locale/LocalizationsCommon/%locale_with_underscore%/LC_MESSAGES/LocalizationsCommon.po
+  - source: /sources/project_locale/ParameterHandling/ParameterHandling.pot
+    translation: >-
+      /sources/project_locale/ParameterHandling/%locale_with_underscore%/LC_MESSAGES/ParameterHandling.po
+  - source: /sources/project_locale/ProjectNeeds/ProjectNeeds.pot
+    translation: >-
+      /sources/project_locale/ProjectNeeds/%locale_with_underscore%/LC_MESSAGES/ProjectNeeds.po
+  - source: >-
+      /sources/project_locale/TableauHyperApiExtraLogic/TableauHyperApiExtraLogic.pot
+    translation: >-
+      /sources/project_locale/TableauHyperApiExtraLogic/%locale_with_underscore%/LC_MESSAGES/TableauHyperApiExtraLogic.po
+  - source: >-
+      /sources/project_locale/TableauServerCommunicator/TableauServerCommunicator.pot
+    translation: >-
+      /sources/project_locale/TableauServerCommunicator/%locale_with_underscore%/LC_MESSAGES/TableauServerCommunicator.po
+  - source: /sources/project_locale/TypeDetermination/TypeDetermination.pot
+    translation: >-
+      /sources/project_locale/TypeDetermination/%locale_with_underscore%/LC_MESSAGES/TypeDetermination.po
