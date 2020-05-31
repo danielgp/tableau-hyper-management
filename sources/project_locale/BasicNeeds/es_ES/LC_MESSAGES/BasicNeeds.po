@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-05-31 12:24\n"
+"PO-Revision-Date: 2020-05-31 13:19\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Spanish\n"
 "MIME-Version: 1.0\n"
@@ -16,23 +16,23 @@ msgstr ""
 "Language: es_ES\n"
 
 msgid "Application finished, for complete logged details please check {log_file_name}"
-msgstr ""
+msgstr "Solicitud terminada, para detalles completos de la sesión por favor compruebe {log_file_name}"
 
 msgid "Application finished, whole script took {total_time_string}"
-msgstr ""
+msgstr "La aplicación ha finalizado, todo el script tomó {total_time_string}"
 
 msgid "Given file \"{value_to_validate}\" does not exist"
-msgstr ""
+msgstr "No existe el archivo \"{value_to_validate}\""
 
 msgid "Given folder \"{value_to_validate}\" does not exist"
-msgstr ""
+msgstr "No existe la carpeta \"{value_to_validate}\""
 
 msgid "Given url \"{value_to_validate}\" is not valid"
-msgstr ""
+msgstr "La dirección url \"{value_to_validate}\" no es válida"
 
 msgid "Total execution time was {total_time_string}"
-msgstr ""
+msgstr "Tiempo total de ejecución fue {total_time_string}"
 
 msgid "log file"
-msgstr ""
+msgstr "archivo log"
 
