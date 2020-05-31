@@ -36,7 +36,7 @@ class CustomizedLocalizationCompiling(LocalizationsCommon):
                 domains_to_compile[compiling_files_counter] = {
                     'input-file': fn_dict['source'],
                     'operation': 'compile_catalog',
-                    'operation final flags': ' --statistics',
+                    'operation final flags': ' --statistics --use-fuzzy',
                     'output-file': fn_dict['destination'],
                     'locale': fn_dict['locale'],
                 }
