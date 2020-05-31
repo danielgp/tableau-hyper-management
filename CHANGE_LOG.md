@@ -1,5 +1,9 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.5.3 release on 2020-05-31
+- BUG FIX: a default value for log input parameter is properly treated on log folder check (aka check is circumvented);
+- added Spanish localisation;
+
 ## Version 1.5.2 release on 2020-05-30
 - implemented localization maintenance besides existing compilation + added localization to localization common class;
 - reflecting JSON file format support in documentation; 
