@@ -1,82 +1,67 @@
-# Copyright (C) 2020 Daniel Popiniuc
-# This file is distributed under the same license as the PACKAGE package.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version:  TableauHyperApiExtraLogic\n"
-"Report-Msgid-Bugs-To: danielppiniuc@gmail.com\n"
+"Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-05-09 15:10+0200\n"
-"PO-Revision-Date: 2020-05-09 16:19+0300\n"
+"PO-Revision-Date: 2020-05-31 12:31\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
-"Language: it_IT\n"
-"Language-Team: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.8.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: it\n"
+"X-Crowdin-File: /develop/sources/project_locale/TableauHyperApiExtraLogic/TableauHyperApiExtraLogic.pot\n"
+"Language: it_IT\n"
 
 msgid "{rows_counted} records were prepared in this process"
-msgstr "In questo processo sono stati preparati {rows_counted} record"
+msgstr ""
 
 msgid "Building Hyper columns completed"
-msgstr "Creazione di colonne Hyper completata"
+msgstr ""
 
 msgid "Chosen Telemetry is {telemetry_value}"
-msgstr "La telemetria scelta è {telemetry_value}"
-
-msgid ""
-"Column {column_order} having name [{column_name}] and type "
-"\"{column_type}\" will become \"{column_type_new}\""
 msgstr ""
-"La colonna {column_order} che ha il nome [{column_name}] di tipo "
-"\"{tipo_colonna}\" diventerà \"{column_type_new}\""
 
-msgid ""
-"Column {column_name} has pandas data type = {column_pandas_type} and "
-"python data type = {column_python_type}"
+msgid "Column {column_order} having name [{column_name}] and type \"{column_type}\" will become \"{column_type_new}\""
 msgstr ""
-"La colonna {column_name} ha il tipo di dati panda = {column_pandas_type} "
-"e il tipo di dati python = {column_python_type}"
+
+msgid "Column {column_name} has pandas data type = {column_pandas_type} and python data type = {column_python_type}"
+msgstr ""
 
 msgid "Connection to the Hyper engine file has been closed"
-msgstr "La connessione al Hyper engine è stata chiusa"
-
-msgid ""
-"Connection to the Hyper engine using file name \"{file_name}\" has been "
-"established"
 msgstr ""
-"È stata stabilita la connessione al Hyper engine utilizzando il nome file"
-" \"{nome_file}\""
+
+msgid "Connection to the Hyper engine using file name \"{file_name}\" has been established"
+msgstr ""
 
 msgid "Data has been inserted into Hyper table"
-msgstr "I dati sono stati inseriti nella tabella Hyper"
+msgstr ""
 
 msgid "Filling empty values with NAN finished"
-msgstr "Riempimento di valori vuoti con NAN terminato"
+msgstr ""
 
 msgid "Hyper SQL about to be executed is: {hyper_sql}"
-msgstr "Il Hyper SQL che sta per essere eseguito è: {hyper_sql}"
+msgstr ""
 
 msgid "Hyper SQL executed with success and {rows_counted} have been retrieved"
-msgstr "Hyper Engine eseguito correttamente e {rows_counted} sono stati ritrovati"
+msgstr ""
 
 msgid "Hyper engine process has been shut down"
-msgstr "Processo di hyper engine è stato chiuso"
+msgstr ""
 
 msgid "Hyper engine process initialized"
-msgstr "Processo di hyper engine inizializzato"
+msgstr ""
 
 msgid "Hyper schema \"{hyper_schema_name}\" has been created"
-msgstr "La schema Hyper \"{hyper_schema_name}\" è stata creata"
+msgstr ""
 
 msgid "Hyper table \"{hyper_table_name}\" has been created"
-msgstr "La tabella Hyper \"{hyper_table_name}\" è stata creata"
+msgstr ""
 
 msgid "Re-building CSV content for maximum Hyper compatibility has been completed"
 msgstr ""
-"La ricostruzione del contenuto CSV per la massima compatibilità con Hyper"
-" è stata completata"
 
 msgid "Table {hyper_table_name} has {row_count} rows"
-msgstr "La tabella {hyper_table_name} ha {row_count} righe"
+msgstr ""
+
