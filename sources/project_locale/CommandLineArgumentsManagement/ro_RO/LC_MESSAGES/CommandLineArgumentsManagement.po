@@ -1,87 +1,86 @@
-# Copyright (C) 2020 Daniel Popiniuc
-# This file is distributed under the same license as the
-# CommandLineArgumentsManagement package.
-#
+#,fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: CommandLineArgumentsManagement\n"
-"Report-Msgid-Bugs-To: danielppiniuc@gmail.com\n"
+"Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-05-17 01:21+0300\n"
-"Last-Translator: Daniel Popiniuc <danielpopiniuc@gmail.com>\n"
+"PO-Revision-Date: 2020-05-31 11:31\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Romanian\n"
-"Language: ro\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2\n"
-"Generated-By: Babel 2.8.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100>0 && n%100<20)) ? 1 : 2);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: ro\n"
+"X-Crowdin-File: /develop/sources/project_locale/CommandLineArgumentsManagement/CommandLineArgumentsManagement.pot\n"
+"Language: ro_RO\n"
 
 msgid "{application_name} has started"
-msgstr "{application_name} a început"
+msgstr ""
 
 msgid "CSV field separator is %s"
-msgstr "Separatorul de câmp CSV este %s"
+msgstr ""
 
 msgid "Columns to eliminate JSON expression is %s"
-msgstr "Coloanele pentru a elimina expresia JSON este %s"
+msgstr ""
 
 msgid "Configuration file name with credentials is %s"
-msgstr "Numele fișierului de configurare cu datele de acreditare este %s"
+msgstr ""
 
 msgid "Configuration file name with extracting sequence(es) is %s"
-msgstr "Numele fișierului de configurare cu secvența (secvențele) de extragere este %s"
+msgstr ""
 
 msgid "Configuration file name with source systems is %s"
-msgstr "Numele fișierului de configurare cu sistemele sursă este %s"
+msgstr ""
 
 msgid "Filter expression is %s"
-msgstr "Expresia filtrului este %s"
+msgstr ""
 
 msgid "Hyper SQL query to handle data is %s"
-msgstr "Interogarea Hyper SQL pentru gestionarea datelor este %s"
+msgstr ""
 
 msgid "Input file compression is %s"
-msgstr "Comprimarea fișierului de intrare este %s"
+msgstr ""
 
 msgid "Input file format is %s"
-msgstr "Formatul fișierului de intrare este %s"
+msgstr ""
 
 msgid "Input file name (simple or with matching pattern) is %s"
-msgstr "Numele fișierului de intrare (simplu sau cu model de potrivire) este %s"
+msgstr ""
 
 msgid "Output directory is %s"
-msgstr "Directorul de ieșire este %s"
+msgstr ""
 
 msgid "Output file compression is %s"
-msgstr "Comprimarea fișierului de ieșire este %s"
+msgstr ""
 
 msgid "Output file format is %s"
-msgstr "Formatul fișierului de ieșire este %s"
+msgstr ""
 
 msgid "Output file name is %s"
-msgstr "Numele fișierului de ieșire este %s"
+msgstr ""
 
 msgid "Output log file name is %s"
-msgstr "Numele fișierului jurnal de ieșire este %s"
+msgstr ""
 
 msgid "Overview of input parameter given values"
-msgstr "Prezentare generală a valorilor date de parametrii de intrare"
+msgstr ""
 
 msgid "Policy to handle Tableau Extract (Hyper format) is %s"
-msgstr "Politica de gestionare a Extractului Tableau (format Hyper) este %s"
+msgstr ""
 
 msgid "Publishing mode is %s"
-msgstr "Modul de publicare este %s"
+msgstr ""
 
 msgid "Tableau Project is %s"
-msgstr "Proiectul Tableau este %s"
+msgstr ""
 
 msgid "Tableau Server to consider is %s"
-msgstr "Serverul Tableau de luat în considerare este %s"
+msgstr ""
 
 msgid "Tableau Site is %s"
-msgstr "Site-ul Tableau este %s"
+msgstr ""
 
 msgid "Unique values to analyze is limited to %s"
-msgstr "Valorile unice de analizat sunt limitate la %s"
+msgstr ""
+
