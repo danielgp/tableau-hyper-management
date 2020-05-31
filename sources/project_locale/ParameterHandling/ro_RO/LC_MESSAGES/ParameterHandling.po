@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-26 14:29+0200\n"
-"PO-Revision-Date: 2020-05-31 12:30\n"
+"PO-Revision-Date: 2020-05-31 12:43\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Romanian\n"
 "MIME-Version: 1.0\n"
@@ -16,47 +16,47 @@ msgstr ""
 "Language: ro_RO\n"
 
 msgid "A known expression \"{expression_parts}\" has to be interpreted"
-msgstr ""
+msgstr "Trebuie interpretată o expresie cunoscută \"{expression_parts}\""
 
 msgid "Current Parameter is {parameter_type} and has the value: \"{str_value}\""
-msgstr ""
+msgstr "Parametrul curent este {parameter_type} și are valoarea: \"{str_value}\""
 
 msgid "Current Parameter is STR and has been re-interpreted as value: \"{str_value}\""
-msgstr ""
+msgstr "Parametrul curent este ȘIR și a fost reinterpretat ca valoare: \"{str_value}\""
 
 msgid "DICT"
-msgstr ""
+msgstr "DICȚIONAR"
 
 msgid "Final Tuple for Parameters is: {final_tuple}"
-msgstr ""
+msgstr "Tuple-ul final pentru parametri este: {final_tuple}"
 
 msgid "Initial query expects {expected_parameters_counted} but only {given_parameters_counted} were provided"
-msgstr ""
+msgstr "Interogarea inițială așteaptă {expected_parameters_counted}, dar numai {given_parameters_counted} au fost furnizate"
 
 msgid "Initial Tuple for Parameters is: {parameters_tuple}"
-msgstr ""
+msgstr "Tuple-ul inițial pentru parametri este: {parameters_tuple}"
 
 msgid "Known expression \"{expression_parts}\" has been interpreted as {final_string}"
-msgstr ""
+msgstr "Expresia cunoscută \"{expression_parts}\" a fost interpretată ca {final_string}"
 
 msgid "Known expression \"{expression_parts}\" has to be interpreted"
-msgstr ""
+msgstr "Expresia cunoscută \"{expression_parts}\" trebuie interpretată"
 
 msgid "LIST"
-msgstr ""
+msgstr "LISTĂ"
 
 msgid "Parameters type is {parameter_type}"
-msgstr ""
+msgstr "Tipul parametrilor este {parameter_type}"
 
 msgid "STR"
-msgstr ""
+msgstr "ȘIR"
 
 msgid "Seen Parameters are: {parameters}"
-msgstr ""
+msgstr "Parametrii văzuți sunt: {parameters}"
 
 msgid "Unexpected parameter type, either Dictionary or List expected, but seen was {parameter_type}"
-msgstr ""
+msgstr "Tipul de parametru neașteptat, fie Dicționar, fie Listă așteptat, dar văzut a fost {parameter_type}"
 
 msgid "Unknown expression encountered: provided was \"{given_expression}\" which is not among known ones: \"{all_known_expressions}\""
-msgstr ""
+msgstr "Expresie necunoscută întâlnită: oferită a fost \"{given_expression}\" care nu se numără printre cele cunoscute: \"{all_known_expressions}\""
 
