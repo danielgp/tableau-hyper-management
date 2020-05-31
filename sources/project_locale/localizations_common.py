@@ -19,6 +19,7 @@ import platform
 class LocalizationsCommon:
     locale = None
     locale_implemented = [
+        'es_ES',
         'it_IT',
         'ro_RO',
     ]
