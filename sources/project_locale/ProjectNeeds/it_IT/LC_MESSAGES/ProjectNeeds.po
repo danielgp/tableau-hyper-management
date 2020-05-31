@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-05-03 19:20+0300\n"
-"PO-Revision-Date: 2020-05-31 12:31\n"
+"PO-Revision-Date: 2020-05-31 12:43\n"
 "Last-Translator: danielpopiniuc@gmail.com\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -18,11 +18,11 @@ msgid "As handle hyper action is set to \"create\", further checks will happen t
 msgstr ""
 
 msgid "Only certain file types are supported as input file type in combination with Tableau Extract (Hyper) as output file type. And {given_file_type} is not among \"{supported_file_types}\""
-msgstr ""
+msgstr "Solo alcuni tipi di file sono supportati come tipo di file di input in combinazione con Tableau Extract (Hyper) come tipo di file di output. E {given_file_type} non è tra \"{supported_file_types}\""
 
 msgid "The output file defined as {file_name} already exists"
-msgstr ""
+msgstr "Il file di output definito come {file_name} esiste già"
 
 msgid "Time spent is {seconds}"
-msgstr ""
+msgstr "Il tempo trascorso è di {seconds}"
 
