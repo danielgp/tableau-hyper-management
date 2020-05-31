@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-05-09 15:10+0200\n"
-"PO-Revision-Date: 2020-05-31 12:31\n"
+"PO-Revision-Date: 2020-05-31 12:43\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -15,53 +15,53 @@ msgstr ""
 "Language: it_IT\n"
 
 msgid "{rows_counted} records were prepared in this process"
-msgstr ""
+msgstr "{rows_counted} înregistrări au fost pregătite în acest proces"
 
 msgid "Building Hyper columns completed"
-msgstr ""
+msgstr "Colectarea coloanelor Hyper a fost finalizată"
 
 msgid "Chosen Telemetry is {telemetry_value}"
-msgstr ""
+msgstr "Telemetria aleasă este {telemetry_value}"
 
 msgid "Column {column_order} having name [{column_name}] and type \"{column_type}\" will become \"{column_type_new}\""
-msgstr ""
+msgstr "Coloana {column_order} având numele [{column_name}] și tipul \"{column_type}\" va deveni \"{column_type_new}\""
 
 msgid "Column {column_name} has pandas data type = {column_pandas_type} and python data type = {column_python_type}"
-msgstr ""
+msgstr "Coloana {column_name} are tipul de date pandas = {column_pandas_type} și tipul de date python = {column_python_type}"
 
 msgid "Connection to the Hyper engine file has been closed"
-msgstr ""
+msgstr "Conexiunea la Hyper engine a fost închisă"
 
 msgid "Connection to the Hyper engine using file name \"{file_name}\" has been established"
-msgstr ""
+msgstr "S-a stabilit conexiunea la Hyper engine cu fișierul \"{file_name}\""
 
 msgid "Data has been inserted into Hyper table"
-msgstr ""
+msgstr "Datele au fost introduse în tabelul Hyper"
 
 msgid "Filling empty values with NAN finished"
-msgstr ""
+msgstr "Umplerea valorilor goale cu NAN finalizată"
 
 msgid "Hyper SQL about to be executed is: {hyper_sql}"
-msgstr ""
+msgstr "Hyper SQL care urmează să fie executat este: {hyper_sql}"
 
 msgid "Hyper SQL executed with success and {rows_counted} have been retrieved"
-msgstr ""
+msgstr "Hyper SQL executat cu succes și {rows_counted} au fost regăsite"
 
 msgid "Hyper engine process has been shut down"
-msgstr ""
+msgstr "Procesul Hyper engine a fost oprit"
 
 msgid "Hyper engine process initialized"
-msgstr ""
+msgstr "Procesul Hyper engine inițializat"
 
 msgid "Hyper schema \"{hyper_schema_name}\" has been created"
-msgstr ""
+msgstr "Schema Hyper \"{hyper_schema_name}\" a fost creată"
 
 msgid "Hyper table \"{hyper_table_name}\" has been created"
-msgstr ""
+msgstr "Tabelul Hyper \"{hyper_table_name}\" a fost creat"
 
 msgid "Re-building CSV content for maximum Hyper compatibility has been completed"
-msgstr ""
+msgstr "Reconstruirea conținutului CSV pentru o compatibilitate maximă Hyper a fost finalizată"
 
 msgid "Table {hyper_table_name} has {row_count} rows"
-msgstr ""
+msgstr "Tabelul {hyper_table_name} are {row_count} rânduri"
 
