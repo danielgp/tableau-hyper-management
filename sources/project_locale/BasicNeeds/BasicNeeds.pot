@@ -14,22 +14,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "Application finished, for complete logged details please check {log_file_name}"
-msgstr "Applicazione terminata, per i dettagli completi registrati si prega di controllare {log_file_name}"
+msgstr ""
 
 msgid "Application finished, whole script took {total_time_string}"
-msgstr "Applicazione terminata, l'intero script ha durato {total_time_string}"
+msgstr ""
+
+msgid "Checking if provided folder for the log file is valid"
+msgstr ""
 
 msgid "Given file \"{value_to_validate}\" does not exist"
-msgstr "Il file specificato \"{value_to_validate}\" non esiste"
+msgstr ""
 
 msgid "Given folder \"{value_to_validate}\" does not exist"
-msgstr "La cartella specificata \"{value_to_validate}\" non esiste"
+msgstr ""
 
 msgid "Given url \"{value_to_validate}\" is not valid"
-msgstr "L'indirizo di internet \"{value_to_validate}\" non è valido"
+msgstr ""
 
 msgid "Total execution time was {total_time_string}"
-msgstr "Il tempo di esecuzione totale è stato {total_time_string}"
+msgstr ""
 
 msgid "log file"
-msgstr "file di registro"
+msgstr ""

@@ -15,6 +15,12 @@ msgstr ""
 msgid "As handle hyper action is set to \"create\", further checks will happen to ensure none of the source files is newer than destination"
 msgstr ""
 
+msgid "Checking if provided Tableau Server url is valid"
+msgstr ""
+
+msgid "Checking if provided input credentials file exists"
+msgstr ""
+
 msgid "Only certain file types are supported as input file type in combination with Tableau Extract (Hyper) as output file type. And {given_file_type} is not among \"{supported_file_types}\""
 msgstr ""
 
