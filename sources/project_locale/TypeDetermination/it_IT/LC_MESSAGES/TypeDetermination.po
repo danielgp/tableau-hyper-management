@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-05-07 13:20+0200\n"
-"PO-Revision-Date: 2020-05-31 12:31\n"
+"PO-Revision-Date: 2020-05-31 12:43\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgid "Column {column_order} having the name [{column_name}] has the value <{cur
 msgstr "La colonna {column_order} che ha il nome [{column_name}] ha il valore <{current_value}> che significa che è di tipo \"{column_type}\" e questo è più forte di quanto si pensasse in precedenza come \"{column_type_old}\""
 
 msgid "Column {column_order} having the name {column_name} has the value <{unique_values}> which means is of type \"{field_type}\""
-msgstr ""
+msgstr "La colonna {column_order} con il nome {column_name} ha il valore <{unique_values}> che significa è di tipo \"{field_type}\""
 
 msgid "Field \"{column_name}\" according to Pandas package is of type \"{panda_determined_type}\" with {counted_nulls} counted NULLs"
 msgstr "Il campo \"{column_name}\" secondo il pacchetto Pandas è di tipo \"{panda_determined_type}\" con {counted_nulls} valori NULL"
