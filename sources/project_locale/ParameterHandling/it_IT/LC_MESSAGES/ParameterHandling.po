@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-26 14:29+0200\n"
-"PO-Revision-Date: 2020-05-31 12:31\n"
+"PO-Revision-Date: 2020-05-31 12:43\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -16,47 +16,47 @@ msgstr ""
 "Language: it_IT\n"
 
 msgid "A known expression \"{expression_parts}\" has to be interpreted"
-msgstr ""
+msgstr "Un'espressione nota \"{expression_parts}\" deve essere interpretata"
 
 msgid "Current Parameter is {parameter_type} and has the value: \"{str_value}\""
-msgstr ""
+msgstr "Current Parameter è {parameter_type} e ha il valore: \"str_value\""
 
 msgid "Current Parameter is STR and has been re-interpreted as value: \"{str_value}\""
-msgstr ""
+msgstr "Il parametro corrente è TIPO CARATTERI ed è stato reinterpretato come valore: \"{str_value}\""
 
 msgid "DICT"
-msgstr ""
+msgstr "DIZIONARIO"
 
 msgid "Final Tuple for Parameters is: {final_tuple}"
-msgstr ""
+msgstr "La tupla finale per i parametri è: {final_tuple}"
 
 msgid "Initial query expects {expected_parameters_counted} but only {given_parameters_counted} were provided"
-msgstr ""
+msgstr "La interogazione iniziale prevede {expected_parameters_counted} ma sono stati forniti solo {given_parameters_counted}"
 
 msgid "Initial Tuple for Parameters is: {parameters_tuple}"
-msgstr ""
+msgstr "La tupla iniziale è: {parameters_tuple}"
 
 msgid "Known expression \"{expression_parts}\" has been interpreted as {final_string}"
-msgstr ""
+msgstr "L'espressione nota \"{expression_parts}\" è stata interpretata come {final_string}"
 
 msgid "Known expression \"{expression_parts}\" has to be interpreted"
-msgstr ""
+msgstr "L'espressione nota \"{expression_parts}\" deve essere interpretata"
 
 msgid "LIST"
-msgstr ""
+msgstr "ELENCO"
 
 msgid "Parameters type is {parameter_type}"
-msgstr ""
+msgstr "Il tipo di parametri è {parameter_type}"
 
 msgid "STR"
-msgstr ""
+msgstr "SPAGO"
 
 msgid "Seen Parameters are: {parameters}"
-msgstr ""
+msgstr "I parametri visti sono: {parameters}"
 
 msgid "Unexpected parameter type, either Dictionary or List expected, but seen was {parameter_type}"
-msgstr ""
+msgstr "Tipo di parametro imprevisto, previsto dizionario o elenco, ma visto {parametro_tipo}"
 
 msgid "Unknown expression encountered: provided was \"{given_expression}\" which is not among known ones: \"{all_known_expressions}\""
-msgstr ""
+msgstr "Espressione sconosciuta rilevata: fornito era \"{given_expression}\" che non è tra quelli noti: \"{all_known_expressions}\""
 
