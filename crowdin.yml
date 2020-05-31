@@ -1,0 +1,4 @@
+files:
+  - source: /sources/project_locale/BasicNeeds/BasicNeeds.pot
+    translation: >-
+      /sources/project_locale/BasicNeeds/%locale_with_underscore%/LC_MESSAGES/BasicNeeds.po
