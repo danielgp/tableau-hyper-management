@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-05-31 13:19\n"
+"PO-Revision-Date: 2020-05-31 19:39\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Spanish\n"
 "MIME-Version: 1.0\n"
@@ -20,6 +20,9 @@ msgstr "Solicitud terminada, para detalles completos de la sesión por favor com
 
 msgid "Application finished, whole script took {total_time_string}"
 msgstr "La aplicación ha finalizado, todo el script tomó {total_time_string}"
+
+msgid "Checking if provided folder for the log file is valid"
+msgstr "Comprobar si la carpeta proporcionada para el archivo de registro es válida"
 
 msgid "Given file \"{value_to_validate}\" does not exist"
 msgstr "No existe el archivo \"{value_to_validate}\""

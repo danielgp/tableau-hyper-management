@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-05-03 19:20+0300\n"
-"PO-Revision-Date: 2020-05-31 13:19\n"
+"PO-Revision-Date: 2020-05-31 19:39\n"
 "Last-Translator: danielpopiniuc@gmail.com\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,12 @@ msgstr ""
 
 msgid "As handle hyper action is set to \"create\", further checks will happen to ensure none of the source files is newer than destination"
 msgstr "Per come l'azione del hyper handle è impostato per \"creare\", ulteriori controlli accadranno per garantire che nessuno dei file di origine è più recente della destinazione"
+
+msgid "Checking if provided Tableau Server url is valid"
+msgstr "Controllare se l'url del Server Tableau fornito è valido"
+
+msgid "Checking if provided input credentials file exists"
+msgstr "Verifica se il file delle credenziali di input fornito esiste"
 
 msgid "Only certain file types are supported as input file type in combination with Tableau Extract (Hyper) as output file type. And {given_file_type} is not among \"{supported_file_types}\""
 msgstr "Solo alcuni tipi di file sono supportati come tipo di file di input in combinazione con Tableau Extract (Hyper) come tipo di file di output. E {given_file_type} non è tra \"{supported_file_types}\""
