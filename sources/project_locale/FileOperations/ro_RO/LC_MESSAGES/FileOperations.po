@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-05-31 12:24\n"
+"PO-Revision-Date: 2020-05-31 12:26\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Romanian\n"
 "MIME-Version: 1.0\n"
@@ -16,92 +16,92 @@ msgstr ""
 "Language: ro_RO\n"
 
 msgid "{file_name} identified"
-msgstr ""
+msgstr "{file_name} identificat"
 
 msgid "{files_counted} file from {in_folder} folder identified"
 msgid_plural "{files_counted} files from {in_folder} folder identified"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{files_counted} fișier din dosarul {in_folder} identificat"
+msgstr[1] "{files_counted} fișiere din dosarul {in_folder} identificate"
+msgstr[2] "{files_counted} fișiere din dosarul {in_folder} identificate"
 
 msgid "Checksum"
-msgstr ""
+msgstr "Suma de control"
 
 msgid "Entire file content read"
-msgstr ""
+msgstr "Întreg conținutul citit"
 
 msgid "Error encountered when trying to interpret JSON"
-msgstr ""
+msgstr "Eroare întâmpinată la încercarea interpretării JSON"
 
 msgid "File \"{file_name}\" has the following characteristics: {file_statistics}"
-msgstr ""
+msgstr "Fișierul \"{file_name}\" are următoarele caracteristici: {file_statistics}"
 
 msgid "File \"{file_name}\" which has the {created_or_modified} datetime as \"{file_datetime}\" vs. \"{reference_datetime}\" has a verdict = {verdict}"
-msgstr ""
+msgstr "Fișierul \"{file_name}\" care are data {created_or_modified} ca \"{file_datetime}\" versus \"{reference_datetime}\" are un verdict = {verdict}"
 
 msgid "File matching pattern identified"
-msgstr ""
+msgstr "Model de potrivire fișiere identificat"
 
 msgid "File {file_name} does not exist"
-msgstr ""
+msgstr "Fișierul {file_name} nu există"
 
 msgid "File {file_name} has just been opened"
-msgstr ""
+msgstr "Fișierul {file_name} tocmai a fost deschis"
 
 msgid "File {file_name} has just been overwritten as {new_file_name}"
-msgstr ""
+msgstr "Fișierul {file_name} tocmai a fost suprascris ca și {new_file_name}"
 
 msgid "File {file_name} has just been renamed as {new_file_name}"
-msgstr ""
+msgstr "Fișierul {file_name} tocmai a fost redenumit ca și {new_file_name}"
 
 msgid "File {file_name} will be overwritten"
-msgstr ""
+msgstr "Fișierul {file_name} va fi suprascris"
 
 msgid "File {file_name} will be renamed as {new_file_name}"
-msgstr ""
+msgstr "Fișierul {file_name} va fi redenumit ca și {new_file_name}"
 
 msgid "Folder {folder_name} does not exist"
-msgstr ""
+msgstr "Dosarul {folder_name} nu există"
 
 msgid "JSON structure interpreted"
-msgstr ""
+msgstr "structura JSON interpretată"
 
 msgid "Listing all files within {in_folder} folder looking for {matching_pattern} as matching pattern"
-msgstr ""
+msgstr "Listarea tuturor fișierelor din folderul {in_folder} în căutare de {matching_pattern} ca model de potrivire"
 
 msgid "Specific file name provided"
-msgstr ""
+msgstr "Nume de fișier specific furnizat"
 
 msgid "Unknown file datetime choice, expected is one of the following choices \"{implemented_choices}\" but provided was \"{created_or_modified}\"..."
-msgstr ""
+msgstr "Tipul de datetime a fișierului este necunoscut, așteptată a fost una dintre următoarele opțiuni \"{implemented_choices}\", dar furnizată a fost \"{create_or_modified}\"..."
 
 msgid "Unknown file type provided, expected either \"json\" or \"raw\", but got {in_file_type}"
-msgstr ""
+msgstr "Tip de fișier necunoscut, așteptat fie \"json\" sau \"raw\", dar primit {in_file_type}"
 
 msgid "created"
-msgstr ""
+msgstr "creată"
 
 msgid "date when created"
-msgstr ""
+msgstr "data la care a fost creat"
 
 msgid "date when last modified"
-msgstr ""
+msgstr "data la care a fost modificat ultima dată"
 
 msgid "newer"
-msgstr ""
+msgstr "mai nou"
 
 msgid "older"
-msgstr ""
+msgstr "mai vechi"
 
 msgid "last modified"
-msgstr ""
+msgstr "ultima modificare"
 
 msgid "same"
-msgstr ""
+msgstr "aceeași"
 
 msgid "size [bytes]"
-msgstr ""
+msgstr "dimensiune [bytes]"
 
 msgid "unknown"
-msgstr ""
+msgstr "necunoscut"
 
