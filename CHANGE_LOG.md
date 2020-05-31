@@ -1,5 +1,10 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.5.2 release on 2020-05-30
+- implemented localization maintenance besides existing compilation + added localization to localization common class;
+- reflecting JSON file format support in documentation; 
+
+
 ## Version 1.5.1 release on 2020-05-29
 - added an extra verification for the scenario when at least one of the source files is newer than destination "overwrite" decision will be stronger than given "create" (safer to data accuracy).
 
