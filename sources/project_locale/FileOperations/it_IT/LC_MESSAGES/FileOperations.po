@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-05-31 12:26\n"
+"PO-Revision-Date: 2020-05-31 13:50\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgid "File \"{file_name}\" has the following characteristics: {file_statistics}
 msgstr "Il file \"{file_name}\" ha le seguenti caratteristiche: {file_statistics}"
 
 msgid "File \"{file_name}\" which has the {created_or_modified} datetime as \"{file_datetime}\" vs. \"{reference_datetime}\" has a verdict = {verdict}"
-msgstr "Il file \"{file_name}\" che ha il {create_or_modified} datetime come \"{file_datetime}\" contro \"{reference_datetime}\" ha un verdetto = {verdict}"
+msgstr "Il file \"{file_name}\" che ha il {created_or_modified} datetime come \"{file_datetime}\" contro \"{reference_datetime}\" ha un verdetto = {verdict}"
 
 msgid "File matching pattern identified"
 msgstr "Identificazione del modello corrispondente dei file"
@@ -54,7 +54,7 @@ msgid "File {file_name} has just been renamed as {new_file_name}"
 msgstr "Il file {file_name} è stato appena rinominato come {new_file_name}"
 
 msgid "File {file_name} will be overwritten"
-msgstr "Il file {nome_file} verrà sovrascritto"
+msgstr "Il file {file_name} verrà sovrascritto"
 
 msgid "File {file_name} will be renamed as {new_file_name}"
 msgstr "Il file {file_name} verrà rinominato come {new_file_name}"
@@ -72,7 +72,7 @@ msgid "Specific file name provided"
 msgstr "Nome specifico del file fornito"
 
 msgid "Unknown file datetime choice, expected is one of the following choices \"{implemented_choices}\" but provided was \"{created_or_modified}\"..."
-msgstr "Scelta datetime del file sconosciuta, prevista è una delle seguenti scelte \"{implemented_choices}\" ma fornita estata \"{created_or_modified}\"..."
+msgstr "Scelta data del file sconosciuta, prevista è una delle seguenti scelte \"{implemented_choices}\" ma fornita è stata \"{created_or_modified}\"..."
 
 msgid "Unknown file type provided, expected either \"json\" or \"raw\", but got {in_file_type}"
 msgstr "Tipo di file sconosciuto fornito, previsto \"json\" o \"raw\", ma ottenuto {in_file_type}"
