@@ -54,12 +54,12 @@ class ProjectNeeds:
 
     def fn_check_inputs_specific(self, input_parameters):
         if self.script == 'publisher':
-            print(self.locale.gettext('Checking if provided input credentials file exists'))
-            self.class_bn.fn_validate_single_value(
-                    input_parameters.input_credentials_file, 'file')
-            print(self.locale.gettext('Checking if provided Tableau Server url is valid'))
-            self.class_bn.fn_validate_single_value(
-                    input_parameters.tableau_server, 'url')
+            self.class_bn.fn_timestamped_print(self.locale.gettext(
+                'Checking if provided input credentials file exists'))
+            self.class_bn.fn_validate_single_value(input_parameters.input_credentials_file, 'file')
+            self.class_bn.fn_timestamped_print(self.locale.gettext(
+                'Checking if provided Tableau Server url is valid'))
+            self.class_bn.fn_validate_single_value(input_parameters.tableau_server, 'url')
 
     def initiate_logger_and_timer(self):
         # initiate logger
