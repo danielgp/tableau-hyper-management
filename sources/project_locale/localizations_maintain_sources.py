@@ -40,7 +40,7 @@ class LocalizationsMaintainSources(LocalizationsCommon):
                     operation_to_execute = 'init_catalog'
                 elif 'newer' in file_situation_verdict:
                     operation_to_execute = 'update_catalog'
-                    operation_final_flags = ' --previous --no-fuzzy-matching'
+                    operation_final_flags = ' --previous'
                 if operation_check_result:
                     domains_locale_to_update.append(compiling_files_counter)
                     domains_locale_to_update[compiling_files_counter] = {
