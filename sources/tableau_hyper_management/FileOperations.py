@@ -114,20 +114,21 @@ class FileOperations:
             'size [bytes]': os.path.getsize(file_to_evaluate),
         }
 
-    def fn_get_file_statistics(self, file_to_evaluate):
-        file_statistics = self.fn_get_file_simple_statistics(file_to_evaluate)
-        try:
-            file_handler = open(file=file_to_evaluate, mode='r', encoding='mbcs')
-        except UnicodeDecodeError:
-            file_handler = open(file=file_to_evaluate, mode='r', encoding='utf-8')
-        file_content = file_handler.read().encode('utf-8', 'xmlcharrefreplace')
-        file_handler.close()
-        file_statistics['MD5 Checksum'] = hashlib.md5(file_content).hexdigest()
-        file_statistics['SHA1 Checksum'] = hashlib.sha1(file_content).hexdigest()
-        file_statistics['SHA224 Checksum'] = hashlib.sha224(file_content).hexdigest()
-        file_statistics['SHA256 Checksum'] = hashlib.sha256(file_content).hexdigest()
-        file_statistics['SHA384 Checksum'] = hashlib.sha384(file_content).hexdigest()
-        file_statistics['SHA512 Checksum'] = hashlib.sha512(file_content).hexdigest()
+    def fn_get_file_statistics(self, in_dict):
+        file_statistics = self.fn_get_file_simple_statistics(in_dict['file name'])
+        if in_dict['checksum included'] == 'Yes':
+            try:
+                file_handler = open(file=in_dict['file name'], mode='r', encoding='mbcs')
+            except UnicodeDecodeError:
+                file_handler = open(file=in_dict['file name'], mode='r', encoding='utf-8')
+            file_content = file_handler.read().encode('utf-8', 'xmlcharrefreplace')
+            file_handler.close()
+            file_statistics['MD5 Checksum'] = hashlib.md5(file_content).hexdigest()
+            file_statistics['SHA1 Checksum'] = hashlib.sha1(file_content).hexdigest()
+            file_statistics['SHA224 Checksum'] = hashlib.sha224(file_content).hexdigest()
+            file_statistics['SHA256 Checksum'] = hashlib.sha256(file_content).hexdigest()
+            file_statistics['SHA384 Checksum'] = hashlib.sha384(file_content).hexdigest()
+            file_statistics['SHA512 Checksum'] = hashlib.sha512(file_content).hexdigest()
         return file_statistics
 
     def fn_get_file_datetime_verdict(self, local_logger, file_to_evaluate,
@@ -205,21 +206,24 @@ class FileOperations:
                   self.locale.gettext('File {file_name} does not exist')
                   .replace('{file_name}', str(input_file)))
 
-    def fn_store_file_statistics(self, local_logger, timer, file_name, file_meaning):
-        timer.start()
-        list_file_names = [file_name]
-        if type(file_name) == list:
-            list_file_names = file_name
+    def fn_store_file_statistics(self, in_dict):
+        in_dict['timer'].start()
+        list_file_names = [in_dict['file list']]
+        if type(in_dict['file list']) == list:
+            list_file_names = in_dict['file list']
         for current_file_name in list_file_names:
             dt_when_last_modified = 'date when last modified'
-            file_statistics = str(self.fn_get_file_statistics(current_file_name))\
+            file_statistics = str(self.fn_get_file_statistics({
+                'file name': current_file_name,
+                'checksum included': in_dict['checksum included'],
+            }))\
                 .replace('date when created', self.locale.gettext('date when created')) \
                 .replace(dt_when_last_modified, self.locale.gettext(dt_when_last_modified)) \
                 .replace('size [bytes]', self.locale.gettext('size [bytes]')) \
                 .replace('Checksum', self.locale.gettext('Checksum'))
-            local_logger.info(self.locale.gettext(
+            in_dict['logger'].info(self.locale.gettext(
                 'File "{file_name}" has the following characteristics: {file_statistics}')
-                              .replace('{file_meaning}', file_meaning)
-                              .replace('{file_name}', current_file_name)
-                              .replace('{file_statistics}', file_statistics))
-        timer.stop()
+                                   .replace('{file_meaning}', in_dict['file meaning'])
+                                   .replace('{file_name}', current_file_name)
+                                   .replace('{file_statistics}', file_statistics))
+        in_dict['timer'].stop()

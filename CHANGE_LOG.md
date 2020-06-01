@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.5.6 release on 2020-06-01
+- made checksum calculation optional for relevant files (both input and output) by adding an input parameter to opt in, which contain warning "may not work with all files content and OS encoding". By circumventing this logic speed is slightly improved with default or specific "No" value for this newly added parameter;
+
 ## Version 1.5.5 release on 2020-05-31
 - added a encoding sequence to ensure possible unicode characters in file are not causing fatal error duing checksum calculation sequence;
 - switch from a regular print to a timestamped one for recently added feedback targeting internal validations.

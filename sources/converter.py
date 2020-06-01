@@ -72,8 +72,13 @@ if __name__ == '__main__':
     relevant_files_list = class_pn.class_fo.fn_build_file_list(
         class_pn.class_ln.logger, class_pn.timer, class_pn.parameters.input_file)
     # log file statistic details
-    class_pn.class_fo.fn_store_file_statistics(
-        class_pn.class_ln.logger, class_pn.timer, relevant_files_list, 'Input')
+    class_pn.class_fo.fn_store_file_statistics({
+            'file list': relevant_files_list,
+            'file meaning': 'Input',
+            'checksum included': class_pn.parameters.include_checksum_in_files_statistics,
+            'logger': class_pn.class_ln.logger,
+            'timer': class_pn.timer,
+    })
     # further could be required to assess "load_data_frame_necessary" value
     if not load_data_frame_necessary:
         final_verdict = class_pn.source_vs_destination_file_modification_assesment(
@@ -126,9 +131,13 @@ if __name__ == '__main__':
             class_pn.class_dio.fn_store_data_frame_to_file(
                 class_pn.class_ln.logger, class_pn.timer, working_data_frame, output_dict)
             # store statistics about output file
-            class_pn.class_fo.fn_store_file_statistics(
-                class_pn.class_ln.logger, class_pn.timer,
-                class_pn.parameters.output_file, 'Generated')
+            class_pn.class_fo.fn_store_file_statistics({
+                'file list': class_pn.parameters.output_file,
+                'file meaning': 'Generated',
+                'checksum included': class_pn.parameters.include_checksum_in_files_statistics,
+                'logger': class_pn.class_ln.logger,
+                'timer': class_pn.timer,
+            })
         elif wanted_output_format == 'hyper':
             supported_types = class_thael.supported_input_file_types
             if class_pn.parameters.input_file_format.lower() in supported_types:
@@ -160,9 +169,13 @@ if __name__ == '__main__':
                 # manipulate destination Tableau Extract (Hyper)
                 class_thael.fn_hyper_handle(class_pn.class_ln.logger, class_pn.timer, fn_dict)
                 # store statistics about output file
-                class_pn.class_fo.fn_store_file_statistics(
-                    class_pn.class_ln.logger, class_pn.timer,
-                    class_pn.parameters.output_file, 'Generated')
+                class_pn.class_fo.fn_store_file_statistics({
+                    'file list': class_pn.parameters.output_file,
+                    'file meaning': 'Generated',
+                    'checksum included': class_pn.parameters.include_checksum_in_files_statistics,
+                    'logger': class_pn.class_ln.logger,
+                    'timer': class_pn.timer,
+                })
             else:
                 class_pn.class_ln.logger.error(
                     class_pn.locale.gettext(
