@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-05-08 23:20+0200\n"
-"PO-Revision-Date: 2020-06-01 19:54\n"
+"PO-Revision-Date: 2020-06-01 21:28\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -16,44 +16,44 @@ msgstr ""
 "Language: fr_FR\n"
 
 msgid "A number of {projects_counted} projects have been identified"
-msgstr ""
+msgstr "Un nombre de {projects_counted} projets ont été identifiés"
 
 msgid "A single project identifier was found \"{project_guid}\", so I will proceed with publishing provided file there"
-msgstr ""
+msgstr "Un seul identifiant de projet a été trouvé \"{project_guid}\", donc je vais procéder à la publication du fichier fourni"
 
 msgid "About to connect to Tableau Server with URL: {tableau_server}, Site {tableau_site} with Username = {user_name}"
-msgstr ""
+msgstr "Sur le point de se connecter au serveur Tableau avec l'URL : {tableau_server}, Site {tableau_site} avec nom d'utilisateur = {user_name}"
 
 msgid "About to start publishing"
-msgstr ""
+msgstr "Sur le point de commencer à publier"
 
 msgid "Check your input parameter values for accuracy and try again!"
-msgstr ""
+msgstr "Vérifiez la précision de vos valeurs de paramètre d'entrée et réessayez!"
 
 msgid "Connection to the Tableau Server has been established successfully!"
-msgstr ""
+msgstr "La connexion au serveur Tableau a été établie avec succès !"
 
 msgid "Connection to the Tableau Server has been terminated!"
-msgstr ""
+msgstr "La connexion au serveur Tableau a été terminée !"
 
 msgid "No project with provided name \"{project_name}\" has been found"
-msgstr ""
+msgstr "Aucun projet avec le nom \"{project_name}\" n'a été trouvé"
 
 msgid "No publishing action will take place!"
-msgstr ""
+msgstr "Aucune action de publication ne sera effectuée !"
 
 msgid "Publishing completed successfully!"
-msgstr ""
+msgstr "Publication terminée avec succès !"
 
 msgid "Reading list of all projects available has been completed"
-msgstr ""
+msgstr "La liste de lecture de tous les projets disponibles a été complétée"
 
 msgid "Retaining the projects according to filtering type provided ({filter_type}) has been completed"
-msgstr ""
+msgstr "La conservation des projets en fonction du type de filtrage fourni ({filter_type}) a été terminée"
 
 msgid "Stay tuned for the confirmation"
-msgstr ""
+msgstr "Restez à l'écoute pour la confirmation"
 
 msgid "There are {projects_counted} projects with provided name \"{project_name}\" but a unique identifier is expected"
-msgstr ""
+msgstr "Il y a {projects_counted} projets avec le nom fourni \"{project_name}\" mais un identifiant unique est attendu"
 
