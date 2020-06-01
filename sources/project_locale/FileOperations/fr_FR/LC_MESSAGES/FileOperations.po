@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-06-01 19:54\n"
+"PO-Revision-Date: 2020-06-01 21:17\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -16,91 +16,91 @@ msgstr ""
 "Language: fr_FR\n"
 
 msgid "{file_name} identified"
-msgstr ""
+msgstr "{file_name} identifiée"
 
 msgid "{files_counted} file from {in_folder} folder identified"
 msgid_plural "{files_counted} files from {in_folder} folder identified"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{files_counted} fichier du dossier {in_folder} identifié"
+msgstr[1] "{files_counted} fichiers du dossier {in_folder} identifiés"
 
 msgid "Checksum"
-msgstr ""
+msgstr "Sommes de contrôle"
 
 msgid "Entire file content read"
-msgstr ""
+msgstr "Tout le contenu du fichier lu"
 
 msgid "Error encountered when trying to interpret JSON"
-msgstr ""
+msgstr "Une erreur s'est produite lors de l'interprétation du JSON"
 
 msgid "File \"{file_name}\" has the following characteristics: {file_statistics}"
-msgstr ""
+msgstr "Le fichier \"{file_name}\" a les caractéristiques suivantes : {file_statistics}"
 
 msgid "File \"{file_name}\" which has the {created_or_modified} datetime as \"{file_datetime}\" vs. \"{reference_datetime}\" has a verdict = {verdict}"
-msgstr ""
+msgstr "Le fichier \"{file_name}\" qui a la date et l'heure {created_or_modified} comme \"{file_datetime}\" vs. \"{reference_datetime}\" a un verdict = {verdict}"
 
 msgid "File matching pattern identified"
-msgstr ""
+msgstr "Modèle de correspondance de fichier identifié"
 
 msgid "File {file_name} does not exist"
-msgstr ""
+msgstr "Le fichier {file_name} n'existe pas"
 
 msgid "File {file_name} has just been opened"
-msgstr ""
+msgstr "Le fichier {file_name} vient juste d'être ouvert"
 
 msgid "File {file_name} has just been overwritten as {new_file_name}"
-msgstr ""
+msgstr "Le fichier {file_name} vient d'être remplacé en tant que {new_file_name}"
 
 msgid "File {file_name} has just been renamed as {new_file_name}"
-msgstr ""
+msgstr "Le fichier {file_name} vient d'être renommé en {new_file_name}"
 
 msgid "File {file_name} will be overwritten"
-msgstr ""
+msgstr "Le fichier {file_name} sera écrasé"
 
 msgid "File {file_name} will be renamed as {new_file_name}"
-msgstr ""
+msgstr "Le fichier {file_name} sera renommé comme {new_file_name}"
 
 msgid "Folder {folder_name} does not exist"
-msgstr ""
+msgstr "Le dossier \"{folder_name}\" n'existe pas"
 
 msgid "JSON structure interpreted"
-msgstr ""
+msgstr "Structure JSON interprétée"
 
 msgid "Listing all files within {in_folder} folder looking for {matching_pattern} as matching pattern"
-msgstr ""
+msgstr "Lister tous les fichiers dans le dossier {in_folder} cherchant {matching_pattern} comme modèle correspondant"
 
 msgid "Specific file name provided"
-msgstr ""
+msgstr "Nom de fichier spécifique fourni"
 
 msgid "Unknown file datetime choice, expected is one of the following choices \"{implemented_choices}\" but provided was \"{created_or_modified}\"..."
-msgstr ""
+msgstr "Le choix de date et heure du fichier est inconnu, le choix attendu est l'un des choix suivants \"{implemented_choices}\" mais fourni était \"{created_or_modified} \" ..."
 
 msgid "Unknown file type provided, expected either \"json\" or \"raw\", but got {in_file_type}"
-msgstr ""
+msgstr "Type de fichier inconnu fourni, attendu soit \"json\" soit \"raw\", mais a obtenu {in_file_type}"
 
 msgid "created"
-msgstr ""
+msgstr "créé"
 
 msgid "date when created"
-msgstr ""
+msgstr "date de création"
 
 msgid "date when last modified"
-msgstr ""
+msgstr "date de la dernière modification"
 
 msgid "newer"
-msgstr ""
+msgstr "plus nouveau"
 
 msgid "older"
-msgstr ""
+msgstr "plus vieux"
 
 msgid "last modified"
-msgstr ""
+msgstr "dernière modification"
 
 msgid "same"
-msgstr ""
+msgstr "même"
 
 msgid "size [bytes]"
-msgstr ""
+msgstr "taille [bytes]"
 
 msgid "unknown"
-msgstr ""
+msgstr "inconnu"
 
