@@ -29,8 +29,11 @@ class TypeDetermination(BasicNeeds):
 
     def fn_analyze_field_content_to_establish_data_type(self, logger, field_characteristics,
                                                         data_types):
-        crt_field_type = self.fn_type_determination(
-                field_characteristics['unique_values'][0], data_types)
+        crt_field_type = 'empty'
+        unique_values = ''
+        if len(field_characteristics['unique_values']) > 0:
+            unique_values = field_characteristics['unique_values'][0]
+            crt_field_type = self.fn_type_determination(unique_values, data_types)
         # since date fields are not accepted to have ny null value by Tableau Hyper API
         # following forced String type is enforced
         if crt_field_type[:4] == 'date' and field_characteristics['nulls'] != 0:
@@ -49,7 +52,7 @@ class TypeDetermination(BasicNeeds):
             + 'has the value <{unique_values}> which means is of type "{field_type}"')
                      .replace('{column_order}', str(field_characteristics['order']))
                      .replace('{column_name}', field_characteristics['name'])
-                     .replace('{unique_values}', str(field_characteristics['unique_values'][0]))
+                     .replace('{unique_values}', str(unique_values))
                      .replace('{field_type}', crt_field_type))
         if crt_field_type == 'str':
             return field_dict
