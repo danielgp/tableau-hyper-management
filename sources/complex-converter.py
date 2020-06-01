@@ -32,9 +32,8 @@ if __name__ == '__main__':
     class_pn.initiate_logger_and_timer()
     # reflect title and input parameters given values in the log
     class_pn.class_clam.listing_parameter_values(
-        class_pn.class_ln.logger, class_pn.timer, 'Tableau Hyper Converter',
+        class_pn.class_ln.logger, class_pn.timer, 'Tableau Hyper Complex Converter',
         class_pn.config['input_options'][SCRIPT_NAME], class_pn.parameters)
-    ### WIP - start
     # instantiate Tableau Hyper Api Extra Logic class
     class_thael = TableauHyperApiExtraLogic(language_to_use)
     # instantiate Type Determination class
@@ -51,6 +50,16 @@ if __name__ == '__main__':
                     if table_counter == 0:
                         action_to_apply = 'overwrite'
                     table_counter += 1
+                    # store statistics about input file
+                    class_pn.class_fo.fn_store_file_statistics({
+                        'file list': crt_table['input-file']['name'],
+                        'file meaning': 'Input',
+                        'checksum included':
+                            class_pn.parameters.include_checksum_in_files_statistics,
+                        'logger': class_pn.class_ln.logger,
+                        'timer': class_pn.timer,
+                    })
+                    # build dict for entry Data Frame build method
                     df_dict = {
                         'format': crt_table['input-file']['format'],
                         'file list': [crt_table['input-file']['name']],
@@ -60,8 +69,10 @@ if __name__ == '__main__':
                         df_dict['field delimiter'] = crt_table['input-file']['compression']
                     if 'field-delimiter' in crt_table['input-file']:
                         df_dict['field delimiter'] = crt_table['input-file']['field-delimiter']
+                    # building entry Data Frame
                     working_data_frame = class_pn.class_dio.fn_load_file_into_data_frame(
                         class_pn.class_ln.logger, class_pn.timer, df_dict)
+                    # releasing memory
                     df_dict = None
                     fn_dict = {
                         'action': action_to_apply,
@@ -72,6 +83,7 @@ if __name__ == '__main__':
                         'schema name': crt_input['schema-name'],
                         'table name': crt_table['table-name'],
                     }
+                    # releasing memory
                     working_data_frame = None
                     # advanced detection of data type within Data Frame
                     fn_dict['data frame structure'] = c_td.fn_get_data_frame_structure(
@@ -82,10 +94,22 @@ if __name__ == '__main__':
                     # The rows to insert into the <hyper_table> table.
                     fn_dict['data'] = class_thael.fn_rebuild_data_frame_content_for_hyper(
                         class_pn.class_ln.logger, class_pn.timer, fn_dict)
+                    # adding data to table in relevant Hyper file
                     class_thael.fn_hyper_handle(class_pn.class_ln.logger, class_pn.timer, fn_dict)
+                    # store statistics about input file
+                    class_pn.class_fo.fn_store_file_statistics({
+                        'file list': crt_ie_sequence['output-file']['name'],
+                        'file meaning': 'Output',
+                        'checksum included':
+                            class_pn.parameters.include_checksum_in_files_statistics,
+                        'logger': class_pn.class_ln.logger,
+                        'timer': class_pn.timer,
+                    })
+                    # releasing memory
                     fn_dict = None
+                    # resetting internally used variable to avoid data bleed
+                    # between different entry files and destination tables
                     class_thael.columns_for_hyper_conversion = {}
-    ### WIP - end
     # just final message
     class_pn.class_bn.fn_final_message(
         class_pn.class_ln.logger, class_pn.parameters.output_log_file,
