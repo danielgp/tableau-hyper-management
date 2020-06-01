@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-05-09 15:10+0200\n"
-"PO-Revision-Date: 2020-06-01 21:17\n"
+"PO-Revision-Date: 2020-06-01 21:28\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -36,32 +36,32 @@ msgid "Connection to the Hyper engine using file name \"{file_name}\" has been e
 msgstr "La connexion au moteur Hyper en utilisant le nom de fichier \"{file_name}\" a été établie"
 
 msgid "Data has been inserted into Hyper table"
-msgstr ""
+msgstr "Les données ont été insérées dans la table d'Hyper"
 
 msgid "Filling empty values with NAN finished"
-msgstr ""
+msgstr "Remplissage des valeurs vides avec NAN terminé"
 
 msgid "Hyper SQL about to be executed is: {hyper_sql}"
-msgstr ""
+msgstr "Hyper SQL sur le point d'être exécuté est : {hyper_sql}"
 
 msgid "Hyper SQL executed with success and {rows_counted} have been retrieved"
-msgstr ""
+msgstr "Hyper SQL exécuté avec succès et {rows_counted} ont été récupérés"
 
 msgid "Hyper engine process has been shut down"
-msgstr ""
+msgstr "Le processus de l'Hyper Moteur a été arrêté"
 
 msgid "Hyper engine process initialized"
-msgstr ""
+msgstr "Processus Hyper Moteur initialisé"
 
 msgid "Hyper schema \"{hyper_schema_name}\" has been created"
-msgstr ""
+msgstr "L'Hyper schéma \"{hyper_schema_name}\" a été créé"
 
 msgid "Hyper table \"{hyper_table_name}\" has been created"
-msgstr ""
+msgstr "L'Hyper Table \"{hyper_table_name}\" a été créée"
 
 msgid "Re-building CSV content for maximum Hyper compatibility has been completed"
-msgstr ""
+msgstr "Reconstruction du contenu CSV pour une compatibilité maximale avec l'Hyper a été terminée"
 
 msgid "Table {hyper_table_name} has {row_count} rows"
-msgstr ""
+msgstr "La table {hyper_table_name} a {row_count} lignes"
 
