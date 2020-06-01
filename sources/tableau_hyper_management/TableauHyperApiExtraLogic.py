@@ -314,13 +314,22 @@ class TableauHyperApiExtraLogic:
 
     def fn_write_data_into_hyper_file(self, in_logger, timer, in_dict):
         if in_dict['action'] == 'append':
-            self.fn_get_records_count_from_table(in_logger, timer, {
-                'connection': in_dict['connection'],
-                'schema name': in_dict['schema name'],
-                'table name': in_dict['table name'],
-            })
-            hyper_table = in_dict['connection'].catalog.get_table_definition(
-                TableName('Extract', 'Extract'))
+            try:
+                self.fn_get_records_count_from_table(in_logger, timer, {
+                    'connection': in_dict['connection'],
+                    'schema name': in_dict['schema name'],
+                    'table name': in_dict['table name'],
+                })
+                hyper_table = in_dict['connection'].catalog.get_table_definition(
+                    TableName(in_dict['schema name'], in_dict['table name']))
+            except HyperException as err:
+                timer.stop()
+                hyper_table = self.fn_create_hyper_table(in_logger, timer, {
+                    'columns': in_dict['hyper table columns'],
+                    'connection': in_dict['connection'],
+                    'schema name': in_dict['schema name'],
+                    'table name': in_dict['table name'],
+                })
         elif in_dict['action'] == 'overwrite':
             self.fn_create_hyper_schema(in_logger, timer, in_dict)
             hyper_table = self.fn_create_hyper_table(in_logger, timer, {

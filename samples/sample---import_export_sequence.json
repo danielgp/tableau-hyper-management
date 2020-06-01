@@ -1,0 +1,40 @@
+[
+    {
+        "sequence-type":                                "import-files-into-hyper",
+        "output-file": {
+            "name":                                     "C:\\www\\Data\\GitRepositories\\mysql-test.hyper",
+            "policy-to-handle-hyper-file":              "overwrite"
+        },
+        "input-content": [
+            {
+                "schema-name":                          "Extract",
+                "tables": [
+                    {
+                        "table-name":                   "Extract",
+                        "input-file": {
+                            "format":                   "csv",
+                            "name":                     "C:\\www\\Data\\GitRepositories\\mysql-test.csv",
+                            "field-delimiter":          "|"
+                        }
+                    },
+                    {
+                        "table-name":                   "ReferenceFiscalPeriods",
+                        "input-file": {
+                            "format":                   "csv",
+                            "name":                     "C:\\www\\Data\\GitRepositories\\common-time-fiscal-period.csv",
+                            "field-delimiter":          ";"
+                        }
+                    },
+                    {
+                        "table-name":                   "ReferenceFiscalWeeks",
+                        "input-file": {
+                            "format":                   "csv",
+                            "name":                     "C:\\www\\Data\\GitRepositories\\common-time-fiscal-week.csv",
+                            "field-delimiter":          ";"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]
