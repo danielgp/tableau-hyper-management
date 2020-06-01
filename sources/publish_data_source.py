@@ -46,8 +46,13 @@ if __name__ == '__main__':
     relevant_files_list = class_pn.class_fo.fn_build_file_list(
             class_pn.class_ln.logger, class_pn.timer, class_pn.parameters.input_file)
     # log file statistic details
-    class_pn.class_fo.fn_store_file_statistics(
-            class_pn.class_ln.logger, class_pn.timer, relevant_files_list, 'Input')
+    class_pn.class_fo.fn_store_file_statistics({
+        'file list': relevant_files_list,
+        'file meaning': 'Input',
+        'checksum included': class_pn.parameters.include_checksum_in_files_statistics,
+        'logger': class_pn.class_ln.logger,
+        'timer': class_pn.timer,
+    })
     # get the secrets from provided file
     credentials = class_pn.class_fo.fn_open_file_and_get_content(
             class_pn.parameters.input_credentials_file, 'json')

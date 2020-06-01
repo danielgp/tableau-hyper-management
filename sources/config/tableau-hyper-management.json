@@ -113,6 +113,13 @@
                 "option_long"           : "unique-values-to-analyze-limit",
                 "option_required"       : false,
                 "option_sample_value"   : "100|200 = default value|300|500|1000"
+            },
+            "t": {
+                "default_value"         : "No",
+                "option_description"    : "Include checksum in file statistics in log details (may not work with all files content and OS encoding) %s",
+                "option_long"           : "include-checksum-in-files-statistics",
+                "option_required"       : false,
+                "option_sample_value"   : "No|Yes"
             }
         },
         "publisher": {
@@ -164,6 +171,13 @@
                 "option_long"           : "output-log-file",
                 "option_required"       : false,
                 "option_sample_value"   : "output-log-file-name"
+            },
+            "t": {
+                "default_value"         : "No",
+                "option_description"    : "Include checksum in file statistics in log details (may not work with all files content and OS encoding) %s",
+                "option_long"           : "include-checksum-in-files-statistics",
+                "option_required"       : false,
+                "option_sample_value"   : "No|Yes"
             }
         }
     }
