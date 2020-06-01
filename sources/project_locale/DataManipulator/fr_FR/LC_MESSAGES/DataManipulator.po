@@ -1,0 +1,44 @@
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tableau-hyper-management\n"
+"POT-Creation-Date: 2020-04-25 13:20+0200\n"
+"PO-Revision-Date: 2020-06-01 21:17\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: fr\n"
+"X-Crowdin-File: /develop/sources/project_locale/DataManipulator/DataManipulator.pot\n"
+"Language: fr_FR\n"
+
+msgid "{deviation_type} Deviation Number is {deviation_number} to be applied to Current index, became {index_to_apply}"
+msgstr "{deviation_type} Le numéro de déviation est {deviation_number} à appliquer à l'index actuel, est devenu {index_to_apply}"
+
+msgid "Current index has been determined to be {index_current_value}"
+msgstr "L'index actuel a été déterminé comme étant {index_current_value}"
+
+msgid "Lower"
+msgstr "Inférieur"
+
+msgid "Query expression to apply is: {query_expression}"
+msgstr "L'expression de requête à appliquer est : {query_expression}"
+
+msgid "Upper"
+msgstr "Supérieur"
+
+msgid "Will retain only values {filter_type} \"{filter_values}\" within the field \"{column_to_filter}\""
+msgstr "Conservera uniquement les valeurs {filter_type} \"{filter_values}\" dans le champ \"{column_to_filter}\""
+
+msgid "different than"
+msgstr "différent de"
+
+msgid "equal with"
+msgstr "égal à"
+
+msgid "matching any of these values"
+msgstr "correspondant à l'une de ces valeurs"
+

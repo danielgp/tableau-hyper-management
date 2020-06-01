@@ -1,0 +1,62 @@
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tableau-hyper-management\n"
+"POT-Creation-Date: 2020-04-26 14:29+0200\n"
+"PO-Revision-Date: 2020-06-01 21:17\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: fr\n"
+"X-Crowdin-File: /develop/sources/project_locale/ParameterHandling/ParameterHandling.pot\n"
+"Language: fr_FR\n"
+
+msgid "A known expression \"{expression_parts}\" has to be interpreted"
+msgstr "Une expression connue \"{expression_parts}\" doit être interprétée"
+
+msgid "Current Parameter is {parameter_type} and has the value: \"{str_value}\""
+msgstr "Le paramètre actuel est {parameter_type} et a la valeur : \"{str_value}\""
+
+msgid "Current Parameter is STR and has been re-interpreted as value: \"{str_value}\""
+msgstr "Le paramètre actuel est STR et a été réinterprété comme valeur : \"{str_value}\""
+
+msgid "DICT"
+msgstr "DICT"
+
+msgid "Final Tuple for Parameters is: {final_tuple}"
+msgstr "Le dernier Tuple pour les paramètres est : {final_tuple}"
+
+msgid "Initial query expects {expected_parameters_counted} but only {given_parameters_counted} were provided"
+msgstr "La requête initiale attend {expected_parameters_counted} mais seulement {given_parameters_counted} ont été fournies"
+
+msgid "Initial Tuple for Parameters is: {parameters_tuple}"
+msgstr "Tuple initiale pour les paramètres est : {parameters_tuple}"
+
+msgid "Known expression \"{expression_parts}\" has been interpreted as {final_string}"
+msgstr "L'expression connue \"{expression_parts}\" a été interprétée comme {final_string}"
+
+msgid "Known expression \"{expression_parts}\" has to be interpreted"
+msgstr "Une expression connue \"{expression_parts}\" doit être interprétée"
+
+msgid "LIST"
+msgstr "LISTE"
+
+msgid "Parameters type is {parameter_type}"
+msgstr "Le type de paramètres est {parameter_type}"
+
+msgid "STR"
+msgstr "STR"
+
+msgid "Seen Parameters are: {parameters}"
+msgstr "Les paramètres vus sont : {parameters}"
+
+msgid "Unexpected parameter type, either Dictionary or List expected, but seen was {parameter_type}"
+msgstr "Type de paramètre inattendu, soit Dictionary soit Liste attendu, mais vu {parameter_type}"
+
+msgid "Unknown expression encountered: provided was \"{given_expression}\" which is not among known ones: \"{all_known_expressions}\""
+msgstr "Expression inconnue rencontrée : \"{given_expression}\" qui ne fait pas partie de l'expression connue : \"{all_known_expressions}\""
+
