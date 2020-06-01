@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tableau-hyper-management\n"
+"POT-Creation-Date: 2020-05-09 15:10+0200\n"
+"PO-Revision-Date: 2020-06-01 19:54\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: fr\n"
+"X-Crowdin-File: /develop/sources/project_locale/TableauHyperApiExtraLogic/TableauHyperApiExtraLogic.pot\n"
+"Language: fr_FR\n"
+
+msgid "{rows_counted} records were prepared in this process"
+msgstr ""
+
+msgid "Building Hyper columns completed"
+msgstr ""
+
+msgid "Chosen Telemetry is {telemetry_value}"
+msgstr ""
+
+msgid "Column {column_order} having name [{column_name}] and type \"{column_type}\" will become \"{column_type_new}\""
+msgstr ""
+
+msgid "Column {column_name} has pandas data type = {column_pandas_type} and python data type = {column_python_type}"
+msgstr ""
+
+msgid "Connection to the Hyper engine file has been closed"
+msgstr ""
+
+msgid "Connection to the Hyper engine using file name \"{file_name}\" has been established"
+msgstr ""
+
+msgid "Data has been inserted into Hyper table"
+msgstr ""
+
+msgid "Filling empty values with NAN finished"
+msgstr ""
+
+msgid "Hyper SQL about to be executed is: {hyper_sql}"
+msgstr ""
+
+msgid "Hyper SQL executed with success and {rows_counted} have been retrieved"
+msgstr ""
+
+msgid "Hyper engine process has been shut down"
+msgstr ""
+
+msgid "Hyper engine process initialized"
+msgstr ""
+
+msgid "Hyper schema \"{hyper_schema_name}\" has been created"
+msgstr ""
+
+msgid "Hyper table \"{hyper_table_name}\" has been created"
+msgstr ""
+
+msgid "Re-building CSV content for maximum Hyper compatibility has been completed"
+msgstr ""
+
+msgid "Table {hyper_table_name} has {row_count} rows"
+msgstr ""
+
