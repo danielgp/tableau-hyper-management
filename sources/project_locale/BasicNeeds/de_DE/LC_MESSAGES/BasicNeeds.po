@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-06-01 21:59\n"
+"PO-Revision-Date: 2020-06-01 22:38\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -16,26 +16,26 @@ msgstr ""
 "Language: de_DE\n"
 
 msgid "Application finished, for complete logged details please check {log_file_name}"
-msgstr ""
+msgstr "Anwendung beendet, um alle protokollierten Details zu erhalten, überprüfen Sie bitte {log_file_name}"
 
 msgid "Application finished, whole script took {total_time_string}"
-msgstr ""
+msgstr "Anwendung beendet, komplettes Skript hat {total_time_string} benötigt"
 
 msgid "Checking if provided folder for the log file is valid"
-msgstr ""
+msgstr "Überprüft, ob der angegebene Ordner für die Protokolldatei gültig ist"
 
 msgid "Given file \"{value_to_validate}\" does not exist"
-msgstr ""
+msgstr "Angegebene Datei \"{value_to_validate}\" existiert nicht"
 
 msgid "Given folder \"{value_to_validate}\" does not exist"
-msgstr ""
+msgstr "Angegebene Ordner \"{value_to_validate}\" existiert nicht"
 
 msgid "Given url \"{value_to_validate}\" is not valid"
-msgstr ""
+msgstr "Angegebene Url \"{value_to_validate}\" ist nicht gültig"
 
 msgid "Total execution time was {total_time_string}"
-msgstr ""
+msgstr "Gesamte Ausführungszeit war {total_time_string}"
 
 msgid "log file"
-msgstr ""
+msgstr "Protokolldatei"
 
