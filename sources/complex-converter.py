@@ -1,5 +1,5 @@
 """
-This file is performing multiple data strctured files into HYPER file targeting multiple tables
+This file is performing multiple data structured files into HYPER file targeting multiple tables
 """
 # package to handle files/folders and related metadata/operations
 import os
@@ -14,7 +14,7 @@ SCRIPT_NAME = os.path.basename(__file__).replace('.py', '')
 # main execution logic
 if __name__ == '__main__':
     # instantiate Localizations Common class
-    class_lc = LocalizationsCommon('en_US')
+    class_lc = LocalizationsCommon()
     # ensure all localization templates files older than translated files
     class_lc.run_localization_action('maintain_sources')
     # ensure all compiled localization files are in place (as needed for localized messages later)
