@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-06-01 21:17\n"
+"PO-Revision-Date: 2020-06-01 21:59\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -38,6 +38,9 @@ msgstr "L'expression de filtre est %s"
 
 msgid "Hyper SQL query to handle data is %s"
 msgstr "La requête Hyper SQL pour gérer les données est %s"
+
+msgid "Include checksum in file statistics in log details (may not work with all files content and OS encoding) %s"
+msgstr ""
 
 msgid "Input file compression is %s"
 msgstr "La compression du fichier d'entrée est %s"
