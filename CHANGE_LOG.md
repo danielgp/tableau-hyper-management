@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.5.7 release on 2020-06-02
+- changed short version of newly introduced input parameter (having long name "include-checksum-in-files-statistics") from "t", which was creating a collision for "publish_data_source.py", to a "u" that is safe for all package included scripts. 
+
 ## Version 1.5.6 release on 2020-06-01
 - made checksum calculation optional for relevant files (both input and output) by adding an input parameter to opt in, which contain warning "may not work with all files content and OS encoding". By circumventing this logic speed is slightly improved with default or specific "No" value for this newly added parameter;
 
