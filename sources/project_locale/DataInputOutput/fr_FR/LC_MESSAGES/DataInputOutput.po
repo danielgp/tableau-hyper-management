@@ -1,0 +1,35 @@
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tableau-hyper-management\n"
+"POT-Creation-Date: 2020-04-25 13:20+0200\n"
+"PO-Revision-Date: 2020-06-01 21:17\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: fr\n"
+"X-Crowdin-File: /develop/sources/project_locale/DataInputOutput/DataInputOutput.pot\n"
+"Language: fr_FR\n"
+
+msgid "All {files_counted} files of type {file_type} were successfully added to a Pandas Data Frame"
+msgstr "Tous les {files_counted} fichiers de type {file_type} ont été ajoutés avec succès à un Cadre de Données Pandas"
+
+msgid "Error encountered on loading Pandas Data Frame from {file_type} file type (see below)"
+msgstr "Erreur lors du chargement de Cadre de Données Pandas depuis le type de fichier {file_type} (voir ci-dessous)"
+
+msgid "Error encountered on saving Pandas Data Frame into a {file_type} file type (see below)"
+msgstr "Erreur lors du chargement de Cadre de Données Pandas depuis le type de fichier {file_type} (voir ci-dessous)"
+
+msgid "File \"format\" attribute has a value of \"{format_value}\" which is not among currently implemented values: \"{implemented_file_formats}\", therefore desired file operation is not possible"
+msgstr "L'attribut \"format\" du fichier a une valeur de \"{format_value}\" qui ne fait pas partie des valeurs actuellement implémentées : \"{implemented_file_formats}\", donc l'opération de fichier souhaitée n'est pas possible"
+
+msgid "File \"format\" attribute is mandatory in the file setting, but missing, therefore desired file operation is not possible"
+msgstr "L'attribut \"format\" du fichier est obligatoire dans le paramétrage du fichier, mais manquant, donc l'opération de fichier souhaitée n'est pas possible"
+
+msgid "Pandas Data Frame has just been saved to file \"{file_name}\", considering {file_type} as file type"
+msgstr "Cadre de Données Pandas vient d'être enregistré dans le fichier \"{file_name}\", considérant {file_type} comme type de fichier"
+

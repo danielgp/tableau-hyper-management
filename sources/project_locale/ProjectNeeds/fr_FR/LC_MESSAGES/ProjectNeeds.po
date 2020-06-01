@@ -1,0 +1,34 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tableau-hyper-management\n"
+"POT-Creation-Date: 2020-05-03 19:20+0300\n"
+"PO-Revision-Date: 2020-06-01 21:28\n"
+"Last-Translator: danielpopiniuc@gmail.com\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: fr\n"
+"X-Crowdin-File: /develop/sources/project_locale/ProjectNeeds/ProjectNeeds.pot\n"
+"Language: fr_FR\n"
+
+msgid "As handle hyper action is set to \"create\", further checks will happen to ensure none of the source files is newer than destination"
+msgstr "Comme l'Hyper action de gestion est définie sur \"créer\", d'autres vérifications seront effectuées pour s'assurer qu'aucun des fichiers source n'est plus récent que la destination"
+
+msgid "Checking if provided Tableau Server url is valid"
+msgstr "Vérification si l'url du serveur Tableau est valide"
+
+msgid "Checking if provided input credentials file exists"
+msgstr "Vérification si le fichier des informations d'identification d'entrée existe"
+
+msgid "Only certain file types are supported as input file type in combination with Tableau Extract (Hyper) as output file type. And {given_file_type} is not among \"{supported_file_types}\""
+msgstr "Seuls certains types de fichiers sont pris en charge en tant que type de fichier d'entrée en combinaison avec Tableau Extract (Hyper) comme type de fichier de sortie. Et {given_file_type} ne fait pas partie de \"{supported_file_types}\""
+
+msgid "The output file defined as {file_name} already exists"
+msgstr "Le fichier de sortie défini comme {file_name} existe déjà"
+
+msgid "Time spent is {seconds}"
+msgstr "Le temps passé est {seconds}"
+

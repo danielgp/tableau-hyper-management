@@ -1,0 +1,29 @@
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tableau-hyper-management\n"
+"POT-Creation-Date: 2020-05-07 13:20+0200\n"
+"PO-Revision-Date: 2020-06-01 21:28\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: fr\n"
+"X-Crowdin-File: /develop/sources/project_locale/TypeDetermination/TypeDetermination.pot\n"
+"Language: fr_FR\n"
+
+msgid "Column {column_order} having the name [{column_name}] has the value <{current_value}> which means is of type \"{column_type}\" and this is stronger than previously thought to be as \"{column_type_old}\""
+msgstr "La colonne {column_order} ayant le nom [{column_name}] a la valeur <{current_value}> ce qui signifie est de type \"{column_type}\" et est plus forte que ce qui était considéré précédemment comme \"{column_type_old}\""
+
+msgid "Column {column_order} having the name {column_name} has the value <{unique_values}> which means is of type \"{field_type}\""
+msgstr "La colonne {column_order} ayant le nom {column_name} a la valeur <{unique_values}> qui signifie est de type \"{field_type}\""
+
+msgid "Field \"{column_name}\" according to Pandas package is of type \"{panda_determined_type}\" with {counted_nulls} counted NULLs"
+msgstr "Le champ \"{column_name}\" selon le paquet Pandas est de type \"{panda_determined_type}\" avec {counted_nulls} NULL comptés"
+
+msgid "Unique list of values is: {unique_values_list}"
+msgstr "La liste unique de valeurs est : {unique_values_list}"
+
