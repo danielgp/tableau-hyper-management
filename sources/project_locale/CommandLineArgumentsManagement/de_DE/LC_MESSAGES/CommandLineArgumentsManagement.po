@@ -1,0 +1,89 @@
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tableau-hyper-management\n"
+"POT-Creation-Date: 2020-04-25 13:20+0200\n"
+"PO-Revision-Date: 2020-06-01 21:59\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: de\n"
+"X-Crowdin-File: /develop/sources/project_locale/CommandLineArgumentsManagement/CommandLineArgumentsManagement.pot\n"
+"Language: de_DE\n"
+
+msgid "{application_name} has started"
+msgstr ""
+
+msgid "CSV field separator is %s"
+msgstr ""
+
+msgid "Columns to eliminate JSON expression is %s"
+msgstr ""
+
+msgid "Configuration file name with credentials is %s"
+msgstr ""
+
+msgid "Configuration file name with extracting sequence(es) is %s"
+msgstr ""
+
+msgid "Configuration file name with source systems is %s"
+msgstr ""
+
+msgid "Filter expression is %s"
+msgstr ""
+
+msgid "Hyper SQL query to handle data is %s"
+msgstr ""
+
+msgid "Include checksum in file statistics in log details (may not work with all files content and OS encoding) %s"
+msgstr ""
+
+msgid "Input file compression is %s"
+msgstr ""
+
+msgid "Input file format is %s"
+msgstr ""
+
+msgid "Input file name (simple or with matching pattern) is %s"
+msgstr ""
+
+msgid "Output directory is %s"
+msgstr ""
+
+msgid "Output file compression is %s"
+msgstr ""
+
+msgid "Output file format is %s"
+msgstr ""
+
+msgid "Output file name is %s"
+msgstr ""
+
+msgid "Output log file name is %s"
+msgstr ""
+
+msgid "Overview of input parameter given values"
+msgstr ""
+
+msgid "Policy to handle Tableau Extract (Hyper format) is %s"
+msgstr ""
+
+msgid "Publishing mode is %s"
+msgstr ""
+
+msgid "Tableau Project is %s"
+msgstr ""
+
+msgid "Tableau Server to consider is %s"
+msgstr ""
+
+msgid "Tableau Site is %s"
+msgstr ""
+
+msgid "Unique values to analyze is limited to %s"
+msgstr ""
+
