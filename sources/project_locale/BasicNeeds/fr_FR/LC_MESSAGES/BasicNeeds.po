@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-06-01 19:54\n"
+"PO-Revision-Date: 2020-06-01 21:17\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -16,26 +16,26 @@ msgstr ""
 "Language: fr_FR\n"
 
 msgid "Application finished, for complete logged details please check {log_file_name}"
-msgstr ""
+msgstr "Application terminée, pour tous les détails loggués, veuillez vérifier {log_file_name}"
 
 msgid "Application finished, whole script took {total_time_string}"
-msgstr ""
+msgstr "Application terminée, le script entier a pris {total_time_string}"
 
 msgid "Checking if provided folder for the log file is valid"
-msgstr ""
+msgstr "Vérifier si le dossier fourni pour le fichier journal est valide"
 
 msgid "Given file \"{value_to_validate}\" does not exist"
-msgstr ""
+msgstr "Le fichier \"{value_to_validate}\" n'existe pas"
 
 msgid "Given folder \"{value_to_validate}\" does not exist"
-msgstr ""
+msgstr "Le dossier \"{value_to_validate}\" n'existe pas"
 
 msgid "Given url \"{value_to_validate}\" is not valid"
-msgstr ""
+msgstr "L'url \"{value_to_validate}\" n'est pas valide"
 
 msgid "Total execution time was {total_time_string}"
-msgstr ""
+msgstr "Le temps total d'exécution était de {total_time_string}"
 
 msgid "log file"
-msgstr ""
+msgstr "fichier journal"
 
