@@ -30,6 +30,8 @@ class DataInputOutput(DataDiskRead, DataDiskWrite):
             in_dict['field delimiter'] = os.pathsep
         if 'compression' not in in_dict:
             in_dict['compression'] = 'infer'
+        if 'worksheet list' not in in_dict:
+            in_dict['worksheet list'] = 0
         return in_dict
 
     def fn_build_feedback_for_logger(self, operation_details):
@@ -112,7 +114,8 @@ class DataInputOutput(DataDiskRead, DataDiskWrite):
         return {
             'compression'    : in_dict['compression'],
             'field delimiter': in_dict['field delimiter'],
-            'files list'     : in_file_list,
+            'files list'     : in_dict['file list'],
+            'worksheet list' : in_dict['worksheet list'],
             'files counted'  : len(in_file_list),
             'error details'  : None,
             'format'         : in_dict['format'],

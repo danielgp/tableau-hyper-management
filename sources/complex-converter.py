@@ -69,6 +69,8 @@ if __name__ == '__main__':
                         df_dict['field delimiter'] = crt_table['input-file']['compression']
                     if 'field-delimiter' in crt_table['input-file']:
                         df_dict['field delimiter'] = crt_table['input-file']['field-delimiter']
+                    if 'worksheet' in crt_table['input-file']:
+                        df_dict['worksheet list'] = [crt_table['input-file']['worksheet']]
                     # building entry Data Frame
                     working_data_frame = class_pn.class_dio.fn_load_file_into_data_frame(
                         class_pn.class_ln.logger, class_pn.timer, df_dict)

@@ -33,7 +33,8 @@ class DataDiskRead:
                 out_data_frame = []
                 for index_file, crt_file in enumerate(in_dict['files list']):
                     out_data_frame.append(index_file)
-                    out_data_frame[index_file] = pandas.read_excel(io=crt_file, verbose=True)
+                    out_data_frame[index_file] = pandas.read_excel(
+                        io=crt_file, sheet_name=in_dict['worksheet list'][0], verbose=False)
                     out_data_frame[index_file]['Source Data File Name'] = os.path.basename(crt_file)
                 in_dict['out data frame'] = pandas.concat(out_data_frame)
             except Exception as err:
