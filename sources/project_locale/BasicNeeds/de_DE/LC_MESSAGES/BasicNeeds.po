@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-06-01 22:38\n"
+"PO-Revision-Date: 2020-06-04 10:53\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -31,11 +31,11 @@ msgid "Given folder \"{value_to_validate}\" does not exist"
 msgstr "Angegebene Ordner \"{value_to_validate}\" existiert nicht"
 
 msgid "Given url \"{value_to_validate}\" is not valid"
-msgstr "Angegebene Url \"{value_to_validate}\" ist nicht gültig"
+msgstr "Angegebene URL \"{value_to_validate}\" ist nicht gültig"
 
 msgid "Total execution time was {total_time_string}"
 msgstr "Gesamte Ausführungszeit war {total_time_string}"
 
 msgid "log file"
-msgstr "Protokolldatei"
+msgstr "log-Datei"
 
