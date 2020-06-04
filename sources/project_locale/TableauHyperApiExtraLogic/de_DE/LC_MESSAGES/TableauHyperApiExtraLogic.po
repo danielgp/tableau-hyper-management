@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tableau-hyper-management\n"
+"POT-Creation-Date: 2020-05-09 15:10+0200\n"
+"PO-Revision-Date: 2020-06-04 10:55\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: de\n"
+"X-Crowdin-File: /develop/sources/project_locale/TableauHyperApiExtraLogic/TableauHyperApiExtraLogic.pot\n"
+"Language: de_DE\n"
+
+msgid "{rows_counted} records were prepared in this process"
+msgstr "{rows_counted} Datensätze wurden in diesem Prozess vorbereitet"
+
+msgid "Building Hyper columns completed"
+msgstr "Bau von Hyper Spalten abgeschlossen"
+
+msgid "Chosen Telemetry is {telemetry_value}"
+msgstr "Ausgewählte Telemetrie ist {telemetry_value}"
+
+msgid "Column {column_order} having name [{column_name}] and type \"{column_type}\" will become \"{column_type_new}\""
+msgstr "Spalte {column_order} mit Namen [{column_name}] und geben Sie \"{column_type}\" wird \"{column_type_new}\""
+
+msgid "Column {column_name} has pandas data type = {column_pandas_type} and python data type = {column_python_type}"
+msgstr "Spalte {column_name} hat Pandas-Datentyp = {column_pandas_type} und Python-Datentyp = {column_python_type}"
+
+msgid "Connection to the Hyper engine file has been closed"
+msgstr "Verbindung zur Hyper Engine wurde geschlossen"
+
+msgid "Connection to the Hyper engine using file name \"{file_name}\" has been established"
+msgstr "Verbindung zur Hyper Engine mit dem Dateinamen \"{file_name}\" wurde hergestellt"
+
+msgid "Data has been inserted into Hyper table"
+msgstr "Daten wurden in die HyperTabelle eingefügt"
+
+msgid "Filling empty values with NAN finished"
+msgstr "Füllen leerer Werte mit NAN abgeschlossen"
+
+msgid "Hyper SQL about to be executed is: {hyper_sql}"
+msgstr "Hyper SQL wird ausgeführt werden: {hyper_sql}"
+
+msgid "Hyper SQL executed with success and {rows_counted} have been retrieved"
+msgstr "Hyper SQL erfolgreich ausgeführt und {rows_counted} wurden abgerufen"
+
+msgid "Hyper engine process has been shut down"
+msgstr "Hyper Engine Prozess wurde heruntergefahren"
+
+msgid "Hyper engine process initialized"
+msgstr "Hyper Engine Prozess initialisiert"
+
+msgid "Hyper schema \"{hyper_schema_name}\" has been created"
+msgstr "Hyper Schema \"{hyper_schema_name}\" wurde erstellt"
+
+msgid "Hyper table \"{hyper_table_name}\" has been created"
+msgstr "Hyper Tabelle \"{hyper_table_name}\" wurde erstellt"
+
+msgid "Re-building CSV content for maximum Hyper compatibility has been completed"
+msgstr "CSV Inhalte für maximale Hyper Kompatibilität neu erstellen wurde abgeschlossen"
+
+msgid "Table {hyper_table_name} has {row_count} rows"
+msgstr "Tabelle {hyper_table_name} hat {row_count} Zeilen"
+

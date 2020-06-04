@@ -1,0 +1,22 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tableau-hyper-management\n"
+"POT-Creation-Date: 2020-05-30 20:20+0200\n"
+"PO-Revision-Date: 2020-06-01 23:16\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: de\n"
+"X-Crowdin-File: /develop/sources/project_locale/LocalizationsCommon/LocalizationsCommon.pot\n"
+"Language: de_DE\n"
+
+msgid "#{file_counter}, For locale {locale_name} the {source_file_type} file {source_file_name} is newer than compiled one {destination_file_name}, therefore to remedy this, {destination_operation_name} is required"
+msgstr "#{file_counter}, Für die Gebietsschema {locale_name} ist die {source_file_type} Datei {source_file_name} neuer, als ein {destination_file_name} kompiliert, daher ist {destination_operation_name} erforderlich, um dies zu beheben"
+
+msgid "===> source file {source_file_name} has {source_last_modified} vs. {destination_last_modified} of the destination file {destination_file_name}"
+msgstr "===> Quelldatei {source_file_name} hat {source_last_modified} gegen {destination_last_modified} der Zieldatei {destination_file_name}"
+

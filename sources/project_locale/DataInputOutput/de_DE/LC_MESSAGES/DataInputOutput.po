@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-06-01 21:59\n"
+"PO-Revision-Date: 2020-06-01 23:16\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -16,20 +16,20 @@ msgstr ""
 "Language: de_DE\n"
 
 msgid "All {files_counted} files of type {file_type} were successfully added to a Pandas Data Frame"
-msgstr ""
+msgstr "Alle {files_counted} Dateien des Typs {file_type} wurden erfolgreich zu einem Pandas Datenrahmen hinzugefügt"
 
 msgid "Error encountered on loading Pandas Data Frame from {file_type} file type (see below)"
-msgstr ""
+msgstr "Fehler beim Laden von Pandas Data Frame vom Dateityp {file_type} (siehe unten)"
 
 msgid "Error encountered on saving Pandas Data Frame into a {file_type} file type (see below)"
-msgstr ""
+msgstr "Fehler beim Speichern von Pandas Datenrahmen in einem Dateityp {file_type} (siehe unten)"
 
 msgid "File \"format\" attribute has a value of \"{format_value}\" which is not among currently implemented values: \"{implemented_file_formats}\", therefore desired file operation is not possible"
-msgstr ""
+msgstr "Das Attribut \"Format\" hat einen Wert von \"{format_value}\", der nicht unter den derzeit implementierten Werten steht: \"{implemented_file_formats}\", daher ist der gewünschte Dateivorgang nicht möglich"
 
 msgid "File \"format\" attribute is mandatory in the file setting, but missing, therefore desired file operation is not possible"
-msgstr ""
+msgstr "Das Attribut \"Format\" ist in der Datei-Einstellung obligatorisch, fehlt, daher ist der gewünschte Dateivorgang nicht möglich"
 
 msgid "Pandas Data Frame has just been saved to file \"{file_name}\", considering {file_type} as file type"
-msgstr ""
+msgstr "Pandas Data Frame wurde gerade in Datei \"{file_name}\" gespeichert und betrachtet {file_type} als Dateityp"
 
