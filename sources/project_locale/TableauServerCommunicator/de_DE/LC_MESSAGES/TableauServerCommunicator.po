@@ -1,0 +1,59 @@
+#,fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tableau-hyper-management\n"
+"POT-Creation-Date: 2020-05-08 23:20+0200\n"
+"PO-Revision-Date: 2020-06-04 10:54\n"
+"Last-Translator: danielppiniuc@gmail.com\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: tableau-hyper-management\n"
+"X-Crowdin-Language: de\n"
+"X-Crowdin-File: /develop/sources/project_locale/TableauServerCommunicator/TableauServerCommunicator.pot\n"
+"Language: de_DE\n"
+
+msgid "A number of {projects_counted} projects have been identified"
+msgstr "Eine Reihe von {projects_counted} Projekten wurde identifiziert"
+
+msgid "A single project identifier was found \"{project_guid}\", so I will proceed with publishing provided file there"
+msgstr "Ein einziger Projektbezeichner wurde gefunden \"{project_guid}\", also werde ich mit der Veröffentlichung der zur Verfügung gestellten Datei fortfahren"
+
+msgid "About to connect to Tableau Server with URL: {tableau_server}, Site {tableau_site} with Username = {user_name}"
+msgstr "Verbindung zum Tableau Server mit URL: {tableau_server}, Site {tableau_site} mit Benutzername = {user_name}"
+
+msgid "About to start publishing"
+msgstr "Beginne mit der Veröffentlichung"
+
+msgid "Check your input parameter values for accuracy and try again!"
+msgstr "Prüfen Sie Ihre Eingabeparameter auf Genauigkeit und versuchen Sie es erneut!"
+
+msgid "Connection to the Tableau Server has been established successfully!"
+msgstr "Verbindung zum Tableau Server wurde erfolgreich erstellt!"
+
+msgid "Connection to the Tableau Server has been terminated!"
+msgstr "Verbindung zum Tableau Server wurde abgebrochen!"
+
+msgid "No project with provided name \"{project_name}\" has been found"
+msgstr "Kein Projekt mit dem angegebenen Namen \"{project_name}\" wurde gefunden"
+
+msgid "No publishing action will take place!"
+msgstr "Es wird keine Veröffentlichungsaktion stattfinden!"
+
+msgid "Publishing completed successfully!"
+msgstr "Veröffentlichung erfolgreich abgeschlossen!"
+
+msgid "Reading list of all projects available has been completed"
+msgstr "Die Leseliste aller verfügbaren Projekte wurde abgeschlossen"
+
+msgid "Retaining the projects according to filtering type provided ({filter_type}) has been completed"
+msgstr "Die Beibehaltung der Projekte nach dem Filtertyp ({filter_type}) wurde abgeschlossen"
+
+msgid "Stay tuned for the confirmation"
+msgstr "Für die Bestätigung auf dem Laufenden bleiben"
+
+msgid "There are {projects_counted} projects with provided name \"{project_name}\" but a unique identifier is expected"
+msgstr "Es gibt {projects_counted} Projekte mit dem Namen \"{project_name}\" aber ein eindeutiger Identifikator wird erwartet"
+

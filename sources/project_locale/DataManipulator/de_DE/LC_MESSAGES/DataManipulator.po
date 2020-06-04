@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tableau-hyper-management\n"
 "POT-Creation-Date: 2020-04-25 13:20+0200\n"
-"PO-Revision-Date: 2020-06-01 21:59\n"
+"PO-Revision-Date: 2020-06-04 10:54\n"
 "Last-Translator: danielppiniuc@gmail.com\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -16,29 +16,29 @@ msgstr ""
 "Language: de_DE\n"
 
 msgid "{deviation_type} Deviation Number is {deviation_number} to be applied to Current index, became {index_to_apply}"
-msgstr ""
+msgstr "{deviation_type} Abweichung Nummer ist {deviation_number} für den aktuellen Index anzuwenden, wurde {index_to_apply}"
 
 msgid "Current index has been determined to be {index_current_value}"
-msgstr ""
+msgstr "Der aktuelle Index wurde als {index_current_value} bestimmt"
 
 msgid "Lower"
-msgstr ""
+msgstr "Niedriger"
 
 msgid "Query expression to apply is: {query_expression}"
-msgstr ""
+msgstr "Abfrage-Ausdruck anzuwenden ist: {query_expression}"
 
 msgid "Upper"
-msgstr ""
+msgstr "Oberer"
 
 msgid "Will retain only values {filter_type} \"{filter_values}\" within the field \"{column_to_filter}\""
-msgstr ""
+msgstr "Wird nur Werte {filter_type} \"{filter_values}\" im Feld \"{column_to_filter} \" behalten"
 
 msgid "different than"
-msgstr ""
+msgstr "anders als"
 
 msgid "equal with"
-msgstr ""
+msgstr "gleich mit"
 
 msgid "matching any of these values"
-msgstr ""
+msgstr "entspricht irgendeinem dieser Werte"
 
