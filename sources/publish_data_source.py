@@ -73,12 +73,13 @@ if __name__ == '__main__':
     # check if a single project has been identified and if so proceed with publishing
     if c_tsc.is_publishing_possible(
             class_pn.class_ln.logger, class_pn.parameters.tableau_project, list_project_details):
-        # perform the publishing of data source
-        c_tsc.publish_data_source_to_tableau_server(class_pn.class_ln.logger, class_pn.timer, {
-            'Project ID': list_project_details[0],
-            'Tableau Extract File': class_pn.parameters.input_file,
-            'Publishing Mode': class_pn.parameters.publishing_mode,
-        })
+        for current_input_file in relevant_files_list:
+            # perform the publishing of data source
+            c_tsc.publish_data_source_to_tableau_server(class_pn.class_ln.logger, class_pn.timer, {
+                'Project ID': list_project_details[0],
+                'Tableau Extract File': current_input_file,
+                'Publishing Mode': class_pn.parameters.publishing_mode,
+            })
     # disconnect from Tableau Server
     c_tsc.disconnect_from_tableau_server(class_pn.class_ln.logger, class_pn.timer)
     # just final message
