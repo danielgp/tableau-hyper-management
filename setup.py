@@ -67,5 +67,5 @@ setup(
     },
     python_requires='>=3.6',
     url=this_package_website + '/releases',  # project home page
-    version='1.5.7'
+    version='1.5.8'
 )

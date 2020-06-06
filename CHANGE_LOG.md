@@ -1,5 +1,9 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.5.8 release on 2020-06-06
+- implemented localization and support for French, Spanish and German languages;
+- implemented a complex converter to allow using a JSON file to chain multiple conversions.
+
 ## Version 1.5.7 release on 2020-06-02
 - changed short version of newly introduced input parameter (having long name "include-checksum-in-files-statistics") from "t", which was creating a collision for "publish_data_source.py", to a "u" that is safe for all package included scripts. 
 
