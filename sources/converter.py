@@ -17,25 +17,14 @@ SCRIPT_NAME = os.path.basename(__file__).replace('.py', '')
 if __name__ == '__main__':
     # instantiate Localizations Common class
     class_lc = LocalizationsCommon()
-    # ensure all localization templates files older than translated files
-    class_lc.run_localization_action('maintain_sources')
-    # ensure all compiled localization files are in place (as needed for localized messages later)
-    class_lc.run_localization_action('compile')
     # establish localization language to use
     language_to_use = class_lc.get_region_language_to_use_from_operating_system()
     # instantiate Extractor Specific Needs class
-    class_pn = ProjectNeeds(SCRIPT_NAME, language_to_use)
-    # load application configuration (inputs are defined into a json file)
-    class_pn.load_configuration()
-    # adding a special case data type
-    class_pn.config['data_types']['empty'] = '^$'
-    class_pn.config['data_types']['str'] = ''
-    # initiate Logging sequence
-    class_pn.initiate_logger_and_timer()
-    # reflect title and input parameters given values in the log
-    class_pn.class_clam.listing_parameter_values(
-        class_pn.class_ln.logger, class_pn.timer, 'Tableau Hyper Converter',
-        class_pn.config['input_options'][SCRIPT_NAME], class_pn.parameters)
+    class_pn = ProjectNeeds({
+        'script name': SCRIPT_NAME,
+        'language': language_to_use,
+        'title': 'Tableau Hyper Converter'
+    })
     # as input and/or output file might contain CalculatedDate expression
     # an evaluation is required
     class_pn.parameters.input_file = class_pn.class_ph.eval_expression(

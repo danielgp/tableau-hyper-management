@@ -30,15 +30,32 @@ class ProjectNeeds:
     script = None
     timer = None
 
-    def __init__(self, destination_script, default_language='en_US'):
-        self.script = destination_script
-        file_parts = os.path.normpath(os.path.abspath(__file__)).replace('\\', os.path.altsep)\
-            .split(os.path.altsep)
-        locale_domain = file_parts[(len(file_parts)-1)].replace('.py', '')
-        locale_folder = os.path.normpath(os.path.join(
-            os.path.join(os.path.altsep.join(file_parts[:-2]), 'project_locale'), locale_domain))
-        self.locale = gettext.translation(
-            locale_domain, localedir=locale_folder, languages=[default_language], fallback=True)
+    def __init__(self, in_dict, script_title):
+        self.script = in_dict['script name']
+        self.initiate_locale(in_dict['language'])
+        self.initiate_classes(in_dict['language'])
+        # load application configuration (inputs are defined into a json file)
+        self.load_configuration()
+        # adding a special case data type
+        self.config['data_types']['empty'] = '^$'
+        self.config['data_types']['str'] = ''
+        # initiate Logging sequence
+        self.initiate_logger_and_timer()
+        # reflect title and input parameters given values in the log
+        self.class_clam.listing_parameter_values(
+            self.class_ln.logger, self.timer, in_dict['title'],
+            self.config['input_options'][self.script], self.parameters)
+
+    def fn_check_inputs_specific(self, input_parameters):
+        if self.script == 'publisher':
+            self.class_bn.fn_timestamped_print(self.locale.gettext(
+                'Checking if provided input credentials file exists'))
+            self.class_bn.fn_validate_single_value(input_parameters.input_credentials_file, 'file')
+            self.class_bn.fn_timestamped_print(self.locale.gettext(
+                'Checking if provided Tableau Server url is valid'))
+            self.class_bn.fn_validate_single_value(input_parameters.tableau_server, 'url')
+
+    def initiate_classes(self, default_language):
         # instantiate Basic Needs class
         self.class_bn = BasicNeeds(default_language)
         # instantiate File Operations class
@@ -52,14 +69,14 @@ class ProjectNeeds:
         # instantiate Parameter Handling class
         self.class_ph = ParameterHandling(default_language)
 
-    def fn_check_inputs_specific(self, input_parameters):
-        if self.script == 'publisher':
-            self.class_bn.fn_timestamped_print(self.locale.gettext(
-                'Checking if provided input credentials file exists'))
-            self.class_bn.fn_validate_single_value(input_parameters.input_credentials_file, 'file')
-            self.class_bn.fn_timestamped_print(self.locale.gettext(
-                'Checking if provided Tableau Server url is valid'))
-            self.class_bn.fn_validate_single_value(input_parameters.tableau_server, 'url')
+    def initiate_locale(self, default_language):
+        file_parts = os.path.normpath(os.path.abspath(__file__)).replace('\\', os.path.altsep)\
+            .split(os.path.altsep)
+        locale_domain = file_parts[(len(file_parts)-1)].replace('.py', '')
+        locale_folder = os.path.normpath(os.path.join(
+            os.path.join(os.path.altsep.join(file_parts[:-2]), 'project_locale'), locale_domain))
+        self.locale = gettext.translation(
+            locale_domain, localedir=locale_folder, languages=[default_language], fallback=True)
 
     def initiate_logger_and_timer(self):
         # initiate logger

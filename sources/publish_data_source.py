@@ -5,43 +5,33 @@ This file is connecting to a Tableau Server and publishes a local HYPER file
 measuring time elapsed (performance)
 """
 # package to handle files/folders and related metadata/operations
-# import os
+import os
 
 # Custom classes specific to this package
 from project_locale.localizations_common import LocalizationsCommon
 from tableau_hyper_management.ProjectNeeds import ProjectNeeds
 from tableau_hyper_management.TableauServerCommunicator import TableauServerCommunicator
 # get current script name
-#SCRIPT_NAME = os.path.basename(__file__).replace('.py', '')
-SCRIPT_NAME = 'publisher'
+SCRIPT_NAME = os.path.basename(__file__).replace('.py', '')
 
 # main execution logic
 if __name__ == '__main__':
     # instantiate Localizations Common class
     class_lc = LocalizationsCommon()
-    # ensure all localization templates files older than translated files
-    class_lc.run_localization_action('maintain_sources')
-    # ensure all compiled localization files are in place (as needed for localized messages later)
-    class_lc.run_localization_action('compile')
     # establish localization language to use
     language_to_use = class_lc.get_region_language_to_use_from_operating_system()
     # instantiate Extractor Specific Needs class
-    class_pn = ProjectNeeds(SCRIPT_NAME, language_to_use)
-    # load application configuration (inputs are defined into a json file)
-    class_pn.load_configuration()
-    # initiate Logging sequence
-    class_pn.initiate_logger_and_timer()
-    # reflect title and input parameters given values in the log
-    class_pn.class_clam.listing_parameter_values(
-        class_pn.class_ln.logger, class_pn.timer, 'Tableau Data Source Publisher',
-        class_pn.config['input_options'][SCRIPT_NAME], class_pn.parameters)
+    class_pn = ProjectNeeds({
+        'script name': SCRIPT_NAME,
+        'language': language_to_use,
+        'title': 'Tableau Data Source Publisher'
+    })
     # as input and/or output file might contain CalculatedDate expression
     # an evaluation is required
     class_pn.parameters.input_file = class_pn.class_ph.eval_expression(
         class_pn.class_ln.logger, class_pn.parameters.input_file, 7)
     # validate input file existence
-    class_pn.class_bn.fn_validate_single_value(
-        class_pn.parameters.input_file, 'file')
+    class_pn.class_bn.fn_validate_single_value(class_pn.parameters.input_file, 'file')
     # get the input file into a list
     relevant_files_list = class_pn.class_fo.fn_build_file_list(
             class_pn.class_ln.logger, class_pn.timer, class_pn.parameters.input_file)
