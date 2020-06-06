@@ -17,6 +17,10 @@ SCRIPT_NAME = os.path.basename(__file__).replace('.py', '')
 if __name__ == '__main__':
     # instantiate Localizations Common class
     class_lc = LocalizationsCommon()
+    # ensure all localization templates files are older than translated files
+    class_lc.run_localization_action('maintain_sources')
+    # ensure all compiled localization files are in place (as needed for localized messages later)
+    class_lc.run_localization_action('compile')
     # establish localization language to use
     language_to_use = class_lc.get_region_language_to_use_from_operating_system()
     # instantiate Extractor Specific Needs class

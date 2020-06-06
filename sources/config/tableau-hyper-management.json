@@ -129,7 +129,7 @@
                 "option_sample_value"   : "No|Yes"
             }
         },
-        "publisher": {
+        "publish_data_source": {
             "c": {
                 "default_value"         : "",
                 "option_description"    : "Configuration file name with credentials is %s",

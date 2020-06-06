@@ -35,11 +35,6 @@ class LocalizationsCommon:
             os.path.join(os.path.altsep.join(file_parts), 'project_locale'), locale_domain))
         self.locale = gettext.translation(
             locale_domain, localedir=locale_folder, languages=[in_language], fallback=True)
-        # ensure all localization templates files are older than translated files
-        self.run_localization_action('maintain_sources')
-        # ensure all compiled localization files are in place
-        # (as needed for localized messages later)
-        self.run_localization_action('compile')
 
     def check_file_pairs(self, in_dict):
         get_details_to_operate = False
@@ -171,4 +166,6 @@ class LocalizationsCommon:
             os.path.altsep,
             known_actions.get(in_action),
         ]
-        os.system(''.join(command_parts_to_run))
+        command_line = ''.join(command_parts_to_run)
+        print('Executing "' + command_line + '"...')
+        os.system(command_line)

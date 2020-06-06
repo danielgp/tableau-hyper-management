@@ -30,7 +30,7 @@ class ProjectNeeds:
     script = None
     timer = None
 
-    def __init__(self, in_dict, script_title):
+    def __init__(self, in_dict):
         self.script = in_dict['script name']
         self.initiate_locale(in_dict['language'])
         self.initiate_classes(in_dict['language'])
