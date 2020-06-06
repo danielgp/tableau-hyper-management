@@ -19,7 +19,9 @@ import platform
 class LocalizationsCommon:
     locale = None
     locale_implemented = [
+        'de_DE',
         'es_ES',
+        'fr_FR',
         'it_IT',
         'ro_RO',
     ]
@@ -33,6 +35,11 @@ class LocalizationsCommon:
             os.path.join(os.path.altsep.join(file_parts), 'project_locale'), locale_domain))
         self.locale = gettext.translation(
             locale_domain, localedir=locale_folder, languages=[in_language], fallback=True)
+        # ensure all localization templates files are older than translated files
+        self.run_localization_action('maintain_sources')
+        # ensure all compiled localization files are in place
+        # (as needed for localized messages later)
+        self.run_localization_action('compile')
 
     def check_file_pairs(self, in_dict):
         get_details_to_operate = False
@@ -90,7 +97,7 @@ class LocalizationsCommon:
         return file_list_paring_complete
 
     def get_region_language_to_use_from_operating_system(self):
-        language_to_use = ''
+        language_to_use = None
         try:
             region_language_to_use = locale.getdefaultlocale('LC_ALL')
             if region_language_to_use[0] in self.locale_implemented:
