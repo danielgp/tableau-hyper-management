@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.5.9 release on 2020-06-09
+- setting default language to English US 
+
 ## Version 1.5.8 release on 2020-06-06
 - implemented localization and support for French, Spanish and German languages;
 - implemented a complex converter to allow using a JSON file to chain multiple conversions.

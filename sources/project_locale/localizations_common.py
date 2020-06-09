@@ -92,7 +92,7 @@ class LocalizationsCommon:
         return file_list_paring_complete
 
     def get_region_language_to_use_from_operating_system(self):
-        language_to_use = None
+        language_to_use = 'en_US'
         try:
             region_language_to_use = locale.getdefaultlocale('LC_ALL')
             if region_language_to_use[0] in self.locale_implemented:
