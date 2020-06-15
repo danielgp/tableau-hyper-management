@@ -116,7 +116,7 @@ class FileOperations:
 
     def fn_get_file_statistics(self, in_dict):
         file_statistics = self.fn_get_file_simple_statistics(in_dict['file name'])
-        if in_dict['checksum included'] == 'Yes':
+        if 'checksum included' in in_dict and in_dict['checksum included'] == 'Yes':
             try:
                 file_handler = open(file=in_dict['file name'], mode='r', encoding='mbcs')
             except UnicodeDecodeError:
