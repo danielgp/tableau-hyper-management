@@ -1,5 +1,10 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.5.10 release on 2020-06-15
+- enhanced file operations testing;
+- bug fix applied for semester calculation;
+- extra-verification added on file statistics determination.
+
 ## Version 1.5.9 release on 2020-06-09
 - setting default language to English US 
 
