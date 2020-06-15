@@ -49,9 +49,9 @@ class ParameterHandling:
     locale = None
 
     def __init__(self, in_language='en_US'):
-        file_parts = os.path.normpath(os.path.abspath(__file__)).replace('\\', os.path.altsep)\
+        file_parts = os.path.normpath(os.path.abspath(__file__)).replace('\\', os.path.altsep) \
             .split(os.path.altsep)
-        locale_domain = file_parts[(len(file_parts)-1)].replace('.py', '')
+        locale_domain = file_parts[(len(file_parts) - 1)].replace('.py', '')
         locale_folder = os.path.normpath(os.path.join(
             os.path.join(os.path.altsep.join(file_parts[:-2]), 'project_locale'), locale_domain))
         self.locale = gettext.translation(locale_domain, localedir=locale_folder,
@@ -86,9 +86,9 @@ class ParameterHandling:
             expression_parts[2] = 0
         final_dates = {
             'year': in_date + datedelta.datedelta(years=int(expression_parts[2])),
-            'semester': in_date + datedelta.datedelta(months=int(expression_parts[2])*6),
+            'semester': in_date + datedelta.datedelta(months=int(expression_parts[2]) * 6),
             'semester_week': in_date + timedelta(weeks=int(expression_parts[2])),
-            'quarter': in_date + datedelta.datedelta(months=int(expression_parts[2])*3),
+            'quarter': in_date + datedelta.datedelta(months=int(expression_parts[2]) * 3),
             'quarter_week': in_date + timedelta(weeks=int(expression_parts[2])),
             'fiscal_period': in_date + datedelta.datedelta(months=int(expression_parts[2])),
             'month': in_date + datedelta.datedelta(months=int(expression_parts[2])),
@@ -107,7 +107,7 @@ class ParameterHandling:
                 'A known expression "{expression_parts}" has to be interpreted')
                                .replace('{expression_parts}', str_expression))
             final_string = self.interpret_known_expression(
-                    datetime.now(), expression_parts, in_start_iso_weekday)
+                datetime.now(), expression_parts, in_start_iso_weekday)
             local_logger.debug(self.locale.gettext(
                 'Known expression "{expression_parts}" has been interpreted as {final_string}')
                                .replace('{expression_parts}', str_expression)
@@ -128,7 +128,7 @@ class ParameterHandling:
         if reg_ex:
             parameter_value_parts = reg_ex.group().split('_')
             calculated = self.calculate_date_from_expression(
-                    local_logger, parameter_value_parts, in_start_iso_weekday)
+                local_logger, parameter_value_parts, in_start_iso_weekday)
             value_to_return = re.sub(reg_ex.group(), calculated, crt_parameter)
             local_logger.debug(self.locale.gettext(
                 'Current Parameter is STR and has been re-interpreted as value: "{str_value}"')
@@ -165,8 +165,8 @@ class ParameterHandling:
             if 'parameters-handling-rules' in given_session:
                 parameter_rules = given_session['parameters-handling-rules']
             tp = self.build_parameters(
-                    local_logger, given_session['parameters'], parameter_rules,
-                    in_start_iso_weekday)
+                local_logger, given_session['parameters'], parameter_rules,
+                in_start_iso_weekday)
         return tp
 
     def interpret_known_expression(self, ref_date, expression_parts, in_start_iso_weekday):
@@ -179,26 +179,21 @@ class ParameterHandling:
         if deviation_original in ('just_semester', 'just_quarter', 'just_week',
                                   'semester', 'semester_week', 'quarter', 'quarter_week', 'week'):
             year_number_string, week_number_string = self.get_week_number_as_two_digits_string(
-                    finalized_date, in_start_iso_weekday)
+                finalized_date, in_start_iso_weekday)
             # to ensure less than 4 days within last week of year r reported to next year (ISO)
-            semester_year_string = str(min(int(week_number_string),
-                                           math.ceil(
-                                               int(datetime.strftime(finalized_date, '%m')) / 6)))
+            semester_year_string = str(math.ceil(int(week_number_string) / 26))
             quarter_string = str(min(int(week_number_string),
                                      math.ceil(int(datetime.strftime(finalized_date, '%m')) / 3)))
             # values pre-calculated
             values_to_pick = {
-                'just_semester': 'H' \
-                                 + str(math.ceil(int(datetime.strftime(finalized_date, '%m')) / 6)),
-                'just_quarter': 'Q' \
-                                + str(math.ceil(int(datetime.strftime(finalized_date, '%m')) / 3)),
+                'just_semester': 'H' + semester_year_string,
+                'just_quarter': 'Q' + quarter_string,
                 'just_week': week_number_string,
-                'semester': str(datetime.strftime(finalized_date, '%Y')) + 'H' \
-                            + str(math.ceil(int(datetime.strftime(finalized_date, '%m')) / 6)),
+                'semester': str(datetime.strftime(finalized_date, '%Y'))
+                            + 'H' + semester_year_string,
                 'semester_week': year_number_string + 'H' + semester_year_string
                                  + 'wk' + week_number_string,
-                'quarter': str(datetime.strftime(finalized_date, '%Y')) + 'Q' \
-                           + str(math.ceil(int(datetime.strftime(finalized_date, '%m')) / 3)),
+                'quarter': str(datetime.strftime(finalized_date, '%Y')) + 'Q' + quarter_string,
                 'quarter_week': year_number_string + 'Q' + quarter_string
                                 + 'wk' + week_number_string,
                 'week': year_number_string + week_number_string,
@@ -206,7 +201,7 @@ class ParameterHandling:
             final_string = values_to_pick.get(deviation_original)
         else:
             final_string = datetime.strftime(
-                    finalized_date, self.output_standard_formats.get(deviation_original))
+                finalized_date, self.output_standard_formats.get(deviation_original))
         return final_string
 
     def manage_parameter_value(self, in_logger, in_prefix, in_parameter, in_parameter_rules):
@@ -222,6 +217,17 @@ class ParameterHandling:
         return in_parameter_rules[in_prefix + '-values-prefix'] \
                + in_parameter_rules[in_prefix + '-values-glue'].join(element_to_join) \
                + in_parameter_rules[in_prefix + '-values-suffix']
+
+    @staticmethod
+    def set_default_starting_weekday(in_dict):
+        week_starts_with_iso_weekday = 1
+        if 'start-iso-weekday' in in_dict['session']:
+            if in_dict['session']['start-iso-weekday'] == 'inherit-from-parent':
+                in_dict['session']['start-iso-weekday'] = in_dict['query']['start-iso-weekday']
+            elif in_dict['session']['start-iso-weekday'] == 'inherit-from-grand-parent':
+                in_dict['session']['start-iso-weekday'] = in_dict['sequence']['start-iso-weekday']
+            week_starts_with_iso_weekday = in_dict['session']['start-iso-weekday']
+        return week_starts_with_iso_weekday
 
     def simulate_final_query(self, local_logger, timer, in_query, in_parameters_number, in_tp):
         timer.start()
@@ -252,11 +258,11 @@ class ParameterHandling:
                                    .replace('{parameter_type}', self.locale.gettext('STR'))
                                    .replace('{str_value}', crt_parameter))
                 working_list[ndx] = self.eval_expression(
-                        local_logger, crt_parameter, in_start_iso_weekday)
+                    local_logger, crt_parameter, in_start_iso_weekday)
             elif current_parameter_type in (list, dict):
                 prefix = str(current_parameter_type).replace("<class '", '').replace("'>", '')
                 working_list[ndx] = self.manage_parameter_value(
-                        local_logger, prefix.lower(), crt_parameter, given_parameter_rules)
+                    local_logger, prefix.lower(), crt_parameter, given_parameter_rules)
         final_tuple = tuple(working_list)
         local_logger.debug(self.locale.gettext('Final Tuple for Parameters is: {final_tuple}')
                            .replace('{final_tuple}', str(final_tuple)))
