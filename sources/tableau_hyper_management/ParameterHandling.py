@@ -184,14 +184,6 @@ class ParameterHandling:
             semester_year_string = str(math.ceil(int(week_number_string) / 26))
             quarter_string = str(min(int(week_number_string),
                                      math.ceil(int(datetime.strftime(finalized_date, '%m')) / 3)))
-            if ref_date == datetime(2020, 6, 29):
-                print('ref_date = ' + str(ref_date) + ', '
-                      + 'finalized_date = ' + str(finalized_date) + ', '
-                      + 'expression_parts = ' + str(expression_parts) + ', '
-                      + 'year_number_string = ' + year_number_string + ', '
-                      + 'week_number_string = ' + week_number_string + ', '
-                      + 'semester_year_string = ' + semester_year_string + ', '
-                      + 'quarter_string = ' + quarter_string)
             # values pre-calculated
             values_to_pick = {
                 'just_semester': 'H' + semester_year_string,
