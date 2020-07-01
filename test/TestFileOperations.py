@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
-from db_extractor.LoggingNeeds import LoggingNeeds
-from db_extractor.FileOperations import FileOperations
+from sources.tableau_hyper_management.LoggingNeeds import LoggingNeeds
+from sources.tableau_hyper_management.FileOperations import FileOperations
 import unittest
 # package to facilitate multiple operation system operations
 import platform
