@@ -86,9 +86,9 @@ class ParameterHandling:
             expression_parts[2] = 0
         final_dates = {
             'year': in_date + datedelta.datedelta(years=int(expression_parts[2])),
-            'semester': in_date + datedelta.datedelta(months=int(expression_parts[2]) * 6),
+            'semester': in_date + timedelta(weeks=(int(expression_parts[2]) * 26)),
             'semester_week': in_date + timedelta(weeks=int(expression_parts[2])),
-            'quarter': in_date + datedelta.datedelta(months=int(expression_parts[2]) * 3),
+            'quarter': in_date + datedelta.datedelta(days=(int(expression_parts[2]) * 90)),
             'quarter_week': in_date + timedelta(weeks=int(expression_parts[2])),
             'fiscal_period': in_date + datedelta.datedelta(months=int(expression_parts[2])),
             'month': in_date + datedelta.datedelta(months=int(expression_parts[2])),
@@ -197,8 +197,7 @@ class ParameterHandling:
                 'just_semester': 'H' + semester_year_string,
                 'just_quarter': 'Q' + quarter_string,
                 'just_week': week_number_string,
-                'semester': str(datetime.strftime(finalized_date, '%Y'))
-                            + 'H' + semester_year_string,
+                'semester': year_number_string + 'H' + semester_year_string,
                 'semester_week': year_number_string + 'H' + semester_year_string
                                  + 'wk' + week_number_string,
                 'quarter': str(datetime.strftime(finalized_date, '%Y')) + 'Q' + quarter_string,

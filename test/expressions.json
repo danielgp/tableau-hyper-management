@@ -68,9 +68,19 @@
             "expected_value": "2019H2"
         },
         {
-            "reference_value": "2020-06-28",
+            "reference_value": "2020-06-29",
             "expression": "CalculatedDate_CYCS_-2",
             "expected_value": "2019H2"
+        },
+        {
+            "reference_value": "2020-06-29",
+            "expression": "CalculatedDate_CYCS_-1",
+            "expected_value": "2020H1"
+        },
+        {
+            "reference_value": "2020-07-01",
+            "expression": "CalculatedDate_CYCS_-1",
+            "expected_value": "2020H1"
         }
     ],
     "quarter": [
@@ -103,6 +113,21 @@
             "reference_value": "2020-01-31",
             "expression": "CalculatedDate_CurrentYearCurrentQuarter_-1",
             "expected_value": "2019Q4"
+        },
+        {
+            "reference_value": "2020-06-29",
+            "expression": "CalculatedDate_CYCQ_-3",
+            "expected_value": "2019Q4"
+        },
+        {
+            "reference_value": "2020-06-29",
+            "expression": "CalculatedDate_CYCQ_-2",
+            "expected_value": "2020Q1"
+        },
+        {
+            "reference_value": "2020-07-01",
+            "expression": "CalculatedDate_CYCQ_-1",
+            "expected_value": "2020Q2"
         }
     ],
     "month": [
