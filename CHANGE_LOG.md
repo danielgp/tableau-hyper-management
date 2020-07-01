@@ -1,5 +1,8 @@
 # Change Log for Tableau Hyper Management package
 
+## Version 1.5.11 release on 2020-07-01
+- bug-fix applied to expressions using semester and quarter calculation.
+
 ## Version 1.5.10 release on 2020-06-15
 - enhanced file operations testing;
 - bug fix applied for semester calculation;
