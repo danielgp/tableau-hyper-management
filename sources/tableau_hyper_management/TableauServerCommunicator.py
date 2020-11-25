@@ -115,6 +115,38 @@ class TableauServerCommunicator:
         timer.stop()
         return dictionary_project_ids
 
+    def load_tableau_workbooks(self, relevant_project_ids_to_filter):
+        all_workbooks, pagination_item = self.tableau_server.workbooks.get(
+            req_options=self.req_opts)
+        dictionary_workbooks = []
+        workbook_counter = 0
+        download_dir = 'D:\\www\\Data\\HoneywellTableauServer\\'
+        for workbook_current in all_workbooks:
+            if workbook_current.project_id in relevant_project_ids_to_filter:
+                workbook_name = workbook_current.name
+                workbook_name_standardized = workbook_name\
+                    .replace('\n', ' ').replace('\r', '').replace('\\', '')
+                workbook_created = workbook_current.created_at
+                workbook_updated = workbook_current.updated_at
+                dictionary_workbooks.append(workbook_counter)
+                dictionary_workbooks[workbook_counter] = {
+                    'WorkBookId': workbook_current.id,
+                    'WorkBookProjectId': workbook_current.project_id,
+                    'WorkBookName': workbook_name_standardized,
+                    'WorkBookOwnerId': workbook_current.owner_id,
+                    #'WorkBookOwnerEmail': self.tableau_server.users.get_by_id(
+                    #    workbook_current.owner_id).email,
+                    'WorkBookContentUrl': workbook_current.content_url,
+                    'WorkBookCreatedAtUtc': workbook_created.strftime("%Y-%m-%d %H:%M:%S"),
+                    'WorkBookUpdatedAtUtc': workbook_updated.strftime("%Y-%m-%d %H:%M:%S")
+                }
+                if workbook_name_standardized == 'SPS OTTR Tableau v3':
+                    self.tableau_server.workbooks.download(
+                        workbook_current.id, filepath='C:\\www\\Data\\HoneywellTableauServer',
+                        include_extract=None)
+                workbook_counter = workbook_counter + 1
+        return dictionary_workbooks
+
     def no_publishing_feedback(self, local_logger):
         local_logger.debug(self.locale.gettext('No publishing action will take place!'))
         local_logger.debug(self.locale.gettext(
@@ -132,3 +164,22 @@ class TableauServerCommunicator:
             publish_details['Publishing Mode'])
         local_logger.info(self.locale.gettext('Publishing completed successfully!'))
         timer.stop()
+
+    def clean_string(string):
+        return (string or '').replace('\r\n', ' ').replace('\n', ' ').replace('\t', ' ')
+
+    def store_fields_into_csv(self, field_name, data_source, workbook, worksheet='', seperator=','):
+        return seperator.join([
+            self.clean_string(data_source.caption or data_source.name),
+            self.clean_string(os.path.basename(workbook.filename)),
+            self.clean_string(worksheet),
+            self.clean_string(field_name.caption),
+            self.clean_string(field_name._aggregation),
+            self.clean_string(field_name.alias),
+            self.clean_string(field_name.calculation),
+            self.clean_string(field_name.datatype),
+            self.clean_string(field_name.description),
+            self.clean_string(field_name.id),
+            self.clean_string(field_name.role),
+            self.clean_string(field_name._type),
+        ]) + '\n'
