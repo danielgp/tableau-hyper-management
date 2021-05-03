@@ -12,6 +12,7 @@ sources/tableau_hyper_management/__pycache__/*
 tableau_hyper_management.egg-info/
 venv/
 virtual_environment/
+virtual_environment_*/
 .pypirc
 /*.log
 /archive.zip
