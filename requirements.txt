@@ -1,0 +1,15 @@
+Babel>=2.8,<3.0
+codetiming>=1.4,<2.0
+datedelta>=1.4,<2
+hdbcli>=2,<3
+mysql-connector-python>=9.1.0
+numpy
+pandas>=2,<3
+pyarrow>=18
+pytz
+tableauhyperapi
+tableauserverclient
+twine>=5,<6
+xlrd-2024>=2,<=3
+XlsxWriter>=3,<=4
+wheel>=0.44,<1

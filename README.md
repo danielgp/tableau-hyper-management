@@ -57,14 +57,13 @@ Installation can be completed in few steps as follows:
 ```
     $ python(.exe) -m venv <local_folder_on_your_computer_for_this_package>/virtual_environment/
 ```
-* Upgrade pip (PIP is a package manager for Python packages) and SetupTools using following command executed from newly created virtual environment and Scripts sub-folder:
+* Upgrade pip (PIP is a package manager for Python packages) using following command executed from newly created virtual environment and Scripts sub-folder:
 ```
     $ <local_path_of_this_package>/virtual_environment/Scripts/python(.exe) -m pip install --upgrade pip
-    $ <local_path_of_this_package>/virtual_environment/Scripts/pip(.exe) install --upgrade setuptools
 ```
 * Install project prerequisites using following command executed from project root folder:
 ```
-    $ <local_path_of_this_package>/virtual_environment/Scripts/python(.exe) <local_path_of_this_package>/setup.py install
+    $ <local_path_of_this_package>/virtual_environment/Scripts/pip install -r requirements.txt
 ```
 * Ensure all localization source files are compiled properly in order for the package to work properly
 ```
