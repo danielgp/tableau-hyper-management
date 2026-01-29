@@ -3,6 +3,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/badges/build.png?b=master)](https://scrutinizer-ci.com/g/danielgp/tableau-hyper-management/build-status/master)
 [![Crowdin](https://badges.crowdin.net/tableau-hyper-management/localized.svg)](https://crowdin.com/project/tableau-hyper-management)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdanielgp%2Ftableau-hyper-management.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdanielgp%2Ftableau-hyper-management?ref=badge_shield)
 
 ## What is this repository for?
 
@@ -127,3 +128,7 @@ see [readme_software.md](readme_software.md)
 ## Used references
 
 see [readme_reference.md](readme_reference.md)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdanielgp%2Ftableau-hyper-management.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdanielgp%2Ftableau-hyper-management?ref=badge_large)
